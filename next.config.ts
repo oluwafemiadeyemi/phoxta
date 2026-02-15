@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
       ? [{ protocol: "https", hostname: supabaseHostname }]
       : [],
   },
+  // Refine (@refinedev/core) internally uses useSearchParams() in its
+  // RouteChangeHandler — we can't wrap that in Suspense ourselves, so
+  // disable the CSR-bailout error for third-party code.
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default nextConfig;
