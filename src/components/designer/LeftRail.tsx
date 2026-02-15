@@ -123,7 +123,7 @@ export default function LeftRail() {
         open={mobilePopupTab !== null}
         onClose={() => setMobilePopupTab(null)}
         title={activeTab?.label ?? ''}
-        icon={activeTab ? React.cloneElement(activeTab.icon as React.ReactElement, { className: 'h-4 w-4' }) : undefined}
+        icon={activeTab ? React.cloneElement(activeTab.icon as React.ReactElement<{ className?: string }>, { className: 'h-4 w-4' }) : undefined}
         placement="beside-left"
         anchorY={popupAnchorY}
       >
