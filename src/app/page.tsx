@@ -326,7 +326,7 @@ export default function LandingPage() {
           <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
             <span className="font-normal text-white">Launch a </span>
             <Typewriter
-              words={isMobileLanding ? ['Startup', 'Business'] : ['Startup', 'Business', 'Side Hustle']}
+              words={['Startup', 'Business']}
               className="text-white"
             />
             <br />
