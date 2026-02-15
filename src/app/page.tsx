@@ -252,7 +252,11 @@ export default function LandingPage() {
   const ctaView = useInView()
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white overflow-x-hidden" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
+    <div className="min-h-screen bg-[#09090b] text-white overflow-x-hidden relative" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
+      {/* Full-page constellation stars background */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{ opacity: 0.45 }}>
+        <ConstellationCanvas className="absolute inset-0" />
+      </div>
 
       {/* ═══════════════════ NAVBAR ═══════════════════ */}
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#09090b]/80 backdrop-blur-xl border-b border-white/[0.06]' : 'bg-transparent'}`}>
@@ -304,10 +308,6 @@ export default function LandingPage() {
 
       {/* ═══════════════════ HERO SECTION ═══════════════════ */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        {/* Constellation stars background */}
-        <div className="absolute inset-0 pointer-events-auto" style={{ filter: 'blur(1.5px)', opacity: 0.45 }}>
-          <ConstellationCanvas className="absolute inset-0" />
-        </div>
         {/* Gradient orbs layered on top of stars */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.3) 0%, rgba(168,85,247,0.15) 40%, transparent 70%)' }} />
         <div className="absolute top-40 -right-40 w-[500px] h-[500px] opacity-12 pointer-events-none rounded-full" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 60%)' }} />
