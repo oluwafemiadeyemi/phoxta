@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 
 // ---------------------------------------------------------------------------
 // Constellation stars canvas background
@@ -231,6 +231,15 @@ export default function LandingPage() {
   const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [isMobileLanding, setIsMobileLanding] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)')
+    setIsMobileLanding(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobileLanding(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -318,12 +327,12 @@ export default function LandingPage() {
           <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
             <span className="font-normal text-white">Launch a </span>
             <Typewriter
-              words={['Startup', 'Business', 'Side Hustle']}
+              words={isMobileLanding ? ['Startup', 'Business'] : ['Startup', 'Business', 'Side Hustle']}
               className="text-white"
             />
             <br />
             <style>{`@keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } } @keyframes textBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }`}</style>
-            <span className="font-normal bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>in </span><span className="inline-block bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite,textBounce_3s_ease-in-out_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>7 Clicks.</span>
+            <span className="font-normal text-white">in </span><span className="inline-block bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite,textBounce_3s_ease-in-out_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>7 Clicks.</span>
           </h1>
 
           <p className="mt-5 text-base md:text-lg text-white/50 max-w-xl mx-auto">
