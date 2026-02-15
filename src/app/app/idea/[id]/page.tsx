@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { PHASES, getDayStatus, TOTAL_SUB_PHASES } from '@/lib/phaseConfig'
@@ -28,6 +28,14 @@ const PHASE_ACCENTS: Record<string, { ring: string; bg: string; text: string }> 
 const PHASE_BAR_COLORS = ['bg-blue-500', 'bg-purple-500', 'bg-amber-500', 'bg-green-500']
 
 export default function IdeaOverviewPage() {
+  return (
+    <Suspense>
+      <IdeaOverviewContent />
+    </Suspense>
+  )
+}
+
+function IdeaOverviewContent() {
   const { id } = useParams<{ id: string }>()
   const searchParams = useSearchParams()
   const [idea, setIdea] = useState<Idea | null>(null)
