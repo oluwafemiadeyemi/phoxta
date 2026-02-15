@@ -18,17 +18,17 @@ function ConstellationCanvas({ className }: { className?: string }) {
     if (!canvas) return
     const w = canvas.width = canvas.offsetWidth * devicePixelRatio
     const h = canvas.height = canvas.offsetHeight * devicePixelRatio
-    const count = Math.floor((w * h) / 18000) // density relative to area
+    const count = Math.floor((w * h) / 45000) // sparser density
     const stars: typeof starsRef.current = []
     for (let i = 0; i < count; i++) {
       stars.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5,
-        o: Math.random() * 0.5 + 0.3,
-        conn: Math.random() < 0.2,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        r: Math.random() * 1 + 0.3,
+        o: Math.random() * 0.35 + 0.15,
+        conn: Math.random() < 0.15,
       })
     }
     starsRef.current = stars
@@ -42,8 +42,8 @@ function ConstellationCanvas({ className }: { className?: string }) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const LINE_DIST = 120 * devicePixelRatio
-    const MOUSE_DIST = 180 * devicePixelRatio
+    const LINE_DIST = 90 * devicePixelRatio
+    const MOUSE_DIST = 140 * devicePixelRatio
 
     const draw = () => {
       const w = canvas.width
@@ -257,7 +257,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#09090b] text-white overflow-x-hidden relative" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
       {/* Full-page constellation stars background */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{ opacity: 0.45 }}>
+      <div className="fixed inset-0 pointer-events-none z-0" style={{ opacity: 0.3 }}>
         <ConstellationCanvas className="absolute inset-0" />
       </div>
 
