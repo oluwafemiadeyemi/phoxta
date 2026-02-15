@@ -2,7 +2,11 @@ import OpenAI from 'openai'
 import type { ZodTypeAny } from 'zod'
 import { ZodError } from 'zod'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+let _openai: OpenAI | null = null
+function getOpenAI() {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 export class PhoxtaQuotaError extends Error {
   constructor(message = 'OpenAI quota exceeded') {
@@ -51,7 +55,7 @@ export async function runPhoxtaAI(
 
   try {
     console.log(`[aiClient] Calling ${model}, maxTokens=${options?.maxTokens ?? 'default'}, prompt length=${prompt.length}`)
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model,
       temperature,
       ...(options?.maxTokens ? { max_tokens: options.maxTokens } : {}),

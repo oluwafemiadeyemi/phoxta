@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/supabaseServer'
 import OpenAI from 'openai'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+let _openai: OpenAI | null = null
+function getOpenAI() {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 export async function POST(
   req: NextRequest,
@@ -42,7 +46,7 @@ export async function POST(
       })
     }
 
-    const response = await openai.images.generate({
+    const response = await getOpenAI().images.generate({
       model: 'dall-e-3',
       prompt: `${prompt}. Style: Urban, modern, professional, clean composition, high contrast, no text overlays, photorealistic, contemporary design aesthetic.`,
       n: 1,
