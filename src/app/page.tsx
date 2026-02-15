@@ -315,13 +315,13 @@ export default function LandingPage() {
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 text-center">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
+          <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
             <span className="font-normal text-white">Launch a </span>
             <Typewriter
               words={['Startup', 'Business', 'Side Hustle']}
               className="text-white"
             />
-            <br />
+            <span className="hidden sm:inline"><br /></span>{' '}
             <style>{`@keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } } @keyframes textBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }`}</style>
             <span className="font-normal bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>in </span><span className="inline-block bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite,textBounce_3s_ease-in-out_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>7 Clicks.</span>
           </h1>
