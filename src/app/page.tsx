@@ -372,9 +372,8 @@ export default function LandingPage() {
 
             {/* Section header */}
             <div className="relative text-center mb-14">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500 mb-3 block">Features</span>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#09090b]">
-                Every tool you need to <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">validate &amp; launch</span><br /> your idea fast
+                Every tool you need to<br /><span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">validate &amp; launch</span><br />your idea fast
               </h2>
               <p className="mt-4 text-[#09090b]/50 max-w-xl mx-auto">We unleash your business potential by maximising innovation through AI-powered tools and creative solutions.</p>
             </div>
