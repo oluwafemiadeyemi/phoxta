@@ -308,15 +308,15 @@ export default function LandingPage() {
 
       {/* ═══════════════════ HERO SECTION ═══════════════════ */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        {/* Beaming colorful glow — centered on text area */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[900px] h-[700px] pointer-events-none" style={{ filter: 'blur(100px)' }}>
-          <div className="absolute inset-0 m-auto w-[220px] h-[220px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
-          <div className="absolute inset-0 m-auto w-[500px] h-[350px] rounded-full opacity-35" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.4) 0%, transparent 60%)' }} />
-          <div className="absolute inset-0 m-auto w-[400px] h-[450px] rounded-full opacity-30 rotate-[30deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(168,85,247,0.35) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[480px] h-[300px] rounded-full opacity-25 -rotate-[20deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.35) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[350px] h-[250px] rounded-full opacity-20 translate-x-[60px] -translate-y-[30px]" style={{ background: 'radial-gradient(ellipse at center, rgba(34,211,238,0.3) 0%, transparent 60%)' }} />
-          <div className="absolute inset-0 m-auto w-[300px] h-[350px] rounded-full opacity-15 -translate-x-[80px] translate-y-[20px]" style={{ background: 'radial-gradient(ellipse at center, rgba(244,114,182,0.3) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[250px] h-[200px] rounded-full opacity-15 translate-y-[60px]" style={{ background: 'radial-gradient(ellipse at center, rgba(52,211,153,0.25) 0%, transparent 60%)' }} />
+        {/* Beaming colorful glow — contained within text area */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[320px] h-[260px] sm:w-[500px] sm:h-[400px] md:w-[700px] md:h-[500px] pointer-events-none" style={{ filter: 'blur(80px)' }}>
+          <div className="absolute inset-0 m-auto w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] md:w-[200px] md:h-[200px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
+          <div className="absolute inset-0 m-auto w-[220px] h-[160px] sm:w-[340px] sm:h-[240px] md:w-[420px] md:h-[280px] rounded-full opacity-35" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.4) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0 m-auto w-[180px] h-[200px] sm:w-[280px] sm:h-[320px] md:w-[340px] md:h-[380px] rounded-full opacity-30 rotate-[30deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(168,85,247,0.35) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[200px] h-[140px] sm:w-[320px] sm:h-[200px] md:w-[400px] md:h-[250px] rounded-full opacity-25 -rotate-[20deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.35) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[160px] h-[120px] sm:w-[240px] sm:h-[170px] md:w-[300px] md:h-[200px] rounded-full opacity-20 translate-x-[30px] sm:translate-x-[45px] -translate-y-[15px] sm:-translate-y-[25px]" style={{ background: 'radial-gradient(ellipse at center, rgba(34,211,238,0.3) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0 m-auto w-[140px] h-[160px] sm:w-[200px] sm:h-[240px] md:w-[250px] md:h-[300px] rounded-full opacity-15 -translate-x-[40px] sm:-translate-x-[60px] translate-y-[10px] sm:translate-y-[15px]" style={{ background: 'radial-gradient(ellipse at center, rgba(244,114,182,0.3) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[120px] h-[100px] sm:w-[170px] sm:h-[140px] md:w-[210px] md:h-[170px] rounded-full opacity-15 translate-y-[30px] sm:translate-y-[45px]" style={{ background: 'radial-gradient(ellipse at center, rgba(52,211,153,0.25) 0%, transparent 60%)' }} />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 text-center">
@@ -359,6 +359,15 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="relative bg-white text-[#09090b] rounded-3xl shadow-2xl shadow-black/30 border border-white/20 p-8 md:p-14 overflow-hidden animate-[sectionBounce_6s_ease-in-out_infinite]">
             <style>{`@keyframes sectionBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }`}</style>
+            {/* SVG gradient definition for feature icons */}
+            <svg width="0" height="0" className="absolute">
+              <defs>
+                <linearGradient id="feat-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#6366f1" />
+                  <stop offset="100%" stopColor="#a855f7" />
+                </linearGradient>
+              </defs>
+            </svg>
             {/* Blue-purple constellation glow behind the content */}
             <div className="absolute inset-0 pointer-events-none" style={{ filter: 'blur(80px)' }}>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-40" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.6) 0%, transparent 60%)' }} />
@@ -380,12 +389,12 @@ export default function LandingPage() {
               {/* Left column — 3 stacked cards */}
               <div className="flex flex-col gap-5">
                 {[
-                  { icon: '💡', title: 'Idea Validator', desc: 'Validate your business ideas with AI-driven 10-phase assessments, market research, and expert feedback.' },
-                  { icon: '🎨', title: 'Designer', desc: 'Create stunning visuals with a powerful canvas editor — design graphics, mockups, and branded assets.' },
-                  { icon: '🌐', title: 'Web Design', desc: 'Build professional websites from beautiful templates — customize layouts, text, and images with an intuitive editor.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>, title: 'Idea Validator', desc: 'Validate your business ideas with AI-driven 10-phase assessments, market research, and expert feedback.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" /></svg>, title: 'Designer', desc: 'Create stunning visuals with a powerful canvas editor — design graphics, mockups, and branded assets.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A8.966 8.966 0 0 1 3 12c0-1.264.26-2.467.732-3.558" /></svg>, title: 'Web Design', desc: 'Build professional websites from beautiful templates — customize layouts, text, and images with an intuitive editor.' },
                 ].map((f, i) => (
                   <div key={`l${i}`} className="group flex items-start gap-4 rounded-2xl border border-[#09090b]/[0.06] bg-white/80 p-5 hover:bg-white transition-all duration-300 hover:border-indigo-200 hover:-translate-y-0.5 hover:shadow-lg">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center text-2xl grayscale">{f.icon}</div>
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-transparent flex items-center justify-center">{f.icon}</div>
                     <div>
                       <h3 className="text-sm font-semibold text-[#09090b] mb-1">{f.title}</h3>
                       <p className="text-xs text-[#09090b]/45 leading-relaxed">{f.desc}</p>
@@ -410,12 +419,12 @@ export default function LandingPage() {
               {/* Right column — 3 stacked cards */}
               <div className="flex flex-col gap-5">
                 {[
-                  { icon: '📇', title: 'Phoxta CRM', desc: 'Manage leads, track deals, and nurture customer relationships with an AI-assisted pipeline built for startups.' },
-                  { icon: '📊', title: 'Analytics Hub', desc: 'Monitor key metrics, track growth KPIs, and generate actionable reports with real-time business dashboards.' },
-                  { icon: '📧', title: 'Email Campaigns', desc: 'Design, automate, and send targeted email sequences to engage your audience and drive conversions.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>, title: 'Phoxta CRM', desc: 'Manage leads, track deals, nurture relationships, run email campaigns, and monitor analytics — all in one AI-powered pipeline.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" /></svg>, title: 'Market Place', desc: 'Browse and purchase creative assets — templates, graphics, and more — then customize them in one prompt with Phoxta AI.' },
+                  { icon: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="url(#feat-grad)"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>, title: 'Content Management', desc: 'Organize, schedule, and publish content across channels — manage your brand voice and assets from a single dashboard.' },
                 ].map((f, i) => (
                   <div key={`r${i}`} className="group flex items-start gap-4 rounded-2xl border border-[#09090b]/[0.06] bg-white/80 p-5 hover:bg-white transition-all duration-300 hover:border-purple-200 hover:-translate-y-0.5 hover:shadow-lg">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-2xl grayscale">{f.icon}</div>
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-transparent flex items-center justify-center">{f.icon}</div>
                     <div>
                       <h3 className="text-sm font-semibold text-[#09090b] mb-1">{f.title}</h3>
                       <p className="text-xs text-[#09090b]/45 leading-relaxed">{f.desc}</p>
