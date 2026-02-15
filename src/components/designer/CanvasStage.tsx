@@ -656,6 +656,22 @@ export default function CanvasStage({
       // artboard background, eliminating anti-alias fading at page edges.
       applyDesignClip(fabricCanvas, (fabricCanvas as any).__artboardW ?? designWidth, (fabricCanvas as any).__artboardH ?? designHeight)
 
+      // ── Prevent selecting objects when clicking outside the artboard ──
+      // Even if part of an object extends beyond the visible page, clicks
+      // outside the artboard rectangle should not select anything.
+      fabricCanvas.on('mouse:down:before', (opt: any) => {
+        if (!fabricCanvas) return
+        const pointer = fabricCanvas.getScenePoint(opt.e)
+        const aw = (fabricCanvas as any).__artboardW ?? designWidth
+        const ah = (fabricCanvas as any).__artboardH ?? designHeight
+        if (pointer.x < 0 || pointer.y < 0 || pointer.x > aw || pointer.y > ah) {
+          // Click is outside the artboard — clear selection and skip target
+          fabricCanvas.discardActiveObject()
+          opt.target = undefined            // prevent Fabric from selecting
+          fabricCanvas.requestRenderAll()
+        }
+      })
+
       // ── Middle-click panning (always available regardless of tool) ──
       fabricCanvas.on('mouse:down', (opt: any) => {
         const e = opt.e as MouseEvent
@@ -1030,6 +1046,87 @@ export default function CanvasStage({
     }
   }, [canvas, setZoom])
 
+  // ── Touch gestures: pinch-to-zoom & two-finger pan ────────
+  useEffect(() => {
+    const wrapper = wrapperRef.current
+    if (!canvas || !wrapper) return
+
+    let lastTouchDist = 0
+    let lastTouchMid = { x: 0, y: 0 }
+    let isTouchPanning = false
+    let lastSingleTouch = { x: 0, y: 0 }
+
+    const getDistance = (t1: Touch, t2: Touch) =>
+      Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY)
+
+    const getMidpoint = (t1: Touch, t2: Touch) => ({
+      x: (t1.clientX + t2.clientX) / 2,
+      y: (t1.clientY + t2.clientY) / 2,
+    })
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        // Prevent default scrolling/zooming
+        e.preventDefault()
+        isTouchPanning = true
+        lastTouchDist = getDistance(e.touches[0], e.touches[1])
+        lastTouchMid = getMidpoint(e.touches[0], e.touches[1])
+        // Disable Fabric object selection during gesture
+        canvas.selection = false
+        canvas.discardActiveObject()
+        canvas.requestRenderAll()
+      }
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && isTouchPanning) {
+        e.preventDefault()
+        const dist = getDistance(e.touches[0], e.touches[1])
+        const mid = getMidpoint(e.touches[0], e.touches[1])
+
+        // --- Zoom ---
+        const scaleFactor = dist / lastTouchDist
+        let newZoom = canvas.getZoom() * scaleFactor
+        newZoom = Math.min(Math.max(newZoom, ZOOM_MIN), ZOOM_MAX)
+
+        // Zoom toward the midpoint of the two fingers
+        const wrapperRect = wrapper.getBoundingClientRect()
+        const offsetX = mid.x - wrapperRect.left
+        const offsetY = mid.y - wrapperRect.top
+        const point = new (fabricModule!.Point)(offsetX, offsetY)
+        canvas.zoomToPoint(point, newZoom)
+
+        // --- Pan ---
+        const vpt = canvas.viewportTransform!.slice() as number[]
+        vpt[4] += mid.x - lastTouchMid.x
+        vpt[5] += mid.y - lastTouchMid.y
+        canvas.setViewportTransform(vpt as any)
+
+        setZoom(newZoom)
+        lastTouchDist = dist
+        lastTouchMid = mid
+      }
+    }
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) {
+        isTouchPanning = false
+        canvas.selection = true
+      }
+    }
+
+    // Passive: false is needed so we can preventDefault on touch events
+    wrapper.addEventListener('touchstart', onTouchStart, { passive: false })
+    wrapper.addEventListener('touchmove', onTouchMove, { passive: false })
+    wrapper.addEventListener('touchend', onTouchEnd)
+
+    return () => {
+      wrapper.removeEventListener('touchstart', onTouchStart)
+      wrapper.removeEventListener('touchmove', onTouchMove)
+      wrapper.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [canvas, setZoom])
+
   // ── Autosave ──────────────────────────────────────────────
   const save = useCallback(async () => {
     const state = useDocumentStore.getState()
@@ -1206,18 +1303,18 @@ export default function CanvasStage({
       onDrop={handleDrop}
     >
       {/* Zoom toolbar */}
-      <div className="absolute bottom-3 right-3 z-10 flex items-center gap-1 bg-zinc-900/90 backdrop-blur rounded-lg shadow-sm border border-white/[0.06] px-1 py-1">
+      <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 z-10 flex items-center gap-0.5 md:gap-1 bg-zinc-900/90 backdrop-blur rounded-lg shadow-sm border border-white/[0.06] px-1 py-1">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="ghost" size="icon-xs" onClick={handleZoomOut}>
-              <ZoomOut className="h-4 w-4" />
+              <ZoomOut className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent><p>Zoom out</p></TooltipContent>
         </Tooltip>
 
         <span
-          className="text-xs font-mono w-12 text-center cursor-pointer select-none"
+          className="text-[10px] md:text-xs font-mono w-10 md:w-12 text-center cursor-pointer select-none"
           onDoubleClick={handleZoomFit}
           title="Double-click to fit"
         >
@@ -1227,7 +1324,7 @@ export default function CanvasStage({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="ghost" size="icon-xs" onClick={handleZoomIn}>
-              <ZoomIn className="h-4 w-4" />
+              <ZoomIn className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </Button>
           </TooltipTrigger>
           <TooltipContent><p>Zoom in</p></TooltipContent>
@@ -1235,22 +1332,8 @@ export default function CanvasStage({
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              onClick={handleZoom100}
-              className="text-[10px] font-mono w-7"
-            >
-              1:1
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent><p>100%</p></TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
             <Button variant="ghost" size="icon-xs" onClick={handleZoomFit}>
-              <Maximize className="h-3.5 w-3.5" />
+              <Maximize className="h-3 w-3 md:h-3.5 md:w-3.5" />
             </Button>
           </TooltipTrigger>
           <TooltipContent><p>Fit to screen</p></TooltipContent>

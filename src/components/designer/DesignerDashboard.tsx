@@ -155,7 +155,7 @@ export default function DesignerDashboardClient() {
     <div className="min-h-screen bg-[#09090b]">
       {/* Header */}
       <div className="border-b border-white/[0.06] bg-[#09090b]/80 backdrop-blur-xl sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon-sm" className="text-zinc-400 hover:text-white hover:bg-white/[0.06]" asChild>
               <Link href="/app">
@@ -164,19 +164,19 @@ export default function DesignerDashboardClient() {
             </Button>
             <h1 className="text-lg font-semibold text-white">Designer</h1>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 md:gap-2 flex-wrap justify-end">
             <Button
               variant="ghost"
               size="sm"
               className="text-xs text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06]"
               onClick={() => { setShowTrash(true); fetchTrash() }}
             >
-              <Trash2 className="mr-1.5 h-3.5 w-3.5" /> Trash
+              <Trash2 className="mr-1.5 h-3.5 w-3.5" /> <span className="hidden sm:inline">Trash</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
+              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white hidden md:flex"
               disabled={psdImporting}
               onClick={() => psdFileRef.current?.click()}
             >
@@ -190,20 +190,20 @@ export default function DesignerDashboardClient() {
             <Button
               variant="outline"
               size="sm"
-              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
+              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white hidden sm:flex"
               onClick={() => setShowAiDesign(true)}
             >
               <Sparkles className="mr-1.5 h-3.5 w-3.5" /> AI Design
             </Button>
             <Button size="sm" className="text-xs bg-white text-black hover:bg-zinc-200" onClick={() => setShowNew(true)}>
-              <Plus className="mr-1.5 h-3.5 w-3.5" /> New design
+              <Plus className="mr-1.5 h-3.5 w-3.5" /> <span className="hidden sm:inline">New design</span><span className="sm:hidden">New</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Projects grid */}
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-8">
         {isLoading ? (
           <div className="text-center py-16">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground mx-auto mb-3" />
@@ -287,10 +287,12 @@ export default function DesignerDashboardClient() {
           )}
 
           {/* Custom size */}
-          <div className="flex gap-2 mb-4">
-            <Input id="new-name" type="text" placeholder="Design name" className="flex-1 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white placeholder:text-zinc-500" />
-            <Input id="new-w" type="number" placeholder="Width" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
-            <Input id="new-h" type="number" placeholder="Height" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
+          <div className="flex flex-wrap gap-2 mb-4">
+            <Input id="new-name" type="text" placeholder="Design name" className="flex-1 min-w-[120px] text-xs h-9 bg-zinc-800 border-white/[0.08] text-white placeholder:text-zinc-500" />
+            <div className="flex gap-2">
+              <Input id="new-w" type="number" placeholder="Width" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
+              <Input id="new-h" type="number" placeholder="Height" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
+            </div>
             <Button size="sm" className="bg-white text-black hover:bg-zinc-200" onClick={() => {
               const name = (document.getElementById('new-name') as HTMLInputElement).value || 'Untitled design'
               const w = parseInt((document.getElementById('new-w') as HTMLInputElement).value) || 1080
@@ -308,7 +310,7 @@ export default function DesignerDashboardClient() {
             return (
               <div key={cat} className="mb-4">
                 <p className="text-[11px] text-muted-foreground uppercase tracking-wide mb-2">{cat}</p>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {presets.map(preset => (
                     <Button
                       key={preset.label}

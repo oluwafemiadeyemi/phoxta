@@ -212,7 +212,7 @@ export default function AdjustmentsPanel() {
   const hasChanges = FILTER_DEFS.some(d => values[d.key] !== d.defaultValue)
 
   return (
-    <div className="w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
       {/* Header */}
       <button
         type="button"

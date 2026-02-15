@@ -38,6 +38,12 @@ export interface UIState {
   activeTool: ActiveTool
   setActiveTool: (t: ActiveTool) => void
 
+  /* Mobile drawers */
+  mobileLeftDrawerOpen: boolean
+  setMobileLeftDrawerOpen: (v: boolean) => void
+  mobileRightDrawerOpen: boolean
+  setMobileRightDrawerOpen: (v: boolean) => void
+
   /* Canvas helpers */
   showGrid: boolean
   toggleGrid: () => void
@@ -81,6 +87,11 @@ export const useUIStore = create<UIState>((set) => ({
 
   activeTool: 'select',
   setActiveTool: (t) => set({ activeTool: t }),
+
+  mobileLeftDrawerOpen: false,
+  setMobileLeftDrawerOpen: (v) => set({ mobileLeftDrawerOpen: v }),
+  mobileRightDrawerOpen: false,
+  setMobileRightDrawerOpen: (v) => set({ mobileRightDrawerOpen: v }),
 
   showGrid: false,
   toggleGrid: () => set((s) => ({ showGrid: !s.showGrid })),

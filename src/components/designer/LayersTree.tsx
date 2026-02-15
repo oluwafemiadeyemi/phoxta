@@ -162,7 +162,7 @@ export default function LayersTree() {
   if (!layerPanelOpen) return null
 
   return (
-    <div className="w-56 bg-[#18181b] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-[#18181b] flex flex-col overflow-hidden shrink-0">
       <button
         type="button"
         onClick={() => setCollapsed(c => !c)}

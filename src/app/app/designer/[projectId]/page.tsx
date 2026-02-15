@@ -6,7 +6,6 @@
 // ===========================================================================
 import { useEffect, useState, use, useRef } from 'react'
 import { useDocumentStore } from '@/stores/designer/documentStore'
-import { useUIStore } from '@/stores/designer/uiStore'
 import TopBar from '@/components/designer/TopBar'
 import LeftRail from '@/components/designer/LeftRail'
 import LeftPanel from '@/components/designer/LeftPanel'
@@ -17,6 +16,7 @@ import LayersTree from '@/components/designer/LayersTree'
 import PagesStrip from '@/components/designer/PagesStrip'
 import CanvasStage from '@/components/designer/CanvasStage'
 import LeftToolbar from '@/components/designer/LeftToolbar'
+import MobileRightPanelTiles from '@/components/designer/MobileRightPanelTiles'
 import ExportModal from '@/components/designer/modals/ExportModal'
 import ShareModal from '@/components/designer/modals/ShareModal'
 import CsvBulkModal from '@/components/designer/modals/CsvBulkModal'
@@ -276,41 +276,58 @@ export default function DesignerEditorPage({ params }: PageProps) {
   const initialFabricUrl = (currentPage as any)?.fabricUrl ?? undefined
 
   return (
-    <div className="h-screen flex flex-col bg-[#111113] overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-[#111113] overflow-hidden">
       <TopBar projectId={projectId} />
 
-      <div className="flex-1 flex overflow-hidden">
-        <LeftRail />
-        <LeftPanel />
-        <LeftToolbar />
-
-        {/* Canvas area */}
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="flex-1 relative overflow-hidden">
-            {aiProgress && (
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-violet-600 text-white px-4 py-2 rounded-full shadow-lg">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-                <span className="text-xs font-medium">{aiProgress}</span>
-              </div>
-            )}
-            <CanvasStage
-              key={currentPageId ?? 'default'}
-              pageId={currentPageId ?? ''}
-              projectId={projectId}
-              initialFabricUrl={initialFabricUrl}
-              width={currentPage?.width ?? project?.width ?? 1080}
-              height={currentPage?.height ?? project?.height ?? 1080}
-            />
-          </div>
-          <PagesStrip projectId={projectId} />
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
+        {/* Mobile: right panel tiles (top strip) */}
+        <div className="order-first md:hidden shrink-0">
+          <MobileRightPanelTiles />
         </div>
 
-        {/* Layers + Character + Properties stacked */}
-        <div className="flex flex-col border-l border-white/[0.06] shrink-0 overflow-auto">
+        {/* Desktop: right panels (right column) */}
+        <div className="hidden md:flex md:order-last shrink-0 overflow-y-auto flex-col border-l border-white/[0.06]">
           <LayersTree />
           <CharacterPanel />
           <AdjustmentsPanel />
           <RightPanel />
+        </div>
+
+        {/* Main workspace — left panels + canvas */}
+        <div className="flex-1 flex overflow-hidden order-last md:order-first min-h-0">
+          {/* Left panels — always visible */}
+          <LeftRail />
+          <LeftPanel />
+
+          {/* Canvas + floating toolbar wrapper */}
+          <div className="flex-1 flex overflow-hidden min-w-0 relative">
+            {/* LeftToolbar: floats over canvas on mobile, inline on desktop */}
+            <div className="absolute left-0 top-0 bottom-0 z-20 md:relative md:inset-auto">
+              <LeftToolbar />
+            </div>
+
+            {/* Canvas area */}
+            <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+              <div className="flex-1 relative overflow-hidden">
+                {aiProgress && (
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-violet-600 text-white px-4 py-2 rounded-full shadow-lg">
+                    <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+                    <span className="text-xs font-medium">{aiProgress}</span>
+                  </div>
+                )}
+                <CanvasStage
+                  key={currentPageId ?? 'default'}
+                  pageId={currentPageId ?? ''}
+                  projectId={projectId}
+                  initialFabricUrl={initialFabricUrl}
+                  width={currentPage?.width ?? project?.width ?? 1080}
+                  height={currentPage?.height ?? project?.height ?? 1080}
+                />
+              </div>
+
+              <PagesStrip projectId={projectId} />
+            </div>
+          </div>
         </div>
       </div>
 

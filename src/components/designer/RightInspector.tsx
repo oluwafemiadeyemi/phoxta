@@ -162,7 +162,7 @@ export default function RightInspector() {
   ]
 
   return (
-    <div className="w-64 bg-[#18181b] border-l border-white/[0.06] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-64 bg-[#18181b] border-l border-white/[0.06] flex flex-col overflow-hidden shrink-0">
       <div className="p-3 border-b border-white/[0.04]">
         <h3 className="text-xs font-semibold text-zinc-200">Item Properties</h3>
       </div>

@@ -45,7 +45,9 @@ import {
   ChevronDown,
   PanelRight,
   Sparkles,
+  Menu,
 } from 'lucide-react'
+import { useIsMobile } from './useIsMobile'
 
 interface TopBarProps {
   projectId: string
@@ -57,6 +59,7 @@ export default function TopBar({ projectId }: TopBarProps) {
     isDirty, isSaving, lastSavedAt, canvas, pages, currentPageId,
   } = useDocumentStore()
   const { setExportModalOpen, setShareModalOpen, setCsvModalOpen, setAiDesignModalOpen, setLeftRailTab, rightPanelOpen, setRightPanelOpen } = useUIStore()
+  const isMobile = useIsMobile()
 
   const handleNameBlur = async (newName: string) => {
     const trimmed = newName.trim()
@@ -150,7 +153,7 @@ export default function TopBar({ projectId }: TopBarProps) {
         : '—'
 
   return (
-    <div className="h-12 bg-[#18181b] border-b border-white/[0.06] flex items-center px-3 gap-2 shrink-0 z-30">
+    <div className="h-12 bg-[#18181b] border-b border-white/[0.06] flex items-center px-2 md:px-3 gap-1 md:gap-2 shrink-0 z-30">
       {/* Back */}
       <Tooltip>
         <TooltipTrigger asChild>
@@ -163,35 +166,37 @@ export default function TopBar({ projectId }: TopBarProps) {
         <TooltipContent side="bottom"><p>Back to projects</p></TooltipContent>
       </Tooltip>
 
-      {/* File menu */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="text-xs font-medium text-zinc-400 hover:text-zinc-200">
-            File
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-48">
-          <DropdownMenuItem onClick={handleSave} className="text-xs">
-            <Save className="mr-2 h-3.5 w-3.5" /> Save
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleDuplicate} className="text-xs">
-            <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate project
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setLeftRailTab('psd')} className="text-xs">
-            <FileImage className="mr-2 h-3.5 w-3.5" /> Import PSD
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCsvModalOpen(true)} className="text-xs">
-            <Table className="mr-2 h-3.5 w-3.5" /> Bulk Create (CSV)
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem asChild className="text-xs">
-            <Link href={`/app/designer/${projectId}/versions`}>
-              <History className="mr-2 h-3.5 w-3.5" /> Version history
-            </Link>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {/* File menu — hidden on mobile, merged into overflow */}
+      {!isMobile && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="text-xs font-medium text-zinc-400 hover:text-zinc-200">
+              File
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-48">
+            <DropdownMenuItem onClick={handleSave} className="text-xs">
+              <Save className="mr-2 h-3.5 w-3.5" /> Save
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDuplicate} className="text-xs">
+              <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate project
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => setLeftRailTab('psd')} className="text-xs">
+              <FileImage className="mr-2 h-3.5 w-3.5" /> Import PSD
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setCsvModalOpen(true)} className="text-xs">
+              <Table className="mr-2 h-3.5 w-3.5" /> Bulk Create (CSV)
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild className="text-xs">
+              <Link href={`/app/designer/${projectId}/versions`}>
+                <History className="mr-2 h-3.5 w-3.5" /> Version history
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
 
       {/* Project name */}
       <Input
@@ -200,28 +205,17 @@ export default function TopBar({ projectId }: TopBarProps) {
         key={project?.id}
         onBlur={(e) => handleNameBlur(e.target.value)}
         onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur() }}
-        className="text-sm font-medium text-zinc-200 bg-transparent border-transparent hover:border-white/[0.08] focus:border-white/[0.15] max-w-[200px] h-8"
+        className={`text-sm font-medium text-zinc-200 bg-transparent border-transparent hover:border-white/[0.08] focus:border-white/[0.15] h-8 ${isMobile ? 'max-w-[100px]' : 'max-w-[200px]'}`}
       />
 
       {/* Save status */}
-      <Badge variant={isDirty ? 'secondary' : 'outline'} className={`text-[10px] font-normal ${isDirty ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-500'}`}>
-        {savedLabel}
+      <Badge variant={isDirty ? 'secondary' : 'outline'} className={`text-[10px] font-normal shrink-0 ${isDirty ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-500'}`}>
+        {isMobile ? (isDirty ? '●' : '✓') : savedLabel}
       </Badge>
 
       <div className="flex-1" />
 
-      {/* AI Design */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline" size="sm" onClick={() => setAiDesignModalOpen(true)} className="text-xs">
-            <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-            AI Design
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom"><p>Generate a design with AI</p></TooltipContent>
-      </Tooltip>
-
-      {/* Undo / Redo */}
+      {/* Undo / Redo — always visible */}
       <div className="flex items-center gap-0.5">
         <Tooltip>
           <TooltipTrigger asChild>
@@ -241,52 +235,104 @@ export default function TopBar({ projectId }: TopBarProps) {
         </Tooltip>
       </div>
 
-      {/* Save */}
-      <Button variant="outline" size="sm" onClick={handleSave} disabled={!isDirty || isSaving} className="text-xs">
-        <Save className="mr-1.5 h-3.5 w-3.5" />
-        {isSaving ? 'Saving…' : 'Save'}
-      </Button>
+      {/* Desktop: full toolbar */}
+      {!isMobile && (
+        <>
+          {/* AI Design */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm" onClick={() => setAiDesignModalOpen(true)} className="text-xs">
+                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                AI Design
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom"><p>Generate a design with AI</p></TooltipContent>
+          </Tooltip>
 
-      {/* Export Dropdown */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size="sm" className="text-xs">
-            <Download className="mr-1.5 h-3.5 w-3.5" />
-            Export
-            <ChevronDown className="ml-1 h-3 w-3" />
+          {/* Save */}
+          <Button variant="outline" size="sm" onClick={handleSave} disabled={!isDirty || isSaving} className="text-xs">
+            <Save className="mr-1.5 h-3.5 w-3.5" />
+            {isSaving ? 'Saving…' : 'Save'}
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-40">
-          <DropdownMenuItem onClick={() => handleExport('png')} className="text-xs">PNG</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleExport('jpg')} className="text-xs">JPG</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleExport('svg')} className="text-xs">SVG</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleExport('pdf')} className="text-xs">PDF</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setExportModalOpen(true)} className="text-xs">
-            Advanced export…
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
 
-      {/* Share */}
-      <Button variant="outline" size="sm" onClick={() => setShareModalOpen(true)} className="text-xs">
-        <Share2 className="mr-1.5 h-3.5 w-3.5" />
-        Share
-      </Button>
+          {/* Export Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="sm" className="text-xs">
+                <Download className="mr-1.5 h-3.5 w-3.5" />
+                Export
+                <ChevronDown className="ml-1 h-3 w-3" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuItem onClick={() => handleExport('png')} className="text-xs">PNG</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('jpg')} className="text-xs">JPG</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('svg')} className="text-xs">SVG</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleExport('pdf')} className="text-xs">PDF</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setExportModalOpen(true)} className="text-xs">
+                Advanced export…
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-      {/* Properties toggle */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant={rightPanelOpen ? 'secondary' : 'ghost'}
-            size="icon-xs"
-            onClick={() => setRightPanelOpen(!rightPanelOpen)}
-          >
-            <PanelRight className="h-4 w-4" />
+          {/* Share */}
+          <Button variant="outline" size="sm" onClick={() => setShareModalOpen(true)} className="text-xs">
+            <Share2 className="mr-1.5 h-3.5 w-3.5" />
+            Share
           </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom"><p>{rightPanelOpen ? 'Hide' : 'Show'} properties</p></TooltipContent>
-      </Tooltip>
+
+          {/* Properties toggle */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant={rightPanelOpen ? 'secondary' : 'ghost'}
+                size="icon-xs"
+                onClick={() => setRightPanelOpen(!rightPanelOpen)}
+              >
+                <PanelRight className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom"><p>{rightPanelOpen ? 'Hide' : 'Show'} properties</p></TooltipContent>
+          </Tooltip>
+        </>
+      )}
+
+      {/* Mobile: overflow menu with all secondary actions */}
+      {isMobile && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon-xs">
+              <Menu className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-52">
+            <DropdownMenuItem onClick={handleSave} disabled={!isDirty || isSaving} className="text-xs">
+              <Save className="mr-2 h-3.5 w-3.5" /> {isSaving ? 'Saving…' : 'Save'}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setAiDesignModalOpen(true)} className="text-xs">
+              <Sparkles className="mr-2 h-3.5 w-3.5" /> AI Design
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => handleExport('png')} className="text-xs">
+              <Download className="mr-2 h-3.5 w-3.5" /> Export PNG
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExport('jpg')} className="text-xs">
+              <Download className="mr-2 h-3.5 w-3.5" /> Export JPG
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setExportModalOpen(true)} className="text-xs">
+              <Download className="mr-2 h-3.5 w-3.5" /> Advanced Export…
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => setShareModalOpen(true)} className="text-xs">
+              <Share2 className="mr-2 h-3.5 w-3.5" /> Share
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDuplicate} className="text-xs">
+              <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate project
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
     </div>
   )
 }

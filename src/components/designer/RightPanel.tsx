@@ -167,7 +167,7 @@ export default function RightPanel() {
   ]
 
   return (
-    <div className="w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
       <button
         type="button"
         onClick={() => setCollapsed(c => !c)}

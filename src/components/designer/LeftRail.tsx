@@ -4,7 +4,7 @@
 // LeftRail — icon tabs on the far left
 // Uses: shadcn Tooltip, Button
 // ===========================================================================
-import React from 'react'
+import React, { useState } from 'react'
 import { useUIStore } from '@/stores/designer/uiStore'
 import type { LeftRailTab } from '@/stores/designer/uiStore'
 import { Button } from '@/components/ui/button'
@@ -21,6 +21,13 @@ import {
   FileImage,
   Layers,
 } from 'lucide-react'
+import { useIsMobile } from './useIsMobile'
+import MobilePopupPanel from './MobilePopupPanel'
+import TemplatesPanel from './panels/TemplatesPanel'
+import ImagesPanel from './panels/ImagesPanel'
+import BrandKitPanel from './panels/BrandKitPanel'
+import ProjectsPanel from './panels/ProjectsPanel'
+import PsdImportPanel from './panels/PsdImportPanel'
 
 const TABS: { id: LeftRailTab; label: string; icon: React.ReactNode }[] = [
   { id: 'templates', label: 'Templates', icon: <LayoutTemplate className="h-5 w-5" /> },
@@ -30,10 +37,33 @@ const TABS: { id: LeftRailTab; label: string; icon: React.ReactNode }[] = [
   { id: 'psd', label: 'PSD', icon: <FileImage className="h-5 w-5" /> },
 ]
 
+function getMobilePanel(tab: LeftRailTab) {
+  switch (tab) {
+    case 'templates': return <TemplatesPanel />
+    case 'images': return <ImagesPanel />
+    case 'brand': return <BrandKitPanel />
+    case 'projects': return <ProjectsPanel />
+    case 'psd': return <PsdImportPanel />
+    default: return null
+  }
+}
+
 export default function LeftRail() {
   const { leftRailTab, setLeftRailTab, leftPanelOpen, setLeftPanelOpen, layerPanelOpen, setLayerPanelOpen } = useUIStore()
+  const isMobile = useIsMobile()
+  const [mobilePopupTab, setMobilePopupTab] = useState<LeftRailTab | null>(null)
+  const [popupAnchorY, setPopupAnchorY] = useState<number>(0)
 
-  const handleClick = (tab: LeftRailTab) => {
+  const handleClick = (tab: LeftRailTab, e?: React.MouseEvent) => {
+    if (isMobile) {
+      // Position popup beside the clicked button
+      if (e) {
+        const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+        setPopupAnchorY(rect.top)
+      }
+      setMobilePopupTab(prev => (prev === tab ? null : tab))
+      return
+    }
     if (leftRailTab === tab && leftPanelOpen) {
       setLeftPanelOpen(false)
     } else {
@@ -42,7 +72,10 @@ export default function LeftRail() {
     }
   }
 
+  const activeTab = TABS.find(t => t.id === mobilePopupTab)
+
   return (
+    <>
     <div className="w-14 bg-[#18181b] border-r border-white/[0.06] flex flex-col items-center py-2 gap-1 shrink-0 z-20">
       {TABS.map((t) => {
         const isActive = leftRailTab === t.id && leftPanelOpen
@@ -52,7 +85,7 @@ export default function LeftRail() {
               <Button
                 variant={isActive ? 'secondary' : 'ghost'}
                 size="icon"
-                onClick={() => handleClick(t.id)}
+                onClick={(e) => handleClick(t.id, e)}
                 className={`w-11 h-11 flex flex-col gap-0.5 ${isActive ? 'text-zinc-100' : 'text-zinc-500'}`}
               >
                 {t.icon}
@@ -83,5 +116,20 @@ export default function LeftRail() {
         <TooltipContent side="right"><p>Layers</p></TooltipContent>
       </Tooltip>
     </div>
+
+    {/* Mobile bottom-sheet popup for left panel content */}
+    {isMobile && (
+      <MobilePopupPanel
+        open={mobilePopupTab !== null}
+        onClose={() => setMobilePopupTab(null)}
+        title={activeTab?.label ?? ''}
+        icon={activeTab ? React.cloneElement(activeTab.icon as React.ReactElement, { className: 'h-4 w-4' }) : undefined}
+        placement="beside-left"
+        anchorY={popupAnchorY}
+      >
+        {mobilePopupTab && getMobilePanel(mobilePopupTab)}
+      </MobilePopupPanel>
+    )}
+    </>
   )
 }

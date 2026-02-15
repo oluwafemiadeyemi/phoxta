@@ -300,18 +300,18 @@ export default function LandingPage() {
           <ConstellationCanvas className="absolute inset-0" />
         </div>
         {/* Gradient orbs layered on top of stars */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] opacity-30 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.4) 0%, rgba(168,85,247,0.2) 40%, transparent 70%)' }} />
-        <div className="absolute top-40 -right-40 w-[500px] h-[500px] opacity-20 pointer-events-none rounded-full" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 60%)' }} />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.3) 0%, rgba(168,85,247,0.15) 40%, transparent 70%)' }} />
+        <div className="absolute top-40 -right-40 w-[500px] h-[500px] opacity-12 pointer-events-none rounded-full" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 60%)' }} />
 
         {/* Beaming colorful glow — centered on text area */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[900px] h-[700px] pointer-events-none" style={{ filter: 'blur(90px)' }}>
-          <div className="absolute inset-0 m-auto w-[220px] h-[220px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%)' }} />
-          <div className="absolute inset-0 m-auto w-[500px] h-[350px] rounded-full opacity-60" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.55) 0%, transparent 60%)' }} />
-          <div className="absolute inset-0 m-auto w-[400px] h-[450px] rounded-full opacity-50 rotate-[30deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(168,85,247,0.5) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[480px] h-[300px] rounded-full opacity-45 -rotate-[20deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.5) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[350px] h-[250px] rounded-full opacity-35 translate-x-[60px] -translate-y-[30px]" style={{ background: 'radial-gradient(ellipse at center, rgba(34,211,238,0.45) 0%, transparent 60%)' }} />
-          <div className="absolute inset-0 m-auto w-[300px] h-[350px] rounded-full opacity-30 -translate-x-[80px] translate-y-[20px]" style={{ background: 'radial-gradient(ellipse at center, rgba(244,114,182,0.45) 0%, transparent 55%)' }} />
-          <div className="absolute inset-0 m-auto w-[250px] h-[200px] rounded-full opacity-25 translate-y-[60px]" style={{ background: 'radial-gradient(ellipse at center, rgba(52,211,153,0.4) 0%, transparent 60%)' }} />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[900px] h-[700px] pointer-events-none" style={{ filter: 'blur(100px)' }}>
+          <div className="absolute inset-0 m-auto w-[220px] h-[220px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
+          <div className="absolute inset-0 m-auto w-[500px] h-[350px] rounded-full opacity-35" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.4) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0 m-auto w-[400px] h-[450px] rounded-full opacity-30 rotate-[30deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(168,85,247,0.35) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[480px] h-[300px] rounded-full opacity-25 -rotate-[20deg]" style={{ background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.35) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[350px] h-[250px] rounded-full opacity-20 translate-x-[60px] -translate-y-[30px]" style={{ background: 'radial-gradient(ellipse at center, rgba(34,211,238,0.3) 0%, transparent 60%)' }} />
+          <div className="absolute inset-0 m-auto w-[300px] h-[350px] rounded-full opacity-15 -translate-x-[80px] translate-y-[20px]" style={{ background: 'radial-gradient(ellipse at center, rgba(244,114,182,0.3) 0%, transparent 55%)' }} />
+          <div className="absolute inset-0 m-auto w-[250px] h-[200px] rounded-full opacity-15 translate-y-[60px]" style={{ background: 'radial-gradient(ellipse at center, rgba(52,211,153,0.25) 0%, transparent 60%)' }} />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 text-center">

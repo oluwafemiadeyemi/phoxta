@@ -55,16 +55,16 @@ export default function PagesStrip({ projectId }: PagesStripProps) {
   }
 
   return (
-    <div className="h-24 bg-[#18181b] border-t border-white/[0.06] shrink-0">
+    <div className="h-16 md:h-24 bg-[#18181b] border-t border-white/[0.06] shrink-0">
       <ScrollArea className="h-full">
-        <div className="flex items-center px-4 gap-3 h-full min-h-[96px]">
+        <div className="flex items-center px-2 md:px-4 gap-2 md:gap-3 h-full min-h-[64px] md:min-h-[96px]">
           {pages.map((page, idx) => {
             const isActive = page.id === currentPageId
             return (
               <div key={page.id} className="relative group shrink-0">
                 <button
                   onClick={() => setCurrentPageId(page.id)}
-                  className={`w-28 h-16 rounded-lg border-2 transition-all overflow-hidden flex items-center justify-center
+                  className={`w-16 h-10 md:w-28 md:h-16 rounded-lg border-2 transition-all overflow-hidden flex items-center justify-center
                     ${isActive ? 'border-blue-500 shadow-sm' : 'border-zinc-700 hover:border-zinc-600'}`}
                 >
                   {page.previewUrl ? (
@@ -112,7 +112,7 @@ export default function PagesStrip({ projectId }: PagesStripProps) {
                 variant="outline"
                 onClick={() => addPage()}
                 disabled={loading}
-                className="w-28 h-16 rounded-lg border-2 border-dashed shrink-0"
+                className="w-16 h-10 md:w-28 md:h-16 rounded-lg border-2 border-dashed shrink-0"
               >
                 <Plus className="h-5 w-5" />
               </Button>
