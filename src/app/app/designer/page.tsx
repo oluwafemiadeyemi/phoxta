@@ -1,17 +1,16 @@
-// ===========================================================================
-// Designer Dashboard Page — SERVER component wrapper
-// Forces dynamic rendering to prevent prerendering issues with Refine's
-// internal useSearchParams() usage.
-// ===========================================================================
-import { Suspense } from 'react'
-import DesignerDashboardClient from '@/components/designer/DesignerDashboard'
+'use client'
 
-export const dynamic = 'force-dynamic'
+// ===========================================================================
+// Designer Dashboard Page — uses next/dynamic with ssr:false to completely
+// skip server-side rendering and avoid useSearchParams prerender errors.
+// ===========================================================================
+import dynamic from 'next/dynamic'
+
+const DesignerDashboardClient = dynamic(
+  () => import('@/components/designer/DesignerDashboard'),
+  { ssr: false }
+)
 
 export default function DesignerDashboardPage() {
-  return (
-    <Suspense>
-      <DesignerDashboardClient />
-    </Suspense>
-  )
+  return <DesignerDashboardClient />
 }

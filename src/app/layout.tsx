@@ -18,8 +18,6 @@ export const metadata: Metadata = {
     'Validate your startup idea in 7 days with AI-powered research, structured daily tasks, and a final go/no-go verdict.',
 }
 
-export const dynamic = 'force-dynamic'
-
 export default function RootLayout({
   children,
 }: Readonly<{

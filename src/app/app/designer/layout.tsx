@@ -1,18 +1,17 @@
-// ===========================================================================
-// Designer Layout — SERVER component that forces dynamic rendering
-// and wraps the client-side Refine provider in a Suspense boundary
-// ===========================================================================
-import { Suspense } from 'react'
-import DesignerProvider from '@/components/designer/DesignerProvider'
+'use client'
 
-export const dynamic = 'force-dynamic'
+// ===========================================================================
+// Designer Layout — uses next/dynamic with ssr:false to completely prevent
+// Refine's RouteChangeHandler (which uses useSearchParams) from running
+// during Next.js static prerendering.
+// ===========================================================================
+import dynamic from 'next/dynamic'
+
+const DesignerProvider = dynamic(
+  () => import('@/components/designer/DesignerProvider'),
+  { ssr: false }
+)
 
 export default function DesignerLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <Suspense>
-      <DesignerProvider>
-        {children}
-      </DesignerProvider>
-    </Suspense>
-  )
+  return <DesignerProvider>{children}</DesignerProvider>
 }
