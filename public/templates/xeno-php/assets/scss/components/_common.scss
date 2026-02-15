@@ -1,0 +1,276 @@
+
+
+/*---- 
+
+====================
+01. Base CSS
+    # Common CSS
+====================
+
+----*/ 
+
+
+@use "./../abstract";
+
+#smooth-wrapper{
+    overflow: hidden;
+    z-index: 1;
+}
+@media (min-width: 1451px) {
+    .container{
+        max-width: 1314px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1450px) {
+    .container{
+        max-width: 1200px;
+    }
+}
+.p-r{
+    position: relative;
+}
+.bg_cover{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 100%;
+}
+.font-200{
+    font-weight: 200;
+}
+.form-group{
+    position: relative;
+}
+label{
+    margin-bottom: 0;
+}
+.form_control{
+    width: 100%;
+}
+.text-white{
+    p,
+    h6,
+    h5,
+    h4,
+    h3,
+    h2,
+    & h1{
+        color: $white-color;
+    }
+    & .sub-heading{
+        background-color: $white-color;
+        color: $heading-color;
+        border-color: transparent;
+    }
+}
+.thin-200{
+    font-weight: 200;
+}
+.section-title{
+    & h2{
+        margin-bottom: 20px;
+        @include respond(xxl){
+            font-size: 38px;
+            line-height: 1.1;
+        }
+        @include respond(xl){
+            font-size: 36px;
+            line-height: 1.1;
+        }
+        @include respond(md){
+            font-size: 28px;
+            line-height: 1.3;
+        }
+    }
+    &.style-one{
+        h2{
+            font-size: 150px;
+            margin-bottom: 50px;
+            @include respond(xxxl){
+                font-size: 120px;
+            }
+            @include respond(xl){
+                font-size: 70px;
+            }
+            @include respond(md){
+                font-size: 44px;
+                margin-bottom: 20px;
+            }
+            & span{
+                font-size: 65px;
+                font-weight: 200;
+                letter-spacing: -0.02em;
+                @include respond(md){
+                    font-size: 28px;
+                }
+            }
+        }
+        & p{
+            margin-left: 110px;
+            max-width: 970px;
+            display: inline-flex;
+            align-items: center;
+            &:before{
+                display: inline-flex;
+                content: '';
+                width: 300px;
+                height: 1px;
+                background-color: $border-color;
+                margin-right: 50px;
+                flex: 0 0 auto;
+            }
+            @include respond(xl){
+                margin-left: 15px;
+                &:before{
+                    width: 100px;
+                }
+            }
+            @include respond(lg){
+                margin-left: 0;
+                &:before{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.title-white{
+    & h2{
+        color: $white-color;
+    }
+    & p{
+        color: $white-color;
+    }
+}
+
+.check-list{
+    &.style-one{
+        & li{
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            &:not(:last-child){
+                margin-bottom: 13px;
+            }
+            & i{
+                margin-right: 10px;
+                color: $primary-color;
+            }
+        }
+    }
+    &.style-two{
+        & li{
+            position: relative;
+            padding-left: 15px;
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
+            &:before{
+                position: absolute;
+                top: 11px;
+                left: 0;
+                content: '';
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+/* Animated List Wrap */
+
+.headline-wrap {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    font-family: $heading-font;
+    text-transform: capitalize;
+    & .marquee-wrap {
+        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    & .marquee-item{
+        display: flex;
+        align-items: center;
+        margin-right: 50px;
+        & i{
+            margin-right: 15px;
+            line-height: 0;
+        }
+    }
+    & .marquee-inner{
+        display: flex;
+        &.left{
+            animation: marquee_left 35s linear infinite;
+        }
+    }
+    &.style-one{
+        padding: 15px 0;
+        font-family: $heading-font;
+        color: $heading-color;
+        background-color: $primary-color;
+    }
+}
+
+/* Headline Animation */
+
+
+.animate-float-bob-x {
+    animation-name: float-bob-x;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+.animate-float-bob-y {
+    animation-name: float-bob-y;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+.rotate360 {
+    -webkit-animation: spin 7s linear infinite;
+            animation: spin 7s linear infinite;
+}
+.zoomInOut{
+    animation: zoomInOut 6s linear infinite;
+}
+
+/* Pagination */ 
+
+.xeno-pagination{
+    & ul{
+        & li{
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            & a{
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $border-color;
+                color: $heading-color;
+                &:hover{
+                    background-color: $primary-color;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}
+
+/* Form Message */ 
+
+.form-message{
+    padding: 10px 0 0;
+    &.success{
+        color: $primary-color;
+    }
+    &.error{
+        color: rgba(209, 12, 12, 0.808);
+    }
+}

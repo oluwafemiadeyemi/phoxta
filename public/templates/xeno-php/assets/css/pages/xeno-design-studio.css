@@ -1,0 +1,788 @@
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Default CSS
+# Hero Section CSS
+# About Section CSS
+# Project Section CSS
+# Process Section CSS
+# Team Section CSS
+# Testimonial Section CSS
+# Award Section CSS
+# Contact Section CSS
+# Blog Section CSS
+# Company Section CSS
+
+------------------------------------------------------*/
+/*====== Default CSS ======*/
+:root {
+  --primary-color: #DDFE7D;
+  --primary-black-color: #0A0A0A;
+}
+
+.theme-btn.style-one {
+  color: var(--primary-black-color);
+  border-radius: 30px;
+}
+.theme-btn.style-one:hover {
+  background-color: var(--white-color);
+  color: var(--primary-black-color);
+}
+.theme-btn.style-two:hover {
+  color: var(--heading-color);
+}
+
+.big-text h2 {
+  text-align: center;
+  font: 700 170px var(--heading-font);
+  line-height: 1;
+  text-transform: uppercase;
+}
+@media (max-width: 1399.98px) {
+  .big-text h2 {
+    font-size: 120px;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .big-text h2 {
+    font-size: 80px;
+  }
+}
+@media (max-width: 767.98px) {
+  .big-text h2 {
+    font-size: 40px;
+  }
+}
+
+/*====== Start Zeno Hero Section ======*/
+.xeno-hero-ds {
+  position: relative;
+  z-index: 1;
+  padding: 200px 0 100px;
+  background-color: var(--primary-black-color);
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ds {
+    padding: 130px 0 100px;
+  }
+}
+.xeno-hero-ds .line-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.xeno-hero-ds .container-fluid {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ds .container-fluid {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-hero-ds .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.xeno-hero-ds .title {
+  color: var(--primary-color);
+  font-size: 190px;
+  line-height: 1;
+  font-weight: 700;
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 70px;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ds .title {
+    display: none;
+  }
+}
+.xeno-hero-ds .hero-content {
+  margin-bottom: 30px;
+}
+.xeno-hero-ds .hero-content h1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-size: 190px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white-color);
+  text-transform: uppercase;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ds .hero-content h1 {
+    font-size: 240px;
+    line-height: 1.3;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .hero-content h1 {
+    font-size: 200px;
+    line-height: 1.3;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-hero-ds .hero-content h1 {
+    font-size: 160px;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ds .hero-content h1 {
+    font-size: 38px;
+  }
+}
+.xeno-hero-ds .hero-content .title {
+  display: none;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ds .hero-content .title {
+    display: block;
+    font-size: 240px;
+    line-height: 1.3;
+    text-align: right;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .hero-content .title {
+    font-size: 190px;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-hero-ds .hero-content .title {
+    font-size: 160px;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ds .hero-content .title {
+    font-size: 38px;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .hero-content-wrap .hero-image {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+}
+.xeno-hero-ds .hero-content-wrap .content-box {
+  padding-left: 18%;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .hero-content-wrap .content-box {
+    text-align: center;
+    padding-left: 0;
+  }
+}
+.xeno-hero-ds .hero-content-wrap .content-box p {
+  margin-bottom: 50px;
+  font-size: 24px;
+  line-height: 40px;
+  color: var(--white-color);
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ds .hero-content-wrap .content-box p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+.xeno-hero-ds .hero-content-wrap .content-box .experience-box {
+  margin-top: 50px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ds .hero-content-wrap .experience-box {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.experience-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.experience-box h2 {
+  font-size: 180px;
+  color: var(--white-color);
+  font-weight: 800;
+  line-height: 1;
+}
+@media (max-width: 1650px) {
+  .experience-box h2 {
+    font-size: 120px;
+  }
+}
+@media (max-width: 767.98px) {
+  .experience-box h2 {
+    font-size: 36px;
+  }
+}
+.experience-box h2 .symbol {
+  font-weight: 300;
+  margin-left: -30px;
+}
+@media (max-width: 767.98px) {
+  .experience-box h2 .symbol {
+    font-size: 36px;
+    margin-left: 0;
+  }
+}
+.experience-box span.duration {
+  border: 1px solid var(--white-color);
+  font: 400 24px var(--heading-font);
+  padding: 20px 70px;
+  border-radius: 55px;
+  max-width: 260px;
+  color: var(--white-color);
+  margin-left: 40px;
+}
+
+/*====== End Hero Section ======*/
+/*====== Start About Section ======*/
+@media (max-width: 767.98px) {
+  .xeno-about-ds .xeno-content-box {
+    margin-top: 60px;
+  }
+}
+.xeno-about-ds .xeno-content-box h2 {
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-about-ds .xeno-content-box h2 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-about-ds .xeno-content-box h2 {
+    font-size: 24px;
+    line-height: 35px;
+  }
+}
+
+.xeno-fun-item {
+  background-color: var(--primary-color);
+  max-width: 445px;
+  min-height: 550px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 50px 70px 70px;
+}
+.xeno-fun-item .number h2 {
+  font-size: 80px;
+  font-weight: 600;
+}
+.xeno-fun-item .number h2 span.symbol {
+  display: block;
+  margin-bottom: 25px;
+}
+.xeno-fun-item .content h4 {
+  max-width: 260px;
+  border-radius: 100px;
+  padding: 30px 60px;
+  border: 1px solid var(--heading-color);
+}
+
+/*====== End About Section ======*/
+/*====== Start Services Section ======*/
+.xeno-service-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+@media (max-width: 767.98px) {
+  .xeno-service-item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+}
+.xeno-service-item .thumbnail {
+  padding: 4px;
+  width: 250px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+@media (max-width: 767.98px) {
+  .xeno-service-item .thumbnail {
+    width: 100%;
+  }
+  .xeno-service-item .thumbnail img {
+    width: 100%;
+  }
+}
+.xeno-service-item .thumbnail img {
+  border-radius: 7px;
+}
+.xeno-service-item .content {
+  padding: 50px;
+}
+@media (max-width: 767.98px) {
+  .xeno-service-item .content {
+    padding: 30px;
+  }
+}
+.xeno-service-item .content .icon {
+  margin-bottom: 30px;
+}
+.xeno-service-item .content h4 {
+  margin-bottom: 30px;
+}
+@media (max-width: 1650px) {
+  .xeno-service-item .content h4 {
+    margin-bottom: 25px;
+    font-size: 20px;
+  }
+}
+.xeno-service-item .content p {
+  margin-bottom: 45px;
+  line-height: 26px;
+}
+@media (max-width: 1650px) {
+  .xeno-service-item .content p {
+    margin-bottom: 30px;
+  }
+}
+.xeno-service-item .content .icon-btn.style-one {
+  width: 50px;
+  height: 50px;
+}
+.xeno-service-item .content .icon-btn.style-one:hover {
+  color: var(--heading-color);
+}
+
+/*====== End Services Section ======*/
+/*====== Start Project Section ======*/
+.xeno-project-ds .big-text {
+  margin-bottom: 100px;
+}
+.xeno-project-ds .big-text h2 {
+  color: var(--heading-color);
+}
+
+.xeno-project-item {
+  background-color: var(--white-color);
+  border-radius: 10px;
+}
+.xeno-project-item .thumbnail img {
+  width: 100%;
+  border-radius: 10px;
+}
+.xeno-project-item .content-wrap {
+  padding-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+@media (max-width: 767.98px) {
+  .xeno-project-item .content-wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-project-item .content-wrap .button {
+    margin-top: 20px;
+  }
+}
+.xeno-project-item .content-wrap .button .theme-btn.style-one:hover {
+  background-color: var(--primary-black-color);
+  color: var(--primary-color);
+}
+
+/*====== End Project Section ======*/
+/*====== Start Process Section ======*/
+.xeno-sec-ds {
+  background-color: var(--primary-black-color);
+}
+.xeno-sec-ds .big-text h2 {
+  color: var(--white-color);
+}
+
+.process-slider .xeno-process-item {
+  max-width: 520px;
+  margin-right: 30px;
+}
+
+.xeno-process-item .xeno-inner-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 40px 50px 35px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.xeno-process-item .xeno-inner-item:hover {
+  border-color: var(--primary-color);
+}
+.xeno-process-item .xeno-inner-item:hover .number {
+  background-color: var(--primary-color);
+  color: var(--heading-color);
+}
+.xeno-process-item .number {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--primary-black-color);
+  margin-right: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 18px;
+  font-family: var(--heading-font);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-bottom: 25px;
+}
+.xeno-process-item .content h5 {
+  color: var(--white-color);
+  margin-bottom: 20px;
+}
+.xeno-process-item .content p {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 26px;
+}
+
+/*====== End Process Section ======*/
+/*====== Start Team Section ======*/
+.xeno-team-item {
+  text-align: center;
+}
+.xeno-team-item .thumbnail {
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767.98px) {
+  .xeno-team-item .thumbnail {
+    width: 220px;
+    height: 220px;
+  }
+}
+.xeno-team-item .thumbnail img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.xeno-team-item .content h4 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white-color);
+}
+.xeno-team-item .content span.position {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.view-more-btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  font: 700 20px var(--heading-font);
+  color: var(--heading-color);
+  text-align: center;
+}
+.view-more-btn i {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  margin-bottom: 10px;
+}
+.view-more-btn:hover {
+  color: var(--heading-color);
+}
+
+/*====== End Team Section ======*/
+/*====== Start Testimonial Section ======*/
+.testimonial-slider {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.testimonial-slider .slick-slide {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.xeno-testimonial-item .testimonial-inner-content {
+  padding: 40px 50px;
+  background-color: var(--white-color);
+  border-radius: 10px;
+  border: 1px solid #EFEFEF;
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-testimonial-item .testimonial-inner-content {
+    padding: 30px 30px 25px;
+  }
+}
+.xeno-testimonial-item .testimonial-inner-content .author-thumb-quote {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 25px;
+}
+.xeno-testimonial-item .testimonial-inner-content .author-thumb-item .author-thumb {
+  margin-bottom: 20px;
+}
+.xeno-testimonial-item .testimonial-inner-content .author-thumb-item .author-info h5 {
+  margin-bottom: 10px;
+}
+
+/*====== End Testimonial Section ======*/
+/*====== Start Award Section ======*/
+.xeno-awards-ds .xeno-image-box {
+  position: relative;
+  z-index: 1;
+  height: 495px;
+  text-align: center;
+}
+.xeno-awards-ds .xeno-image-box .award-image img {
+  -webkit-transform: rotate(-5deg);
+          transform: rotate(-5deg);
+  border-radius: 10px;
+}
+.xeno-awards-ds .xeno-image-box .award-circle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.xeno-award-item {
+  position: relative;
+}
+.xeno-award-item .award-inner {
+  position: relative;
+  padding: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+@media (max-width: 767.98px) {
+  .xeno-award-item .award-inner {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 33px 20px 25px;
+  }
+}
+.xeno-award-item .award-inner:hover {
+  border-color: var(--heading-color);
+}
+.xeno-award-item .name {
+  width: 20%;
+}
+@media (max-width: 767.98px) {
+  .xeno-award-item .name {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+.xeno-award-item .title {
+  width: 60%;
+  color: var(--heading-color);
+  font: 600 24px var(--heading-font);
+}
+@media (max-width: 767.98px) {
+  .xeno-award-item .title {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+.xeno-award-item .year {
+  width: 20%;
+  text-align: right;
+}
+@media (max-width: 767.98px) {
+  .xeno-award-item .year {
+    width: 100%;
+    text-align: left;
+  }
+}
+.xeno-award-item:hover .award-inner:after {
+  border-color: transparent;
+  background-color: #EDF2FF;
+}
+
+/*====== End Award Section ======*/
+/*====== Start Contact Section ======*/
+.xeno-contact-ds {
+  background-color: #0A0A0A;
+}
+.xeno-contact-ds .big-text {
+  margin-bottom: 100px;
+}
+.xeno-contact-ds .big-text h2 {
+  color: var(--white-color);
+}
+
+.xeno-info-box .content span.title {
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 10px;
+}
+.xeno-info-box .content h5 {
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.xeno-contact-form label {
+  font: 600 16px var(--heading-font);
+  color: var(--white-color);
+  margin-bottom: 10px;
+}
+.xeno-contact-form .form_control {
+  padding: 14px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-bottom: 30px;
+  color: #B7B7B7;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.xeno-contact-form .form_control:focus {
+  border-color: transparent;
+  background-color: var(--white-color);
+}
+.xeno-contact-form .theme-btn {
+  width: 100%;
+}
+.xeno-contact-form .theme-btn.style-one {
+  padding: 15px 30px;
+}
+
+/*====== End Contact Section ======*/
+/*====== Start Blog Section ======*/
+.xeno-blog-post .thumbnail img {
+  border-radius: 10px;
+}
+.xeno-blog-post .content {
+  padding-top: 15px;
+}
+.xeno-blog-post .content .post-meta {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+.xeno-blog-post .content .post-meta span:not(:last-child):after {
+  display: inline-block;
+  content: "";
+  margin-left: 20px;
+  margin-right: 15px;
+  vertical-align: middle;
+  width: 50px;
+  height: 1px;
+  background-color: var(--border-color);
+}
+@media (max-width: 1399.98px) {
+  .xeno-blog-post .content .post-meta span:not(:last-child):after {
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+}
+.xeno-blog-post .content h3.title {
+  font-size: 24px;
+  margin-bottom: 12px;
+  line-height: 35px;
+}
+
+/*====== End Blog Section ======*/
+/*====== Start Company Section ======*/
+.xeno-company-ds {
+  border-top: 1px solid var(--border-color);
+}
+
+/*====== End Company Section ======*/

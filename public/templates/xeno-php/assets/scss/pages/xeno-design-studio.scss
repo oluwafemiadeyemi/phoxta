@@ -1,0 +1,716 @@
+
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Default CSS
+# Hero Section CSS
+# About Section CSS
+# Project Section CSS
+# Process Section CSS
+# Team Section CSS
+# Testimonial Section CSS
+# Award Section CSS
+# Contact Section CSS
+# Blog Section CSS
+# Company Section CSS
+
+------------------------------------------------------*/
+
+@import "../abstract";
+
+/*====== Default CSS ======*/
+
+:root{
+    --primary-color: #DDFE7D;
+    --primary-black-color: #0A0A0A;
+}
+
+.theme-btn{
+    &.style-one{
+        color: $primary-black-color;
+        border-radius: 30px;
+        &:hover{
+            background-color: $white-color;
+            color: $primary-black-color;
+        }
+    }
+    &.style-two{
+        &:hover{
+            color: $heading-color;
+        }
+    }
+}
+
+.big-text{
+    & h2{
+        text-align: center;
+        font: 700 170px $heading-font;
+        line-height: 1;
+        text-transform: uppercase;
+        @include respond(xxl){
+            font-size: 120px;
+        }
+        @include respond(xl){
+            font-size: 80px;
+        }
+        @include respond(md){
+            font-size: 40px;
+        }
+    }
+}
+
+/*====== Start Zeno Hero Section ======*/
+
+.xeno-hero-ds{
+    position: relative;
+    z-index: 1;
+    padding: 200px 0 100px;
+    background-color: $primary-black-color;
+    @include respond(md){
+        padding: 130px 0 100px;
+    }
+    & .line-bg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    & .container-fluid{
+        padding-left: 120px;
+        padding-right: 120px;
+        @include respond(xxxl){
+            padding-left: 70px;
+            padding-right: 70px;
+        }
+        @include respond(xl){
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        @include respond(lg){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    & .title{
+        color: $primary-color;
+        font-size: 190px;
+        line-height: 1;
+        font-weight: 700;
+        font-family: $heading-font;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        margin-bottom: 70px;
+        @include respond(xxxl){
+            display: none;
+        }
+    }
+    & .hero-content{
+        margin-bottom: 30px;
+        & h1{
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 190px;
+            font-weight: 700;
+            line-height: 1;
+            color: $white-color;
+            text-transform: uppercase;
+            @include respond(xxxl){
+                font-size: 240px;
+                line-height: 1.3;
+            }
+            @include respond(xl){
+                font-size: 200px;
+                line-height: 1.3;
+            }
+            @include respond(lg){
+                font-size: 160px;
+            }
+            @include respond(md){
+                font-size:38px;
+            }
+        }
+        & .title{
+            display: none;
+            @include respond(xxxl){
+                display: block;
+                font-size: 240px;
+                line-height: 1.3;
+                text-align: right;
+            }
+            @include respond(xl){
+                font-size: 190px;
+            }
+            @include respond(lg){
+                font-size: 160px;
+            }
+            @include respond(md){
+                font-size:38px;
+            }
+        }
+    }
+    & .hero-content-wrap{
+        & .hero-image{
+            @include respond(xl){
+                margin-bottom: 40px;
+                text-align: center;
+            }
+        }
+        & .content-box{
+            padding-left: 18%;
+            @include respond(xl){ 
+                text-align: center;
+                padding-left: 0;
+            }
+            & p{
+                margin-bottom: 50px;
+                font-size: 24px;
+                line-height: 40px;
+                color: $white-color;
+                @include respond(md){
+                    font-size: 18px;
+                    line-height: 30px;
+                }
+            }
+            & .experience-box{
+                margin-top: 50px;
+            }
+        }
+        .experience-box{
+            @include respond(xl){ 
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.experience-box{
+    display: flex;
+    align-items: center;
+    & h2{
+        font-size: 180px;
+        color: $white-color;
+        font-weight: 800;
+        line-height: 1;
+        @include respond(xxxl){
+            font-size: 120px;
+        }
+        @include respond(md){
+            font-size: 36px;
+        }
+        & .symbol{
+            font-weight: 300;
+            margin-left: -30px;
+            @include respond(md){
+                font-size: 36px;
+                margin-left: 0;
+            }
+        }
+    }
+    & span.duration{
+        border: 1px solid $white-color;
+        font: 400 24px $heading-font;
+        padding: 20px 70px;
+        border-radius: 55px;
+        max-width: 260px;
+        color: $white-color;
+        margin-left: 40px;
+    }
+}/*====== End Hero Section ======*/ 
+
+/*====== Start About Section ======*/
+
+.xeno-about-ds{
+    & .xeno-content-box{
+        @include respond(md){
+            margin-top: 60px;
+        }
+        & h2{
+            margin-bottom: 40px;
+            @include respond(xl){ 
+                font-size: 40px;
+            }
+            @include respond(md){ 
+                font-size: 24px;
+                line-height: 35px;
+            }
+        }
+    }
+}
+.xeno-fun-item{
+    background-color: $primary-color;
+    max-width: 445px;
+    min-height: 550px;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 50px 70px 70px;
+    & .number{
+        & h2{
+            font-size: 80px;
+            font-weight: 600;
+            & span.symbol{
+                display: block;
+                margin-bottom: 25px;
+            }
+        }
+    }
+    & .content{
+        & h4{
+            max-width: 260px;
+            border-radius: 100px;
+            padding: 30px 60px;
+            border: 1px solid $heading-color;
+        }
+    }
+}/*====== End About Section ======*/
+
+
+/*====== Start Services Section ======*/ 
+
+.xeno-service-item{
+    display: flex;
+    align-items: center;
+    background-color: $white-color;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    @include respond(md){ 
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    & .thumbnail{
+        padding: 4px;
+        width: 250px;
+        flex: 0 0 auto;
+        @include respond(md){ 
+            width: 100%;
+            & img{
+                width: 100%;
+            }
+        }
+        & img{
+            border-radius: 7px;
+        }
+    }
+    & .content{
+        padding: 50px;
+        @include respond(md){ 
+            padding: 30px;
+        }
+        & .icon{
+            margin-bottom: 30px;
+        }
+        & h4{
+            margin-bottom: 30px;
+            @include respond(xxxl){
+                margin-bottom: 25px;
+                font-size: 20px;
+            }
+        }
+        & p{
+            margin-bottom: 45px;
+            line-height: 26px;
+            @include respond(xxxl){
+                margin-bottom: 30px;
+            }
+        }
+        & .icon-btn{
+            &.style-one{
+                width: 50px;
+                height: 50px;
+                &:hover{
+                    color: $heading-color;
+                }
+            }
+        }
+    }
+}/*====== End Services Section ======*/ 
+
+
+/*====== Start Project Section ======*/ 
+
+.xeno-project-ds{
+    & .big-text{
+        margin-bottom: 100px;
+        & h2{
+            color: $heading-color;
+        }
+    }
+}
+
+.xeno-project-item{
+    background-color: $white-color;
+    border-radius: 10px;
+    & .thumbnail{
+        & img{
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+    & .content-wrap{
+        padding-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include respond(md){ 
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        & .button{
+            @include respond(md){ 
+                margin-top: 20px;
+            }
+            & .theme-btn{
+                &.style-one{
+                    &:hover{
+                        background-color: $primary-black-color;
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+}/*====== End Project Section ======*/ 
+
+/*====== Start Process Section ======*/ 
+
+.xeno-sec-ds{
+    background-color: $primary-black-color;
+    & .big-text{
+        & h2{
+            color: $white-color;
+        }
+    }
+}
+
+.process-slider{
+    & .xeno-process-item{
+        max-width: 520px;
+        margin-right: 30px;
+    }
+}
+
+.xeno-process-item{
+    & .xeno-inner-item{
+        display: flex;
+        align-items: flex-start;
+        padding: 40px 50px 35px;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 7px;
+        transition: all .3s;
+        &:hover{
+            border-color: $primary-color;
+            & .number{
+                background-color: $primary-color;
+                color: $heading-color;
+            }
+        }
+    }
+    
+    & .number{
+        flex: 0 0 auto;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        background-color: $primary-black-color;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-family: $heading-font;
+        transition: all .3s;
+        margin-bottom: 25px;
+    }
+    & .content{
+        & h5{
+            color: $white-color;
+            margin-bottom: 20px;
+        }
+        p{
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 26px;
+        }
+    }
+}
+/*====== End Process Section ======*/ 
+
+/*====== Start Team Section ======*/ 
+
+.xeno-team-item{
+    text-align: center;
+    & .thumbnail{
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        margin-bottom: 20px;
+        @include respond(md){
+            width: 220px;
+            height: 220px;
+        }
+        & img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+    & .content{
+        & h4{
+            font-size: 22px;
+            font-weight: 600;
+            color: $white-color;
+        }
+        & span.position{
+            color: rgba(255, 255, 255, 0.65);
+        }
+    }
+}
+
+.view-more-btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: $primary-color;
+    font: 700 20px $heading-font;
+    color: $heading-color;
+    text-align: center;
+    & i{
+        transform: rotate(-45deg);
+        margin-bottom: 10px;
+    }
+    &:hover{
+        color: $heading-color;
+    }
+}/*====== End Team Section ======*/ 
+
+
+/*====== Start Testimonial Section ======*/ 
+
+.testimonial-slider{
+    margin-left: -15px;
+    margin-right: -15px;
+    & .slick-slide{
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+.xeno-testimonial-item{
+    & .testimonial-inner-content{
+        padding: 40px 50px;
+        background-color: $white-color;
+        border-radius: 10px;
+        border: 1px solid #EFEFEF;
+        @include respond(lg){
+            padding: 30px 30px 25px;
+        }
+        & .author-thumb-quote{
+            justify-content: space-between;
+            margin-bottom: 25px;
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 25px;
+        }
+        & .author-thumb-item{
+            & .author-thumb{
+                margin-bottom: 20px;
+            }
+            & .author-info{
+                & h5{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}/*====== End Testimonial Section ======*/ 
+
+
+/*====== Start Award Section ======*/ 
+
+.xeno-awards-ds{
+    & .xeno-image-box{
+        position: relative;
+        z-index: 1;
+        height: 495px;
+        text-align: center;
+        & .award-image{
+            & img{
+                transform: rotate(-5deg);
+                border-radius: 10px;
+            }
+        }
+        & .award-circle{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+    }
+}
+.xeno-award-item{
+    position: relative;
+    & .award-inner{
+        position: relative;
+        padding: 20px 0;
+        display: flex;
+        overflow: hidden;
+        border-bottom: 1px solid $border-color;
+        transition: all .3s;
+        @include respond(md){
+            flex-direction: column;
+            padding: 33px 20px 25px;
+        }
+        &:hover{
+            border-color: $heading-color;
+        }
+    }
+    & .name{
+        width: 20%;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .title{
+        width: 60%;
+        color: $heading-color;
+        font: 600 24px $heading-font;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .year{
+        width: 20%;
+        text-align: right;
+        @include respond(md){
+            width: 100%;
+            text-align: left;
+        }
+    }
+    &:hover{
+        & .award-inner{
+            &:after{
+                border-color: transparent;
+                background-color: #EDF2FF;
+            }
+        }
+    }
+}/*====== End Award Section ======*/ 
+
+/*====== Start Contact Section ======*/ 
+
+.xeno-contact-ds{
+    background-color: #0A0A0A;
+    & .big-text{
+        margin-bottom: 100px;
+        & h2{
+            color: $white-color;
+        }
+    }
+}
+.xeno-info-box{
+    & .content{
+        & span.title{
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 10px;
+        }
+        & h5{
+            line-height: 30px;
+            font-weight: 500;
+        }
+    }
+}
+.xeno-contact-form{
+    & label{
+        font: 600 16px $heading-font;
+        color: $white-color;
+        margin-bottom: 10px;
+    }
+    & .form_control{
+        padding: 14px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        background-color: rgba(255, 255, 255, 0.05);
+        margin-bottom: 30px;
+        color: #B7B7B7;
+        transition: all .3s;
+        &:focus{
+            border-color: transparent;
+            background-color: $white-color;
+        }
+    }
+    & .theme-btn{
+        width: 100%;
+        &.style-one{
+            padding: 15px 30px;
+        }
+    }
+}/*====== End Contact Section ======*/ 
+
+
+/*====== Start Blog Section ======*/ 
+
+.xeno-blog-post{
+    & .thumbnail{
+        & img{
+            border-radius: 10px;
+        }
+    }
+    & .content{
+        padding-top: 15px;
+        & .post-meta{
+            padding-bottom: 15px;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 20px;
+            & span{
+                &:not(:last-child){
+                    &:after{
+                        display: inline-block;
+                        content: '';
+                        margin-left: 20px;
+                        margin-right: 15px;
+                        vertical-align: middle;
+                        width: 50px;
+                        height: 1px;
+                        background-color: $border-color;
+                        @include respond(xxl){
+                            margin-left: 10px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        & h3.title{
+            font-size: 24px;
+            margin-bottom: 12px;
+            line-height: 35px;
+            @include respond(large){
+                font-size: 20px;
+                line-height: 30px;
+            }
+        }
+    }
+}/*====== End Blog Section ======*/ 
+
+/*====== Start Company Section ======*/ 
+
+.xeno-company-ds{
+    border-top: 1px solid $border-color;
+}
+/*====== End Company Section ======*/ 

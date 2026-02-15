@@ -1,0 +1,1905 @@
+
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Page Banner
+# About Page
+# Service Page
+# Service Details Page
+# Project Page
+# Project Details Page
+# Team Page
+# Faqs Page
+# Blog Grid Page
+# Blog Standard Page
+# Blog Details Page
+# Contact Page
+# 404 Page
+
+------------------------------------------------------*/
+
+
+@import "../abstract";
+
+:root{
+    --gray-dark: #EDF2FF;
+}
+
+/*=========================
+        Page Banner 
+=========================*/
+
+.xeno-page-banner{
+    position: relative;
+    z-index: 1;
+    padding: 195px 0 110px;
+    @include respond(md){
+        padding: 115px 0 60px;
+    }
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            border-radius: 50%;
+            width: 700px;
+            height: 700px;
+            background: linear-gradient(180deg, rgba(0, 71, 255, 0.07) 0%, rgba(0, 71, 255, 0.00) 100%);
+            @include respond(xl){
+                width: 400px;
+                height: 400px;
+            }
+            @include respond(md){
+                width: 300px;
+                height: 300px;
+            }
+        }
+        &.shape-one{
+            top: 10%;
+            left: -20%;
+            @include respond(xl){
+                left: -30%;
+            }
+            @include respond(md){
+               left: -40%;
+            }
+        }
+        &.shape-two{
+            right: -20%;
+            top: 20%;
+            @include respond(xl){
+                right: -30%;
+            }
+            @include respond(md){
+                right: -40%;
+            }
+        }
+    }
+    & .page-title{
+        & span.sub-title{
+            color: $primary-color;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            @include respond(md){
+                font-size: 16px;
+                line-height: 27px;
+            }
+        }
+        & h1{
+            font-size: 120px;
+            line-height: 130px;
+            @include respond(xxxl){
+                font-size: 80px;
+                line-height: 90px;
+            }
+            @include respond(xl){
+                font-size: 60px;
+                line-height: 75px;
+            }
+            @include respond(md){
+                font-size: 34px;
+                line-height: 45px;
+            }
+        }
+    }
+}
+
+
+/*=========================
+    Page : About 
+=========================*/
+
+.xeno-about-sec{
+    & .thumbnail{
+        text-align: right;
+        @include respond(lg){
+            text-align: center;
+        }
+        & img{
+            border-radius: 15px;
+        }
+    }
+    & .text-box{
+        max-width: 580px;
+        padding-left: 50px;
+        @include respond(lg){
+            padding-left: 0;
+            text-align: center;
+            margin: 0 auto 40px;
+        }
+        & p{
+            font-size: 22px;
+            line-height: 40px;
+            margin-bottom: 40px;
+            @include respond(md){
+                font-size: 16px;
+                line-height: 30px;
+            }
+        }
+    }
+    & .xeno-image-box{
+        & img{
+            min-height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+    }
+}
+
+/* Feature Section*/ 
+
+
+.xeno-feature-item{
+    border: 1px solid $border-color;
+    padding: 40px 40px 30px;
+    border-radius: 10px;
+    @include respond(xxxl){
+        padding: 40px 30px 30px;
+    }
+    & .icon{
+        font-size: 55px;
+        color: $primary-color;
+        margin-bottom: 20px;
+    }
+    & .content{
+        & h5{
+            margin-bottom: 20px;
+            font-size: 20px;
+            line-height: 30px;
+            @include respond(xxxl){
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+/* Team Section*/ 
+
+.xeno-team-ca{
+    background-color: #121212;
+    & .xeno-team-item{
+        & .content{
+            & h5{
+                color: $white-color;
+            }
+            & span.position{
+                color: rgba(255, 255, 255, 0.65);
+            }
+        }
+    }
+}
+.team-wrapper{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 0 70px;
+    padding-left: 130px;
+    padding-right: 130px;
+    @include respond(xxxl){
+        padding-left: 70px;
+        padding-right: 70px;
+        gap: 0 30px;
+    }
+    @include respond(xxl){
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+    @include respond(xl){
+        grid-template-columns: repeat(2,1fr);
+        padding-left: 120px;
+        padding-right: 120px;
+        gap: 0 100px;
+    }
+    @include respond(lg){
+        grid-template-columns: repeat(2,1fr);
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+    @include respond(md){
+        grid-template-columns: repeat(1,1fr);
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+}
+.xeno-team-item{
+    &:hover{
+        & .thumbnail{
+            & .hover-content{
+                transform: translate(-50%,0);
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+    & .thumbnail{
+        position: relative;
+        overflow: hidden;
+        & img{
+            width: 100%;
+            border-radius: 10px;
+        }
+        & .hover-content{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            padding: 30px 40px;
+            visibility: hidden;
+            opacity: 0;
+            transform: translate(-50%,-30px);
+            transition: all .33s;
+        }
+        & .social-link{
+            background-color: $primary-color;
+            gap: 0 25px;
+            display: inline-flex;
+            padding: 6px 25px;
+            border-radius: 7px;
+            & a{
+                color: $white-color;
+            }
+        }
+    }
+    & .content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 15px;
+    }
+}
+
+/* Zeno Award Item */ 
+
+.xeno-award-item{
+    position: relative;
+    & .award-inner{
+        position: relative;
+        border-radius: 10px;
+        padding: 33px 50px;
+        display: flex;
+        overflow: hidden;
+        background-color: #fafafa;
+        transition: all .3s;
+        &:after{
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: all .3s;
+        }
+        @include respond(md){
+            flex-direction: column;
+            padding: 33px 20px 25px;
+        }
+    }
+    & .name{
+        width: 20%;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .title{
+        width: 40%;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .place{
+        width: 20%;
+        text-align: right;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+    }
+    & .year{
+        width: 20%;
+        text-align: right;
+        @include respond(md){
+            width: 100%;
+            text-align: left;
+        }
+    }
+    & .hover-image{
+        transition: opacity .3s, transform .7scubic-bezier(.23,1,.32,1);
+        position: absolute;
+        width: 300px;
+        height: 400px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        left: 0;
+        top: -50%;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
+    &:hover{
+        & .award-inner{
+            background-color: #EDF2FF;
+            &:after{
+                border-color: transparent;
+            }
+        }
+        & .hover-image{
+            visibility: visible;
+            opacity: 1;
+            -webkit-transform: translateY(-50%) scale(1);
+            transform: translateY(-50%) scale(1);
+        }
+    }
+}
+
+/* Testimonial Section */ 
+
+.testimonial-arrows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 10px;
+    & .slick-arrow{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1;
+        transition: all .3s;
+        &.prev{
+            & i{
+                transform: rotate(45deg);
+            } 
+        }
+        &.next{
+            & i{
+                transform: rotate(-45deg);
+            }
+        }
+        &:hover{
+            border-color: $primary-color;
+            color: $heading-color;
+        }
+    }
+}
+
+
+.testimonial-slider{
+    margin-left: -15px;
+    margin-right: -15px;
+    & .slick-slide{
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+.xeno-testimonial-item{
+    & .testimonial-content{
+        background-color: #EDF2FF;
+        border: 1px solid rgba(0, 71, 255, 0.10);
+        padding: 50px 45px;
+        border-radius: 20px;
+        @include respond(xxxl){
+            padding: 30px 25px;
+        }
+        & .quote-company-wrap{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        & p{
+            margin-bottom: 30px;
+        }
+        & .author-thumb-item{
+            background-color: $white-color;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            & .author-thumb{
+                flex: 0 0 auto;
+                width: 50px;
+                height: 50px;
+                margin-right: 20px;
+                & img{
+                    width: 100%;
+                    border-radius: 50%;
+                }
+            }
+            & .author-info{
+                & h6{
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+}
+
+/*=========================
+    Page : Service 
+=========================*/
+
+.xeno-services-ca{
+    & .xeno-image-box{
+        margin-bottom: 150px;
+        @include respond(md){
+            margin-bottom: 50px;
+        }
+        & img{
+            min-height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+    }
+}
+
+.xeno-service-item{
+    transition: all .3s;
+    &.service-active{
+        background-color: #EDF2FF;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        & .service-title{
+            & span.number{
+                background-color: $white-color;
+                border-color: transparent;
+            }
+        }
+    }
+    & .service-title{
+        display: flex;
+        align-items: center;
+        padding-bottom: 25px;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 30px;
+        cursor: pointer;
+        transition: all .3s;
+        @include respond(md){
+            font-size: 16px;
+            line-height: 30px;
+        }
+        & span.number{
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 70px;
+            @include respond(md){
+                margin-right: 15px;
+            }
+        }
+        &:after{
+            margin-left: auto;
+            font-weight: 400;
+            content: '\f061';
+            font-family: 'Font Awesome 5 Pro';
+            transform: rotate(-45deg);
+            transition: all .3s;
+        }
+        
+    }
+    & .service-title[aria-expanded=true]{
+        padding: 20px 30px;
+        &:after{
+            transform: rotate(0deg);
+        }
+    }
+    & .thumbnail{
+        padding: 0 30px;
+    }
+    & .service-content{
+        padding: 0 50px 30px;
+        @include respond(xl){
+            padding: 0 30px 30px;
+        }
+        & p{
+            margin-bottom: 40px;
+        }
+        & ul.check-list{
+            & li{
+                &:not(:last-child){
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+.xeno-counter-sec{
+    & .container-fluid{
+        padding-left: 200px;
+        padding-right: 70px;
+        @include respond(xxxl){
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+        @include respond(md){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    & .thumbnail{
+        & img{
+            border-radius: 20px;
+        }
+    }
+    & .counter-wrapper{
+        background-color: $primary-color;
+        border-radius: 20px;
+        padding: 60px 70px 30px;
+        @include respond(lg){
+            padding: 40px 30px 10px;
+        }
+        & .xeno-counter-item{
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+            @include respond(xxxl){
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+            & .content{
+                flex-grow: 1;
+                & h2{
+                    color: $white-color;
+                }
+                & p{
+                    color: $white-color;
+                }
+            }
+            & .icon{
+                color: $white-color;
+                font-size: 65px;
+            }
+        }
+    }
+}
+
+.xeno-faqs-sec{
+    & .xeno-content-box{
+        & p{
+            padding-left: 25%;
+            @include respond(xl){
+                padding-left: 0;
+            }
+        }
+        & .xeno-button{
+            padding-left: 25%;
+            @include respond(xl){
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+
+/*============================
+    Page : Service Details 
+============================*/
+
+
+.xeno-service-sec{
+    & .thumbnail{
+        & img{
+            border-radius: 15px;
+        }
+    }
+    & .xeno-content-box{
+        & h2{
+            max-width: 540px;
+            @include respond(xl){
+                font-size: 32px;
+                line-height: 45px;
+            }
+        }
+        & .text-box{
+            & p{
+                max-width: 350px;
+                @include respond(xl){
+                    max-width: 100%;
+                }
+            }
+        }
+        & ul{
+            & li{
+                &:not(:last-child){
+                    margin-bottom: 30px;
+                }
+            }
+        }
+        & .xeno-text-box{
+            & h4{
+                margin-bottom: 15px;
+            }
+        }
+    }
+    & .xeno-navigation-wrapper{
+        padding-top: 130px;
+        border-top: 1px solid #e1e1e1;
+        & .xeno-navigation-item{
+            max-width: 550px;
+            @include respond(xl){
+                max-width: 100%;
+            }
+            & .thumbnail{
+                max-width: 200px;
+            }
+        }
+    }
+    & .accordion{
+        max-width: 510px;
+        margin-left: auto;
+        @include respond(xl){
+            margin-left: 0;
+            max-width: 100%;
+        }
+    }
+}
+.accordion-card{
+    &.style-one{
+        border: 1px solid $border-color;
+        padding: 20px 30px;
+        border-radius: 10px;
+        &  .accordion-header{
+            & .accordion-title{
+                line-height: 25px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                
+                & span.sn{
+                    margin-right: 8px;
+                }
+                &:after{
+                    flex: 0 0 auto;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    content: "\f061";
+                    font-family: "Font Awesome 5 Pro";
+                    font-weight: 400;
+                    margin-left: auto;
+                    transition: all .3s;
+                }
+                
+            }
+            & .accordion-title[aria-expanded=true]{
+                &:after{
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+        & .accordion-content{
+            & p{
+                padding-top: 10px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+
+
+
+/*=========================
+    Page : Projects 
+=========================*/
+
+.xeno-project-item{
+    & .thumbnail{
+        & img{
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+    & .content-wrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+    }
+    & .content{
+        padding-right: 15px;
+        & .project-categories{
+            & a{
+                padding: 5px 15px;
+                line-height: 16px;
+                border: 1px solid $border-color;
+                border-radius: 20px;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+        }
+        & h4.title{
+            &:hover{
+                color: $primary-color;
+            }
+            @include respond(sm){
+                font-size: 18px;
+                line-height: 30px;            
+            }
+        }
+    }
+    & .icon-btn{
+        &.style-one{
+            width: 55px;
+            height: 55px;
+            font-size: 18px;
+            
+        }
+    }
+}
+
+
+/*=========================
+    Page : Project Details 
+=========================*/
+
+.xeno-project-details-sec{
+    & .project-info-wrapper{
+        padding: 105px 0 50px;
+        border-top: 1px solid $border-color;
+        @include respond(md){
+            padding: 45px 0 20px;
+        }
+        & .text-box{
+            @include respond(md){
+                text-align: center;
+            }
+            & h4{
+                @include respond(xl){
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    & .thumbnail{
+        & img{
+            border-radius: 15px;
+        }
+    }
+    & .xeno-navigation-wrapper{
+        padding-top: 130px;
+        border-top: 1px solid #e1e1e1;
+    }
+}
+
+
+.xeno-process-item{
+    border: 1px solid #E9E9E9;
+    padding: 40px 30px 30px;
+    border-radius: 10px;
+    transition: all .3s;
+    @include respond(xxxl){
+        padding: 40px 20px 30px;
+    }
+    &:hover{
+        background-color: $white-color;
+        filter: drop-shadow(10px 4px 60px rgba(199, 199, 199, 0.25));
+        & .content{
+            & span.number{
+                background-color: $primary-color;
+                color: $white-color;
+            }
+        }
+    }
+    & .content{
+        & span.number{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 10px 4px 60px rgba(132, 132, 132, 0.25);
+            transition: all .35s;
+        }
+        & h4{
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.xeno-navigation-item{
+    display: flex;
+    align-items: center;
+    @include respond(md){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    & .thumbnail{
+        flex: 0 0 auto;
+        margin-right: 30px;
+        max-width: 300px;
+        @include respond(md){
+            margin-bottom: 20px;
+            margin-right: 0;
+        }
+    }
+    & .content{
+        & .project-categories{
+            & a{
+                line-height: 1;
+                border: 1px solid #e1e1e1;
+                border-radius: 30px;
+                padding: 6px 20px;
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+        }
+        & h4{
+            margin-bottom: 15px;
+        }
+        & .icon-btn{
+            &.style-one{
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}
+
+
+/*======================
+    Page : Team 
+======================*/
+
+.xeno-team-about{
+    & .xeno-text-box{
+        padding-left: 60px;
+        @include respond(lg){
+            text-align: center;
+        }
+        @include respond(xl){
+            padding-left: 0;
+        }
+        
+    }
+}
+.xeno-experience-card{
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 71, 255, 0.10);
+    background-color: $gray-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 40px;
+    @include respond(xl){
+        width: 285px;
+        height: 285px;
+    }
+    & .content{
+        & h2{
+            position: relative;
+            font-size: 200px;
+            line-height: .75;
+            display: flex;
+            align-items: flex-end;
+            gap: 30px;
+            & span.symbol{
+                position: absolute;
+                top: 0;
+                right: 80px;
+                font-size: 45px;
+                font-weight: 200;
+                line-height: 1;
+            }
+            & span.duration{
+                font-size: 16px;
+                line-height: 24px;
+                max-width: 100px;
+                letter-spacing: 0;
+            }
+        }
+    }
+}
+
+.xeno-counter-box{
+    width: 200px;
+    height: 280px;
+    border: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    margin: 0 auto 40px;
+    & .content{
+        text-align: center;
+        & h2{
+            font-size: 55px;
+            margin-bottom: 15px;
+            & span{
+                display: block;
+                font-weight: 200;
+                margin-bottom: 20px;
+                &.symbol{
+                    font-size: 45px;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+}
+
+.xeno-iconic-box{
+    background-color: $white-color;
+    padding: 40px 40px 30px;
+    border-radius: 10px;
+    @include respond(xxxl){
+        padding: 40px 30px 30px;
+    }
+    @include respond(xl){
+        padding: 40px 30px 30px;
+    }
+    & .icon{
+        font-size: 50px;
+        color: $primary-color;
+        margin-bottom: 32px;
+    }
+    & .content{
+        & h4{
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+    }
+}
+
+.xeno-team-sec{
+    & .xeno-team-item{
+        & .content{
+            & h5{
+                color: $heading-color;
+            }
+            & span.position{
+                color: $text-color;
+            }
+        }
+    }
+}
+
+.xeno-cta-sec{
+    border-top: 1px solid $border-color;
+}
+
+.xeno-cta-item{
+    background-color: #EDF2FF;
+    padding: 40px 50px 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    & .thumbnail{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        @include respond(xl){
+            display: none;
+        }
+    }
+    & .content{
+        max-width: 300px;
+        & h3{
+            font-size: 35px;
+            font-weight: 600;
+            line-height: 45px;
+            margin-bottom: 30px;
+        }
+        & p{
+            margin-bottom: 30px;
+        }
+        & .theme-btn{
+            &.style-one{
+                background-color: $white-color;
+                color: $heading-color;
+                &:hover{
+                    background-color: $primary-color;
+                    color: $white-color;
+                }
+            }
+        }
+    }
+    @include respond(xl){
+        padding: 30px 30px 40px;
+    }
+}
+
+
+/*======================
+    Page : Faqs 
+======================*/
+
+.xeno-nav-tabs{
+    & .nav-tabs{
+        border-bottom: none;
+        flex-direction: column;
+        @include respond(lg){
+            flex-direction: row;
+        }
+    }
+    & li{
+        display: block;
+        @include respond(lg){
+            &:not(:last-child){
+                margin-right: 10px;
+            }
+        }
+    }
+    & .nav-link{
+        display: block;
+        border: 1px solid $border-color;
+        border-radius: 7px; 
+        padding: 8px 25px;
+        font: 600 18px $heading-font;
+        color: $heading-color;
+        margin-bottom: 10px;
+        &.active{
+            background-color: $primary-color;
+            color: $white-color
+        }
+    }
+}
+
+.accordion-item{
+    border-radius: 10px;
+    border: 1px solid rgba(16, 16, 16, 0.10);
+    background-color: #FAFAFA;
+    padding: 13px 30px;
+    @include respond(sm){
+        padding: 13px 15px;
+    }
+    & .accordion-header{
+        & .accordion-title{
+            line-height: 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            @include respond(sm){
+                align-items: flex-start;
+                font-size: 16px;
+            }
+            &  span.sn{
+                margin-right: 8px;
+            }
+            &:after{
+                flex: 0 0 auto;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                content: '\f067';
+                font-family: 'Font Awesome 5 Pro';
+                font-weight: 400;
+                margin-left: auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid rgba(16, 16, 16, 0.10);
+                background-color: $white-color;
+                transition: all .3s;
+            }
+        }
+        & .accordion-title[aria-expanded=true]{
+            &:after{
+                border-color: #26272B;
+                content: '\f068';
+            }
+        }
+    }
+    & .accordion-content{
+        & p{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+/*======================
+    Page : Blogs Grid 
+======================*/
+
+.xeno-blog-post{
+    & .thumbnail{
+        & img{
+            border-radius: 10px;
+        }
+    }
+    & .content{
+        padding-top: 15px;
+        & .post-meta{
+            padding-bottom: 15px;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 20px;
+            & span{
+                &:not(:last-child){
+                    &:after{
+                        display: inline-block;
+                        content: '';
+                        margin-left: 20px;
+                        margin-right: 15px;
+                        vertical-align: middle;
+                        width: 50px;
+                        height: 1px;
+                        background-color: $border-color;
+                        @include respond(xxl){
+                            margin-left: 10px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        & h3.title{
+            font-size: 24px;
+            margin-bottom: 12px;
+            line-height: 35px;
+            @include respond(large){
+                font-size: 20px;
+                line-height: 30px;
+            }
+        }
+    }
+}
+
+/*=========================
+    Page : Blogs Standard 
+=========================*/
+
+.xeno-blog-post-two{
+    border: 1px solid $border-color;
+    border-radius: 7px;
+    background-color: $white-color;
+    & .thumbnail{
+        padding: 10px;
+        position: relative;
+        & img{
+            width: 100%;
+            border-radius: 7px;
+        }
+        & .play-button{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            & .video-popup{
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                background-color: $primary-color;
+                color: $white-color;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    & .content{
+        padding: 30px 30px 20px;
+        & .post-meta{
+            & span.category{
+                margin-right: 15px;
+                margin-bottom: 15px;
+                & a{
+                    padding: 7px 21px;
+                    background-color: $primary-color;
+                    color: $white-color;
+                    line-height: 20px;
+                    border-radius: 20px;
+                    font-weight: 500;
+                }
+            }
+            & span{
+                margin-bottom: 10px;
+                & i{
+                    margin-right: 10px;
+                }
+            }
+        }
+        & h4.title{
+            margin-bottom: 15px;
+            font-size: 40px;
+            line-height: 1.2;
+            @include respond(lg){
+                font-size: 20px;
+                line-height: 30px;
+            }
+            &:hover{
+                & a{
+                    color: $primary-color;
+                }
+            }
+        }
+        & p{
+            margin-bottom: 25px;
+        }
+    }
+}
+.blog-quote-post-item{
+    padding: 40px;
+    background-color: #f8f8f8;
+    border-radius: 7px;
+    & .post-content{
+        & h4.title{
+            font-size: 30px;
+            line-height: 40px;
+            margin-bottom:15px;
+            @include respond (lg){
+                font-size: 18px;
+                line-height: 30px;
+            }
+        }
+        & p{
+            display: inline-flex;
+            align-items: center;
+            &:before{
+                display: inline-flex;
+                content: '';
+                width: 50px;
+                height: 3px;
+                background-color: $primary-color;
+                margin-right: 30px;
+            }
+        }
+    }
+}
+
+/*=========================
+    Page : Blogs Details 
+=========================*/
+
+.blog-details-wrapper{
+    & .blog-post-main{
+        & .blog-post-item{
+            & .post-thumbnail{
+                margin-bottom: 40px;
+                & img{
+                    border-radius: 7px;
+                }
+            }
+            & .post-content{
+                & h3.title{
+                    font-size: 30px;
+                    line-height: 40px;
+                    margin-bottom: 25px;
+                    @include respond(phone){
+                        font-size: 24px;
+                    }
+                }
+                & h3{
+                    @include respond(phone){
+                        font-size: 24px;
+                    }
+                }
+                & p{
+                    margin-bottom: 30px;
+                }
+                & ul{
+                    margin-bottom: 50px;
+                    & li{
+                        line-height: 30px;
+                        &:not(:last-child){
+                            margin-bottom: 23px;
+                        }
+                    }
+                }
+            }
+        }
+        & .entry-footer{
+            border: 1px solid rgba(31, 31, 31, 0.10);
+            background-color: $white-color;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            border-radius: 7px;
+            @include respond(xl){
+                padding: 20px 20px;
+                flex-direction: column;
+                justify-content: center;
+            }
+            & span{
+                font-weight: 600;
+                color: $heading-color;
+                margin-right: 15px;
+                font-size: 20px;
+                @include respond(md){
+                    font-size: 14px;
+                }
+            }
+            & .tag-links{
+                & a{
+                    padding: 5px 20px;
+                    border: 1px solid $border-color;
+                    border-radius: 7px;
+                    margin-right: 5px;
+                    line-height: 20px;
+                    @include respond(md){
+                        margin-bottom: 10px;
+                    }
+                    &:hover{
+                        background-color: $primary-color;
+                        color: $white-color;
+                    }
+                }
+            }
+            & .social-share{
+                @include respond(xl){
+                    margin-top: 15px;
+                }
+                & a{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    font-size: 13px;
+                    border: 1px solid $border-color;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    &:not(:last-child){
+                        margin-right: 5px;
+                    }
+                    &:hover{
+                        background-color: $primary-color;
+                        color: $white-color;
+                    }
+                }
+            }
+        }
+    }
+    & .post-author-box{
+        background-color: $primary-black-color;
+        display: flex;
+        align-items: center;
+        padding: 40px;
+        border-radius: 10px;
+        @include respond(md){
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        & .author-thumbnail{
+            width: 130px;
+            height: 130px;
+            flex: 0 0 auto;
+            margin-right: 40px;
+            @include respond(md){
+                margin-bottom: 30px;
+            }
+            & img{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+        & .author-info{
+            & h4.title{
+                color: $white-color;
+                margin-bottom: 4px;
+            }
+            & p{
+                color: $white-color;
+                margin-bottom: 15px;
+            }
+            & ul.social-link{
+                & li{
+                    display: inline-block;
+                    &:not(:last-child){
+                        margin-right: 20px;
+                    }
+                    & a{
+                        color: rgba(144, 144, 144, 1);
+                        &:hover{
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .post-navigation{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include respond(md){
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        & .post-nav-item{
+            display: flex;
+            align-items: center;
+            max-width: 330px;
+            @include respond(xs){
+                margin-bottom: 30px;
+            }
+            & .thumb{
+                width: 100px;
+                height: 100px;
+                flex: 0 0 auto;
+                margin-right: 30px;
+                & img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 7px;
+                }
+            }
+            & .content{
+                & h6{
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    & .comments-area{
+        & h3.comments-title{
+            margin-bottom: 30px;
+        }
+        & .comments-list{
+            & .comment{
+                padding: 30px;
+                display: flex;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.10);
+                background-color: $white-color;
+                margin-bottom: 30px;
+                @include respond (md){
+                    flex-direction: column;
+                }
+                & .comment-avatar{
+                    flex: 0 0 auto;
+                    width: 85px;
+                    height: 85px;
+                    margin-right: 30px;
+                    @include respond (md){
+                        margin-bottom: 20px;
+                    }
+                    & img{
+                        border-radius: 50%;
+                        width: 100%;
+                    }
+                }
+                & .comment-author-content{
+                    & span.author-name{
+                    display: block;
+                    text-transform: capitalize;
+                    color: $heading-color;
+                    font: 600 18px $heading-font;
+                    margin-bottom: 15px;
+                        & span{
+                            float: right;
+                            font: 500 16px $body-font;
+                        }
+                    }
+                    & p{
+                        margin-bottom: 10px;
+                    }
+                    & .reply{
+                        color: $heading-color;
+                        font-weight: 500;
+                        &:hover{
+                            color: $primary-color;
+                        }
+                        & i{
+                            transform: rotate(-45deg);
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+            & .comment-reply{
+                & .comment{
+                    margin-left: 50px;
+                    @include respond (md){
+                        margin-left: 20px;
+                    }
+                }
+            }
+        }
+    }
+    & .contact-wrapper{
+        border: 1px solid rgba(31, 31, 31, 0.10);
+        padding: 40px 60px 50px;
+        background-color: #fff;
+        border-radius: 10px;
+        @include respond(lg){
+            padding: 40px 30px 50px;
+        }
+        & p{
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+        & .contact-form{
+            & .form_control{
+                padding-bottom: 20px;
+                background-color: transparent;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid rgba(31, 31, 31, 0.10);
+                margin-bottom: 30px;
+                transition: all .3s;
+                &:focus{
+                    border-color: $primary-color;
+                }
+            }
+            & .form-check{
+                display: flex;
+                align-items: center;
+                margin-bottom: 25px;
+                @include respond (md){
+                    align-items: flex-start;
+                }
+                & label{
+                    cursor: pointer;
+                }
+                & .form-check-input{
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+}
+
+/* Sidebar Widget Area */ 
+
+.sidebar-widget-area{
+    & .sidebar-widget{
+        padding: 20px 40px 30px;
+        border-radius: 7px;
+        border: 1px solid rgba(31, 31, 31, 0.10);
+        background-color: $white-color;
+        @include respond(md){
+            padding: 30px 30px 30px;
+        }
+        & h4.widget-title{
+            padding-bottom: 30px;
+            &:after{
+                margin-top: 10px;
+                display: block;
+                content: '';
+                width: 50px;
+                height: 3px;
+                background-color: $primary-color;
+            }
+        }
+        &.sidebar-search-widget{
+            padding: 0;
+            border: none;
+            & .widget-content{
+                & form{
+                    & .form_control{
+                        padding: 20px 30px;
+                        border: 1px solid $border-color;
+                        width: 100%;
+                        border-radius: 7px;
+                        transition: all .3s;
+                        &:focus{
+                            border-color: $primary-color;
+                        }
+                    }
+                    & .search-btn{
+                        position: absolute;
+                        top: 21px;
+                        right: 30px;
+                        background-color: transparent;
+                        color: $heading-color;
+                    }
+                }
+            }
+        }
+        &.sidebar-nav-widget{
+            & .widget-content{
+                & ul{
+                    & li{
+                        &:not(:last-child){
+                            & a{
+                                border-bottom: 1px solid $border-color;
+                                padding-bottom: 15px;
+                                margin-bottom: 15px;
+                            }
+                        }
+                        & a{
+                            display: block;
+                            font: 500 18px $heading-font;
+                            & span{
+                                float: right;
+                            }
+                            &:hover{
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.sidebar-post-widget{
+            & .widget-content{
+                & ul{
+                    & li{
+                        &:not(:last-child){
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+                & .post-thumbnail-content{
+                    display: flex;
+                    align-items: center;
+                    & img{
+                        flex: 0 0 auto;
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 7px;
+                        margin-right: 30px;
+                    }
+                    & .post-title-date{
+                        & h6{
+                            line-height: 30px;
+                            @include respond(xxl){
+                                font-size: 14px;
+                            }
+                            &:hover{
+                                color: $primary-color;
+                            }
+                            @include respond(md){
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.sidebar-tag-widget{
+            padding: 30px 40px 30px;
+            & .widget-content{
+                & a{
+                    padding: 7px 15px;
+                    border-radius: 7px;
+                    border: 1px solid rgba(31, 31, 31, 0.10);
+                    font-weight: 500;
+                    line-height: 20px;
+                    margin-bottom: 10px;
+                    margin-right: 5px;
+                    &:hover{
+                        background-color: $primary-color;
+                        color: $white-color;
+                    }
+                }
+            }
+        }
+        &.sidebar-gallery-widget{
+            & ul{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            & .gallery-item{
+                & .gallery-img{
+                    & img{
+                        width: 100%;
+                        border-radius: 7px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/*===================
+    Page : Contact 
+===================*/
+
+.xeno-contact-map{
+    & .map-box{
+        & iframe{
+            width: 100%;
+            border: none;
+            height: 600px;
+        }
+    }
+}
+.xeno-contact-form{
+    & .form_control{
+        border: none;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #e1e1e1;
+        padding-bottom: 15px;
+    }
+}
+.xeno-contact-wrapper{
+    & h2{
+        font-size: 45px;
+        @include respond(md){
+            font-size: 30px;
+            line-height: 40px;
+        }
+    }
+}
+.xeno-contact-sec{
+    & .xeno-content-box{
+        padding-right: 40px;
+        @include respond(md){
+            padding-right: 0;
+        }
+        & h2{
+            font-size: 45px;
+            margin-bottom: 15px;
+            @include respond(md){
+                font-size: 30px;
+                line-height: 40px;
+            }
+        }
+        & p{
+            margin-bottom: 25px;
+        }
+        & ul{
+            & li{
+                &:not(:last-child){
+                    margin-bottom: 30px;
+                }
+                & h3{
+                    font-size: 35px;
+                }
+                & h5{
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+}
+
+/*===================
+    Page : 404 
+===================*/
+
+.xeno-error-sec{
+    padding: 200px 0 140px;
+    overflow: hidden;
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            border-radius: 50%;
+        }
+        &.shape-one{
+            top: 15%;
+            left: 15%;
+            @include respond(xl){
+                top: 10%;
+                left: 5%;
+            }
+            @include respond(md){
+                top: 0;
+                left: 0;
+            }
+            & span{
+                width: 150px;
+                height: 150px;
+                background:linear-gradient(218deg, rgba(0, 71, 255, 0.20) 13.52%, rgba(0, 71, 255, 0.00) 81.48%);
+            }
+        }
+        &.shape-two{
+            top: -20%;
+            right: -10%;
+            & span{
+                width: 500px;
+                height: 500px;
+                background: linear-gradient(231deg, rgba(0, 71, 255, 0.00) 53.52%, rgba(0, 71, 255, 0.10) 85.17%);
+            }
+            @include respond(xl){
+                right: -25%;
+            }
+            @include respond(md){
+                right: -25%;
+                top: 0;
+                & span{
+                    width: 250px;
+                    height: 250px;
+                }
+            }
+        }
+        &.shape-three{
+            left: 80px;
+            bottom: 50px;
+            & span{
+                width: 200px;
+                height: 200px;
+                background: linear-gradient(209deg, rgba(0, 71, 255, 0.15) 12.99%, rgba(0, 71, 255, 0.00) 83.77%);
+            }
+            @include respond(xl){
+                left: 0;
+                bottom: 20px;
+            }
+            @include respond(md){
+                bottom: 0%;
+                left: -35%;
+                & span{
+                    width: 250px;
+                    height: 250px;
+                }
+            }
+        }
+        &.shape-four{
+            bottom: 80px;
+            right: 120px;
+            @include respond(xl){
+                bottom: 30px;
+                right: 0;
+            }
+            @include respond(md){
+                bottom: 0;
+                right: 0;
+            }
+            & span{
+                width: 150px;
+                height: 150px;
+                background: linear-gradient(302deg, rgba(0, 71, 255, 0.00) 13.67%, rgba(0, 71, 255, 0.15) 86.11%);
+            }
+        }
+    }
+    & .xeno-content-box{
+        & img{
+            margin-bottom: 30px;
+        }
+        & h1{
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 56px;
+            margin-bottom: 25px;
+            @include respond(sm){
+                font-size: 28px;
+                line-height: 40px;
+            }
+        }
+        & p{
+            margin-bottom: 30px;
+        }
+    }
+} 

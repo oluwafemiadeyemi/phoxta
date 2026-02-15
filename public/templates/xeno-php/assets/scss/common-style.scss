@@ -1,0 +1,39 @@
+
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+
+------------------------------------------------------
+   CSS INDEX
+-----------------------------------------------------
+
+    # Components
+        # Base CSS
+        # Common CSS
+        # Preloader CSS
+        # Offcanvas CSS
+        # Animation CSS
+        # Button CSS
+        # Header CSS
+        # Footer CSS
+-------------------------------------------------------    */
+
+
+// Abstract
+
+@import "abstract";
+
+// Components
+@import 'components/base';
+@import 'components/common';
+@import 'components/preloader';
+@import 'components/Offcanvas';
+@import 'components/animations';
+@import 'components/buttons';
+@import 'components/header';
+@import 'components/footer';

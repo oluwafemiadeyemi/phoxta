@@ -1,0 +1,283 @@
+-- ===========================================================================
+-- Graphics Designer – Full Supabase migration
+-- Covers: projects, documents, pages, assets, brand kits, collaboration,
+--         comments, versions, audit logs, storage buckets + RLS
+-- ===========================================================================
+
+-- ===== 1) design_projects =====
+CREATE TABLE IF NOT EXISTS design_projects (
+  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id           UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  name              TEXT NOT NULL DEFAULT 'Untitled Design',
+  width             INT  NOT NULL DEFAULT 1080,
+  height            INT  NOT NULL DEFAULT 1080,
+  created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  deleted_at        TIMESTAMPTZ,                              -- soft delete
+  folder_id         UUID,                                     -- optional folder grouping
+  is_template       BOOLEAN NOT NULL DEFAULT false,
+  template_source_id UUID REFERENCES design_projects(id) ON DELETE SET NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_projects_user
+  ON design_projects (user_id, updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_design_projects_deleted
+  ON design_projects (user_id) WHERE deleted_at IS NOT NULL;
+
+ALTER TABLE design_projects ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dp_select" ON design_projects FOR SELECT
+  USING (auth.uid() = user_id);
+CREATE POLICY "dp_insert" ON design_projects FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "dp_update" ON design_projects FOR UPDATE
+  USING (auth.uid() = user_id);
+CREATE POLICY "dp_delete" ON design_projects FOR DELETE
+  USING (auth.uid() = user_id);
+
+
+-- ===== 2) design_documents =====
+CREATE TABLE IF NOT EXISTS design_documents (
+  project_id         UUID PRIMARY KEY REFERENCES design_projects(id) ON DELETE CASCADE,
+  current_version_id UUID,
+  pages_count        INT NOT NULL DEFAULT 1,
+  meta               JSONB NOT NULL DEFAULT '{}'::jsonb
+);
+
+ALTER TABLE design_documents ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dd_select" ON design_documents FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dd_insert" ON design_documents FOR INSERT
+  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dd_update" ON design_documents FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dd_delete" ON design_documents FOR DELETE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+
+
+-- ===== 3) design_pages =====
+CREATE TABLE IF NOT EXISTS design_pages (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  project_id      UUID NOT NULL REFERENCES design_projects(id) ON DELETE CASCADE,
+  page_index      INT NOT NULL DEFAULT 0,
+  width           INT NOT NULL DEFAULT 1080,
+  height          INT NOT NULL DEFAULT 1080,
+  background      JSONB NOT NULL DEFAULT '{"type":"color","value":"#ffffff"}'::jsonb,
+  fabric_json_path TEXT,   -- storage path
+  preview_path     TEXT    -- storage path
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_pages_project
+  ON design_pages (project_id, page_index);
+
+ALTER TABLE design_pages ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dpg_select" ON design_pages FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dpg_insert" ON design_pages FOR INSERT
+  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dpg_update" ON design_pages FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dpg_delete" ON design_pages FOR DELETE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+
+
+-- ===== 4) design_assets =====
+CREATE TABLE IF NOT EXISTS design_assets (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id     UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  project_id  UUID REFERENCES design_projects(id) ON DELETE SET NULL,
+  type        TEXT NOT NULL DEFAULT 'image',
+  name        TEXT NOT NULL,
+  path        TEXT NOT NULL,
+  meta        JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_assets_user
+  ON design_assets (user_id, created_at DESC);
+
+ALTER TABLE design_assets ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "da_select" ON design_assets FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "da_insert" ON design_assets FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "da_update" ON design_assets FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "da_delete" ON design_assets FOR DELETE USING (auth.uid() = user_id);
+
+
+-- ===== 5) design_brand_kits =====
+CREATE TABLE IF NOT EXISTS design_brand_kits (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id     UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  name        TEXT NOT NULL DEFAULT 'My Brand',
+  colors      JSONB NOT NULL DEFAULT '[]'::jsonb,
+  fonts       JSONB NOT NULL DEFAULT '[]'::jsonb,
+  logos       JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+ALTER TABLE design_brand_kits ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dbk_select" ON design_brand_kits FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "dbk_insert" ON design_brand_kits FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "dbk_update" ON design_brand_kits FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "dbk_delete" ON design_brand_kits FOR DELETE USING (auth.uid() = user_id);
+
+
+-- ===== 6) design_collaborators =====
+CREATE TABLE IF NOT EXISTS design_collaborators (
+  project_id  UUID NOT NULL REFERENCES design_projects(id) ON DELETE CASCADE,
+  user_id     UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  role        TEXT NOT NULL DEFAULT 'viewer' CHECK (role IN ('owner','editor','commenter','viewer')),
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (project_id, user_id)
+);
+
+ALTER TABLE design_collaborators ENABLE ROW LEVEL SECURITY;
+
+-- Collaborators can see their own rows
+CREATE POLICY "dc_select" ON design_collaborators FOR SELECT
+  USING (auth.uid() = user_id OR EXISTS (
+    SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+-- Only project owner can manage collaborators
+CREATE POLICY "dc_insert" ON design_collaborators FOR INSERT
+  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dc_update" ON design_collaborators FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dc_delete" ON design_collaborators FOR DELETE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+
+-- Allow collaborators to SELECT the project itself
+CREATE POLICY "dp_collab_select" ON design_projects FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = id AND dc.user_id = auth.uid()));
+-- Allow editor collaborators to UPDATE
+CREATE POLICY "dp_collab_update" ON design_projects FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = id AND dc.user_id = auth.uid() AND dc.role = 'editor'));
+
+
+-- ===== 7) design_comments =====
+CREATE TABLE IF NOT EXISTS design_comments (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  project_id  UUID NOT NULL REFERENCES design_projects(id) ON DELETE CASCADE,
+  page_id     UUID REFERENCES design_pages(id) ON DELETE SET NULL,
+  object_id   TEXT,
+  author_id   UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  body        TEXT NOT NULL,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  resolved_at TIMESTAMPTZ
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_comments_project
+  ON design_comments (project_id, created_at DESC);
+
+ALTER TABLE design_comments ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dcm_select" ON design_comments FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
+    OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()));
+CREATE POLICY "dcm_insert" ON design_comments FOR INSERT
+  WITH CHECK (auth.uid() = author_id AND (
+    EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
+    OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()
+      AND dc.role IN ('owner','editor','commenter'))));
+CREATE POLICY "dcm_update" ON design_comments FOR UPDATE
+  USING (auth.uid() = author_id);
+CREATE POLICY "dcm_delete" ON design_comments FOR DELETE
+  USING (auth.uid() = author_id);
+
+
+-- ===== 8) design_versions =====
+CREATE TABLE IF NOT EXISTS design_versions (
+  id                 UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  project_id         UUID NOT NULL REFERENCES design_projects(id) ON DELETE CASCADE,
+  created_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+  created_by         UUID NOT NULL REFERENCES auth.users(id),
+  label              TEXT,
+  document_json_path TEXT NOT NULL,
+  preview_paths      JSONB NOT NULL DEFAULT '[]'::jsonb
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_versions_project
+  ON design_versions (project_id, created_at DESC);
+
+ALTER TABLE design_versions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dv_select" ON design_versions FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
+    OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()));
+CREATE POLICY "dv_insert" ON design_versions FOR INSERT
+  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dv_update" ON design_versions FOR UPDATE
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+
+
+-- ===== 9) design_audit_logs =====
+CREATE TABLE IF NOT EXISTS design_audit_logs (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  project_id  UUID NOT NULL REFERENCES design_projects(id) ON DELETE CASCADE,
+  actor_id    UUID NOT NULL REFERENCES auth.users(id),
+  action      TEXT NOT NULL,
+  meta        JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_design_audit_project
+  ON design_audit_logs (project_id, created_at DESC);
+
+ALTER TABLE design_audit_logs ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "dal_select" ON design_audit_logs FOR SELECT
+  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+CREATE POLICY "dal_insert" ON design_audit_logs FOR INSERT
+  WITH CHECK (auth.uid() = actor_id);
+
+
+-- ===========================================================================
+-- STORAGE BUCKETS
+-- ===========================================================================
+
+-- Private bucket for user projects
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('design-projects', 'design-projects', false)
+ON CONFLICT (id) DO NOTHING;
+
+-- System templates bucket (read-only for users; admin writes via service role)
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('design-system', 'design-system', false)
+ON CONFLICT (id) DO NOTHING;
+
+-- Exports bucket (private per user)
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('design-exports', 'design-exports', false)
+ON CONFLICT (id) DO NOTHING;
+
+
+-- ===========================================================================
+-- STORAGE RLS POLICIES
+-- ===========================================================================
+
+-- ----- design-projects: user owns {uid}/... -----
+CREATE POLICY "sp_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "sp_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "sp_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "sp_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+
+-- ----- design-system: everyone reads, no user writes -----
+CREATE POLICY "ss_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'design-system');
+-- NOTE: Only admins/service-role can write to design-system. No INSERT/UPDATE/DELETE policies for regular users.
+
+-- ----- design-exports: user owns {uid}/... -----
+CREATE POLICY "se_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "se_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "se_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+-- No delete for exports — admin only. Users can download but not hard-delete.

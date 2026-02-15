@@ -1,0 +1,1084 @@
+
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Hero Section CSS
+# About Section CSS
+# Service Section CSS
+# Counter Section CSS
+# Project Section CSS
+# Testimonial Section CSS
+# Pricing Section CSS
+# Promo Section CSS
+# Award Section CSS
+# Team Section CSS
+# Blog Section CSS
+
+------------------------------------------------------*/
+
+@import "../abstract";
+
+.theme-btn{
+    &.style-one{
+        &:hover{
+            background-color: $primary-black-color;
+            color: $white-color;
+        }
+    }
+    &.style-two{
+        &:hover{
+            background-color: $primary-color;
+            color: $white-color;
+            border-color: transparent;
+        }
+    }
+}
+
+
+/*====== Start Hero Section  ======*/ 
+
+.xeno-hero-ca{
+    padding: 220px 0 200px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    @include respond(md){
+        padding: 220px 0 60px;
+    }
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            width: 705px;
+            height: 705px;
+            border-radius: 50%;
+            @include respond(xxxl){
+                width: 550px;
+                height: 550px;
+            }
+            @include respond(xl){
+                width: 450px;
+                height: 450px;
+            }
+            @include respond(lg){
+                width: 300px;
+                height: 300px;
+            }
+        }
+        &.circle-shape-one{
+            top: 85px;
+            left: -15%;
+            & span{
+                background: linear-gradient(180deg, rgba(0, 71, 255, 0.07) 0%, rgba(0, 71, 255, 0.00) 100%);
+            }
+        }
+        &.circle-shape-two{
+            bottom: -40%;
+            right: -20%;
+            & span{
+                background: linear-gradient(180deg, rgba(0, 71, 255, 0.10) 0%, rgba(0, 71, 255, 0.00) 100%);
+            }
+            @include respond(xl){
+                bottom: -20%;
+            }
+        }
+    }
+    & .hero-image{
+        position: absolute;
+        z-index: -1;
+        & img{
+            border-radius: 30px;
+            @include respond(xxxl){
+                width: 80%;
+            }
+            @include respond(xl){
+                width: 60%;
+            }
+            @include respond(lg){
+                width: 40%;
+            }
+        }
+        &.hero-image-one{
+            bottom: 150px;
+            left: 30px;
+            text-align: left;
+            @include respond(xxxl){
+                bottom: 70px;
+            }
+            @include respond(xl){
+                bottom: 120px;
+            }
+            @include respond(lg){
+                bottom: 50px;
+            }
+            @include respond(md){
+                display: none;
+            }
+        }
+        &.hero-image-two{
+            top: 190px;
+            right: 30px;
+            text-align: right;
+            @include respond(xl){
+                right: 15px;
+            }
+            @include respond(lg){
+                top: 150px;
+            }
+        }
+    }
+    & .hero-content{
+        position: relative;
+        & h1{
+            font-size: 200px;
+            line-height: 1;
+            font-weight: 700;
+            margin-bottom: 120px;
+            & span{
+                &.text-one{
+                    font-size: 100px;
+                    @include respond(lg){
+                        font-size: 30px;
+                        line-height: 1;
+                    }
+                }
+            }
+            & .avatar-thumb{
+                @include respond(xxxl){
+                    display: none;
+                }
+            }
+            @include respond(xxxl){
+                font-size: 170px;
+                line-height: 1;
+            }
+            @include respond(xl){
+                font-size: 140px;
+                line-height: 1;
+                margin-bottom: 60px;
+            }
+            @include respond(lg){
+                font-size: 110px;
+                line-height: 1;
+                margin-bottom: 40px;
+            }
+            @include respond(md){
+                font-size: 70px;
+                line-height: 1;
+                margin-bottom: 20px;
+            }
+            @include respond(sm){
+                font-size: 55px;
+            }
+        }
+        & .sub-text{
+            position: absolute;
+            font-size: 18px;
+            font-weight: 600;
+            color: $primary-color;
+            max-width: 140px;
+            @include respond(xl){
+                position: relative;
+                margin-bottom: 20px;
+            }
+        }
+    }
+    & .xeno-text-box{
+        padding: 30px 0 30px 100px;
+        border-left: 1px solid $border-color;
+        max-width: 675px;
+        margin-left: auto;
+        @include respond(xl){
+            padding: 30px;
+        }
+        @include respond(md){
+            padding: 15px;
+        }
+        & p{
+            margin-bottom: 30px;
+        }
+        & .xeno-button{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            & a{
+                margin-bottom: 20px;
+                &:not(:last-child){
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}/*====== End Hero Section  ======*/ 
+
+/*====== Start About Section  ======*/ 
+
+.xeno-about-ca{
+    background-color: #121212;
+    border-radius: 20px;
+    & .about-text-box{
+        margin-bottom: 80px;
+        @include respond(md){
+            margin-bottom: 30px;
+        }
+        & h2{
+            color: $white-color;
+            font-size: 59px;
+            line-height: 1;
+            font-weight: 600;
+            @include respond(xxxl){
+                font-size: 54px;
+                line-height: 1.2;
+            }
+            @include respond(xl){
+                font-size: 43px;
+                line-height: 1.5;
+            }
+            @include respond(lg){
+                font-size: 35px;
+                line-height: 1.5;
+            }
+            @include respond(md){
+                font-size: 24px;
+            }
+            @include respond(sm){
+                font-size: 22px;
+            }
+            & span.text-one{
+                color: rgba(255, 255, 255, 0.55);
+            }
+            & span.text-two{
+                color: #FFDF1A;
+            }
+            & span.text-three{
+                color: #0F5;
+            }
+            & span.text-four{
+                color: #F0D;
+            }
+        }
+    }
+    & .xeno-text-box{
+        & p{
+            margin-bottom: 70px;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 300px;
+        }
+        & .theme-btn{
+            &.style-two{
+                color: $white-color;
+                border-color: rgba(255, 255, 255, 0.10);
+            }
+        }
+    }
+}
+
+.ca-experience-box{
+    & h2{
+        position: relative;
+        font-size: 180px;
+        color: $white-color;
+        font-weight: 600;
+        line-height: 1;
+        & span.symbol{
+            font-size: 45px;
+            font-weight: 200;
+            position: absolute;
+            top: 25px;
+        }
+        & span.duration{
+            font-size: 16px;
+            font-weight: 500;
+            max-width: 85px;
+            line-height: 27px;
+            letter-spacing: 0;
+        }
+    }
+}
+/*====== End About Section  ======*/ 
+
+
+/*====== Start Service Section  ======*/ 
+
+.xeno-service-item{
+    transition: all .3s;
+    &.service-active{
+        background-color: #EDF2FF;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        & .service-title{
+            & span.number{
+                background-color: $white-color;
+                border-color: transparent;
+            }
+        }
+    }
+    & .service-title{
+        display: flex;
+        font-size: 22px;
+        align-items: center;
+        padding-bottom: 25px;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 30px;
+        cursor: pointer;
+        transition: all .3s;
+        @include respond(md){
+            font-size: 16px;
+            line-height: 30px;
+        }
+        & span.number{
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid $border-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 70px;
+            @include respond(md){
+                margin-right: 15px;
+            }
+        }
+        &:after{
+            margin-left: auto;
+            font-weight: 400;
+            content: '\f061';
+            font-family: 'Font Awesome 5 Pro';
+            transform: rotate(-45deg);
+            transition: all .3s;
+        }
+        
+    }
+    & .service-title[aria-expanded=true]{
+        padding: 20px 30px;
+        border-bottom: none;
+        &:after{
+            transform: rotate(0deg);
+        }
+    }
+    & .thumbnail{
+        padding: 0 30px;
+    }
+    & .service-content{
+        padding: 0 50px 30px;
+        @include respond(xl){
+            padding: 0 30px 30px;
+        }
+        & p{
+            margin-bottom: 30px;
+        }
+        & ul.check-list{
+            & li{
+                &:not(:last-child){
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}/*====== End Service Section  ======*/ 
+
+/*====== Start Counter Section  ======*/ 
+
+.xeno-counter-ca{
+    background-color: $primary-color;
+    border-radius: 20px;
+    margin: 0 30px;
+    @include respond(xl){
+        margin: 0 15px;
+    }
+    @include respond(md){
+        margin: 0 ;
+    }
+}
+
+.xeno-counter-item{
+    background-color: $white-color;
+    padding: 30px 40px;
+    border-radius: 10px;
+    @include respond(xl){
+        padding: 30px 25px;
+    }
+    & .content-icon-wrap{
+        margin-bottom: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & .icon{
+            font-size: 50px;
+            color: $primary-color;
+        }
+        & .content{
+            & span.text{
+                display: inline-flex;
+                align-items: center;
+                &:before{
+                    content: '';
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 50%;
+                    background-color: $primary-color;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+}/*====== End Counter Section  ======*/ 
+
+/*====== Start Project Section  ======*/ 
+
+.xeno-project-ca{
+    & .container-fluid{
+        padding-left: 100px;
+        padding-right: 100px;
+        @include respond(xxl){
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        @include respond(xl){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+.xeno-project-item-list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    --row-gap: 80px;
+    --column-gap: 140px;
+    gap: var(--row-gap) var(--column-gap);
+    @include respond(xxxl){
+        --row-gap: 50px;
+        --column-gap: 100px; 
+    }
+    @include respond(xl){
+        --row-gap: 40px;
+        --column-gap: 70px; 
+    }
+    & .xeno-project-item{
+        flex: 0 0 calc(46.8% - var(--column-gap) / 2);
+        @include respond(lg){
+            flex: 0 0 100%;
+        }
+        &:nth-child(4n+2),
+        &:nth-child(4n+3){
+            flex: 0 0 calc(53.2% - var(--column-gap)/2);
+            @include respond(lg){
+                flex: 0 0 100%;
+            }
+        }
+    }
+}
+.xeno-project-item{
+    & .thumbnail{
+        & img{
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+    & .content-wrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+    }
+    & .content{
+        & .project-categories{
+            & a{
+                padding: 5px 15px;
+                line-height: 16px;
+                border: 1px solid $border-color;
+                border-radius: 20px;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+        }
+        & h4.title{
+            &:hover{
+                color: $primary-color;
+            }
+            @include respond(sm){
+                font-size: 18px;
+                line-height: 30px;            
+            }
+        }
+    }
+    & .icon-btn{
+        &.style-one{
+            width: 55px;
+            height: 55px;
+            font-size: 18px;
+            
+        }
+    }
+}/*====== End Project Section  ======*/ 
+
+/*====== Start Testimonial Section  ======*/ 
+
+.xeno-testimonial-ca{
+    background-color: #121212;
+    border-radius: 20px;
+}
+.xeno-testimonial-item{
+    background-color: $white-color;
+    border-radius: 20px;
+    padding: 10px;
+    & .testimonial-inner-content{
+        display: flex;
+        @include respond(md){
+            flex-direction: column;
+            padding: 20px 15px;
+        }
+        & .testimonial-left{
+            width: 40%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 30px;
+            @include respond(md){
+                width: 100%;
+                align-items: center;
+                flex-direction: row;
+                margin-bottom: 40px;
+            }
+        }
+        & .testimonial-right{
+            width: 60%;
+            padding: 40px 70px;
+            border: 1px solid $border-color;
+            border-radius: 20px;
+            & p{
+                margin-bottom: 100px;
+                @include respond(md){
+                    margin-bottom: 50px;
+                }
+            }
+            @include respond(xl){
+                padding: 40px 30px;
+            }
+            @include respond(md){
+                width: 100%;
+                padding: 30px 20px;
+            }
+        }
+    }
+}
+.ca-experience-box-two{
+    max-width: 330px;
+    & h2{
+        font-size: 180px;
+        font-weight: 200;
+        color: $white-color;
+        line-height: 1;
+        margin-bottom: 25px;
+        & span.symbol{
+            vertical-align: text-top;
+            font-size: 100px;
+        }
+    }
+    & p{
+        color: $white-color;
+        margin-bottom: 40px;
+    }
+    & .author-client-box{
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, .10);
+        & h5{
+            color: $white-color;
+            font-weight: 500;
+            font-size: 16px;
+        }
+    }
+}
+.author-client-box{
+    & h5{
+        margin-bottom: 20px;
+    }
+    & ul{
+        & li{
+            display: inline-block;
+            &:not(:first-child){
+                margin-left: -10px;
+            }
+            & img{
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                border: 2px solid $border-color;
+            }
+            & a{
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $primary-color;
+                color: $white-color;
+            }
+        }
+    }
+}/*====== End Testimonial Section  ======*/ 
+
+/*====== Start Pricing Section  ======*/ 
+
+.xeno-pricing-ca{
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, rgba(0, 71, 255, 0.10) 0%, rgba(0, 71, 255, 0.00) 100%);
+            @include respond(md){
+                width: 300px;
+                height: 300px;
+            }
+        }
+        &.circle-shape-one{
+            top: 20%;
+            left: -7%;
+        }
+        &.circle-shape-two{
+            top: 7%;
+            right: -20%;
+        }
+    }
+}
+
+.xeno-pricing-item{
+    min-width: 1100px;
+    & .pricing-header{
+        display: flex;
+        & .pricing-title{
+            padding: 45px 60px;
+            width: 40%;
+            border-right: 1px solid rgba(38, 39, 43, 0.10);
+            & h4{
+                @include respond(xl){
+                    font-size: 16px;
+                    line-height: 30px;
+                }
+            }
+            @include respond(xl){
+                padding: 45px 30px;
+            }
+        }
+        & .pricing-plan{
+            width: 20%;
+            text-align: center;
+            padding: 20px 15px;
+            &:last-child{
+                border-right: 1px solid $border-color;
+            }
+            & span.plan{
+                display: block;
+                font: 600 16px $heading-font;
+                letter-spacing: -0.02em;
+                margin-bottom: 10px;
+            }
+            & h2.price{
+                font-size: 45px;
+                font-weight: 600;
+                line-height: 1;
+                margin-bottom: 15px;
+                & span.duration{
+                    font-size: 16px;
+                    line-height: 30px;
+                    font-weight: 400;
+                }
+                @include respond(xl){
+                    font-size: 30px;
+                }
+            }
+            & p{
+                line-height: 26px;
+            }
+            &.bg-active{
+                border-radius: 10px 10px 0 0;
+                border: 1px solid $border-color;
+                border-bottom: none;
+                background-color: #EDF2FF;
+                margin-left: -1px;
+            }
+        }
+    }
+    & .pricing-body{
+        & .pricing-body-item{
+            display: flex;
+            border: 1px solid rgba(38, 39, 43, 0.10);
+            margin-bottom: -1px;
+            &:first-child{
+                border-top: 1px solid $border-color;
+            }
+            &:last-child{
+                margin-bottom: 0px;
+            }
+            & .pricing-title{
+                padding: 15px 40px;
+                width: 40%;
+                border-right: 1px solid rgba(38, 39, 43, 0.10);
+                color: $heading-color;
+                font: 400 16px $heading-font;
+            }
+            & .pricing-list{
+                padding: 15px;
+                width: 20%;
+                text-align: center;
+                font-weight: 500;
+                font-size: 16px;
+                & i{
+                    font-size: 12px;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $white-color;
+                    &.fa-check{
+                        background-color: #2AA20C;
+                    }
+                    &.fa-times{
+                        background-color: #FF385C;
+                    }
+                }
+                &.bg-active{
+                    border-left: 1px solid $border-color;
+                    border-right: 1px solid $border-color;
+                    border-bottom: none;
+                    background-color: #EDF2FF;
+                }
+            }
+        }
+    }
+    & .pricing-footer{
+        display: flex;
+        & .pricing-title{
+            width: 40%;
+            border-right: 1px solid $border-color;
+        }
+        & .pricing-button{
+            padding: 40px 15px 40px;
+            width: 20%;
+            text-align: center;
+            &:last-child{
+                border-right: 1px solid $border-color;
+            }
+            & span{
+                font-size: 14px;
+            }
+            & .theme-btn{
+                margin-bottom: 5px;
+                &.style-one{
+                    background-color: transparent;
+                    color: $heading-color;
+                    font-size: 14px;
+                    padding: 12px 22px;
+                    border: 1px solid rgba(38, 39, 43, 0.10);
+                    @include respond(xl){
+                        padding: 8px 20px;
+                    }
+                    &:hover{
+                        background-color: $heading-color;
+                        color: $white-color;
+                    }
+                }
+            }
+            &.bg-active{
+                border-top: none;
+                border: 1px solid $border-color;
+                background-color: #EDF2FF;
+                border-radius: 0 0 10px 10px;
+                margin-left: -1px;
+                & .theme-btn{
+                    &.style-one{
+                        background-color: $white-color;
+                        color: $heading-color;
+                        border-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}/*====== End Pricing Section  ======*/ 
+
+/*====== Start Promo Section  ======*/ 
+
+.xeno-promo-ca{
+    padding: 130px 0;
+    @include respond(md){
+        padding: 60px 0;
+    }
+    & .xeno-image-box{
+        & img{
+            object-fit: cover;
+            object-position: center;
+            min-height: 400px;
+        }
+    }
+}/*====== End Promo Section  ======*/ 
+
+/*====== Start Award Section  ======*/ 
+
+.xeno-award-item{
+    position: relative;
+    & .award-inner{
+        position: relative;
+        border-radius: 10px;
+        padding: 33px 50px;
+        display: flex;
+        overflow: hidden;
+        background-color: #fafafa;
+        transition: all .3s;
+        &:after{
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: all .3s;
+        }
+        @include respond(md){
+            flex-direction: column;
+            padding: 33px 20px 25px;
+        }
+    }
+    & .name{
+        width: 20%;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .title{
+        width: 40%;
+        color: $heading-color;
+        font-size: 24px;
+        font-weight: 600;
+        @include respond(lg){
+            font-size: 18px;
+        }
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+    & .place{
+        width: 20%;
+        text-align: right;
+        @include respond(md){
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+    }
+    & .year{
+        width: 20%;
+        text-align: right;
+        @include respond(md){
+            width: 100%;
+            text-align: left;
+        }
+    }
+    & .hover-image{
+        transition: opacity .3s, transform .7scubic-bezier(.23,1,.32,1);
+        position: absolute;
+        width: 300px;
+        height: 400px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        left: 0;
+        top: -50%;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
+    &:hover{
+        & .award-inner{
+            background-color: #EDF2FF;
+            &:after{
+                border-color: transparent;
+            }
+        }
+        & .hover-image{
+            visibility: visible;
+            opacity: 1;
+            -webkit-transform: translateY(-50%) scale(1);
+            transform: translateY(-50%) scale(1);
+        }
+    }
+}/*====== End Award Section  ======*/ 
+
+/*====== Start Team Section  ======*/ 
+
+.xeno-team-ca{
+    position: relative;
+    z-index: 1;
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(180deg, rgba(0, 71, 255, 0.10) 0%, rgba(0, 71, 255, 0.00) 100%);
+            border-radius: 50%;
+        }
+        &.circle-shape-one {
+            top: 10%;
+            left: -10%;
+        }
+        &.circle-shape-two {
+            bottom: -10%;
+            right: -10%;
+        }
+    }
+}
+
+.team-wrapper{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 0 70px;
+    padding-left: 130px;
+    padding-right: 130px;
+    @include respond(xxxl){
+        padding-left: 70px;
+        padding-right: 70px;
+        gap: 0 30px;
+    }
+    @include respond(xxl){
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+    @include respond(xl){
+        grid-template-columns: repeat(2,1fr);
+        padding-left: 120px;
+        padding-right: 120px;
+        gap: 0 100px;
+    }
+    @include respond(lg){
+        grid-template-columns: repeat(2,1fr);
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+    @include respond(md){
+        grid-template-columns: repeat(1,1fr);
+        padding-left: 15px;
+        padding-right: 15px;
+        gap: 0 15px;
+    }
+}
+
+.xeno-team-item{
+    &:hover{
+        & .thumbnail{
+            & .hover-content{
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+    & .thumbnail{
+        position: relative;
+        overflow: hidden;
+        & img{
+            width: 100%;
+        }
+        & .hover-content{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            padding: 30px 40px;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: all .33s;
+        }
+        & .social-link{
+            background-color: $primary-color;
+            gap: 0 25px;
+            display: inline-flex;
+            padding: 6px 25px;
+            border-radius: 7px;
+            & a{
+                color: $white-color;
+            }
+        }
+    }
+    & .content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 15px;
+    }
+}/*====== End Team Section  ======*/ 
+
+
+/*====== Start Blogs Section  ======*/ 
+
+.xeno-blog-post{
+    & .content{
+        padding-top: 15px;
+        & .post-meta{
+            padding-bottom: 15px;
+            border-bottom: 1px solid $border-color;
+            margin-bottom: 28px;
+            & span{
+                & a{
+                    color: $primary-color;
+                }
+                &:not(:last-child){
+                    &:after{
+                        display: inline-block;
+                        content: '';
+                        margin-left: 20px;
+                        margin-right: 15px;
+                        vertical-align: middle;
+                        width: 50px;
+                        height: 1px;
+                        background-color: $border-color;
+                        @include respond(xxl){
+                            margin-left: 10px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        & h4.title{
+            margin-bottom: 12px;
+            @include respond(xl){
+                font-size: 20px;
+                line-height: 30px;
+            }
+            &:hover{
+                & a{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+/*====== End Blogs Section  ======*/ 

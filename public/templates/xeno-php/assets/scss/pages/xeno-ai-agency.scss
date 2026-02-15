@@ -1,0 +1,787 @@
+
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Default CSS
+# Hero Section CSS
+# Company Section CSS 
+# Features Section CSS
+# Pricing Section CSS
+# Testimonial Section CSS
+# Faq Section CSS
+# CTA Section
+
+------------------------------------------------------*/
+
+@import "../abstract";
+
+/*====== Default CSS ======*/ 
+
+:root{
+    --primary-color: #CE6FD5;
+}
+.theme-btn{
+    &.style-one{
+        background-color: inherit;
+        background:  linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+    }
+}
+
+/*====== Zeno Hero Section ======*/ 
+
+.xeno-hero-ai{
+    position: relative;
+    z-index: 1;
+    padding: 220px 0 150px;
+    @include respond(md){
+        padding: 120px 0 80px;
+    }
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & img{
+            opacity: 0.15;
+        }
+        @include respond(xl){
+            display: none;
+        }
+        &.shape-one{
+            bottom: 0;
+            left: 0;
+        }
+        &.shape-two{
+            bottom: 0;
+            right: 0;
+        }
+    }
+    & .hero-content{
+        padding-right: 50px;
+        @include respond(xl){
+            margin-bottom: 50px;
+        }
+        @include respond(md){
+            padding-right: 0;
+        }
+        & h1{
+            color: $white-color;
+            font-size: 85px;
+            margin-bottom: 130px;
+            @include respond(xxxl){
+                font-size: 72px;
+                line-height: 85px;
+            }
+            @include respond(xxl){
+                margin-bottom: 80px;
+            }
+            @include respond(xl){
+                font-size: 52px;
+                line-height: 75px;
+                margin-bottom: 40px;
+            }
+            @include respond(md){
+                font-size: 32px;
+                line-height: 45px;
+            }
+            & span{
+                background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+        & p{
+            max-width: 530px;
+            margin-bottom: 30px;
+            color: $white-color;
+        }
+    }
+    & .hero-image-box{
+        position: relative;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        padding: 10px;
+        border-radius: 10px;
+        margin-right: -162px;
+        @include respond(xxxl){
+            margin-right: -50px;
+        }
+        @include respond(xxl){
+            margin-right: 0;
+        }
+        @include respond(xl){
+            max-width: 800px;
+        }
+        & .hero-image{
+            & img{
+                border-radius: 10px;
+            }
+        }
+    }
+    & .ai-card-box{
+        position: absolute;
+        bottom: -60px;
+        right: -80px;
+        @include respond(xxxl){
+            right: -50px;
+        }
+        @include respond(lg){
+            display: none;
+        }
+    }
+}
+
+.ai-card-box{
+    background-color: #D0FF71;
+    border-radius: 17px;
+    max-width: 250px;
+    padding: 40px 35px;
+}
+
+/*====== End Zeno Hero Section ======*/ 
+
+/*====== Start Company Section ======*/ 
+
+.xeno-company-ai{
+    border-bottom: 1px solid $border-color;
+    & .text-box{
+        & h4{
+            background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}
+
+.client-slider{
+    margin-left: -75px;
+    margin-right: -75px;
+    & .slick-slide{
+        margin-left: 75px;
+        margin-right: 75px;
+    }
+}
+
+.xeno-client-item{
+    & .thumbnail{
+        & a{
+            opacity: .5;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}
+/*====== End Company Section ======*/ 
+
+/*====== Start Features Section ======*/ 
+.ai-business-wrapper{
+    position: relative;
+    z-index: 1;
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        @include respond(xl){
+            display: none;
+        }
+        &.shape-one{
+            bottom: 0;
+            top: 0;
+            & img{
+                opacity: 0.15;
+            }
+        }
+    }
+}
+
+.xeno-features-ai{
+    & .xeno-image-box{
+        border-radius: 15px;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        margin-left: 100px;
+        position: relative;
+        z-index: 1;
+        height: 570px;
+        padding: 20px;
+        text-align: right;
+        @include respond(xl){
+            margin-left: 0;
+        }
+        @include respond(md){
+            height: auto;
+            text-align: center;
+        }
+        & .image-one{
+            & img{
+                border-radius: 10px;
+            }
+        }
+        & .image-two{
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            & img{
+                border-radius: 10px;
+            }
+            @include respond(md){
+                position: relative;
+                bottom: auto;
+                left: auto;
+                padding: 30px 0;
+            }
+        }
+        & .image-three{
+            position: absolute;
+            bottom: 45px;
+            right: 45px;
+            @include respond(md){
+                position: relative;
+                bottom: auto;
+                right: auto;
+            }
+        }
+    }
+}
+
+.xeno-iconic-box{
+    border: 1px solid rgba(18, 18, 18, 0.07);
+    padding: 25px 35px 17px;
+    border-radius: 10px;
+    & .content{
+        & h4{
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            & i{
+                flex: 0 0 auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $white-color;
+                margin-right: 20px;
+                font-size: 14px;
+            }
+        }
+        & p{
+            line-height: 26px; 
+        }
+    }
+}
+/*====== End Features Section ======*/ 
+
+
+/*====== Start Service Section ======*/ 
+
+.xeno-service-ai{
+    & .service-wrapper{
+        background: linear-gradient(270deg, rgba(193, 116, 214, 0.10) 19.31%, rgba(138, 135, 216, 0.10) 100%);
+    }
+    & .xeno-image-box{
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        padding: 33px 35px;
+        border-radius: 17px;
+        text-align: center;
+    }
+}
+
+.xeno-service-item{
+    background-color: $white-color;
+    border-radius: 10px;
+    display: flex;
+    padding: 30px 30px 25px;
+    @include respond(xl){
+        padding: 30px 20px 25px;
+    }
+    & .icon{
+        flex: 0 0 auto;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        margin-right: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: $white-color;
+        @include respond(xxxl){
+            margin-right: 20px;
+        }
+    }
+    & .content{
+        & h4{
+            margin-bottom: 20px;
+            @include respond(xxxl){
+                font-size: 22px;
+            }
+        }
+        & p{
+            line-height: 26px;
+        }
+    }
+}
+/*====== End Service Section ======*/ 
+
+/*====== Start Features Section */ 
+
+.xeno-features-ai-two{
+    & .xeno-image-box{
+        position: relative;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        padding: 30px;
+        text-align: right;
+        height: 570px;
+        margin-left: 100px;
+        border-radius: 15px;
+        @include respond(xl){
+            margin-left: 0;
+        }
+        @include respond(md){
+            height: auto;
+            text-align: center;
+        }
+        & .image-one{
+            & img{
+                border-radius: 10px;
+            }
+        }
+        & .image-two{
+            position: absolute;
+            left: 30px;
+            bottom: 110px;
+            @include respond(md){
+                position: relative;
+                bottom: auto;
+                left: auto;
+                padding: 30px 0;
+            }
+            & img{
+                border-radius: 10px;
+                box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            }
+        }
+        & .image-three{
+            position: absolute;
+            right: 60px;
+            bottom: 30px;
+            @include respond(md){
+                position: relative;
+                bottom: auto;
+                right: auto;
+            }
+            & img{
+                border-radius: 7px;
+                box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+}
+
+.xeno-icon-box{
+    & .icon{
+        width: 55px;
+        height: 55px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        font-size: 24px;
+        color: $white-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & .content{
+        & h5{
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        & p{
+            line-height: 26px;
+        }
+    }
+}
+/*====== End Features Section ======*/ 
+
+
+
+/*====== Start Features Section ======*/ 
+
+.xeno-features-ai-three{
+    & .xeno-image-box{
+        position: relative;
+        background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+        border-radius: 15px;
+        padding: 30px;
+        height: 570px;
+        margin-right: 100px;
+        & .image-one{
+            & img{
+                border-radius: 10px;
+            }
+        }
+        @include respond(xl){
+            margin-right: 0;
+        }
+        & .image-two{
+            position: absolute;
+            right: 30px;
+            bottom: 30px;
+            @include respond(md){
+                right: auto;
+                bottom: auto;
+                position: relative;
+                margin-top: 30px;
+            }
+            & img{
+                border-radius: 10px;
+            }
+            & .overlay{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(18, 18, 18, 0.40);
+                border-radius: 10px;
+            }
+        }
+    }
+    & .xeno-content-box{
+        & .check-list{
+            & li{
+                &:before{
+                    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                }
+            }
+        }
+    }
+}
+
+.xeno-card-item{
+    background-color: $white-color;
+    padding: 20px;
+    border-radius: 10px;
+    & .content-wrap{
+        padding: 10px 20px 30px;
+        @include respond(lg){
+            padding: 10px 0 30px;
+        }
+    }
+    & .icon{
+        margin-bottom: 20px;
+        & i{
+            font-size: 55px;
+            color: $primary-color;
+        }
+    }
+    & .content{
+        & h4{
+            margin-bottom: 15px;
+        }
+    }
+    & .thumbnail{
+        & img{
+            border-radius: 10px;
+        }
+    }
+}
+/*====== End Features Section ======*/ 
+
+
+/*====== Start Pricing Section ======*/ 
+
+.xeno-pricing-item{
+    padding: 50px 40px 40px;
+    background: linear-gradient(270deg, rgba(206, 111, 213, 0.10) 0%, rgba(138, 135, 216, 0.10) 100%);
+    border-radius: 15px;
+    @include respond(lg){
+        padding: 50px 30px 40px;
+    }
+    & .pricing-header{
+        margin-bottom: 30px;
+        & span.plan{
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(17, 17, 17, 0.10);
+            line-height: 1;
+            font: 500 16px $heading-font;
+            color: $heading-color;
+            margin-bottom: 16px;
+        }
+        & h2{
+            font-size: 45px;
+            & span.duration{
+                font-size: 16px;
+            }
+        }
+    }
+    & .pricing-body{
+        & .xeno-button{
+            margin-bottom: 30px;
+        }
+        & .theme-btn{
+            width: 100%;
+            &.style-one{
+                background: $white-color;
+                color: $heading-color;
+                transition: all .3s;
+                &:hover{
+                    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                    color: $white-color;
+                }
+            }
+        }
+        & .check-list{
+            & li{
+                & i{
+                    margin-right: 10px;
+                }
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
+/*====== End Pricing Section ======*/ 
+
+
+/*====== Start Testimonial Section ======*/ 
+
+.xeno-testimonial-ai{
+    padding-left: 70px;
+    padding-right: 70px;
+    @include respond(xl){
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .testimonial-wrapper{
+        background: linear-gradient(270deg, rgba(193, 116, 214, 0.10) 19.31%, rgba(138, 135, 216, 0.10) 100%);
+        border-radius: 30px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        & .pattern-bg{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .1;
+            z-index: -1;
+        }
+    }
+    & .testimonial-slider{
+        margin-left: -15px;
+        margin-right: -15px;
+        & .slick-slide{
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        & ul.slick-dots{
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+            & li{
+                & button{
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                    transition: all .3s;
+                }
+                &.slick-active{
+                    & button{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            } 
+        }
+    }
+}
+
+.xeno-testimonial-item{
+    background-color: $white-color;
+    padding: 30px 50px;
+    border-radius: 10px;
+    text-align: center;
+    @include respond(lg){
+        padding: 30px 20px;
+    }
+    & .testimonial-content{
+        & .author-quote-title{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 30px;   
+            margin-bottom: 25px;
+            border-bottom: 1px solid $border-color;
+            & .author-quote{
+                display: inline-flex;
+                align-items: center;
+                & img{
+                    width: 55px;
+                    height: 55px;
+                    border-radius: 50%;
+                }
+                & .quote{
+                    width: 55px;
+                    height: 55px;
+                    border-radius: 50%;
+                    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    color: $white-color;
+                    margin-left: -10px;
+                }
+            }
+            & .author-title{
+                margin-left: 20px;
+                & h5{
+                    margin-bottom: 0;
+                }
+            }
+        }
+        & h5{
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+/*====== End Testimonial Section ======*/ 
+
+
+/*====== Start Faq Section ======*/
+
+.xeno-faq-ai{
+    & .xeno-image-box{
+        & img{
+            margin-right: -100px;
+            @include respond(md){
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.xeno-accordion-item{
+    border: 1px solid $border-color;
+    padding: 15px 15px 15px 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    & .accordion-header{
+        & .accordion-title{
+            line-height: 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            @include respond(xs){
+                align-items: flex-start;
+                font-size: 16px;
+            }
+            &  span.sn{
+                margin-right: 8px;
+            }
+            &:after{
+                flex: 0 0 auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                color: $white-color;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                content: '\f061';
+                font-family: 'Font Awesome 5 Pro';
+                font-weight: 400;
+                margin-left: auto;
+                transition: all .3s;
+            }
+        }
+        & .accordion-title[aria-expanded=true]{
+            &:after{
+                transform: rotate(-45deg);
+                background-color: $primary-color;
+            }
+        }
+    }
+    & .accordion-content{
+        padding: 15px 0 0;
+    }
+}
+
+/*====== End Faq Section ======*/
+
+/*====== Start CTA Section ======*/ 
+
+.ai-cta-wrapper{
+    padding: 90px 30px 70px;
+    border-radius: 20px;
+    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+    position: relative;
+    z-index: 1;
+    @include respond(md){
+        padding: 60px 15px 40px;
+    }
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        @include respond(lg){
+            display: none;
+        }
+        &.shape-one{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        &.shape-two{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    & h2{
+        margin-bottom: 30px;
+        color: $white-color;
+        @include respond(xl){
+            font-size: 36px;
+            line-height: 1.1;
+        }
+        @include respond(md){
+            font-size: 24px;
+            line-height: 1.3;
+        }
+    }
+    & p{
+        color: $white-color;
+        margin-bottom: 30px;
+    }
+    & .xeno-button{
+        & a{
+            margin-bottom: 20px;
+            &:not(:last-child){
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+/*====== End CTA Section ======*/ 

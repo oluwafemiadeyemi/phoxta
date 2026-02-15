@@ -1,0 +1,855 @@
+/*----------------------------------------------------------------------------------- 
+
+Template Name: Xeno - Multipurpose Startup Agency PHP Template
+
+Description: Xeno is a sleek and modern HTML template designed specifically for startups, tech companies, SaaS platforms, digital agencies, and entrepreneurs. Built with Bootstrap 5, GSAP animations, and clean semantic code, Zeno is your perfect front-end foundation for building stunning, high-converting websites with ease. 
+
+Version: 1.0 
+
+--------------------
+CSS Index
+---------------------
+
+# Default CSS
+# Hero Section CSS
+# Company Section CSS 
+# Features Section CSS
+# Pricing Section CSS
+# Testimonial Section CSS
+# Faq Section CSS
+# CTA Section
+
+------------------------------------------------------*/
+/*====== Default CSS ======*/
+:root {
+  --primary-color: #CE6FD5;
+}
+
+.theme-btn.style-one {
+  background-color: inherit;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+}
+
+/*====== Zeno Hero Section ======*/
+.xeno-hero-ai {
+  position: relative;
+  z-index: 1;
+  padding: 220px 0 150px;
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ai {
+    padding: 120px 0 80px;
+  }
+}
+.xeno-hero-ai .shape {
+  position: absolute;
+  z-index: -1;
+}
+.xeno-hero-ai .shape img {
+  opacity: 0.15;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ai .shape {
+    display: none;
+  }
+}
+.xeno-hero-ai .shape.shape-one {
+  bottom: 0;
+  left: 0;
+}
+.xeno-hero-ai .shape.shape-two {
+  bottom: 0;
+  right: 0;
+}
+.xeno-hero-ai .hero-content {
+  padding-right: 50px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ai .hero-content {
+    margin-bottom: 50px;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ai .hero-content {
+    padding-right: 0;
+  }
+}
+.xeno-hero-ai .hero-content h1 {
+  color: var(--white-color);
+  font-size: 85px;
+  margin-bottom: 130px;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ai .hero-content h1 {
+    font-size: 72px;
+    line-height: 85px;
+  }
+}
+@media (max-width: 1399.98px) {
+  .xeno-hero-ai .hero-content h1 {
+    margin-bottom: 80px;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ai .hero-content h1 {
+    font-size: 52px;
+    line-height: 75px;
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-hero-ai .hero-content h1 {
+    font-size: 32px;
+    line-height: 45px;
+  }
+}
+.xeno-hero-ai .hero-content h1 span {
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.xeno-hero-ai .hero-content p {
+  max-width: 530px;
+  margin-bottom: 30px;
+  color: var(--white-color);
+}
+.xeno-hero-ai .hero-image-box {
+  position: relative;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: -162px;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ai .hero-image-box {
+    margin-right: -50px;
+  }
+}
+@media (max-width: 1399.98px) {
+  .xeno-hero-ai .hero-image-box {
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-hero-ai .hero-image-box {
+    max-width: 800px;
+  }
+}
+.xeno-hero-ai .hero-image-box .hero-image img {
+  border-radius: 10px;
+}
+.xeno-hero-ai .ai-card-box {
+  position: absolute;
+  bottom: -60px;
+  right: -80px;
+}
+@media (max-width: 1650px) {
+  .xeno-hero-ai .ai-card-box {
+    right: -50px;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-hero-ai .ai-card-box {
+    display: none;
+  }
+}
+
+.ai-card-box {
+  background-color: #D0FF71;
+  border-radius: 17px;
+  max-width: 250px;
+  padding: 40px 35px;
+}
+
+/*====== End Zeno Hero Section ======*/
+/*====== Start Company Section ======*/
+.xeno-company-ai {
+  border-bottom: 1px solid var(--border-color);
+}
+.xeno-company-ai .text-box h4 {
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.client-slider {
+  margin-left: -75px;
+  margin-right: -75px;
+}
+.client-slider .slick-slide {
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+.xeno-client-item .thumbnail a {
+  opacity: 0.5;
+}
+.xeno-client-item .thumbnail a:hover {
+  opacity: 1;
+}
+
+/*====== End Company Section ======*/
+/*====== Start Features Section ======*/
+.ai-business-wrapper {
+  position: relative;
+  z-index: 1;
+}
+.ai-business-wrapper .shape {
+  position: absolute;
+  z-index: -1;
+}
+@media screen and (max-width: 1199.98px) {
+  .ai-business-wrapper .shape {
+    display: none;
+  }
+}
+.ai-business-wrapper .shape.shape-one {
+  bottom: 0;
+  top: 0;
+}
+.ai-business-wrapper .shape.shape-one img {
+  opacity: 0.15;
+}
+
+.xeno-features-ai .xeno-image-box {
+  border-radius: 15px;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  margin-left: 100px;
+  position: relative;
+  z-index: 1;
+  height: 570px;
+  padding: 20px;
+  text-align: right;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-features-ai .xeno-image-box {
+    margin-left: 0;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai .xeno-image-box {
+    height: auto;
+    text-align: center;
+  }
+}
+.xeno-features-ai .xeno-image-box .image-one img {
+  border-radius: 10px;
+}
+.xeno-features-ai .xeno-image-box .image-two {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+.xeno-features-ai .xeno-image-box .image-two img {
+  border-radius: 10px;
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai .xeno-image-box .image-two {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    padding: 30px 0;
+  }
+}
+.xeno-features-ai .xeno-image-box .image-three {
+  position: absolute;
+  bottom: 45px;
+  right: 45px;
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai .xeno-image-box .image-three {
+    position: relative;
+    bottom: auto;
+    right: auto;
+  }
+}
+
+.xeno-iconic-box {
+  border: 1px solid rgba(18, 18, 18, 0.07);
+  padding: 25px 35px 17px;
+  border-radius: 10px;
+}
+.xeno-iconic-box .content h4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+.xeno-iconic-box .content h4 i {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: var(--white-color);
+  margin-right: 20px;
+  font-size: 14px;
+}
+.xeno-iconic-box .content p {
+  line-height: 26px;
+}
+
+/*====== End Features Section ======*/
+/*====== Start Service Section ======*/
+.xeno-service-ai .service-wrapper {
+  background: -webkit-gradient(linear, right top, left top, color-stop(19.31%, rgba(193, 116, 214, 0.1)), to(rgba(138, 135, 216, 0.1)));
+  background: linear-gradient(270deg, rgba(193, 116, 214, 0.1) 19.31%, rgba(138, 135, 216, 0.1) 100%);
+}
+.xeno-service-ai .xeno-image-box {
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  padding: 33px 35px;
+  border-radius: 17px;
+  text-align: center;
+}
+
+.xeno-service-item {
+  background-color: var(--white-color);
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px 30px 25px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-service-item {
+    padding: 30px 20px 25px;
+  }
+}
+.xeno-service-item .icon {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  margin-right: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 28px;
+  color: var(--white-color);
+}
+@media (max-width: 1650px) {
+  .xeno-service-item .icon {
+    margin-right: 20px;
+  }
+}
+.xeno-service-item .content h4 {
+  margin-bottom: 20px;
+}
+@media (max-width: 1650px) {
+  .xeno-service-item .content h4 {
+    font-size: 22px;
+  }
+}
+.xeno-service-item .content p {
+  line-height: 26px;
+}
+
+/*====== End Service Section ======*/
+/*====== Start Features Section */
+.xeno-features-ai-two .xeno-image-box {
+  position: relative;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  padding: 30px;
+  text-align: right;
+  height: 570px;
+  margin-left: 100px;
+  border-radius: 15px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-features-ai-two .xeno-image-box {
+    margin-left: 0;
+  }
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai-two .xeno-image-box {
+    height: auto;
+    text-align: center;
+  }
+}
+.xeno-features-ai-two .xeno-image-box .image-one img {
+  border-radius: 10px;
+}
+.xeno-features-ai-two .xeno-image-box .image-two {
+  position: absolute;
+  left: 30px;
+  bottom: 110px;
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai-two .xeno-image-box .image-two {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    padding: 30px 0;
+  }
+}
+.xeno-features-ai-two .xeno-image-box .image-two img {
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.xeno-features-ai-two .xeno-image-box .image-three {
+  position: absolute;
+  right: 60px;
+  bottom: 30px;
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai-two .xeno-image-box .image-three {
+    position: relative;
+    bottom: auto;
+    right: auto;
+  }
+}
+.xeno-features-ai-two .xeno-image-box .image-three img {
+  border-radius: 7px;
+  -webkit-box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+          box-shadow: 10px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.xeno-icon-box .icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  font-size: 24px;
+  color: var(--white-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.xeno-icon-box .content h5 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.xeno-icon-box .content p {
+  line-height: 26px;
+}
+
+/*====== End Features Section ======*/
+/*====== Start Features Section ======*/
+.xeno-features-ai-three .xeno-image-box {
+  position: relative;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  border-radius: 15px;
+  padding: 30px;
+  height: 570px;
+  margin-right: 100px;
+}
+.xeno-features-ai-three .xeno-image-box .image-one img {
+  border-radius: 10px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-features-ai-three .xeno-image-box {
+    margin-right: 0;
+  }
+}
+.xeno-features-ai-three .xeno-image-box .image-two {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+@media (max-width: 767.98px) {
+  .xeno-features-ai-three .xeno-image-box .image-two {
+    right: auto;
+    bottom: auto;
+    position: relative;
+    margin-top: 30px;
+  }
+}
+.xeno-features-ai-three .xeno-image-box .image-two img {
+  border-radius: 10px;
+}
+.xeno-features-ai-three .xeno-image-box .image-two .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.4);
+  border-radius: 10px;
+}
+.xeno-features-ai-three .xeno-content-box .check-list li:before {
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+}
+
+.xeno-card-item {
+  background-color: var(--white-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+.xeno-card-item .content-wrap {
+  padding: 10px 20px 30px;
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-card-item .content-wrap {
+    padding: 10px 0 30px;
+  }
+}
+.xeno-card-item .icon {
+  margin-bottom: 20px;
+}
+.xeno-card-item .icon i {
+  font-size: 55px;
+  color: var(--primary-color);
+}
+.xeno-card-item .content h4 {
+  margin-bottom: 15px;
+}
+.xeno-card-item .thumbnail img {
+  border-radius: 10px;
+}
+
+/*====== End Features Section ======*/
+/*====== Start Pricing Section ======*/
+.xeno-pricing-item {
+  padding: 50px 40px 40px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(206, 111, 213, 0.1)), to(rgba(138, 135, 216, 0.1)));
+  background: linear-gradient(270deg, rgba(206, 111, 213, 0.1) 0%, rgba(138, 135, 216, 0.1) 100%);
+  border-radius: 15px;
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-pricing-item {
+    padding: 50px 30px 40px;
+  }
+}
+.xeno-pricing-item .pricing-header {
+  margin-bottom: 30px;
+}
+.xeno-pricing-item .pricing-header span.plan {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  line-height: 1;
+  font: 500 16px var(--heading-font);
+  color: var(--heading-color);
+  margin-bottom: 16px;
+}
+.xeno-pricing-item .pricing-header h2 {
+  font-size: 45px;
+}
+.xeno-pricing-item .pricing-header h2 span.duration {
+  font-size: 16px;
+}
+.xeno-pricing-item .pricing-body .xeno-button {
+  margin-bottom: 30px;
+}
+.xeno-pricing-item .pricing-body .theme-btn {
+  width: 100%;
+}
+.xeno-pricing-item .pricing-body .theme-btn.style-one {
+  background: var(--white-color);
+  color: var(--heading-color);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.xeno-pricing-item .pricing-body .theme-btn.style-one:hover {
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  color: var(--white-color);
+}
+.xeno-pricing-item .pricing-body .check-list li i {
+  margin-right: 10px;
+}
+.xeno-pricing-item .pricing-body .check-list li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+/*====== End Pricing Section ======*/
+/*====== Start Testimonial Section ======*/
+.xeno-testimonial-ai {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+@media screen and (max-width: 1199.98px) {
+  .xeno-testimonial-ai {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.xeno-testimonial-ai .testimonial-wrapper {
+  background: -webkit-gradient(linear, right top, left top, color-stop(19.31%, rgba(193, 116, 214, 0.1)), to(rgba(138, 135, 216, 0.1)));
+  background: linear-gradient(270deg, rgba(193, 116, 214, 0.1) 19.31%, rgba(138, 135, 216, 0.1) 100%);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.xeno-testimonial-ai .testimonial-wrapper .pattern-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: -1;
+}
+.xeno-testimonial-ai .testimonial-slider {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.xeno-testimonial-ai .testimonial-slider .slick-slide {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.xeno-testimonial-ai .testimonial-slider ul.slick-dots {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+.xeno-testimonial-ai .testimonial-slider ul.slick-dots li button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.xeno-testimonial-ai .testimonial-slider ul.slick-dots li.slick-active button {
+  width: 20px;
+  height: 20px;
+}
+
+.xeno-testimonial-item {
+  background-color: var(--white-color);
+  padding: 30px 50px;
+  border-radius: 10px;
+  text-align: center;
+}
+@media screen and (max-width: 991.98px) {
+  .xeno-testimonial-item {
+    padding: 30px 20px;
+  }
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-bottom: 30px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title .author-quote {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title .author-quote img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title .author-quote .quote {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 18px;
+  color: var(--white-color);
+  margin-left: -10px;
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title .author-title {
+  margin-left: 20px;
+}
+.xeno-testimonial-item .testimonial-content .author-quote-title .author-title h5 {
+  margin-bottom: 0;
+}
+.xeno-testimonial-item .testimonial-content h5 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/*====== End Testimonial Section ======*/
+/*====== Start Faq Section ======*/
+.xeno-faq-ai .xeno-image-box img {
+  margin-right: -100px;
+}
+@media (max-width: 767.98px) {
+  .xeno-faq-ai .xeno-image-box img {
+    margin-right: 0;
+  }
+}
+
+.xeno-accordion-item {
+  border: 1px solid var(--border-color);
+  padding: 15px 15px 15px 30px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.xeno-accordion-item .accordion-header .accordion-title {
+  line-height: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+.xeno-accordion-item .accordion-header .accordion-title span.sn {
+  margin-right: 8px;
+}
+.xeno-accordion-item .accordion-header .accordion-title:after {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  color: var(--white-color);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  content: "\f061";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  margin-left: auto;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.xeno-accordion-item .accordion-header .accordion-title[aria-expanded=true]:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  background-color: var(--primary-color);
+}
+.xeno-accordion-item .accordion-content {
+  padding: 15px 0 0;
+}
+
+/*====== End Faq Section ======*/
+/*====== Start CTA Section ======*/
+.ai-cta-wrapper {
+  padding: 90px 30px 70px;
+  border-radius: 20px;
+  background: -webkit-gradient(linear, right top, left top, from(#CE6FD5), to(#8A87D8));
+  background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767.98px) {
+  .ai-cta-wrapper {
+    padding: 60px 15px 40px;
+  }
+}
+.ai-cta-wrapper .shape {
+  position: absolute;
+  z-index: -1;
+}
+@media screen and (max-width: 991.98px) {
+  .ai-cta-wrapper .shape {
+    display: none;
+  }
+}
+.ai-cta-wrapper .shape.shape-one {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.ai-cta-wrapper .shape.shape-two {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.ai-cta-wrapper h2 {
+  margin-bottom: 30px;
+  color: var(--white-color);
+}
+@media screen and (max-width: 1199.98px) {
+  .ai-cta-wrapper h2 {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+}
+@media (max-width: 767.98px) {
+  .ai-cta-wrapper h2 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+}
+.ai-cta-wrapper p {
+  color: var(--white-color);
+  margin-bottom: 30px;
+}
+.ai-cta-wrapper .xeno-button a {
+  margin-bottom: 20px;
+}
+.ai-cta-wrapper .xeno-button a:not(:last-child) {
+  margin-right: 10px;
+}
+
+/*====== End CTA Section ======*/

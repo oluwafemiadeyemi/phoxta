@@ -1,0 +1,176 @@
+// Primary Button
+.link-effect {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    height: 26px;
+    line-height: 1.66;
+
+    .effect-1 {
+        display: block;
+        height: 100%;
+        position: relative;
+        top: 0%;
+        transition: 0.3s;
+    }
+
+    &:hover {
+        .effect-1 {
+            top: -100%;
+        }
+    }
+}
+
+// Theme Button
+.theme-btn {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: $title-font;
+    position: relative;
+    padding: 15px 40px;
+    margin-bottom: 0px;
+    color: $dark-color;
+    background-color: $theme-color2;
+    display: inline-flex;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    border-radius: 40px;
+
+    @include sm {
+        padding: 12px 35px;
+    }
+
+    &.bg-white {
+        background-color: $white-color;
+        border: 1px solid $dark-color;
+    }
+
+    &.bg-dark {
+        background-color: $dark-color;
+        color: $white-color;
+
+        &:hover {
+            color: $white-color;
+            background-color: $theme-color !important;
+        }
+    }
+
+    &.bg-color10 {
+        background-color: $bg-color10;
+        color: $white-color;
+
+        &:hover {
+            color: $white-color;
+            background-color: $theme-color !important;
+        }
+    }
+
+    &.bg-color5 {
+        background-color: $bg-color5;
+        color: $dark-color;
+
+        &:hover {
+            color: $white-color;
+            background-color: $theme-color !important;
+        }
+    }
+
+    &.bg-dark3 {
+        background-color: $dark-color3;
+        color: $white-color;
+
+        &:hover {
+            color: $white-color;
+        }
+    }
+
+    &.bg-theme {
+        background-color: $theme-color;
+        color: $white-color;
+
+        &:hover {
+            color: $white-color;
+        }
+    }
+
+    &.bg-theme3 {
+        background-color: $bg-color3;
+        color: $dark-color;
+
+        &:hover {
+            color: $white-color;
+            background-color: $theme-color !important;
+        }
+    }
+
+    &.bg-border {
+        background-color: $border-color;
+        color: $white-color;
+
+        &:hover {
+            color: $white-color;
+        }
+    }
+
+    &.bg-transparent {
+        background-color: transparent;
+        border: 1px solid $dark-color;
+    }
+
+    i {
+        font-size: 16px;
+        height: 26px;
+        line-height: 1.66;
+    }
+
+    &:hover {
+        color: $dark-color;
+
+        .effect-1 {
+            top: -100%;
+        }
+    }
+
+    &.text-theme {
+        &:before,
+        &:after {
+            background: $theme-color;
+        }
+
+        img {
+            filter: brightness(99);
+        }
+    }
+}
+
+// Icon Btn
+.icon-btn {
+    display: inline-block;
+    width: var(--btn-size, 46px);
+    height: var(--btn-size, 46px);
+    line-height: var(--btn-size, 46px);
+    font-size: var(--btn-font-size, 16px);
+    background-color: $theme-color;
+    color: $white-color;
+    text-align: center;
+    border-radius: 0px;
+    border: none;
+    transition: 0.4s ease-in-out;
+
+    &:hover {
+        background-color: $title-color;
+        color: $white-color;
+    }
+
+    &.btn-border {
+        background: transparent;
+        border: 2px solid $theme-color;
+        color: $theme-color;
+
+        &:hover {
+            background: $theme-color;
+            color: $white-color;
+        }
+    }
+}

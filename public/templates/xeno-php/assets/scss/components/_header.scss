@@ -1,0 +1,570 @@
+
+@use "./../abstract";
+
+
+.header-area{
+    position: relative;
+    z-index: 999;
+}
+.transparent-header {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+/* Header Navigation */
+
+.header-navigation{
+    @include respond(lg){
+        padding: 20px 0;
+    }
+    & .primary-menu{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    & .site-branding{
+        max-width: 200px;
+    }
+    & .main-menu{
+        & ul{
+            & > li{
+                display: inline-block;
+                position: relative;
+                margin-left: 17px;
+                margin-right: 17px;
+                @include respond(xl){
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+                & > a {
+                    position: relative;
+                    display: block;
+                    font: 600 18px $heading-font;
+                    text-transform: capitalize;
+                    line-height: 1;
+                    color: $heading-color;
+                    padding: 36px 0;
+                    @include respond(xl){
+                        font-size: 18px;
+                    }
+                    &:after{
+                        position: absolute;
+                        bottom: 35%;
+                        right: 0;
+                        content: '';
+                        width: 0%;
+                        height: 1px;
+                        background-color: $primary-color;
+                        transition: .35s ease-in-out;
+                    }
+                    & span.dd-trigger{
+                        margin-left: 5px;
+                    }
+                }
+                & .sub-menu {
+                    position: absolute;
+                    left: 0;
+                    top: 120%;
+                    width: 250px;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.2s;
+                    z-index: 99;
+                    padding: 10px 0;
+                    background-color: $white-color;
+                    height: auto;
+                    text-align: left;
+                    box-shadow: 0px 30px 80px 15px rgba(0, 0, 0, 0.09);
+                    border-radius: 7px;
+                    & li {
+                        display: block;
+                        margin: 0;
+                        & a {
+                            display: flex;
+                            align-items: center;
+                            padding: 0 30px;
+                            position: relative;
+                            line-height: 2.5;
+                            margin: 0;
+                            color: $heading-color;
+                            @include transition(.3s);
+                            & span.dd-trigger{
+                                margin-left: auto;
+                            }
+                            &::after{
+                                display: none;
+                            }
+                            &:hover {
+                                color: $primary-color;
+                            }
+                        }
+                        & .sub-menu {
+                            left: 100%;
+                            top: 50%;
+                            @include respond(tablet){
+                                left: auto;
+                                right: 100%;
+                                top: 50%;
+                            }
+                            @include respond(laptop){
+                                left: auto;
+                                right: 100%;
+                                top: 50%;
+                            }
+                        }
+                        &:hover {
+                            & .sub-menu {
+                                top: 0%;
+                            }
+                            & > a{
+                                margin-left: 5px;
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+                &:hover {
+                    & > a{
+                        color: $primary-color;
+                        &:after{
+                            left: 0;
+                            right: auto;
+                            width: 100%;
+                        }
+                    }
+                    & > .sub-menu {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 100%;
+                    }
+                }
+            }
+		}
+    }
+    & .navbar-toggler {
+		padding: 11px 7px;
+		border: 1px solid $heading-color;
+		background-color: transparent;
+		cursor: pointer;
+        display: none;
+        border-radius: 5px;
+        margin-left: 20px;
+		& span {
+			position: relative;
+			border-radius: 3px;
+			display: block;
+			height: 2px;
+			padding: 0;
+			width: 30px;
+			cursor: pointer;
+			display: block;
+            @include transition(.3s);
+            background-color: $heading-color;
+            &:not(:first-child){
+                margin-top: 5px;
+            }
+		}
+		&.active {
+			span:nth-of-type(1) {
+				transform: rotate3d(0, 0, 1, 45deg);
+				top: 7px;
+			}
+			span:nth-of-type(2) {
+				opacity: 0;
+			}
+			span:nth-of-type(3) {
+				transform: rotate3d(0, 0, 1, -45deg);
+				top: -7px;
+			}
+		}
+	}
+    @include respond(lg){
+        & .xeno-nav-menu{
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: -290px;
+            width: 290px;
+            height: 100%;
+            transition-duration: 500ms;
+            padding: 20px 20px 30px;
+            display: block;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            z-index: 9999;
+            background-color: $white-color;
+            &.menu-on {
+                left: 0;
+            }
+            & .main-menu {
+                margin-top: 30px;
+                & ul li {
+                    display: block;
+                    margin: 0;
+                    &:not(:last-child){
+                        border-bottom: 1px solid $border-color;
+                    }
+                    & a {
+                        display: block;
+                        padding: 12px 0;
+                        font-size: 18px;
+                        &:after{
+                            display: none;
+                        }
+                    }   
+                    & .sub-menu {
+                        width: 100%;
+                        position: relative;
+                        top: 0;
+                        left: 0;
+                        padding: 0;
+                        box-shadow: none;
+                        background-color: transparent;
+                        visibility: visible;
+                        opacity: 1;
+                        display: none;
+                        transition: none;
+                        & > li {
+                            & > a{
+                                padding: 5px 20px;
+                            }
+                            & .sub-menu{
+                                width: 100%;
+                                position: relative;
+                                top: 0;
+                                left: 0;
+                                padding: 0;
+                                box-shadow: none;
+                                background-color: transparent;
+                                visibility: visible;
+                                opacity: 1;
+                                display: none;
+                                transition: none;
+                                margin-left: 30px;
+                            }
+                        }
+                    }
+                    & .dd-trigger {
+                        position: absolute;
+                        right: 0;
+                        top: 10px;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 3px;
+                        z-index: 2;
+                        cursor: pointer;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+        & .navbar-close{
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $border-color;
+            font-size: 16px;
+        }
+        & .navbar-toggler{
+            display: block;
+        }
+        & .xeno-nav-button{
+            & .theme-btn{
+                &.style-one{
+                    padding: 17px 24px;
+                }
+            }
+        }
+        & .xeno-menu-bottom{
+            & h5{
+                margin-bottom: 25px;
+            }
+            & .social-link{
+                & li{
+                    display: inline-block;
+                    margin-right: 10px;
+                    & a{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        border: 1px solid $border-color;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover{
+                            background-color: $primary-color;
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nav-right-item{
+    display: flex;
+    align-items: center;
+    & .nav-button{
+        & .theme-btn{
+            &.style-one{
+                padding: 13px 21px;
+            }
+        }
+    }
+}
+
+.header-two{
+    & .container-fluid{
+        padding-left: 120px;
+        padding-right: 120px;
+        @include respond(xl){
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+    & .header-navigation{
+        & .main-menu{
+            & ul{
+                & > li{
+                    & > a {
+                        color: $white-color;
+                        @include respond(lg){
+                            color: $heading-color;
+                        }
+                    }
+                    & .sub-menu {
+                        background-color: $heading-color;
+                        & li {
+                            & a {
+                                color: $white-color;
+                                @include respond(lg){
+                                    color: $heading-color;
+                                }
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+                            &:hover {
+                                & > a{
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        & > a{
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    & .nav-right-item{
+        & .nav-button{
+            & .theme-btn{
+                &.style-one{
+                    &:hover{
+                        background-color: $white-color;
+                        color: $heading-color;
+                    }
+                }
+            }
+        }
+        & .navbar-toggler{
+            border-color: rgba(255, 255, 255, .6);
+            & span{
+                background-color: rgba(255, 255, 255, .6);
+            }
+        }
+    }
+}
+
+.header-three{
+    border-bottom: 1px solid $border-color;
+    & .container-fluid{
+        padding-left: 70px;
+        padding-right: 70px;
+        @include respond(xl){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+.header-four{
+    & .container-fluid{
+        padding-left: 40px;
+        padding-right: 40px;
+        @include respond(xl){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    & .header-navigation{
+        & .main-menu{
+            & ul{
+                & > li{
+                    & > a {
+                        color: $white-color;
+                        @include respond(lg){
+                            color: $heading-color;
+                        }
+                    }
+                    & .sub-menu {
+                        background-color: $heading-color;
+                        @include respond(lg){
+                            background-color: $white-color;
+                        }
+                        & li {
+                            & a {
+                                color: $white-color;
+                                @include respond(lg){
+                                    color: $heading-color;
+                                }
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+                            &:hover {
+                                & > a{
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        & > a{
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+        & .navbar-toggler{
+            @include respond(lg){
+                border-color: rgba(255, 255, 255, .8);
+            }
+            & span{
+                @include respond(lg){
+                    background-color: rgba(255, 255, 255, .8);
+                }
+            }
+        }
+    }
+    & .nav-right-item{
+        & .nav-button{
+            & .theme-btn{
+                &.style-one{
+                    &:hover{
+                        background-color: $white-color;
+                        color: $heading-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.header-five{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    & .header-navigation{
+        & .main-menu{
+            & ul{
+                & > li{
+                    & > a {
+                        color: $white-color;
+                        @include respond(lg){
+                            color: $heading-color;
+                        }
+                    }
+                    & .sub-menu {
+                        background-color: $heading-color;
+                        @include respond(lg){
+                           background-color: $white-color;
+                        }
+                        & li {
+                            & a {
+                                color: $white-color;
+                                @include respond(lg){
+                                    color: $heading-color;
+                                }
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+                            &:hover {
+                                & > a{
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        & > a{
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+        & .navbar-toggler{
+            @include respond(lg){
+                border-color: rgba(255, 255, 255, .8);
+            }
+            & span{
+                @include respond(lg){
+                    background-color: rgba(255, 255, 255, .8);
+                }
+            }
+        }
+    }
+}
+
+/* Header Sticky */
+
+.header-area {
+    &.sticky{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        border-color: transparent;
+        background-color: $white-color;
+        box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.08);
+        animation: sticky 1.2s;
+        &.header-two,
+        &.header-four,
+        &.header-five{
+            background-color: $primary-black-color;
+        }
+    }
+    
+}
+
+@-webkit-keyframes sticky {
+    0% {
+      top: -200px;
+    }
+    100% {
+      top: 0;
+    }
+}
+@keyframes sticky {
+    0% {
+      top: -200px;
+    }
+    100% {
+      top: 0;
+    }
+}

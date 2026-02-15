@@ -1,0 +1,723 @@
+
+@use "./../abstract";
+
+
+.footer-copyright{
+    padding: 20px 0;
+    & .copyright-nav{
+        float: right;
+        & ul{
+            & li{
+                display: inline-block;
+                &:not(:last-child){
+                    margin-right: 20px;
+                }
+                & a{
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Zeno Footer Creative Agency */ 
+
+.xeno-footer-ca{
+    background-color: $heading-color;
+    padding-bottom: 95px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    @include respond(md){
+        padding-bottom: 0;
+    }
+    & .shape{
+        position: absolute;
+        z-index: -1;
+        & span{
+            width: 650px;
+            height: 650px;
+            border-radius: 50%;
+        }
+        &.circle-shape-one{
+            
+            left: -10%;
+            top: -150px;
+            & span{
+                background: linear-gradient(180deg, rgba(246, 246, 246, 0.05) 0%, rgba(246, 246, 246, 0.00) 100%);
+            }
+        }
+        &.circle-shape-two{
+            bottom: -30%;
+            right: -12%;
+            & span{
+                background: linear-gradient(180deg, rgba(246, 246, 246, 0.02) 0%, rgba(246, 246, 246, 0.00) 100%);
+            }
+        }
+    }
+    & .big-text{
+        font-size: 300px;
+        font-weight: 700;
+        font-family: $heading-font;
+        color: $white-color;
+        position: absolute;
+        bottom: 130px;
+        left: -30px;
+        line-height: 1;
+        &:after{
+            position: absolute;
+            left: 0;
+            top: 20px;
+            content: "xeno";
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: rgba(255, 255, 255, 0.20);
+            color: transparent;
+        }
+        @include respond(xxl){
+            font-size: 220px;
+        }
+        @include respond(xl){
+            font-size: 160px;
+        }
+        @include respond(lg){
+            font-size: 120px;
+            left: 0;
+        }
+        @include respond(md){
+            display: none;
+        }
+    }
+    & .footer-top{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+    & .client-item{
+        &:hover{
+            & .client-img{
+                & img{
+                    opacity: 1;
+                }
+            }
+        }
+        & .client-img{
+            & img{
+                opacity: .5;
+            }
+        }
+    }    
+    & .xeno-info-box{
+        & .content{
+            & h3{
+                font-size: 65px;
+                color: $white-color;
+                font-weight: 400;
+                letter-spacing: -1.95px;
+                line-height: 1;
+                margin-bottom: 30px;
+                font-family: $body-font;
+                @include respond(xxl){
+                    font-size: 45px;
+                }
+                @include respond(xl){
+                    font-size: 35px;
+                }
+            }
+            & .theme-btn{
+                margin-top: 40px;
+                &.style-one{
+                    &:hover{
+                        background-color: $white-color;
+                        color: $heading-color;
+                    }
+                }
+            }
+        }
+    }    
+    & .social-box{
+        & a{
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 400;
+            &:not(:last-child){
+                margin-right: 25px;
+                @include respond(md){
+                    margin-right: 10px;
+                }
+            }
+            &:hover{
+                color: $white-color;
+            }
+        }
+    }    
+    & .footer-copyright{
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        padding-top: 65px;
+        @include respond(md){
+            text-align: center;
+        }
+        & p{
+            color: #CECECE;
+            & span{
+                color: $white-color;
+            }
+        }
+    }
+    & .footer-content{
+        & h5{
+            font-weight: 400;
+            color: $white-color;
+        }
+    }
+    & .footer-content-box{
+        padding-left: 70px;
+        @include respond(xxl){
+            padding-left: 0;
+        }
+        @include respond(xl){
+            padding-left: 0;
+        }
+    }
+}
+
+/* Zeno Footer Design Studio */ 
+
+.xeno-footer-ds{
+    background-color: $primary-black-color;
+    & .footer-top{
+        padding: 90px 0 50px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        & .xeno-content-box{
+            & h2{
+                margin-bottom: 20px;
+                color: $white-color;
+            }
+            & p{
+                font-size: 22px;
+            }
+        }
+    }
+    & .footer-widget-area{
+        padding: 90px 0 50px;
+        & .footer-widget{
+            & h4.widget-title{
+                color: $white-color;
+                margin-bottom: 25px;
+            }
+            & .footer-content{
+                & p{
+                    line-height: 35px;
+                    color: rgba(255, 255, 255, 0.65);
+                    & a{
+                        &:hover{
+                            color: $primary-color;
+                        }
+                    }
+                }
+                & .social-box{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-right: -15px;
+                    & a{
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(255, 255, 255, 0.10);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 13px;
+                        color: rgba(255, 255, 255, 0.65);
+                        &:hover{
+                            background-color: $primary-color;
+                            color: $heading-color;
+                            border-color: transparent;
+                        }
+                        &:not(:last-child){
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+            &.footer-newsletter-widget{
+                & .footer-content{
+                    & form{
+                        display: flex;
+                        border-bottom: 1px solid $border-color;
+                        padding-bottom: 10px;
+                        gap: 10px;
+                        & .form_control{
+                            background-color: transparent;
+                            border: none;
+                            flex-grow: 1;
+                            color: rgba(255, 255, 255, 0.65);
+                            &::placeholder{
+                                color: rgba(255, 255, 255, 0.65);
+                            }
+                            &:focus{
+                                background-color: transparent;
+                            }
+                        }
+                        & .theme-btn{
+                            background-color: transparent;
+                            color: $white-color;
+                            & i{
+                                color: $primary-color;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+            &.footer-contact-widget{
+                padding-left: 60px;
+                @include respond(lg){
+                    padding-left: 0;
+                }
+            }
+            &.footer-social-widget{
+                display: flex;
+                justify-content: flex-end;
+                @include respond(lg){
+                    justify-content: flex-start;
+                }
+            }
+        }
+    }
+    & .footer-copyright{
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        padding: 20px 0;
+        & .copyright-text{
+            & p{
+                & span{
+                    color: $white-color;
+                }
+            }
+        }
+        & .copyright-nav{
+            float: right;
+            & ul{
+                & li{
+                    display: inline-block;
+                    &:not(:last-child){
+                        margin-right: 20px;
+                    }
+                    & a{
+                        color: rgba(255, 255, 255, 0.65);
+                        &:hover{
+                            text-decoration: underline;
+                            color: $white-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Zeno Footer Website Agency */ 
+
+.xeno-footer-wa{
+    position: relative;
+    z-index: 1;
+    background-color: $gray-dark;
+    & .shape{
+        position: absolute;
+        &.shape-one{
+            left: -80px;
+            bottom: 0;
+        }
+        &.shape-two{
+            top: 0;
+            right: 0;
+        }
+    }
+    & .footer-top{
+        padding-top: 100px;
+        & h2{
+            font-size: 85px;
+            line-height: 1;
+            letter-spacing: -2.55px;
+            max-width: 1130px;
+            text-transform: uppercase;
+            @include respond(xl){
+                font-size: 60px;
+            }
+            @include respond(lg){
+                font-size: 40px;
+            }
+        }
+    }
+    & .footer-widget-area{
+        padding: 90px 0 50px;
+        & .footer-widget{
+            & h4.widget-title{
+                font-size: 16px;
+            }
+            & .footer-content{
+                & p{
+                    line-height: 35px;
+                    letter-spacing: -0.48px;
+                    font-weight: 600;
+                    color: $heading-color;
+                    & a{
+                        &:hover{
+                            color: $primary-color;
+                        }
+                    }
+                }
+                & .social-box{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-right: -15px;
+                    & a{
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(25, 25, 25, 0.10);
+                        color: $heading-color;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 13px;
+                        &:hover{
+                            background-color: $primary-color;
+                            border-color: transparent;
+                        }
+                        &:not(:last-child){
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+            &.footer-social-widget{
+                display: flex;
+                justify-content: flex-end;
+                @include respond(lg){
+                    justify-content: flex-start;
+                }
+            }
+        }
+    }
+    & .footer-copyright{
+        border-top: 1px solid rgba(25, 25, 25, 0.10);
+        padding: 20px 0;
+        & .copyright-text{
+            & p{
+                & span{
+                    color: $heading-color;
+                }
+            }
+        }
+        & .copyright-nav{
+            float: right;
+            & ul{
+                & li{
+                    display: inline-block;
+                    &:not(:last-child){
+                        margin-right: 20px;
+                    }
+                    & a{
+                        &:hover{
+                            color: $heading-color;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Zeno Footer Marketing */ 
+
+.xeno-footer-ma{
+    background-color: $primary-black-color;
+    & .footer-widget-area{
+        padding: 90px 0 50px;
+        & .footer-widget{
+            & h4.widget-title{
+                font-size: 20px;
+                color: $white-color;
+                margin-bottom: 25px;
+            }
+            & .footer-content{
+                & p{
+                    line-height: 26px;
+                    color: rgba(255, 255, 255, 0.65);
+                }
+                & .social-box{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-right: -15px;
+                    & a{
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(25, 25, 25, 0.10);
+                        color: $white-color;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 13px;
+                        background-color: #243930;
+                        &:hover{
+                            background-color: $primary-color;
+                            border-color: transparent;
+                            color: $heading-color;
+                        }
+                        &:not(:last-child){
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+            &.footer-about-widget{
+                & .footer-content{
+                    & .footer-logo{
+                        margin-bottom: 30px;
+                    }
+                    & p{
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+            &.footer-nav-widget{
+                padding-left: 60px;
+                @include respond(xl){
+                    padding-left: 0;
+                }
+                & .widget-nav{
+                    & li{
+                        &:not(:last-child){
+                            margin-bottom: 15px;
+                        }
+                        & a{
+                            color: rgba(255, 255, 255, 0.65);
+                            &:hover{
+                                color: $white-color;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            &.footer-newsletter-widget{
+                padding-left: 60px;
+                @include respond(xl){
+                    padding-left: 0;
+                }
+                & h3{
+                    letter-spacing: -0.8px;
+                    font-size: 40px;
+                    color: $white-color;
+                    margin-bottom: 40px;
+                    letter-spacing: -0.02em;
+                    line-height: 50px;
+                    @include respond(xxxl){
+                        font-size: 27px;
+                        line-height: 40px;
+                    }
+                }
+                & .form_control{
+                    width: 100%;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    color: rgba(255, 255, 255, 0.65);
+                    background-color: #1D332A;
+                    padding: 12px 30px;
+                    &::placeholder{
+                        color: rgba(255, 255, 255, 0.65);
+                    }
+                }
+                & .submit-btn{
+                    border: none;
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 10px;
+                    background-color: $primary-color;
+                    color: $primary-black-color;
+                }
+            }
+        }
+    }
+    & .footer-copyright{
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        & .copyright-text{
+            @include respond(md){
+                text-align: center;
+            }
+            & p{
+                color: $white-color;
+            }
+        }
+        & .copyright-nav{
+            float: right;
+            @include respond(md){
+                float: none;
+                margin-top: 20px;
+                text-align: center;
+            }
+            & ul{
+                & li{
+                    & a{
+                        color: rgba(255, 255, 255, 0.65);
+                        &:hover{
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Zeno Footer AI */ 
+
+.xeno-footer-ai{
+    position: relative;
+    z-index: 1;
+    & .footer-shape{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        @include respond(xl){
+            display: none;
+        }
+    }
+    & .footer-widget-area{
+        padding: 90px 0 50px;
+        & .footer-widget{
+            & h4.widget-title{
+                font-size: 20px;
+                color: $white-color;
+                margin-bottom: 25px;
+            }
+            & .footer-content{
+                & p{
+                    line-height: 26px;
+                    color: rgba(255, 255, 255, 0.65);
+                }
+                & .social-box{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-right: -15px;
+                    & a{
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        border: 1px solid rgba(25, 25, 25, 0.10);
+                        color: $white-color;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 13px;
+                        background-color: rgba(255, 255, 255, 0.05);
+                        &:hover{
+                            background-color: $primary-color;
+                            border-color: transparent;
+                            color: $white-color;
+                        }
+                        &:not(:last-child){
+                            margin-right: 15px;
+                        }
+                    }
+                }
+            }
+            &.footer-about-widget{
+                & .footer-content{
+                    & .footer-logo{
+                        margin-bottom: 30px;
+                    }
+                    & p{
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+            &.footer-nav-widget{
+                padding-left: 60px;
+                @include respond(xl){
+                    padding-left: 0;
+                }
+                & .widget-nav{
+                    & li{
+                        &:not(:last-child){
+                            margin-bottom: 15px;
+                        }
+                        & a{
+                            color: rgba(255, 255, 255, 0.65);
+                            &:hover{
+                                color: $white-color;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            &.footer-newsletter-widget{
+                padding-left: 60px;
+                @include respond(xl){
+                    padding-left: 0;
+                }
+                & h3{
+                    letter-spacing: -0.8px;
+                    font-size: 40px;
+                    color: $white-color;
+                    margin-bottom: 40px;
+                    line-height: 1;
+                    @include respond(xl){
+                        font-size: 30px;
+                        line-height: 1.2;
+                    }
+                }
+                & .form_control{
+                    width: 100%;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    color: rgba(255, 255, 255, 0.65);
+                    background-color: rgba(255, 255, 255, 0.05);
+                    padding: 12px 30px;
+                    &::placeholder{
+                        color: rgba(255, 255, 255, 0.65);
+                    }
+                }
+                & .submit-btn{
+                    border: none;
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    background: linear-gradient(270deg, #CE6FD5 0%, #8A87D8 100%);
+                    color: $white-color;
+                }
+            }
+        }
+    }
+    & .footer-copyright{
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        & .copyright-text{
+            & p{
+                color: $white-color;
+            }
+        }
+        & .copyright-nav{
+            float: right;
+            & ul{
+                & li{
+                    & a{
+                        color: rgba(255, 255, 255, 0.65);
+                        &:hover{
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
