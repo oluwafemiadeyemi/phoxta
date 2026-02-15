@@ -255,11 +255,16 @@ export default function LandingPage() {
   const ctaView = useInView()
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white overflow-x-hidden relative" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
-      {/* Full-page constellation stars background */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{ opacity: 0.3 }}>
-        <ConstellationCanvas className="absolute inset-0" />
-      </div>
+    <>
+    {/* Global dark background so constellation shows through transparent wrapper */}
+    <style>{`html,body{background:#09090b!important}`}</style>
+
+    {/* Full-page constellation stars background — outside overflow wrapper for true fixed on mobile */}
+    <div className="fixed inset-0 pointer-events-none z-0" style={{ opacity: 0.3 }}>
+      <ConstellationCanvas className="absolute inset-0" />
+    </div>
+
+    <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
 
       {/* ═══════════════════ NAVBAR ═══════════════════ */}
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#09090b]/80 backdrop-blur-xl border-b border-white/[0.06]' : 'bg-transparent'}`}>
@@ -267,12 +272,6 @@ export default function LandingPage() {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <Image src="/Phoxta light@3x.png" alt="Phoxta" width={120} height={36} className="h-9 w-auto" />
-          </div>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm text-white/50 hover:text-white transition-colors">Features</a>
-            <a href="#features" className="text-sm text-white/50 hover:text-white transition-colors">Features</a>
           </div>
 
           {/* CTA */}
@@ -299,9 +298,7 @@ export default function LandingPage() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#09090b]/95 backdrop-blur-xl border-t border-white/[0.06] px-6 pb-6 pt-4 space-y-4 animate-in slide-in-from-top-2 duration-200">
-            <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-white/60 hover:text-white transition-colors">Features</a>
-            <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block text-sm text-white/60 hover:text-white transition-colors">Features</a>
-            <div className="pt-3 border-t border-white/[0.06] flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <button onClick={() => router.push('/auth')} className="text-sm text-white/60 hover:text-white transition-colors py-2 cursor-pointer">Sign In</button>
               <button onClick={() => router.push('/auth')} className="text-sm font-semibold bg-white text-[#09090b] px-5 py-2.5 rounded-full hover:bg-white/90 transition-all cursor-pointer">Get Started</button>
             </div>
@@ -373,7 +370,7 @@ export default function LandingPage() {
             {/* Section header */}
             <div className="relative text-center mb-14">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#09090b]">
-                Every tool you need to<br /><span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">validate &amp; launch</span><br />your idea fast
+                All-in-one platform to<br /><span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">validate &amp; launch</span> fast
               </h2>
               <p className="mt-4 text-[#09090b]/50 max-w-xl mx-auto">We unleash your business potential by maximising innovation through AI-powered tools and creative solutions.</p>
             </div>
@@ -468,8 +465,6 @@ export default function LandingPage() {
 
             {/* Links */}
             <div className="flex items-center gap-6 text-xs text-white/25">
-              <a href="#features" className="hover:text-white/50 transition-colors">Features</a>
-              <a href="#features" className="hover:text-white/50 transition-colors">Features</a>
               <button onClick={() => router.push('/auth')} className="hover:text-white/50 transition-colors cursor-pointer">Sign In</button>
             </div>
 
@@ -481,5 +476,6 @@ export default function LandingPage() {
         </div>
       </footer>
     </div>
+    </>
   )
 }
