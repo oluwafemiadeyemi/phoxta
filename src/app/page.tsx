@@ -10,7 +10,7 @@ import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 function ConstellationCanvas({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -9999, y: -9999 })
-  const starsRef = useRef<{ x: number; y: number; vx: number; vy: number; r: number; o: number }[]>([])
+  const starsRef = useRef<{ x: number; y: number; vx: number; vy: number; r: number; o: number; conn: boolean }[]>([])
   const rafRef = useRef<number>(0)
 
   const init = useCallback(() => {
@@ -28,6 +28,7 @@ function ConstellationCanvas({ className }: { className?: string }) {
         vy: (Math.random() - 0.5) * 0.3,
         r: Math.random() * 1.5 + 0.5,
         o: Math.random() * 0.5 + 0.3,
+        conn: Math.random() < 0.2,
       })
     }
     starsRef.current = stars
@@ -63,9 +64,11 @@ function ConstellationCanvas({ className }: { className?: string }) {
         if (s.y > h) s.y = 0
       }
 
-      // Draw lines between nearby stars
+      // Draw lines between nearby connectable stars
       for (let i = 0; i < stars.length; i++) {
+        if (!stars[i].conn) continue
         for (let j = i + 1; j < stars.length; j++) {
+          if (!stars[j].conn) continue
           const dx = stars[i].x - stars[j].x
           const dy = stars[i].y - stars[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
@@ -308,10 +311,6 @@ export default function LandingPage() {
 
       {/* ═══════════════════ HERO SECTION ═══════════════════ */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        {/* Gradient orbs layered on top of stars */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.3) 0%, rgba(168,85,247,0.15) 40%, transparent 70%)' }} />
-        <div className="absolute top-40 -right-40 w-[500px] h-[500px] opacity-12 pointer-events-none rounded-full" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 60%)' }} />
-
         {/* Beaming colorful glow — centered on text area */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[900px] h-[700px] pointer-events-none" style={{ filter: 'blur(100px)' }}>
           <div className="absolute inset-0 m-auto w-[220px] h-[220px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
@@ -332,7 +331,7 @@ export default function LandingPage() {
             />
             <br />
             <style>{`@keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } } @keyframes textBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }`}</style>
-            <span className="font-normal text-white">in </span><span className="inline-block bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite,textBounce_3s_ease-in-out_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>7 Clicks.</span>
+            <span className="font-normal text-white">in </span><span className="inline-block bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite,textBounce_3s_ease-in-out_infinite]" style={{ backgroundSize: '200% 100%', backgroundImage: 'linear-gradient(90deg, #818cf8 0%, #a78bfa 20%, #f472b6 40%, #ffffff 50%, #f472b6 60%, #a78bfa 80%, #818cf8 100%)' }}>7 Clicks</span>
           </h1>
 
           <p className="mt-5 text-base md:text-lg text-white/50 max-w-xl mx-auto">
