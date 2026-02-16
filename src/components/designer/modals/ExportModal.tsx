@@ -171,8 +171,8 @@ export default function ExportModal() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={options.transparent}
                 onChange={e => setOptions({ ...options, transparent: e.target.checked })}
-                className="accent-zinc-400 rounded" />
-              <span className="text-xs text-zinc-400">Transparent background</span>
+                className="accent-gray-500 rounded" />
+              <span className="text-xs text-gray-500">Transparent background</span>
             </label>
           )}
 
@@ -188,8 +188,8 @@ export default function ExportModal() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={options.cropMarks}
                   onChange={e => setOptions({ ...options, cropMarks: e.target.checked })}
-                  className="accent-zinc-400 rounded" />
-                <span className="text-xs text-zinc-400">Include crop marks</span>
+                  className="accent-gray-500 rounded" />
+                <span className="text-xs text-gray-500">Include crop marks</span>
               </label>
             </>
           )}
@@ -212,7 +212,7 @@ export default function ExportModal() {
           <Separator />
 
           {/* Size info */}
-          <div className="bg-zinc-800/50 rounded-lg p-3">
+          <div className="bg-gray-50 rounded-lg p-3">
             <p className="text-[11px] text-muted-foreground">
               Output: {project ? Math.round(project.width * (options.dpi / 72)) : '–'} × {project ? Math.round(project.height * (options.dpi / 72)) : '–'} px
               &nbsp;&bull;&nbsp;{options.dpi} DPI

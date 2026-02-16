@@ -161,8 +161,8 @@ export default function PsdImportPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-1">Import PSD</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-1">Import PSD</h3>
         <p className="text-[11px] text-muted-foreground">
           Import Adobe Photoshop files with layers preserved
         </p>
@@ -174,11 +174,11 @@ export default function PsdImportPanel() {
           <div
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            className="border-2 border-dashed border-white/[0.08] rounded-lg p-6 text-center hover:border-white/[0.12] transition-colors cursor-pointer"
+            className="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center hover:border-gray-300 transition-colors cursor-pointer"
             onClick={() => fileRef.current?.click()}
           >
             <FileImage className="h-10 w-10 text-muted-foreground/30 mx-auto mb-3" />
-            <p className="text-sm font-medium text-zinc-300 mb-1">Drop a .psd file here</p>
+            <p className="text-sm font-medium text-gray-700 mb-1">Drop a .psd file here</p>
             <p className="text-[11px] text-muted-foreground mb-3">or click to browse</p>
             <Button size="sm" variant="outline" className="text-xs">
               <Upload className="mr-1.5 h-3.5 w-3.5" />
@@ -200,10 +200,10 @@ export default function PsdImportPanel() {
         {step === 'preview' && preview && (
           <div className="space-y-3">
             {/* File info */}
-            <div className="bg-zinc-800/50 rounded-lg p-3">
+            <div className="bg-gray-50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-2">
                 <FileImage className="h-4 w-4 text-purple-500" />
-                <span className="text-xs font-medium text-zinc-200 truncate flex-1">{fileName}</span>
+                <span className="text-xs font-medium text-gray-800 truncate flex-1">{fileName}</span>
               </div>
               <div className="flex gap-3 text-[11px] text-muted-foreground">
                 <span>{preview.width} × {preview.height}px</span>
@@ -214,15 +214,15 @@ export default function PsdImportPanel() {
             {/* Layer list */}
             <div>
               <div className="flex items-center gap-1.5 mb-2">
-                <Layers className="h-3.5 w-3.5 text-zinc-500" />
-                <span className="text-xs font-medium text-zinc-300">Layers</span>
+                <Layers className="h-3.5 w-3.5 text-gray-400" />
+                <span className="text-xs font-medium text-gray-700">Layers</span>
               </div>
               <div className="space-y-0.5 max-h-[300px] overflow-auto">
                 {preview.layers.map((layer, i) => (
                   <div
                     key={i}
                     className={`flex items-center gap-2 px-2 py-1.5 rounded text-xs ${
-                      layer.visible ? 'text-zinc-300' : 'text-zinc-500'
+                      layer.visible ? 'text-gray-700' : 'text-gray-400'
                     }`}
                   >
                     {layerIcon(layer.type)}
@@ -258,7 +258,7 @@ export default function PsdImportPanel() {
         {step === 'importing' && (
           <div className="text-center py-8">
             <Loader2 className="h-8 w-8 text-primary animate-spin mx-auto mb-3" />
-            <p className="text-xs text-zinc-300 font-medium">Importing layers...</p>
+            <p className="text-xs text-gray-700 font-medium">Importing layers...</p>
             <p className="text-[11px] text-muted-foreground mt-1">
               Converting PSD layers to canvas objects
             </p>

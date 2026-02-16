@@ -29,7 +29,7 @@ export default function LeftPanel() {
 
   // Hidden on mobile — mobile uses the popup from LeftRail instead
   return (
-    <div className="hidden md:flex w-72 bg-[#18181b] border-r border-white/[0.06] flex-col overflow-hidden shrink-0 z-10">
+    <div className="hidden md:flex w-72 bg-white border-r border-gray-200 flex-col overflow-hidden shrink-0 z-10">
       {panel}
     </div>
   )

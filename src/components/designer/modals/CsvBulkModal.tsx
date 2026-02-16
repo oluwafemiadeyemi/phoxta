@@ -152,7 +152,7 @@ export default function CsvBulkModal() {
               <div className="space-y-2 mt-2">
                 {textLayers.map(layer => (
                   <div key={layer.id} className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-400 truncate w-32" title={layer.text}>
+                    <span className="text-xs text-gray-500 truncate w-32" title={layer.text}>
                       &ldquo;{layer.text}&rdquo;
                     </span>
                     <ArrowRight className="h-3 w-3 text-muted-foreground shrink-0" />
@@ -177,10 +177,10 @@ export default function CsvBulkModal() {
 
           {/* Preview */}
           {csvData.length > 0 && (
-            <div className="bg-zinc-800/50 rounded-lg p-3">
+            <div className="bg-gray-50 rounded-lg p-3">
               <Label className="text-[11px] text-muted-foreground">Preview (first 3 rows)</Label>
               <div className="overflow-x-auto mt-1">
-                <table className="text-[10px] text-zinc-400 w-full">
+                <table className="text-[10px] text-gray-500 w-full">
                   <thead>
                     <tr>
                       {headers.map(h => <th key={h} className="text-left px-1 py-0.5 font-medium">{h}</th>)}

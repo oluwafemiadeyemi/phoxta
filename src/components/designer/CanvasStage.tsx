@@ -423,7 +423,7 @@ export default function CanvasStage({
       fabricCanvas = new fabric.Canvas(canvasElRef.current, {
         width: containerW,
         height: containerH,
-        backgroundColor: '#27272a', // dark pasteboard
+        backgroundColor: '#e4e4e7', // light pasteboard
         preserveObjectStacking: true,
         selection: true,
         stopContextMenu: true,
@@ -749,7 +749,7 @@ export default function CanvasStage({
               if (!(obj as any).id) (obj as any).id = uuid()
             }
             // Restore pasteboard bg (loadFromJSON may have cleared it)
-            fabricCanvas.backgroundColor = '#27272a'
+            fabricCanvas.backgroundColor = '#e4e4e7'
 
             fabricCanvas.renderAll()
             refreshLayers()
@@ -1298,12 +1298,12 @@ export default function CanvasStage({
     <div
       ref={wrapperRef}
       className="w-full h-full relative overflow-hidden"
-      style={{ background: '#27272a' }}
+      style={{ background: '#e4e4e7' }}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
       {/* Zoom toolbar */}
-      <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 z-10 flex items-center gap-0.5 md:gap-1 bg-zinc-900/90 backdrop-blur rounded-lg shadow-sm border border-white/[0.06] px-1 py-1">
+      <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 z-10 flex items-center gap-0.5 md:gap-1 bg-white/90 backdrop-blur rounded-lg shadow-sm border border-gray-200 px-1 py-1">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="ghost" size="icon-xs" onClick={handleZoomOut}>

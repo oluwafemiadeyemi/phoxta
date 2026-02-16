@@ -54,7 +54,7 @@ export default function LeftToolbar() {
   // so this component only renders the toolbar UI.
 
   return (
-    <div className="w-10 bg-[#18181b] border-r border-white/[0.06] flex flex-col items-center py-2 gap-0.5 shrink-0 z-20 shadow-lg md:shadow-none rounded-r-lg md:rounded-none h-full">
+    <div className="w-10 bg-white border-r border-gray-200 flex flex-col items-center py-2 gap-0.5 shrink-0 z-20 shadow-lg md:shadow-none rounded-r-lg md:rounded-none h-full">
       {TOOLS.map((t) => {
         const isActive = activeTool === t.id
         return (
@@ -64,7 +64,7 @@ export default function LeftToolbar() {
                 variant={isActive ? 'secondary' : 'ghost'}
                 size="icon"
                 onClick={() => setActiveTool(t.id)}
-                className={`w-8 h-8 ${isActive ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500 hover:text-zinc-300'}`}
+                className={`w-8 h-8 ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-500 hover:text-gray-700'}`}
               >
                 {t.icon}
               </Button>

@@ -132,7 +132,7 @@ export default function ShareModal({ projectId }: ShareModalProps) {
               {collabs.map(c => (
                 <div key={c.user_id} className="flex items-center justify-between px-3 py-2 rounded-lg bg-muted">
                   <div>
-                    <p className="text-xs font-medium text-zinc-300">{c.email || c.user_id}</p>
+                    <p className="text-xs font-medium text-gray-700">{c.email || c.user_id}</p>
                     <Badge variant="secondary" className="text-[10px] mt-0.5">{c.role}</Badge>
                   </div>
                   <Button variant="ghost" size="icon-xs" className="text-destructive hover:text-destructive" onClick={() => remove(c.user_id)}>

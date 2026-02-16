@@ -153,7 +153,7 @@ export default function TopBar({ projectId }: TopBarProps) {
         : '—'
 
   return (
-    <div className="h-12 bg-[#18181b] border-b border-white/[0.06] flex items-center px-2 md:px-3 gap-1 md:gap-2 shrink-0 z-30">
+    <div className="h-12 bg-white border-b border-gray-200 flex items-center px-2 md:px-3 gap-1 md:gap-2 shrink-0 z-30">
       {/* Back */}
       <Tooltip>
         <TooltipTrigger asChild>
@@ -170,7 +170,7 @@ export default function TopBar({ projectId }: TopBarProps) {
       {!isMobile && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs font-medium text-zinc-400 hover:text-zinc-200">
+            <Button variant="ghost" size="sm" className="text-xs font-medium text-gray-500 hover:text-gray-800">
               File
             </Button>
           </DropdownMenuTrigger>
@@ -205,11 +205,11 @@ export default function TopBar({ projectId }: TopBarProps) {
         key={project?.id}
         onBlur={(e) => handleNameBlur(e.target.value)}
         onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur() }}
-        className={`text-sm font-medium text-zinc-200 bg-transparent border-transparent hover:border-white/[0.08] focus:border-white/[0.15] h-8 ${isMobile ? 'max-w-[100px]' : 'max-w-[200px]'}`}
+        className={`text-sm font-medium text-gray-800 bg-transparent border-transparent hover:border-gray-200 focus:border-gray-300 h-8 ${isMobile ? 'max-w-[100px]' : 'max-w-[200px]'}`}
       />
 
       {/* Save status */}
-      <Badge variant={isDirty ? 'secondary' : 'outline'} className={`text-[10px] font-normal shrink-0 ${isDirty ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-500'}`}>
+      <Badge variant={isDirty ? 'secondary' : 'outline'} className={`text-[10px] font-normal shrink-0 ${isDirty ? 'text-amber-600 bg-amber-50' : 'text-gray-500'}`}>
         {isMobile ? (isDirty ? '●' : '✓') : savedLabel}
       </Badge>
 

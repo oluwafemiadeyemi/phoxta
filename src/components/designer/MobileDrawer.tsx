@@ -69,7 +69,7 @@ export default function MobileDrawer({
         className={`
           fixed top-0 ${side === 'left' ? 'left-0' : 'right-0'} bottom-0
           ${className}
-          bg-[#18181b] z-50 md:hidden
+          bg-white z-50 md:hidden
           flex flex-col
           transform transition-transform duration-200 ease-out
           ${translateClass}
@@ -78,8 +78,8 @@ export default function MobileDrawer({
       >
         {/* Header */}
         {title && (
-          <div className="h-12 flex items-center justify-between px-3 border-b border-white/[0.06] shrink-0">
-            <h2 className="text-sm font-semibold text-zinc-200">{title}</h2>
+          <div className="h-12 flex items-center justify-between px-3 border-b border-gray-200 shrink-0">
+            <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
             <Button variant="ghost" size="icon-xs" onClick={onClose}>
               <X className="h-4 w-4" />
             </Button>

@@ -55,7 +55,7 @@ export default function PagesStrip({ projectId }: PagesStripProps) {
   }
 
   return (
-    <div className="h-16 md:h-24 bg-[#18181b] border-t border-white/[0.06] shrink-0">
+    <div className="h-16 md:h-24 bg-white border-t border-gray-200 shrink-0">
       <ScrollArea className="h-full">
         <div className="flex items-center px-2 md:px-4 gap-2 md:gap-3 h-full min-h-[64px] md:min-h-[96px]">
           {pages.map((page, idx) => {
@@ -81,7 +81,7 @@ export default function PagesStrip({ projectId }: PagesStripProps) {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button variant="outline" size="icon-xs"
-                        className="h-5 w-5 rounded-full bg-zinc-800 shadow-sm border-white/[0.06]"
+                        className="h-5 w-5 rounded-full bg-gray-100 shadow-sm border-gray-200"
                         onClick={() => addPage(page.id)}>
                         <Copy className="h-2.5 w-2.5" />
                       </Button>
@@ -92,7 +92,7 @@ export default function PagesStrip({ projectId }: PagesStripProps) {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button variant="outline" size="icon-xs"
-                          className="h-5 w-5 rounded-full bg-zinc-800 shadow-sm border-white/[0.06] text-destructive hover:text-destructive"
+                          className="h-5 w-5 rounded-full bg-gray-100 shadow-sm border-gray-200 text-destructive hover:text-destructive"
                           onClick={() => deletePage(page.id)}>
                           <X className="h-2.5 w-2.5" />
                         </Button>

@@ -76,7 +76,7 @@ export default function LeftRail() {
 
   return (
     <>
-    <div className="w-14 bg-[#18181b] border-r border-white/[0.06] flex flex-col items-center py-2 gap-1 shrink-0 z-20">
+    <div className="w-14 bg-white border-r border-gray-200 flex flex-col items-center py-2 gap-1 shrink-0 z-20">
       {TABS.map((t) => {
         const isActive = leftRailTab === t.id && leftPanelOpen
         return (
@@ -86,7 +86,7 @@ export default function LeftRail() {
                 variant={isActive ? 'secondary' : 'ghost'}
                 size="icon"
                 onClick={(e) => handleClick(t.id, e)}
-                className={`w-11 h-11 flex flex-col gap-0.5 ${isActive ? 'text-zinc-100' : 'text-zinc-500'}`}
+                className={`w-11 h-11 flex flex-col gap-0.5 ${isActive ? 'text-gray-900' : 'text-gray-500'}`}
               >
                 {t.icon}
                 <span className="text-[9px] leading-none">{t.label}</span>
@@ -107,7 +107,7 @@ export default function LeftRail() {
             variant={layerPanelOpen ? 'secondary' : 'ghost'}
             size="icon"
             onClick={() => setLayerPanelOpen(!layerPanelOpen)}
-            className={`w-11 h-11 flex flex-col gap-0.5 mb-2 ${layerPanelOpen ? 'text-zinc-100' : 'text-zinc-500'}`}
+            className={`w-11 h-11 flex flex-col gap-0.5 mb-2 ${layerPanelOpen ? 'text-gray-900' : 'text-gray-500'}`}
           >
             <Layers className="h-5 w-5" />
             <span className="text-[9px] leading-none">Layers</span>

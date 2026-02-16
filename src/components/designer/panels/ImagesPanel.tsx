@@ -204,8 +204,8 @@ export default function ImagesPanel() {
   /* ── Render ──────────────────────────────────────────── */
   return (
     <div className="flex flex-col h-full relative">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-2">Images</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-2">Images</h3>
       </div>
 
       <Tabs defaultValue="uploads" className="flex flex-col flex-1 min-h-0 overflow-hidden">
@@ -247,7 +247,7 @@ export default function ImagesPanel() {
                 {assets.map((a) => (
                   <div
                     key={a.id}
-                    className="relative rounded-lg border border-white/[0.06] overflow-hidden hover:shadow-sm transition group cursor-grab active:cursor-grabbing"
+                    className="relative rounded-lg border border-gray-200 overflow-hidden hover:shadow-sm transition group cursor-grab active:cursor-grabbing"
                     draggable
                     onDragStart={(e) => {
                       e.dataTransfer.setData('application/x-designer-image', JSON.stringify({
@@ -336,7 +336,7 @@ export default function ImagesPanel() {
                         }))
                         e.dataTransfer.effectAllowed = 'copy'
                       }}
-                      className="rounded-lg border border-white/[0.06] overflow-hidden hover:shadow-sm transition group text-left cursor-grab active:cursor-grabbing"
+                      className="rounded-lg border border-gray-200 overflow-hidden hover:shadow-sm transition group text-left cursor-grab active:cursor-grabbing"
                     >
                       <div className="aspect-[4/3] bg-muted relative">
                         <img

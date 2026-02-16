@@ -250,10 +250,10 @@ export default function DesignerEditorPage({ params }: PageProps) {
 
   if (!projectId || loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-[#09090b]">
+      <div className="h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-zinc-500 mx-auto mb-3" />
-          <p className="text-xs text-zinc-500">Loading editor…</p>
+          <Loader2 className="h-8 w-8 animate-spin text-gray-500 mx-auto mb-3" />
+          <p className="text-xs text-gray-500">Loading editor…</p>
         </div>
       </div>
     )
@@ -261,7 +261,7 @@ export default function DesignerEditorPage({ params }: PageProps) {
 
   if (error) {
     return (
-      <div className="h-screen flex items-center justify-center bg-[#09090b]">
+      <div className="h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <p className="text-sm text-red-400 mb-2">{error}</p>
           <Button variant="link" size="sm" asChild>
@@ -276,7 +276,7 @@ export default function DesignerEditorPage({ params }: PageProps) {
   const initialFabricUrl = (currentPage as any)?.fabricUrl ?? undefined
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#111113] overflow-hidden">
+    <div className="h-[100dvh] flex flex-col bg-gray-100 overflow-hidden">
       <TopBar projectId={projectId} />
 
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
@@ -286,7 +286,7 @@ export default function DesignerEditorPage({ params }: PageProps) {
         </div>
 
         {/* Desktop: right panels (right column) */}
-        <div className="hidden md:flex md:order-last shrink-0 overflow-y-auto flex-col border-l border-white/[0.06]">
+        <div className="hidden md:flex md:order-last shrink-0 overflow-y-auto flex-col border-l border-gray-200">
           <LayersTree />
           <CharacterPanel />
           <AdjustmentsPanel />

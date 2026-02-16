@@ -58,7 +58,7 @@ export default function MobilePopupPanel({
       {/* Panel */}
       <div
         ref={panelRef}
-        className={`absolute bg-[#18181b] border border-white/[0.08] rounded-xl flex flex-col overflow-hidden shadow-2xl ${
+        className={`absolute bg-white border border-gray-200 rounded-xl flex flex-col overflow-hidden shadow-2xl ${
           placement === 'beside-left'
             ? 'left-[60px] w-[60vw] max-w-[240px] max-h-[45vh] animate-in slide-in-from-left-4 duration-200'
             : placement === 'below-top'
@@ -74,16 +74,16 @@ export default function MobilePopupPanel({
         }
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.06]">
+        <div className="flex items-center justify-between px-3 py-1.5 border-b border-gray-200">
           <div className="flex items-center gap-1.5">
-            {icon && <span className="text-zinc-400">{icon}</span>}
-            <h3 className="text-xs font-semibold text-zinc-200">{title}</h3>
+            {icon && <span className="text-gray-500">{icon}</span>}
+            <h3 className="text-xs font-semibold text-gray-800">{title}</h3>
           </div>
           <Button
             variant="ghost"
             size="icon-xs"
             onClick={onClose}
-            className="text-zinc-500 hover:text-zinc-200 h-5 w-5"
+            className="text-gray-400 hover:text-gray-700 h-5 w-5"
           >
             <X className="h-3 w-3" />
           </Button>

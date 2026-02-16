@@ -53,7 +53,7 @@ export default function MobileToolbar() {
   }
 
   return (
-    <div className="h-14 bg-[#18181b] border-t border-white/[0.06] flex items-center shrink-0 z-30 md:hidden">
+    <div className="h-14 bg-white border-t border-gray-200 flex items-center shrink-0 z-30 md:hidden">
       <ScrollArea className="w-full h-full">
         <div className="flex items-center gap-1 px-2 h-14 min-w-max">
           {/* Quick access: Templates & Images */}
@@ -61,7 +61,7 @@ export default function MobileToolbar() {
             variant="ghost"
             size="icon"
             onClick={() => openLeftPanel('templates')}
-            className="w-10 h-10 flex flex-col gap-0.5 text-zinc-500 shrink-0"
+            className="w-10 h-10 flex flex-col gap-0.5 text-gray-500 shrink-0"
           >
             <LayoutTemplate className="h-4 w-4" />
             <span className="text-[8px] leading-none">Tmpl</span>
@@ -70,14 +70,14 @@ export default function MobileToolbar() {
             variant="ghost"
             size="icon"
             onClick={() => openLeftPanel('images')}
-            className="w-10 h-10 flex flex-col gap-0.5 text-zinc-500 shrink-0"
+            className="w-10 h-10 flex flex-col gap-0.5 text-gray-500 shrink-0"
           >
             <Image className="h-4 w-4" />
             <span className="text-[8px] leading-none">Images</span>
           </Button>
 
           {/* Divider */}
-          <div className="w-px h-6 bg-white/[0.08] mx-1 shrink-0" />
+          <div className="w-px h-6 bg-gray-200 mx-1 shrink-0" />
 
           {/* Drawing tools */}
           {TOOLS.map((t) => {
@@ -88,7 +88,7 @@ export default function MobileToolbar() {
                 variant={isActive ? 'secondary' : 'ghost'}
                 size="icon"
                 onClick={() => setActiveTool(t.id)}
-                className={`w-10 h-10 flex flex-col gap-0.5 shrink-0 ${isActive ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500'}`}
+                className={`w-10 h-10 flex flex-col gap-0.5 shrink-0 ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-500'}`}
               >
                 {t.icon}
                 <span className="text-[8px] leading-none">{t.label}</span>
@@ -97,14 +97,14 @@ export default function MobileToolbar() {
           })}
 
           {/* Divider */}
-          <div className="w-px h-6 bg-white/[0.08] mx-1 shrink-0" />
+          <div className="w-px h-6 bg-gray-200 mx-1 shrink-0" />
 
           {/* Layers/Properties toggle */}
           <Button
             variant={mobileRightDrawerOpen ? 'secondary' : 'ghost'}
             size="icon"
             onClick={() => setMobileRightDrawerOpen(!mobileRightDrawerOpen)}
-            className="w-10 h-10 flex flex-col gap-0.5 text-zinc-500 shrink-0"
+            className="w-10 h-10 flex flex-col gap-0.5 text-gray-500 shrink-0"
           >
             <Layers className="h-4 w-4" />
             <span className="text-[8px] leading-none">Props</span>

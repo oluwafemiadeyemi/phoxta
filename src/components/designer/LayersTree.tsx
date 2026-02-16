@@ -162,15 +162,15 @@ export default function LayersTree() {
   if (!layerPanelOpen) return null
 
   return (
-    <div className="w-full md:w-56 bg-[#18181b] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-white flex flex-col overflow-hidden shrink-0">
       <button
         type="button"
         onClick={() => setCollapsed(c => !c)}
-        className="p-3 border-b border-white/[0.04] flex items-center justify-between w-full hover:bg-white/[0.04] transition-colors cursor-pointer"
+        className="p-3 border-b border-gray-200 flex items-center justify-between w-full hover:bg-gray-100 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-1.5">
-          <Layers className="h-3.5 w-3.5 text-zinc-500" />
-          <h3 className="text-xs font-semibold text-zinc-200">Layers</h3>
+          <Layers className="h-3.5 w-3.5 text-gray-400" />
+          <h3 className="text-xs font-semibold text-gray-800">Layers</h3>
         </div>
         <div className="flex items-center gap-1.5">
           <span className="text-[10px] text-muted-foreground">{layers.length}</span>
@@ -200,7 +200,7 @@ export default function LayersTree() {
                   onClick={() => selectObject(layer.id)}
                   className={`
                     flex items-center gap-1 px-1.5 py-1.5 cursor-pointer transition-all text-xs select-none
-                    ${isActive ? 'bg-blue-500/15 text-blue-400' : 'text-zinc-400 hover:bg-white/[0.04]'}
+                    ${isActive ? 'bg-blue-500/15 text-blue-400' : 'text-gray-500 hover:bg-gray-100'}
                     ${isDragging ? 'opacity-40' : ''}
                     ${isDropTarget && dragIdx !== null
                       ? (displayIdx < dragIdx
@@ -210,7 +210,7 @@ export default function LayersTree() {
                   `}
                 >
                   {/* Drag handle */}
-                  <span className="shrink-0 text-zinc-600 hover:text-zinc-400 cursor-grab active:cursor-grabbing">
+                  <span className="shrink-0 text-gray-300 hover:text-gray-500 cursor-grab active:cursor-grabbing">
                     <GripVertical className="h-3.5 w-3.5" />
                   </span>
 

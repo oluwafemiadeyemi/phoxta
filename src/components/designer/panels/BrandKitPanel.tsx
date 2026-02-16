@@ -59,8 +59,8 @@ export default function BrandKitPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-2">Brand Kit</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-2">Brand Kit</h3>
         <div className="flex gap-1">
           <Input
             type="text"
@@ -89,7 +89,7 @@ export default function BrandKitPanel() {
             {kits.map((kit: DesignBrandKit) => (
               <Card key={kit.id}>
                 <CardContent className="p-3">
-                  <p className="text-xs font-medium text-zinc-300 mb-2">{kit.name}</p>
+                  <p className="text-xs font-medium text-gray-700 mb-2">{kit.name}</p>
 
                   {/* Colors */}
                   {kit.colors.length > 0 && (
@@ -100,7 +100,7 @@ export default function BrandKitPanel() {
                           <button
                             key={i}
                             onClick={() => applyColor(c.hex)}
-                            className="w-7 h-7 rounded-md border border-white/[0.06] hover:scale-110 transition-transform"
+                            className="w-7 h-7 rounded-md border border-gray-200 hover:scale-110 transition-transform"
                             style={{ backgroundColor: c.hex }}
                             title={c.label || c.hex}
                           />
@@ -115,7 +115,7 @@ export default function BrandKitPanel() {
                       <Label className="text-[10px] text-muted-foreground">Fonts</Label>
                       <div className="space-y-0.5 mt-0.5">
                         {kit.fonts.map((f: DesignBrandKit['fonts'][number], i: number) => (
-                          <p key={i} className="text-xs text-zinc-400" style={{ fontFamily: f.family }}>
+                          <p key={i} className="text-xs text-gray-500" style={{ fontFamily: f.family }}>
                             {f.family} ({f.source})
                           </p>
                         ))}
@@ -129,7 +129,7 @@ export default function BrandKitPanel() {
                       <Label className="text-[10px] text-muted-foreground">Logos</Label>
                       <div className="flex flex-wrap gap-1 mt-0.5">
                         {kit.logos.map((l: DesignBrandKit['logos'][number], i: number) => (
-                          <div key={i} className="w-10 h-10 rounded border border-white/[0.06] overflow-hidden">
+                          <div key={i} className="w-10 h-10 rounded border border-gray-200 overflow-hidden">
                             <img src={l.url} alt={l.name} className="w-full h-full object-contain" />
                           </div>
                         ))}

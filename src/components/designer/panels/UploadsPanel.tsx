@@ -61,8 +61,8 @@ export default function UploadsPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-2">Uploads</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-2">Uploads</h3>
         <Button className="w-full text-xs" size="sm" onClick={() => fileRef.current?.click()}>
           <Upload className="mr-1.5 h-3.5 w-3.5" />
           Upload files
@@ -92,7 +92,7 @@ export default function UploadsPanel() {
               <button
                 key={a.id}
                 onClick={() => addToCanvas(a)}
-                className="rounded-lg border border-white/[0.06] overflow-hidden hover:shadow-sm transition group"
+                className="rounded-lg border border-gray-200 overflow-hidden hover:shadow-sm transition group"
               >
                 <div className="aspect-square bg-muted">
                   {a.url ? (

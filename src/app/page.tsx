@@ -267,7 +267,7 @@ export default function LandingPage() {
     <div className="min-h-screen text-white overflow-x-hidden relative" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif' }}>
 
       {/* ═══════════════════ NAVBAR ═══════════════════ */}
-      <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#09090b]/80 backdrop-blur-xl border-b border-white/[0.06]' : 'bg-transparent'}`}>
+      <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${scrolled ? 'bg-[#09090b]/80 backdrop-blur-xl border-white/[0.06]' : 'bg-transparent border-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -332,7 +332,7 @@ export default function LandingPage() {
           </h1>
 
           <p className="mt-5 text-base md:text-lg text-white/50 max-w-xl mx-auto">
-            From concept to launch — validate, design, and build your next big thing with AI-powered tools in just a few clicks.
+            From idea to launch — validate, design, and build your next big thing with AI-powered tools in just a few clicks.
           </p>
 
           <div className="mt-10 flex flex-row gap-3 sm:gap-4 justify-center">

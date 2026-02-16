@@ -53,8 +53,8 @@ export default function TemplatesPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-2">Templates</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-2">Templates</h3>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
           <Input
@@ -89,7 +89,7 @@ export default function TemplatesPanel() {
                   )}
                 </div>
                 <CardContent className="px-2 py-1.5">
-                  <p className="text-[11px] font-medium text-zinc-400 truncate group-hover:text-zinc-200">{t.name}</p>
+                  <p className="text-[11px] font-medium text-gray-500 truncate group-hover:text-gray-800">{t.name}</p>
                   <p className="text-[10px] text-muted-foreground">{t.width}×{t.height}</p>
                 </CardContent>
               </Card>

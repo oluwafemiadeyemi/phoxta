@@ -23,8 +23,8 @@ export default function ProjectsPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200">Projects</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800">Projects</h3>
       </div>
 
       <ScrollArea className="flex-1 p-3">
@@ -41,9 +41,9 @@ export default function ProjectsPanel() {
               <Link
                 key={p.id}
                 href={`/app/designer/${p.id}`}
-                className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-white/[0.04] transition-colors group"
+                className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-gray-100 transition-colors group"
               >
-                <div className="w-10 h-10 rounded border border-white/[0.06] bg-zinc-800/50 overflow-hidden shrink-0">
+                <div className="w-10 h-10 rounded border border-gray-200 bg-gray-50 overflow-hidden shrink-0">
                   {p.preview_url ? (
                     <img src={p.preview_url} alt="" className="w-full h-full object-cover" />
                   ) : (
@@ -53,7 +53,7 @@ export default function ProjectsPanel() {
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-medium text-zinc-300 truncate group-hover:text-zinc-100">{p.name}</p>
+                  <p className="text-xs font-medium text-gray-700 truncate group-hover:text-gray-900">{p.name}</p>
                   <p className="text-[10px] text-muted-foreground">{p.width}×{p.height}</p>
                 </div>
               </Link>

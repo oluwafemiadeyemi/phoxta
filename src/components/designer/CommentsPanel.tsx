@@ -65,10 +65,10 @@ export default function CommentsPanel({ projectId, currentPageId }: CommentsPane
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04] flex items-center justify-between">
+      <div className="p-3 border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <MessageSquare className="h-3.5 w-3.5 text-zinc-500" />
-          <h3 className="text-xs font-semibold text-zinc-200">Comments</h3>
+          <MessageSquare className="h-3.5 w-3.5 text-gray-400" />
+          <h3 className="text-xs font-semibold text-gray-800">Comments</h3>
         </div>
         <Badge variant="secondary" className="text-[10px]">{pageComments.length}</Badge>
       </div>
@@ -81,16 +81,16 @@ export default function CommentsPanel({ projectId, currentPageId }: CommentsPane
         ) : (
           <div className="space-y-3">
             {pageComments.map((c: DesignComment) => (
-              <div key={c.id} className="rounded-lg bg-zinc-800/50 p-3">
+              <div key={c.id} className="rounded-lg bg-gray-50 p-3">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-medium text-zinc-400">
+                  <span className="text-[10px] font-medium text-gray-500">
                     {c.author_id.substring(0, 8)}...
                   </span>
                   <span className="text-[9px] text-muted-foreground">
                     {new Date(c.created_at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-300 whitespace-pre-wrap">{c.body}</p>
+                <p className="text-xs text-gray-700 whitespace-pre-wrap">{c.body}</p>
                 {c.resolved_at && (
                   <Badge variant="secondary" className="mt-1 text-[9px] bg-green-500/10 text-green-400">Resolved</Badge>
                 )}
@@ -102,7 +102,7 @@ export default function CommentsPanel({ projectId, currentPageId }: CommentsPane
       </ScrollArea>
 
       {/* New comment */}
-      <div className="p-3 border-t border-white/[0.04]">
+      <div className="p-3 border-t border-gray-200">
         <div className="flex gap-1.5">
           <Input
             type="text"

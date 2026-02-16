@@ -167,17 +167,17 @@ export default function RightPanel() {
   ]
 
   return (
-    <div className="w-full md:w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-white border-t border-gray-200 flex flex-col overflow-hidden shrink-0">
       <button
         type="button"
         onClick={() => setCollapsed(c => !c)}
-        className="p-3 border-b border-white/[0.04] flex items-center justify-between w-full hover:bg-white/[0.04] transition-colors cursor-pointer"
+        className="p-3 border-b border-gray-200 flex items-center justify-between w-full hover:bg-gray-100 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-1.5">
-          <Settings2 className="h-3.5 w-3.5 text-zinc-500" />
-          <h3 className="text-xs font-semibold text-zinc-200">Properties</h3>
+          <Settings2 className="h-3.5 w-3.5 text-gray-400" />
+          <h3 className="text-xs font-semibold text-gray-800">Properties</h3>
         </div>
-        <ChevronDown className={`h-3.5 w-3.5 text-zinc-500 transition-transform ${collapsed ? '-rotate-90' : ''}`} />
+        <ChevronDown className={`h-3.5 w-3.5 text-gray-400 transition-transform ${collapsed ? '-rotate-90' : ''}`} />
       </button>
 
       {!collapsed && (
@@ -187,11 +187,11 @@ export default function RightPanel() {
           <div className="grid grid-cols-2 gap-1.5">
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-5 shrink-0">W</Label>
-              <span className="text-xs text-zinc-300">{pageW}px</span>
+              <span className="text-xs text-gray-700">{pageW}px</span>
             </div>
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-5 shrink-0">H</Label>
-              <span className="text-xs text-zinc-300">{pageH}px</span>
+              <span className="text-xs text-gray-700">{pageH}px</span>
             </div>
           </div>
         </Section>
@@ -212,11 +212,11 @@ export default function RightPanel() {
           <div className="space-y-1.5">
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-12 shrink-0">Name</Label>
-              <span className="text-xs text-zinc-300 truncate">{project?.name ?? 'Untitled'}</span>
+              <span className="text-xs text-gray-700 truncate">{project?.name ?? 'Untitled'}</span>
             </div>
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-12 shrink-0">Pages</Label>
-              <span className="text-xs text-zinc-300">{pages.length}</span>
+              <span className="text-xs text-gray-700">{pages.length}</span>
             </div>
           </div>
         </Section>

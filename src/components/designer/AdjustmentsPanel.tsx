@@ -212,16 +212,16 @@ export default function AdjustmentsPanel() {
   const hasChanges = FILTER_DEFS.some(d => values[d.key] !== d.defaultValue)
 
   return (
-    <div className="w-full md:w-56 bg-[#18181b] border-t border-white/[0.06] flex flex-col overflow-hidden shrink-0">
+    <div className="w-full md:w-56 bg-white border-t border-gray-200 flex flex-col overflow-hidden shrink-0">
       {/* Header */}
       <button
         type="button"
         onClick={() => setCollapsed(c => !c)}
-        className="p-3 border-b border-white/[0.04] flex items-center justify-between w-full hover:bg-white/[0.04] transition-colors cursor-pointer"
+        className="p-3 border-b border-gray-200 flex items-center justify-between w-full hover:bg-gray-100 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-1.5">
-          <SlidersHorizontal className="h-3.5 w-3.5 text-zinc-500" />
-          <h3 className="text-xs font-semibold text-zinc-200">Adjustments</h3>
+          <SlidersHorizontal className="h-3.5 w-3.5 text-gray-400" />
+          <h3 className="text-xs font-semibold text-gray-800">Adjustments</h3>
         </div>
         <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${collapsed ? '-rotate-90' : ''}`} />
       </button>

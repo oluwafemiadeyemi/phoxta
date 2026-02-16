@@ -39,9 +39,9 @@ export default function PageProperties() {
   }
 
   return (
-    <div className="w-64 bg-[#18181b] border-l border-white/[0.06] flex flex-col overflow-hidden shrink-0">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200">Page</h3>
+    <div className="w-64 bg-white border-l border-gray-200 flex flex-col overflow-hidden shrink-0">
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800">Page</h3>
       </div>
       <ScrollArea className="flex-1">
         <Section title="Canvas">
@@ -49,11 +49,11 @@ export default function PageProperties() {
             <div className="grid grid-cols-2 gap-1.5">
               <div className="flex items-center gap-1">
                 <Label className="text-[10px] text-muted-foreground w-5 shrink-0">W</Label>
-                <span className="text-xs text-zinc-300">{pageW}px</span>
+                <span className="text-xs text-gray-700">{pageW}px</span>
               </div>
               <div className="flex items-center gap-1">
                 <Label className="text-[10px] text-muted-foreground w-5 shrink-0">H</Label>
-                <span className="text-xs text-zinc-300">{pageH}px</span>
+                <span className="text-xs text-gray-700">{pageH}px</span>
               </div>
             </div>
           </div>
@@ -71,11 +71,11 @@ export default function PageProperties() {
           <div className="space-y-1.5">
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-12 shrink-0">Name</Label>
-              <span className="text-xs text-zinc-300 truncate">{project?.name ?? 'Untitled'}</span>
+              <span className="text-xs text-gray-700 truncate">{project?.name ?? 'Untitled'}</span>
             </div>
             <div className="flex items-center gap-1">
               <Label className="text-[10px] text-muted-foreground w-12 shrink-0">Pages</Label>
-              <span className="text-xs text-zinc-300">{pages.length}</span>
+              <span className="text-xs text-gray-700">{pages.length}</span>
             </div>
           </div>
         </Section>

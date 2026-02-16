@@ -109,8 +109,8 @@ export default function ElementsPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200">Elements</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800">Elements</h3>
       </div>
 
       <ScrollArea className="flex-1 p-3">

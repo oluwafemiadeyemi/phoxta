@@ -24,7 +24,7 @@ export function Section({
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-3 py-2 hover:bg-white/[0.04] transition-colors"
+        className="w-full flex items-center justify-between px-3 py-2 hover:bg-gray-100 transition-colors"
       >
         <Label className="text-[10px] text-muted-foreground uppercase tracking-wide cursor-pointer">
           {title}
@@ -75,7 +75,7 @@ export function ColorInput({
         type="color"
         value={value || '#000000'}
         onChange={e => onChange(e.target.value)}
-        className="w-6 h-6 rounded border border-white/[0.08] cursor-pointer p-0"
+        className="w-6 h-6 rounded border border-gray-200 cursor-pointer p-0"
       />
       <Input
         type="text"

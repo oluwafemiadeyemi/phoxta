@@ -43,8 +43,8 @@ export default function TextPanel() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-white/[0.04]">
-        <h3 className="text-xs font-semibold text-zinc-200 mb-2">Text</h3>
+      <div className="p-3 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-800 mb-2">Text</h3>
         <Button className="w-full text-xs" size="sm" onClick={() => addText('Type something', 18)}>
           <Plus className="mr-1.5 h-3.5 w-3.5" />
           Add a text box
@@ -65,7 +65,7 @@ export default function TextPanel() {
                 fontFamily: preset.fontFamily,
                 fontSize: Math.min(preset.fontSize * 0.5, 24),
                 fontWeight: preset.fontWeight as any,
-              }} className="text-zinc-300">
+              }} className="text-gray-700">
                 {preset.label}
               </span>
               <span className="text-[10px] text-muted-foreground ml-2" style={{ fontSize: 10, fontWeight: 'normal', fontFamily: 'Inter' }}>

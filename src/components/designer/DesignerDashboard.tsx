@@ -152,23 +152,23 @@ export default function DesignerDashboardClient() {
   }
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="border-b border-white/[0.06] bg-[#09090b]/80 backdrop-blur-xl sticky top-0 z-40">
+      <div className="border-b border-gray-200 bg-white/80 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon-sm" className="text-zinc-400 hover:text-white hover:bg-white/[0.06]" asChild>
+            <Button variant="ghost" size="icon-sm" className="text-gray-500 hover:text-gray-900 hover:bg-gray-100" asChild>
               <Link href="/app">
                 <ArrowLeft className="h-4 w-4" />
               </Link>
             </Button>
-            <h1 className="text-lg font-semibold text-white">Designer</h1>
+            <h1 className="text-lg font-semibold text-gray-900">Designer</h1>
           </div>
           <div className="flex items-center gap-1.5 md:gap-2 flex-wrap justify-end">
             <Button
               variant="ghost"
               size="sm"
-              className="text-xs text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06]"
+              className="text-xs text-gray-500 hover:text-gray-800 hover:bg-gray-100"
               onClick={() => { setShowTrash(true); fetchTrash() }}
             >
               <Trash2 className="mr-1.5 h-3.5 w-3.5" /> <span className="hidden sm:inline">Trash</span>
@@ -176,7 +176,7 @@ export default function DesignerDashboardClient() {
             <Button
               variant="outline"
               size="sm"
-              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white hidden md:flex"
+              className="text-xs border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 hidden md:flex"
               disabled={psdImporting}
               onClick={() => psdFileRef.current?.click()}
             >
@@ -190,7 +190,7 @@ export default function DesignerDashboardClient() {
             <Button
               variant="outline"
               size="sm"
-              className="text-xs border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white hidden sm:flex"
+              className="text-xs border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 hidden sm:flex"
               onClick={() => setShowAiDesign(true)}
             >
               <Sparkles className="mr-1.5 h-3.5 w-3.5" /> AI Design
@@ -223,7 +223,7 @@ export default function DesignerDashboardClient() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
+                className="border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 onClick={() => psdFileRef.current?.click()}
               >
                 <FileImage className="mr-1.5 h-3.5 w-3.5" /> Import PSD
@@ -235,8 +235,8 @@ export default function DesignerDashboardClient() {
             {projects.map((p: DesignProject) => (
               <div key={p.id} className="group relative">
                 <Link href={`/app/designer/${p.id}`}>
-                  <Card className="overflow-hidden hover:shadow-md transition bg-zinc-900/60 border-white/[0.06] hover:border-white/[0.12]">
-                    <div className="aspect-[4/3] bg-zinc-800 flex items-center justify-center overflow-hidden">
+                  <Card className="overflow-hidden hover:shadow-md transition bg-white border-gray-200 hover:border-gray-300">
+                    <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden">
                       {p.preview_url ? (
                         <img
                           src={p.preview_url}
@@ -251,8 +251,8 @@ export default function DesignerDashboardClient() {
                       )}
                     </div>
                     <CardContent className="px-3 py-2">
-                      <p className="text-xs font-medium text-zinc-300 truncate">{p.name}</p>
-                      <p className="text-[10px] text-zinc-500">
+                      <p className="text-xs font-medium text-gray-700 truncate">{p.name}</p>
+                      <p className="text-[10px] text-gray-500">
                         {p.width}×{p.height} · {new Date(p.updated_at).toLocaleDateString()}
                       </p>
                     </CardContent>
@@ -261,7 +261,7 @@ export default function DesignerDashboardClient() {
                 <Button
                   variant="outline"
                   size="icon-xs"
-                  className="absolute top-2 right-2 h-6 w-6 rounded-full bg-zinc-800/90 border-white/[0.08] text-zinc-300 hidden group-hover:flex"
+                  className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white/90 border-gray-200 text-gray-700 hidden group-hover:flex"
                   onClick={() => handleDelete(p.id)}
                 >
                   <X className="h-3 w-3" />
@@ -274,10 +274,10 @@ export default function DesignerDashboardClient() {
 
       {/* New project dialog */}
       <Dialog open={showNew} onOpenChange={setShowNew}>
-        <DialogContent className="sm:max-w-[560px] max-h-[80vh] overflow-y-auto bg-zinc-900 border-white/[0.08]">
+        <DialogContent className="sm:max-w-[560px] max-h-[80vh] overflow-y-auto bg-white border-gray-200">
           <DialogHeader>
-            <DialogTitle className="text-white">New design</DialogTitle>
-            <DialogDescription className="text-zinc-500">Choose a preset or enter custom dimensions.</DialogDescription>
+            <DialogTitle className="text-gray-900">New design</DialogTitle>
+            <DialogDescription className="text-gray-500">Choose a preset or enter custom dimensions.</DialogDescription>
           </DialogHeader>
 
           {createError && (
@@ -288,10 +288,10 @@ export default function DesignerDashboardClient() {
 
           {/* Custom size */}
           <div className="flex flex-wrap gap-2 mb-4">
-            <Input id="new-name" type="text" placeholder="Design name" className="flex-1 min-w-[120px] text-xs h-9 bg-zinc-800 border-white/[0.08] text-white placeholder:text-zinc-500" />
+            <Input id="new-name" type="text" placeholder="Design name" className="flex-1 min-w-[120px] text-xs h-9 bg-gray-100 border-gray-200 text-gray-900 placeholder:text-gray-400" />
             <div className="flex gap-2">
-              <Input id="new-w" type="number" placeholder="Width" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
-              <Input id="new-h" type="number" placeholder="Height" defaultValue={1080} className="w-20 text-xs h-9 bg-zinc-800 border-white/[0.08] text-white" />
+              <Input id="new-w" type="number" placeholder="Width" defaultValue={1080} className="w-20 text-xs h-9 bg-gray-100 border-gray-200 text-gray-900" />
+              <Input id="new-h" type="number" placeholder="Height" defaultValue={1080} className="w-20 text-xs h-9 bg-gray-100 border-gray-200 text-gray-900" />
             </div>
             <Button size="sm" className="bg-white text-black hover:bg-zinc-200" onClick={() => {
               const name = (document.getElementById('new-name') as HTMLInputElement).value || 'Untitled design'
@@ -315,7 +315,7 @@ export default function DesignerDashboardClient() {
                     <Button
                       key={preset.label}
                       variant="outline"
-                      className="h-auto py-2.5 px-3 justify-start border-white/[0.08] text-zinc-300 hover:bg-white/[0.06] hover:text-white"
+                      className="h-auto py-2.5 px-3 justify-start border-gray-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       onClick={() => createProject(preset.label, preset.width, preset.height)}
                     >
                       <div className="text-left">
@@ -333,9 +333,9 @@ export default function DesignerDashboardClient() {
 
       {/* Trash dialog */}
       <Dialog open={showTrash} onOpenChange={setShowTrash}>
-        <DialogContent className="sm:max-w-[440px] max-h-[60vh] overflow-y-auto bg-zinc-900 border-white/[0.08]">
+        <DialogContent className="sm:max-w-[440px] max-h-[60vh] overflow-y-auto bg-white border-gray-200">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-white">
+            <DialogTitle className="flex items-center gap-2 text-gray-900">
               <Trash2 className="h-4 w-4" /> Trash
             </DialogTitle>
           </DialogHeader>
@@ -349,9 +349,9 @@ export default function DesignerDashboardClient() {
           ) : (
             <div className="space-y-2">
               {trashed.map((p: DesignProject) => (
-                <div key={p.id} className="flex items-center justify-between px-3 py-2 rounded-lg bg-zinc-800">
+                <div key={p.id} className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-100">
                   <div>
-                    <p className="text-xs font-medium text-zinc-300">{p.name}</p>
+                    <p className="text-xs font-medium text-gray-700">{p.name}</p>
                     <p className="text-[10px] text-muted-foreground">
                       Deleted {new Date(p.deleted_at!).toLocaleDateString()}
                     </p>
@@ -370,7 +370,7 @@ export default function DesignerDashboardClient() {
           )}
 
           <DialogFooter>
-            <Button variant="outline" className="border-white/[0.08] text-zinc-300 hover:bg-white/[0.06]" onClick={() => setShowTrash(false)}>Close</Button>
+            <Button variant="outline" className="border-gray-200 text-gray-700 hover:bg-gray-100" onClick={() => setShowTrash(false)}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

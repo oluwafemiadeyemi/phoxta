@@ -87,7 +87,7 @@ export default function MobileRightPanelTiles() {
   return (
     <>
       {/* Tile bar */}
-      <div className="flex items-center gap-1.5 px-2 py-1.5 bg-[#18181b] border-b border-white/[0.06] overflow-x-auto shrink-0">
+      <div className="flex items-center gap-1.5 px-2 py-1.5 bg-white border-b border-gray-200 overflow-x-auto shrink-0">
         {TILES.map(tile => {
           const isActive = activeTile === tile.id
           // Dim tiles that are contextually irrelevant
@@ -105,10 +105,10 @@ export default function MobileRightPanelTiles() {
                 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium
                 transition-all shrink-0 cursor-pointer border
                 ${isActive
-                  ? 'bg-zinc-700 text-zinc-100 border-zinc-600'
+                  ? 'bg-gray-200 text-gray-900 border-gray-300'
                   : dimmed
-                    ? 'bg-white/[0.02] text-zinc-600 border-white/[0.04]'
-                    : 'bg-white/[0.04] text-zinc-400 border-white/[0.06] hover:bg-white/[0.08] hover:text-zinc-200'
+                    ? 'bg-gray-50 text-gray-400 border-gray-200'
+                    : 'bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100 hover:text-gray-800'
                 }
               `}
             >
