@@ -307,7 +307,11 @@ export default function LandingPage() {
       </nav>
 
       {/* ═══════════════════ HERO SECTION ═══════════════════ */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+      <section className="relative pt-32 pb-10 md:pt-44 md:pb-16 overflow-hidden">
+        {/* Gradient overlays — top-left & top-right */}
+        <Image src="/intro-gradient1.png" alt="" width={800} height={800} className="absolute top-0 left-0 w-[65%] md:w-[50%] pointer-events-none select-none opacity-70" style={{ mixBlendMode: 'screen' }} priority />
+        <Image src="/intro-gradient4.png" alt="" width={800} height={800} className="absolute top-0 right-0 w-[65%] md:w-[50%] pointer-events-none select-none opacity-70" style={{ mixBlendMode: 'screen' }} priority />
+
         {/* Beaming colorful glow — contained within text area */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[320px] h-[260px] sm:w-[500px] sm:h-[400px] md:w-[700px] md:h-[500px] pointer-events-none" style={{ filter: 'blur(80px)' }}>
           <div className="absolute inset-0 m-auto w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] md:w-[200px] md:h-[200px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
@@ -320,6 +324,18 @@ export default function LandingPage() {
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 text-center">
+          {/* Social proof badge */}
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center gap-3 bg-white/[0.12] rounded-full px-5 py-1">
+              <div className="flex -space-x-3.5">
+                <Image src="/review-thumb6_1.png" alt="" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#09090b] object-cover" />
+                <Image src="/review-thumb6_2.png" alt="" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#09090b] object-cover" />
+                <Image src="/review-thumb6_3.png" alt="" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-[#09090b] object-cover" />
+              </div>
+              <span className="text-sm text-white/60 font-medium">Loved by UK founders</span>
+            </div>
+          </div>
+
           <h1 className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1]">
             <span className="font-normal text-white">Launch a </span>
             <Typewriter
@@ -335,7 +351,7 @@ export default function LandingPage() {
             From idea to launch — validate, design, and build your next big thing with AI-powered tools in just a few clicks.
           </p>
 
-          <div className="mt-10 flex flex-row gap-3 sm:gap-4 justify-center">
+          <div className="mt-10 flex justify-center">
             <button
               onClick={() => router.push('/auth')}
               className="group inline-flex items-center justify-center gap-2 bg-white text-[#09090b] px-5 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold hover:bg-white/90 transition-all cursor-pointer shadow-2xl shadow-white/10"
@@ -343,13 +359,11 @@ export default function LandingPage() {
               Get Started
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
             </button>
-            <button
-              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center gap-2 bg-white/[0.06] border border-white/[0.1] text-white/70 px-5 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-medium hover:bg-white/[0.1] hover:text-white transition-all cursor-pointer"
-            >
-              Learn More
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
-            </button>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <span className="text-lg font-semibold text-white/60 underline underline-offset-[6px] decoration-2">
+              Explore Marketplace
+            </span>
           </div>
         </div>
       </section>
