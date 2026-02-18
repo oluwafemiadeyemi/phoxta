@@ -1,0 +1,3162 @@
+{
+  "companies": [
+    {
+      "id": "comp_001",
+      "name": "TechVision Solutions",
+      "industry": "SaaS",
+      "website": "https://techvisionsolutions.com",
+      "notes": "Leading cloud-based software provider specializing in enterprise solutions"
+    },
+    {
+      "id": "comp_002",
+      "name": "RetailHub Inc",
+      "industry": "E-commerce",
+      "website": "https://retailhub.io",
+      "notes": "Major e-commerce platform with multi-channel integration capabilities"
+    },
+    {
+      "id": "comp_003",
+      "name": "HealthCare Plus",
+      "industry": "Healthcare",
+      "website": "https://healthcareplus.com",
+      "notes": "Digital health platform for patient management and telemedicine"
+    },
+    {
+      "id": "comp_004",
+      "name": "FinanceCore Systems",
+      "industry": "Finance",
+      "website": "https://financecoresystems.com",
+      "notes": "Fintech company offering payment processing and banking solutions"
+    },
+    {
+      "id": "comp_005",
+      "name": "EduLearn Academy",
+      "industry": "Education",
+      "website": "https://edulearn.edu",
+      "notes": "Online learning platform with AI-powered personalized courses"
+    },
+    {
+      "id": "comp_006",
+      "name": "ManufacturePro",
+      "industry": "Manufacturing",
+      "website": "https://manufacturepro.com",
+      "notes": "Industrial automation and supply chain optimization solutions"
+    },
+    {
+      "id": "comp_007",
+      "name": "CloudSync Ventures",
+      "industry": "SaaS",
+      "website": "https://cloudsynv.io",
+      "notes": "Data synchronization and backup services for enterprises"
+    },
+    {
+      "id": "comp_008",
+      "name": "SecureNet Technologies",
+      "industry": "Other",
+      "website": "https://securenet-tech.com",
+      "notes": "Cybersecurity firm providing threat detection and response services"
+    },
+    {
+      "id": "comp_009",
+      "name": "GreenEarth Logistics",
+      "industry": "E-commerce",
+      "website": "https://greenearthlogistics.com",
+      "notes": "Sustainable logistics and last-mile delivery solutions"
+    },
+    {
+      "id": "comp_010",
+      "name": "MediFlow Diagnostics",
+      "industry": "Healthcare",
+      "website": "https://mediflodiag.com",
+      "notes": "Advanced diagnostic imaging and lab management software"
+    }
+  ],
+  "tags": [
+    {
+      "id": "tag_001",
+      "name": "Hot Lead",
+      "color": "#FF6B6B"
+    },
+    {
+      "id": "tag_002",
+      "name": "Enterprise",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": "tag_003",
+      "name": "SMB",
+      "color": "#45B7D1"
+    },
+    {
+      "id": "tag_004",
+      "name": "Partner",
+      "color": "#96CEB4"
+    },
+    {
+      "id": "tag_005",
+      "name": "Referral",
+      "color": "#FFEAA7"
+    }
+  ],
+  "pipelineStages": [
+    {
+      "id": "stage_001",
+      "name": "Lead",
+      "order": 1,
+      "color": "#94A3B8"
+    },
+    {
+      "id": "stage_002",
+      "name": "Qualified",
+      "order": 2,
+      "color": "#3B82F6"
+    },
+    {
+      "id": "stage_003",
+      "name": "Proposal",
+      "order": 3,
+      "color": "#8B5CF6"
+    },
+    {
+      "id": "stage_004",
+      "name": "Negotiation",
+      "order": 4,
+      "color": "#F59E0B"
+    },
+    {
+      "id": "stage_005",
+      "name": "Won",
+      "order": 5,
+      "color": "#10B981"
+    },
+    {
+      "id": "stage_006",
+      "name": "Lost",
+      "order": 6,
+      "color": "#EF4444"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "cont_001",
+      "name": "John Anderson",
+      "email": "j.anderson@techvisionsolutions.com",
+      "phone": "+1-555-0101",
+      "companyId": "comp_001",
+      "tagIds": ["tag_001", "tag_002"],
+      "dealValue": 250000,
+      "status": "Proposal"
+    },
+    {
+      "id": "cont_002",
+      "name": "Sarah Mitchell",
+      "email": "s.mitchell@retailhub.io",
+      "phone": "+1-555-0102",
+      "companyId": "comp_002",
+      "tagIds": ["tag_002"],
+      "dealValue": 180000,
+      "status": "Negotiation"
+    },
+    {
+      "id": "cont_003",
+      "name": "Michael Chen",
+      "email": "m.chen@healthcareplus.com",
+      "phone": "+1-555-0103",
+      "companyId": "comp_003",
+      "tagIds": ["tag_001", "tag_004"],
+      "dealValue": 320000,
+      "status": "Won"
+    },
+    {
+      "id": "cont_004",
+      "name": "Emma Rodriguez",
+      "email": "e.rodriguez@financecoresystems.com",
+      "phone": "+1-555-0104",
+      "companyId": "comp_004",
+      "tagIds": ["tag_002"],
+      "dealValue": 450000,
+      "status": "Negotiation"
+    },
+    {
+      "id": "cont_005",
+      "name": "David Kumar",
+      "email": "d.kumar@edulearn.edu",
+      "phone": "+1-555-0105",
+      "companyId": "comp_005",
+      "tagIds": ["tag_003"],
+      "dealValue": 95000,
+      "status": "Qualified"
+    },
+    {
+      "id": "cont_006",
+      "name": "Lisa Thompson",
+      "email": "l.thompson@manufacturepro.com",
+      "phone": "+1-555-0106",
+      "companyId": "comp_006",
+      "tagIds": ["tag_002", "tag_005"],
+      "dealValue": 380000,
+      "status": "Proposal"
+    },
+    {
+      "id": "cont_007",
+      "name": "James Wilson",
+      "email": "j.wilson@cloudsynv.io",
+      "phone": "+1-555-0107",
+      "companyId": "comp_007",
+      "tagIds": ["tag_001"],
+      "dealValue": 220000,
+      "status": "Lead"
+    },
+    {
+      "id": "cont_008",
+      "name": "Patricia Brown",
+      "email": "p.brown@securenet-tech.com",
+      "phone": "+1-555-0108",
+      "companyId": "comp_008",
+      "tagIds": ["tag_003", "tag_004"],
+      "dealValue": 150000,
+      "status": "Qualified"
+    },
+    {
+      "id": "cont_009",
+      "name": "Robert Garcia",
+      "email": "r.garcia@greenearthlogistics.com",
+      "phone": "+1-555-0109",
+      "companyId": "comp_009",
+      "tagIds": ["tag_005"],
+      "dealValue": 120000,
+      "status": "Lead"
+    },
+    {
+      "id": "cont_010",
+      "name": "Amanda Lee",
+      "email": "a.lee@mediflodiag.com",
+      "phone": "+1-555-0110",
+      "companyId": "comp_010",
+      "tagIds": ["tag_002"],
+      "dealValue": 275000,
+      "status": "Proposal"
+    },
+    {
+      "id": "cont_011",
+      "name": "Christopher Park",
+      "email": "c.park@techvisionsolutions.com",
+      "phone": "+1-555-0111",
+      "companyId": "comp_001",
+      "tagIds": ["tag_004"],
+      "dealValue": 165000,
+      "status": "Negotiation"
+    },
+    {
+      "id": "cont_012",
+      "name": "Victoria Santos",
+      "email": "v.santos@retailhub.io",
+      "phone": "+1-555-0112",
+      "companyId": "comp_002",
+      "tagIds": ["tag_001", "tag_003"],
+      "dealValue": 200000,
+      "status": "Won"
+    },
+    {
+      "id": "cont_013",
+      "name": "Kevin Martinez",
+      "email": "k.martinez@healthcareplus.com",
+      "phone": "+1-555-0113",
+      "companyId": "comp_003",
+      "tagIds": ["tag_002"],
+      "dealValue": 290000,
+      "status": "Proposal"
+    },
+    {
+      "id": "cont_014",
+      "name": "Rachel White",
+      "email": "r.white@financecoresystems.com",
+      "phone": "+1-555-0114",
+      "companyId": "comp_004",
+      "tagIds": ["tag_005"],
+      "dealValue": 410000,
+      "status": "Negotiation"
+    },
+    {
+      "id": "cont_015",
+      "name": "Daniel Patel",
+      "email": "d.patel@edulearn.edu",
+      "phone": "+1-555-0115",
+      "companyId": "comp_005",
+      "tagIds": ["tag_003"],
+      "dealValue": 78000,
+      "status": "Lead"
+    },
+    {
+      "id": "cont_016",
+      "name": "Jennifer Lopez",
+      "email": "j.lopez@manufacturepro.com",
+      "phone": "+1-555-0116",
+      "companyId": "comp_006",
+      "tagIds": ["tag_001", "tag_002"],
+      "dealValue": 355000,
+      "status": "Won"
+    },
+    {
+      "id": "cont_017",
+      "name": "Mark Johnson",
+      "email": "m.johnson@cloudsynv.io",
+      "phone": "+1-555-0117",
+      "companyId": "comp_007",
+      "tagIds": ["tag_003"],
+      "dealValue": 195000,
+      "status": "Qualified"
+    },
+    {
+      "id": "cont_018",
+      "name": "Nicole Harris",
+      "email": "n.harris@securenet-tech.com",
+      "phone": "+1-555-0118",
+      "companyId": "comp_008",
+      "tagIds": ["tag_004"],
+      "dealValue": 130000,
+      "status": "Proposal"
+    }
+  ],
+  "deals": [
+    {
+      "id": "deal_001",
+      "contactId": "cont_001",
+      "companyId": "comp_001",
+      "value": 250000,
+      "status": "Proposal",
+      "tagIds": ["tag_001", "tag_002"],
+      "title": "Enterprise Cloud Suite Implementation",
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "deal_002",
+      "contactId": "cont_002",
+      "companyId": "comp_002",
+      "value": 180000,
+      "status": "Negotiation",
+      "tagIds": ["tag_002"],
+      "title": "E-commerce Platform Migration",
+      "createdAt": "2024-01-20T14:45:00Z"
+    },
+    {
+      "id": "deal_003",
+      "contactId": "cont_003",
+      "companyId": "comp_003",
+      "value": 320000,
+      "status": "Won",
+      "tagIds": ["tag_001", "tag_004"],
+      "title": "Healthcare Management System",
+      "createdAt": "2023-12-10T09:15:00Z"
+    },
+    {
+      "id": "deal_004",
+      "contactId": "cont_004",
+      "companyId": "comp_004",
+      "value": 450000,
+      "status": "Negotiation",
+      "tagIds": ["tag_002"],
+      "title": "Payment Processing Integration",
+      "createdAt": "2024-01-05T11:20:00Z"
+    },
+    {
+      "id": "deal_005",
+      "contactId": "cont_005",
+      "companyId": "comp_005",
+      "value": 95000,
+      "status": "Qualified",
+      "tagIds": ["tag_003"],
+      "title": "Learning Management System Upgrade",
+      "createdAt": "2024-02-01T08:00:00Z"
+    },
+    {
+      "id": "deal_006",
+      "contactId": "cont_006",
+      "companyId": "comp_006",
+      "value": 380000,
+      "status": "Proposal",
+      "tagIds": ["tag_002", "tag_005"],
+      "title": "Industrial Automation Suite",
+      "createdAt": "2024-01-25T13:30:00Z"
+    },
+    {
+      "id": "deal_007",
+      "contactId": "cont_007",
+      "companyId": "comp_007",
+      "value": 220000,
+      "status": "Lead",
+      "tagIds": ["tag_001"],
+      "title": "Data Backup and Sync Solution",
+      "createdAt": "2024-02-05T10:00:00Z"
+    },
+    {
+      "id": "deal_008",
+      "contactId": "cont_008",
+      "companyId": "comp_008",
+      "value": 150000,
+      "status": "Qualified",
+      "tagIds": ["tag_003", "tag_004"],
+      "title": "Threat Detection Platform",
+      "createdAt": "2024-01-18T15:45:00Z"
+    },
+    {
+      "id": "deal_009",
+      "contactId": "cont_009",
+      "companyId": "comp_009",
+      "value": 120000,
+      "status": "Lead",
+      "tagIds": ["tag_005"],
+      "title": "Green Logistics Optimization",
+      "createdAt": "2024-02-08T09:30:00Z"
+    },
+    {
+      "id": "deal_010",
+      "contactId": "cont_010",
+      "companyId": "comp_010",
+      "value": 275000,
+      "status": "Proposal",
+      "tagIds": ["tag_002"],
+      "title": "Diagnostic Imaging Platform",
+      "createdAt": "2024-01-28T12:15:00Z"
+    },
+    {
+      "id": "deal_011",
+      "contactId": "cont_011",
+      "companyId": "comp_001",
+      "value": 165000,
+      "status": "Negotiation",
+      "tagIds": ["tag_004"],
+      "title": "API Integration Services",
+      "createdAt": "2024-01-22T11:00:00Z"
+    },
+    {
+      "id": "deal_012",
+      "contactId": "cont_012",
+      "companyId": "comp_002",
+      "value": 200000,
+      "status": "Won",
+      "tagIds": ["tag_001", "tag_003"],
+      "title": "Multi-Channel Retail Solution",
+      "createdAt": "2023-11-15T14:20:00Z"
+    },
+    {
+      "id": "deal_013",
+      "contactId": "cont_013",
+      "companyId": "comp_003",
+      "value": 290000,
+      "status": "Proposal",
+      "tagIds": ["tag_002"],
+      "title": "Patient Records Management",
+      "createdAt": "2024-01-30T10:45:00Z"
+    },
+    {
+      "id": "deal_014",
+      "contactId": "cont_014",
+      "companyId": "comp_004",
+      "value": 410000,
+      "status": "Negotiation",
+      "tagIds": ["tag_005"],
+      "title": "Banking Infrastructure Modernization",
+      "createdAt": "2024-01-12T16:30:00Z"
+    },
+    {
+      "id": "deal_015",
+      "contactId": "cont_016",
+      "companyId": "comp_006",
+      "value": 355000,
+      "status": "Won",
+      "tagIds": ["tag_001", "tag_002"],
+      "title": "Supply Chain Digital Transformation",
+      "createdAt": "2023-12-20T13:00:00Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj_001",
+      "name": "Website Redesign",
+      "color": "#3B82F6",
+      "description": "Complete overhaul of company website with modern design and improved UX"
+    },
+    {
+      "id": "proj_002",
+      "name": "Mobile App Development",
+      "color": "#10B981",
+      "description": "Native mobile application for iOS and Android platforms"
+    },
+    {
+      "id": "proj_003",
+      "name": "CRM Integration",
+      "color": "#F59E0B",
+      "description": "Integrate third-party CRM system with existing tools and workflows"
+    },
+    {
+      "id": "proj_004",
+      "name": "Marketing Campaign Q2",
+      "color": "#EF4444",
+      "description": "Launch multi-channel marketing campaign for Q2 product releases"
+    },
+    {
+      "id": "proj_005",
+      "name": "Infrastructure Upgrade",
+      "color": "#8B5CF6",
+      "description": "Migrate infrastructure to cloud and improve scalability"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "team_001",
+      "name": "Alex Chen",
+      "email": "alex.chen@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+      "role": "Frontend Developer"
+    },
+    {
+      "id": "team_002",
+      "name": "Sarah Williams",
+      "email": "sarah.williams@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+      "role": "Project Manager"
+    },
+    {
+      "id": "team_003",
+      "name": "Marcus Johnson",
+      "email": "marcus.johnson@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus",
+      "role": "Backend Developer"
+    },
+    {
+      "id": "team_004",
+      "name": "Emily Rodriguez",
+      "email": "emily.rodriguez@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+      "role": "UX Designer"
+    },
+    {
+      "id": "team_005",
+      "name": "David Kim",
+      "email": "david.kim@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+      "role": "DevOps Engineer"
+    },
+    {
+      "id": "team_006",
+      "name": "Jessica Taylor",
+      "email": "jessica.taylor@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jessica",
+      "role": "QA Engineer"
+    },
+    {
+      "id": "team_007",
+      "name": "Ryan Martinez",
+      "email": "ryan.martinez@company.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Ryan",
+      "role": "Marketing Specialist"
+    }
+  ],
+  "projectStages": [
+    {
+      "id": "pstage_001",
+      "name": "Unassigned",
+      "order": 1
+    },
+    {
+      "id": "pstage_002",
+      "name": "Todo",
+      "order": 2
+    },
+    {
+      "id": "pstage_003",
+      "name": "In Progress",
+      "order": 3
+    },
+    {
+      "id": "pstage_004",
+      "name": "In Review",
+      "order": 4
+    },
+    {
+      "id": "pstage_005",
+      "name": "Done",
+      "order": 5
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_001",
+      "projectId": "proj_001",
+      "title": "Design homepage mockups",
+      "description": "Create high-fidelity mockups for the new homepage design including hero section, features, and testimonials",
+      "stage": "Done",
+      "assigneeId": "team_004",
+      "dueDate": "2024-02-15T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_001_001",
+          "text": "Hero section design",
+          "completed": true
+        },
+        {
+          "id": "check_001_002",
+          "text": "Features section design",
+          "completed": true
+        },
+        {
+          "id": "check_001_003",
+          "text": "Testimonials section",
+          "completed": true
+        }
+      ],
+      "commentCount": 8,
+      "attachmentCount": 3,
+      "createdAt": "2024-02-01T09:00:00Z"
+    },
+    {
+      "id": "task_002",
+      "projectId": "proj_001",
+      "title": "Implement responsive navigation",
+      "description": "Build responsive navigation component with mobile menu and accessibility features",
+      "stage": "In Progress",
+      "assigneeId": "team_001",
+      "dueDate": "2024-02-20T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_002_001",
+          "text": "Desktop navigation",
+          "completed": true
+        },
+        {
+          "id": "check_002_002",
+          "text": "Mobile hamburger menu",
+          "completed": true
+        },
+        {
+          "id": "check_002_003",
+          "text": "Accessibility testing",
+          "completed": false
+        },
+        {
+          "id": "check_002_004",
+          "text": "Cross-browser testing",
+          "completed": false
+        }
+      ],
+      "commentCount": 5,
+      "attachmentCount": 1,
+      "createdAt": "2024-02-05T10:30:00Z"
+    },
+    {
+      "id": "task_003",
+      "projectId": "proj_002",
+      "title": "Set up React Native project structure",
+      "description": "Initialize React Native project with proper folder structure and dependencies",
+      "stage": "Done",
+      "assigneeId": "team_001",
+      "dueDate": "2024-02-10T00:00:00Z",
+      "priority": "Urgent",
+      "checklist": [
+        {
+          "id": "check_003_001",
+          "text": "Initialize project",
+          "completed": true
+        },
+        {
+          "id": "check_003_002",
+          "text": "Set up navigation",
+          "completed": true
+        },
+        {
+          "id": "check_003_003",
+          "text": "Configure CI/CD",
+          "completed": true
+        }
+      ],
+      "commentCount": 12,
+      "attachmentCount": 2,
+      "createdAt": "2024-01-28T08:00:00Z"
+    },
+    {
+      "id": "task_004",
+      "projectId": "proj_002",
+      "title": "Design app authentication flow",
+      "description": "Create user authentication screens including login, signup, and password recovery",
+      "stage": "In Review",
+      "assigneeId": "team_004",
+      "dueDate": "2024-02-18T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_004_001",
+          "text": "Login screen design",
+          "completed": true
+        },
+        {
+          "id": "check_004_002",
+          "text": "Signup screen design",
+          "completed": true
+        },
+        {
+          "id": "check_004_003",
+          "text": "Password recovery flow",
+          "completed": true
+        },
+        {
+          "id": "check_004_004",
+          "text": "Error state designs",
+          "completed": true
+        }
+      ],
+      "commentCount": 6,
+      "attachmentCount": 4,
+      "createdAt": "2024-02-03T11:15:00Z"
+    },
+    {
+      "id": "task_005",
+      "projectId": "proj_003",
+      "title": "API integration planning",
+      "description": "Document API endpoints and plan integration strategy with existing systems",
+      "stage": "In Progress",
+      "assigneeId": "team_003",
+      "dueDate": "2024-02-22T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_005_001",
+          "text": "Review API documentation",
+          "completed": true
+        },
+        {
+          "id": "check_005_002",
+          "text": "Create integration diagram",
+          "completed": false
+        },
+        {
+          "id": "check_005_003",
+          "text": "Define data mapping",
+          "completed": false
+        }
+      ],
+      "commentCount": 4,
+      "attachmentCount": 2,
+      "createdAt": "2024-02-06T14:20:00Z"
+    },
+    {
+      "id": "task_006",
+      "projectId": "proj_004",
+      "title": "Create email campaign templates",
+      "description": "Design and develop responsive email templates for Q2 marketing campaign",
+      "stage": "Todo",
+      "assigneeId": "team_007",
+      "dueDate": "2024-02-25T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_006_001",
+          "text": "Welcome email template",
+          "completed": false
+        },
+        {
+          "id": "check_006_002",
+          "text": "Product announcement template",
+          "completed": false
+        },
+        {
+          "id": "check_006_003",
+          "text": "Newsletter template",
+          "completed": false
+        }
+      ],
+      "commentCount": 2,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-08T09:45:00Z"
+    },
+    {
+      "id": "task_007",
+      "projectId": "proj_005",
+      "title": "Migrate database to cloud",
+      "description": "Plan and execute database migration to AWS RDS with zero downtime",
+      "stage": "In Progress",
+      "assigneeId": "team_005",
+      "dueDate": "2024-02-28T00:00:00Z",
+      "priority": "Urgent",
+      "checklist": [
+        {
+          "id": "check_007_001",
+          "text": "Backup current database",
+          "completed": true
+        },
+        {
+          "id": "check_007_002",
+          "text": "Set up RDS instance",
+          "completed": true
+        },
+        {
+          "id": "check_007_003",
+          "text": "Test migration script",
+          "completed": false
+        },
+        {
+          "id": "check_007_004",
+          "text": "Execute migration",
+          "completed": false
+        },
+        {
+          "id": "check_007_005",
+          "text": "Verify data integrity",
+          "completed": false
+        }
+      ],
+      "commentCount": 15,
+      "attachmentCount": 5,
+      "createdAt": "2024-02-02T07:30:00Z"
+    },
+    {
+      "id": "task_008",
+      "projectId": "proj_001",
+      "title": "Optimize page load performance",
+      "description": "Improve website loading speed through image optimization and code splitting",
+      "stage": "Todo",
+      "assigneeId": "team_001",
+      "dueDate": "2024-03-01T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_008_001",
+          "text": "Image optimization",
+          "completed": false
+        },
+        {
+          "id": "check_008_002",
+          "text": "Implement lazy loading",
+          "completed": false
+        },
+        {
+          "id": "check_008_003",
+          "text": "Code splitting",
+          "completed": false
+        }
+      ],
+      "commentCount": 3,
+      "attachmentCount": 1,
+      "createdAt": "2024-02-09T13:00:00Z"
+    },
+    {
+      "id": "task_009",
+      "projectId": "proj_002",
+      "title": "Implement push notifications",
+      "description": "Set up and integrate push notification service for both iOS and Android",
+      "stage": "Todo",
+      "assigneeId": "team_003",
+      "dueDate": "2024-03-05T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_009_001",
+          "text": "Configure Firebase",
+          "completed": false
+        },
+        {
+          "id": "check_009_002",
+          "text": "iOS implementation",
+          "completed": false
+        },
+        {
+          "id": "check_009_003",
+          "text": "Android implementation",
+          "completed": false
+        },
+        {
+          "id": "check_009_004",
+          "text": "Test on devices",
+          "completed": false
+        }
+      ],
+      "commentCount": 1,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-10T10:20:00Z"
+    },
+    {
+      "id": "task_010",
+      "projectId": "proj_003",
+      "title": "Write integration tests",
+      "description": "Create comprehensive test suite for CRM integration endpoints",
+      "stage": "Unassigned",
+      "assigneeId": null,
+      "dueDate": "2024-03-10T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_010_001",
+          "text": "Test contact sync",
+          "completed": false
+        },
+        {
+          "id": "check_010_002",
+          "text": "Test deal updates",
+          "completed": false
+        },
+        {
+          "id": "check_010_003",
+          "text": "Test error handling",
+          "completed": false
+        }
+      ],
+      "commentCount": 0,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-11T15:30:00Z"
+    },
+    {
+      "id": "task_011",
+      "projectId": "proj_004",
+      "title": "Social media content calendar",
+      "description": "Plan and schedule social media posts for Q2 campaign across all platforms",
+      "stage": "In Progress",
+      "assigneeId": "team_007",
+      "dueDate": "2024-02-23T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_011_001",
+          "text": "LinkedIn posts",
+          "completed": true
+        },
+        {
+          "id": "check_011_002",
+          "text": "Twitter posts",
+          "completed": false
+        },
+        {
+          "id": "check_011_003",
+          "text": "Instagram content",
+          "completed": false
+        }
+      ],
+      "commentCount": 7,
+      "attachmentCount": 8,
+      "createdAt": "2024-02-07T12:00:00Z"
+    },
+    {
+      "id": "task_012",
+      "projectId": "proj_005",
+      "title": "Set up monitoring and alerts",
+      "description": "Configure monitoring tools and alert systems for cloud infrastructure",
+      "stage": "Todo",
+      "assigneeId": "team_005",
+      "dueDate": "2024-03-03T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_012_001",
+          "text": "CloudWatch setup",
+          "completed": false
+        },
+        {
+          "id": "check_012_002",
+          "text": "Alert rules configuration",
+          "completed": false
+        },
+        {
+          "id": "check_012_003",
+          "text": "Dashboard creation",
+          "completed": false
+        }
+      ],
+      "commentCount": 2,
+      "attachmentCount": 1,
+      "createdAt": "2024-02-09T08:15:00Z"
+    },
+    {
+      "id": "task_013",
+      "projectId": "proj_001",
+      "title": "Content migration",
+      "description": "Migrate existing content from old website to new CMS structure",
+      "stage": "Unassigned",
+      "assigneeId": null,
+      "dueDate": "2024-03-08T00:00:00Z",
+      "priority": "Low",
+      "checklist": [
+        {
+          "id": "check_013_001",
+          "text": "Export old content",
+          "completed": false
+        },
+        {
+          "id": "check_013_002",
+          "text": "Format conversion",
+          "completed": false
+        },
+        {
+          "id": "check_013_003",
+          "text": "Import to new CMS",
+          "completed": false
+        },
+        {
+          "id": "check_013_004",
+          "text": "Verify links and images",
+          "completed": false
+        }
+      ],
+      "commentCount": 0,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-12T11:45:00Z"
+    },
+    {
+      "id": "task_014",
+      "projectId": "proj_002",
+      "title": "App store submission preparation",
+      "description": "Prepare all required materials for iOS App Store and Google Play Store submissions",
+      "stage": "Unassigned",
+      "assigneeId": null,
+      "dueDate": "2024-03-15T00:00:00Z",
+      "priority": "Low",
+      "checklist": [
+        {
+          "id": "check_014_001",
+          "text": "App screenshots",
+          "completed": false
+        },
+        {
+          "id": "check_014_002",
+          "text": "App descriptions",
+          "completed": false
+        },
+        {
+          "id": "check_014_003",
+          "text": "Privacy policy",
+          "completed": false
+        }
+      ],
+      "commentCount": 0,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-13T09:00:00Z"
+    },
+    {
+      "id": "task_015",
+      "projectId": "proj_003",
+      "title": "User training documentation",
+      "description": "Create comprehensive user guides and training materials for CRM integration",
+      "stage": "Todo",
+      "assigneeId": "team_002",
+      "dueDate": "2024-03-12T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_015_001",
+          "text": "Quick start guide",
+          "completed": false
+        },
+        {
+          "id": "check_015_002",
+          "text": "Video tutorials",
+          "completed": false
+        },
+        {
+          "id": "check_015_003",
+          "text": "FAQ document",
+          "completed": false
+        }
+      ],
+      "commentCount": 1,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-11T14:30:00Z"
+    },
+    {
+      "id": "task_016",
+      "projectId": "proj_004",
+      "title": "Landing page A/B testing",
+      "description": "Set up and run A/B tests for campaign landing pages to optimize conversions",
+      "stage": "In Review",
+      "assigneeId": "team_007",
+      "dueDate": "2024-02-26T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_016_001",
+          "text": "Create variant A",
+          "completed": true
+        },
+        {
+          "id": "check_016_002",
+          "text": "Create variant B",
+          "completed": true
+        },
+        {
+          "id": "check_016_003",
+          "text": "Set up tracking",
+          "completed": true
+        },
+        {
+          "id": "check_016_004",
+          "text": "Launch test",
+          "completed": false
+        }
+      ],
+      "commentCount": 9,
+      "attachmentCount": 6,
+      "createdAt": "2024-02-05T16:00:00Z"
+    },
+    {
+      "id": "task_017",
+      "projectId": "proj_005",
+      "title": "Security audit",
+      "description": "Conduct comprehensive security audit of cloud infrastructure and identify vulnerabilities",
+      "stage": "In Progress",
+      "assigneeId": "team_005",
+      "dueDate": "2024-03-01T00:00:00Z",
+      "priority": "Urgent",
+      "checklist": [
+        {
+          "id": "check_017_001",
+          "text": "Network security review",
+          "completed": true
+        },
+        {
+          "id": "check_017_002",
+          "text": "IAM permissions audit",
+          "completed": false
+        },
+        {
+          "id": "check_017_003",
+          "text": "Encryption verification",
+          "completed": false
+        },
+        {
+          "id": "check_017_004",
+          "text": "Penetration testing",
+          "completed": false
+        }
+      ],
+      "commentCount": 11,
+      "attachmentCount": 3,
+      "createdAt": "2024-02-04T10:00:00Z"
+    },
+    {
+      "id": "task_018",
+      "projectId": "proj_001",
+      "title": "SEO optimization",
+      "description": "Implement SEO best practices including meta tags, structured data, and sitemap",
+      "stage": "In Review",
+      "assigneeId": "team_001",
+      "dueDate": "2024-02-27T00:00:00Z",
+      "priority": "Medium",
+      "checklist": [
+        {
+          "id": "check_018_001",
+          "text": "Meta tags implementation",
+          "completed": true
+        },
+        {
+          "id": "check_018_002",
+          "text": "Structured data markup",
+          "completed": true
+        },
+        {
+          "id": "check_018_003",
+          "text": "XML sitemap generation",
+          "completed": true
+        }
+      ],
+      "commentCount": 4,
+      "attachmentCount": 2,
+      "createdAt": "2024-02-08T15:20:00Z"
+    },
+    {
+      "id": "task_019",
+      "projectId": "proj_002",
+      "title": "Offline mode implementation",
+      "description": "Enable app to function offline with local data caching and sync when online",
+      "stage": "Todo",
+      "assigneeId": "team_003",
+      "dueDate": "2024-03-18T00:00:00Z",
+      "priority": "Low",
+      "checklist": [
+        {
+          "id": "check_019_001",
+          "text": "Local storage setup",
+          "completed": false
+        },
+        {
+          "id": "check_019_002",
+          "text": "Sync mechanism",
+          "completed": false
+        },
+        {
+          "id": "check_019_003",
+          "text": "Conflict resolution",
+          "completed": false
+        }
+      ],
+      "commentCount": 2,
+      "attachmentCount": 0,
+      "createdAt": "2024-02-12T13:30:00Z"
+    },
+    {
+      "id": "task_020",
+      "projectId": "proj_004",
+      "title": "Analytics dashboard setup",
+      "description": "Create dashboard to track campaign performance metrics and ROI",
+      "stage": "Done",
+      "assigneeId": "team_007",
+      "dueDate": "2024-02-14T00:00:00Z",
+      "priority": "High",
+      "checklist": [
+        {
+          "id": "check_020_001",
+          "text": "Connect data sources",
+          "completed": true
+        },
+        {
+          "id": "check_020_002",
+          "text": "Design dashboard layout",
+          "completed": true
+        },
+        {
+          "id": "check_020_003",
+          "text": "Configure metrics",
+          "completed": true
+        },
+        {
+          "id": "check_020_004",
+          "text": "Set up automated reports",
+          "completed": true
+        }
+      ],
+      "commentCount": 6,
+      "attachmentCount": 4,
+      "createdAt": "2024-02-01T11:00:00Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": "comm_001",
+      "taskId": "task_001",
+      "authorId": "team_002",
+      "content": "Great work on the hero section! The design looks modern and engaging.",
+      "createdAt": "2024-02-02T10:15:00Z"
+    },
+    {
+      "id": "comm_002",
+      "taskId": "task_001",
+      "authorId": "team_004",
+      "content": "Thanks! I've incorporated the feedback from last week's meeting.",
+      "createdAt": "2024-02-02T14:30:00Z"
+    },
+    {
+      "id": "comm_003",
+      "taskId": "task_002",
+      "authorId": "team_001",
+      "content": "Desktop and mobile navigation are complete. Moving on to accessibility testing.",
+      "createdAt": "2024-02-18T09:20:00Z"
+    },
+    {
+      "id": "comm_004",
+      "taskId": "task_002",
+      "authorId": "team_006",
+      "content": "I can help with accessibility testing. Let me know when you're ready.",
+      "createdAt": "2024-02-18T11:45:00Z"
+    },
+    {
+      "id": "comm_005",
+      "taskId": "task_007",
+      "authorId": "team_005",
+      "content": "RDS instance is configured and ready. Starting migration script tests today.",
+      "createdAt": "2024-02-20T08:00:00Z"
+    },
+    {
+      "id": "comm_006",
+      "taskId": "task_007",
+      "authorId": "team_003",
+      "content": "Make sure to test rollback procedures as well.",
+      "createdAt": "2024-02-20T10:30:00Z"
+    }
+  ],
+  "attachments": [
+    {
+      "id": "att_001",
+      "taskId": "task_001",
+      "fileName": "homepage-hero-mockup.fig",
+      "fileSize": "2.4 MB",
+      "fileType": "figma",
+      "uploadedBy": "team_004",
+      "uploadedAt": "2024-02-01T14:00:00Z"
+    },
+    {
+      "id": "att_002",
+      "taskId": "task_001",
+      "fileName": "features-section-design.png",
+      "fileSize": "1.8 MB",
+      "fileType": "image",
+      "uploadedBy": "team_004",
+      "uploadedAt": "2024-02-05T11:20:00Z"
+    },
+    {
+      "id": "att_003",
+      "taskId": "task_001",
+      "fileName": "testimonials-mockup.pdf",
+      "fileSize": "892 KB",
+      "fileType": "pdf",
+      "uploadedBy": "team_004",
+      "uploadedAt": "2024-02-10T16:45:00Z"
+    },
+    {
+      "id": "att_004",
+      "taskId": "task_002",
+      "fileName": "navigation-component.tsx",
+      "fileSize": "15 KB",
+      "fileType": "code",
+      "uploadedBy": "team_001",
+      "uploadedAt": "2024-02-17T09:30:00Z"
+    },
+    {
+      "id": "att_005",
+      "taskId": "task_004",
+      "fileName": "auth-flow-screens.fig",
+      "fileSize": "3.2 MB",
+      "fileType": "figma",
+      "uploadedBy": "team_004",
+      "uploadedAt": "2024-02-10T13:15:00Z"
+    },
+    {
+      "id": "att_006",
+      "taskId": "task_007",
+      "fileName": "migration-script.sql",
+      "fileSize": "45 KB",
+      "fileType": "code",
+      "uploadedBy": "team_005",
+      "uploadedAt": "2024-02-15T10:00:00Z"
+    },
+    {
+      "id": "att_007",
+      "taskId": "task_007",
+      "fileName": "rds-configuration.json",
+      "fileSize": "8 KB",
+      "fileType": "json",
+      "uploadedBy": "team_005",
+      "uploadedAt": "2024-02-18T14:30:00Z"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act_001",
+      "type": "Meeting",
+      "title": "Product Demo with TechVision Solutions",
+      "date": "2024-02-15T14:00:00Z",
+      "contactId": "cont_001",
+      "dealId": "deal_001",
+      "notes": "Initial product demo focusing on cloud integration features",
+      "status": "Completed",
+      "duration": 60,
+      "createdAt": "2024-02-10T09:00:00Z"
+    },
+    {
+      "id": "act_002",
+      "type": "Call",
+      "title": "Follow-up call with RetailHub",
+      "date": "2024-02-20T10:30:00Z",
+      "contactId": "cont_002",
+      "dealId": "deal_002",
+      "notes": "Discuss pricing and implementation timeline",
+      "status": "Completed",
+      "duration": 30,
+      "createdAt": "2024-02-18T11:00:00Z"
+    },
+    {
+      "id": "act_003",
+      "type": "Email",
+      "title": "Send proposal to HealthCare Plus",
+      "date": "2024-02-18T09:00:00Z",
+      "contactId": "cont_003",
+      "dealId": "deal_003",
+      "notes": "Detailed proposal with custom integration requirements",
+      "status": "Completed",
+      "duration": 15,
+      "createdAt": "2024-02-17T16:00:00Z"
+    },
+    {
+      "id": "act_004",
+      "type": "Meeting",
+      "title": "Negotiation meeting with FinanceCore",
+      "date": "2024-02-22T15:00:00Z",
+      "contactId": "cont_004",
+      "dealId": "deal_004",
+      "notes": "Final contract terms and SLA discussion",
+      "status": "Scheduled",
+      "duration": 90,
+      "createdAt": "2024-02-19T10:00:00Z"
+    },
+    {
+      "id": "act_005",
+      "type": "Demo",
+      "title": "Platform demo for EduLearn Academy",
+      "date": "2024-02-21T13:00:00Z",
+      "contactId": "cont_005",
+      "dealId": "deal_005",
+      "notes": "Focus on LMS integration capabilities",
+      "status": "Scheduled",
+      "duration": 45,
+      "createdAt": "2024-02-20T08:30:00Z"
+    },
+    {
+      "id": "act_006",
+      "type": "Call",
+      "title": "Discovery call with ManufacturePro",
+      "date": "2024-02-19T11:00:00Z",
+      "contactId": "cont_006",
+      "dealId": "deal_006",
+      "notes": "Understand automation requirements",
+      "status": "Completed",
+      "duration": 30,
+      "createdAt": "2024-02-15T14:00:00Z"
+    },
+    {
+      "id": "act_007",
+      "type": "Task",
+      "title": "Prepare quote for CloudSync Ventures",
+      "date": "2024-02-23T16:00:00Z",
+      "contactId": "cont_007",
+      "dealId": "deal_007",
+      "notes": "Include data backup and sync pricing",
+      "status": "Scheduled",
+      "duration": 60,
+      "createdAt": "2024-02-21T09:00:00Z"
+    },
+    {
+      "id": "act_008",
+      "type": "Meeting",
+      "title": "Quarterly review with SecureNet",
+      "date": "2024-02-25T10:00:00Z",
+      "contactId": "cont_008",
+      "dealId": "deal_008",
+      "notes": "Review security requirements and compliance",
+      "status": "Scheduled",
+      "duration": 60,
+      "createdAt": "2024-02-20T15:00:00Z"
+    },
+    {
+      "id": "act_009",
+      "type": "Call",
+      "title": "Introduction call with GreenEarth Logistics",
+      "date": "2024-02-16T14:30:00Z",
+      "contactId": "cont_009",
+      "dealId": "deal_009",
+      "notes": "Initial needs assessment",
+      "status": "Completed",
+      "duration": 30,
+      "createdAt": "2024-02-14T10:00:00Z"
+    },
+    {
+      "id": "act_010",
+      "type": "Demo",
+      "title": "Technical demo for MediFlow Diagnostics",
+      "date": "2024-02-24T11:00:00Z",
+      "contactId": "cont_010",
+      "dealId": "deal_010",
+      "notes": "Demo imaging platform integration",
+      "status": "Scheduled",
+      "duration": 60,
+      "createdAt": "2024-02-22T09:00:00Z"
+    },
+    {
+      "id": "act_011",
+      "type": "Email",
+      "title": "Contract sent to TechVision Solutions",
+      "date": "2024-02-17T10:00:00Z",
+      "contactId": "cont_011",
+      "dealId": "deal_011",
+      "notes": "API integration services agreement",
+      "status": "Completed",
+      "duration": 15,
+      "createdAt": "2024-02-16T14:00:00Z"
+    },
+    {
+      "id": "act_012",
+      "type": "Meeting",
+      "title": "Kickoff meeting with RetailHub",
+      "date": "2024-02-26T09:00:00Z",
+      "contactId": "cont_012",
+      "dealId": "deal_012",
+      "notes": "Project kickoff and timeline planning",
+      "status": "Scheduled",
+      "duration": 90,
+      "createdAt": "2024-02-23T11:00:00Z"
+    },
+    {
+      "id": "act_013",
+      "type": "Task",
+      "title": "Research healthcare compliance requirements",
+      "date": "2024-02-27T15:00:00Z",
+      "contactId": "cont_013",
+      "dealId": "deal_013",
+      "notes": "HIPAA compliance documentation needed",
+      "status": "Scheduled",
+      "duration": 120,
+      "createdAt": "2024-02-21T16:00:00Z"
+    },
+    {
+      "id": "act_014",
+      "type": "Call",
+      "title": "Budget discussion with FinanceCore",
+      "date": "2024-02-28T14:00:00Z",
+      "contactId": "cont_014",
+      "dealId": "deal_014",
+      "notes": "Discuss payment terms and milestones",
+      "status": "Scheduled",
+      "duration": 45,
+      "createdAt": "2024-02-25T10:00:00Z"
+    },
+    {
+      "id": "act_015",
+      "type": "Meeting",
+      "title": "Technical requirements gathering",
+      "date": "2024-02-29T10:30:00Z",
+      "contactId": "cont_015",
+      "dealId": null,
+      "notes": "Detailed technical assessment session",
+      "status": "Scheduled",
+      "duration": 60,
+      "createdAt": "2024-02-26T09:00:00Z"
+    },
+    {
+      "id": "act_016",
+      "type": "Task",
+      "title": "Product walkthrough for new lead",
+      "date": "2024-03-01T13:00:00Z",
+      "contactId": null,
+      "dealId": null,
+      "notes": "General product overview",
+      "status": "Scheduled",
+      "duration": 30,
+      "createdAt": "2024-02-27T11:00:00Z"
+    },
+    {
+      "id": "act_017",
+      "type": "Email",
+      "title": "Monthly newsletter to all contacts",
+      "date": "2024-02-14T08:00:00Z",
+      "contactId": null,
+      "dealId": null,
+      "notes": "February product updates and case studies",
+      "status": "Completed",
+      "duration": 15,
+      "createdAt": "2024-02-13T16:00:00Z"
+    },
+    {
+      "id": "act_018",
+      "type": "Task",
+      "title": "Update CRM with Q1 pipeline data",
+      "date": "2024-03-02T16:00:00Z",
+      "contactId": null,
+      "dealId": null,
+      "notes": "Quarterly data cleanup and reporting",
+      "status": "Scheduled",
+      "duration": 90,
+      "createdAt": "2024-02-28T10:00:00Z"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "quote_001",
+      "quoteNumber": "Q-2024-0001",
+      "contactId": "cont_001",
+      "companyId": "comp_001",
+      "dealId": "deal_001",
+      "quoteDate": "2024-01-20T00:00:00Z",
+      "expiryDate": "2024-02-20T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_001_001",
+          "product": "Enterprise Cloud Platform",
+          "description": "Annual subscription for enterprise cloud platform with 100 user licenses",
+          "quantity": 1,
+          "price": 120000,
+          "total": 120000
+        },
+        {
+          "id": "qli_001_002",
+          "product": "Professional Services",
+          "description": "Implementation and onboarding services (200 hours)",
+          "quantity": 200,
+          "price": 250,
+          "total": 50000
+        },
+        {
+          "id": "qli_001_003",
+          "product": "Premium Support",
+          "description": "24/7 premium support package - Annual",
+          "quantity": 1,
+          "price": 30000,
+          "total": 30000
+        }
+      ],
+      "subtotal": 200000,
+      "taxRate": 10,
+      "discount": 5000,
+      "grandTotal": 215000,
+      "status": "Sent",
+      "statusHistory": [
+        {
+          "id": "sh_001_001",
+          "status": "Draft",
+          "timestamp": "2024-01-20T09:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_001_002",
+          "status": "Sent",
+          "timestamp": "2024-01-20T14:30:00Z",
+          "notes": "Quote sent to client"
+        }
+      ],
+      "notes": "Quote includes implementation services and first year support",
+      "createdAt": "2024-01-20T09:00:00Z"
+    },
+    {
+      "id": "quote_002",
+      "quoteNumber": "Q-2024-0002",
+      "contactId": "cont_002",
+      "companyId": "comp_002",
+      "dealId": "deal_002",
+      "quoteDate": "2024-01-25T00:00:00Z",
+      "expiryDate": "2024-02-25T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_002_001",
+          "product": "E-commerce Integration Suite",
+          "description": "Multi-channel e-commerce integration platform",
+          "quantity": 1,
+          "price": 85000,
+          "total": 85000
+        },
+        {
+          "id": "qli_002_002",
+          "product": "Data Migration",
+          "description": "Migration of existing product catalog and customer data",
+          "quantity": 1,
+          "price": 15000,
+          "total": 15000
+        },
+        {
+          "id": "qli_002_003",
+          "product": "Training Sessions",
+          "description": "On-site training for staff (3 days)",
+          "quantity": 3,
+          "price": 2000,
+          "total": 6000
+        }
+      ],
+      "subtotal": 106000,
+      "taxRate": 10,
+      "discount": 3000,
+      "grandTotal": 113600,
+      "status": "Accepted",
+      "statusHistory": [
+        {
+          "id": "sh_002_001",
+          "status": "Draft",
+          "timestamp": "2024-01-25T11:30:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_002_002",
+          "status": "Sent",
+          "timestamp": "2024-01-25T15:00:00Z",
+          "notes": "Quote sent to client"
+        },
+        {
+          "id": "sh_002_003",
+          "status": "Accepted",
+          "timestamp": "2024-01-28T10:15:00Z",
+          "notes": "Client accepted the quote"
+        }
+      ],
+      "notes": "Customer requested discount for annual payment upfront",
+      "createdAt": "2024-01-25T11:30:00Z"
+    },
+    {
+      "id": "quote_003",
+      "quoteNumber": "Q-2024-0003",
+      "contactId": "cont_003",
+      "companyId": "comp_003",
+      "dealId": "deal_003",
+      "quoteDate": "2023-12-15T00:00:00Z",
+      "expiryDate": "2024-01-15T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_003_001",
+          "product": "Healthcare Management Platform",
+          "description": "Complete patient management and telemedicine platform",
+          "quantity": 1,
+          "price": 250000,
+          "total": 250000
+        },
+        {
+          "id": "qli_003_002",
+          "product": "HIPAA Compliance Package",
+          "description": "Security audit and compliance certification",
+          "quantity": 1,
+          "price": 25000,
+          "total": 25000
+        },
+        {
+          "id": "qli_003_003",
+          "product": "Custom Integration",
+          "description": "Integration with existing EMR systems",
+          "quantity": 1,
+          "price": 40000,
+          "total": 40000
+        }
+      ],
+      "subtotal": 315000,
+      "taxRate": 10,
+      "discount": 10000,
+      "grandTotal": 336500,
+      "status": "Accepted",
+      "statusHistory": [
+        {
+          "id": "sh_003_001",
+          "status": "Draft",
+          "timestamp": "2023-12-15T10:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_003_002",
+          "status": "Sent",
+          "timestamp": "2023-12-15T16:00:00Z",
+          "notes": "Quote sent to client"
+        },
+        {
+          "id": "sh_003_003",
+          "status": "Accepted",
+          "timestamp": "2023-12-22T14:30:00Z",
+          "notes": "Client accepted the quote. Deal closed!"
+        }
+      ],
+      "notes": "Deal closed. Implementation begins Q1 2024",
+      "createdAt": "2023-12-15T10:00:00Z"
+    },
+    {
+      "id": "quote_004",
+      "quoteNumber": "Q-2024-0004",
+      "contactId": "cont_004",
+      "companyId": "comp_004",
+      "dealId": "deal_004",
+      "quoteDate": "2024-02-01T00:00:00Z",
+      "expiryDate": "2024-03-01T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_004_001",
+          "product": "Payment Processing API",
+          "description": "Enterprise payment processing infrastructure",
+          "quantity": 1,
+          "price": 180000,
+          "total": 180000
+        },
+        {
+          "id": "qli_004_002",
+          "product": "Fraud Detection Module",
+          "description": "AI-powered fraud detection and prevention",
+          "quantity": 1,
+          "price": 75000,
+          "total": 75000
+        },
+        {
+          "id": "qli_004_003",
+          "product": "Compliance Services",
+          "description": "PCI-DSS compliance support - Annual",
+          "quantity": 1,
+          "price": 35000,
+          "total": 35000
+        },
+        {
+          "id": "qli_004_004",
+          "product": "Managed Services",
+          "description": "24/7 monitoring and maintenance",
+          "quantity": 1,
+          "price": 45000,
+          "total": 45000
+        }
+      ],
+      "subtotal": 335000,
+      "taxRate": 10,
+      "discount": 15000,
+      "grandTotal": 353500,
+      "status": "Sent",
+      "statusHistory": [
+        {
+          "id": "sh_004_001",
+          "status": "Draft",
+          "timestamp": "2024-02-01T14:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_004_002",
+          "status": "Sent",
+          "timestamp": "2024-02-02T09:30:00Z",
+          "notes": "Quote sent to client"
+        }
+      ],
+      "notes": "Awaiting final approval from finance team",
+      "createdAt": "2024-02-01T14:00:00Z"
+    },
+    {
+      "id": "quote_005",
+      "quoteNumber": "Q-2024-0005",
+      "contactId": "cont_005",
+      "companyId": "comp_005",
+      "dealId": "deal_005",
+      "quoteDate": "2024-02-05T00:00:00Z",
+      "expiryDate": "2024-03-05T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_005_001",
+          "product": "Learning Management System",
+          "description": "AI-powered LMS with 500 student capacity",
+          "quantity": 1,
+          "price": 45000,
+          "total": 45000
+        },
+        {
+          "id": "qli_005_002",
+          "product": "Content Creation Tools",
+          "description": "Course authoring and video editing suite",
+          "quantity": 1,
+          "price": 12000,
+          "total": 12000
+        },
+        {
+          "id": "qli_005_003",
+          "product": "Analytics Dashboard",
+          "description": "Student progress tracking and reporting",
+          "quantity": 1,
+          "price": 8000,
+          "total": 8000
+        }
+      ],
+      "subtotal": 65000,
+      "taxRate": 10,
+      "discount": 2000,
+      "grandTotal": 69300,
+      "status": "Draft",
+      "statusHistory": [
+        {
+          "id": "sh_005_001",
+          "status": "Draft",
+          "timestamp": "2024-02-05T09:30:00Z",
+          "notes": "Quote created"
+        }
+      ],
+      "notes": "Pending budget approval from client",
+      "createdAt": "2024-02-05T09:30:00Z"
+    },
+    {
+      "id": "quote_006",
+      "quoteNumber": "Q-2024-0006",
+      "contactId": "cont_006",
+      "companyId": "comp_006",
+      "dealId": "deal_006",
+      "quoteDate": "2024-01-28T00:00:00Z",
+      "expiryDate": "2024-02-28T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_006_001",
+          "product": "Industrial Automation Platform",
+          "description": "Complete automation suite for manufacturing",
+          "quantity": 1,
+          "price": 220000,
+          "total": 220000
+        },
+        {
+          "id": "qli_006_002",
+          "product": "Supply Chain Optimization",
+          "description": "Inventory and logistics management module",
+          "quantity": 1,
+          "price": 65000,
+          "total": 65000
+        },
+        {
+          "id": "qli_006_003",
+          "product": "IoT Sensor Integration",
+          "description": "Integration with 200 IoT sensors",
+          "quantity": 200,
+          "price": 150,
+          "total": 30000
+        },
+        {
+          "id": "qli_006_004",
+          "product": "Training and Support",
+          "description": "First year premium support and training",
+          "quantity": 1,
+          "price": 28000,
+          "total": 28000
+        }
+      ],
+      "subtotal": 343000,
+      "taxRate": 10,
+      "discount": 8000,
+      "grandTotal": 369300,
+      "status": "Sent",
+      "statusHistory": [
+        {
+          "id": "sh_006_001",
+          "status": "Draft",
+          "timestamp": "2024-01-28T13:15:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_006_002",
+          "status": "Sent",
+          "timestamp": "2024-01-29T10:00:00Z",
+          "notes": "Quote sent to client"
+        }
+      ],
+      "notes": "Quote includes IoT sensor hardware procurement assistance",
+      "createdAt": "2024-01-28T13:15:00Z"
+    },
+    {
+      "id": "quote_007",
+      "quoteNumber": "Q-2024-0007",
+      "contactId": "cont_008",
+      "companyId": "comp_008",
+      "dealId": "deal_008",
+      "quoteDate": "2024-02-10T00:00:00Z",
+      "expiryDate": "2024-03-10T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_007_001",
+          "product": "Threat Detection Platform",
+          "description": "Advanced cybersecurity threat detection system",
+          "quantity": 1,
+          "price": 95000,
+          "total": 95000
+        },
+        {
+          "id": "qli_007_002",
+          "product": "Security Operations Center",
+          "description": "Managed SOC services - Annual",
+          "quantity": 1,
+          "price": 48000,
+          "total": 48000
+        }
+      ],
+      "subtotal": 143000,
+      "taxRate": 10,
+      "discount": 5000,
+      "grandTotal": 152300,
+      "status": "Draft",
+      "statusHistory": [
+        {
+          "id": "sh_007_001",
+          "status": "Draft",
+          "timestamp": "2024-02-10T10:45:00Z",
+          "notes": "Quote created"
+        }
+      ],
+      "notes": "Customer comparing with competitor offerings",
+      "createdAt": "2024-02-10T10:45:00Z"
+    },
+    {
+      "id": "quote_008",
+      "quoteNumber": "Q-2024-0008",
+      "contactId": "cont_010",
+      "companyId": "comp_010",
+      "dealId": "deal_010",
+      "quoteDate": "2024-02-12T00:00:00Z",
+      "expiryDate": "2024-03-12T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_008_001",
+          "product": "Diagnostic Imaging Platform",
+          "description": "PACS and imaging workflow management system",
+          "quantity": 1,
+          "price": 180000,
+          "total": 180000
+        },
+        {
+          "id": "qli_008_002",
+          "product": "Lab Management Module",
+          "description": "Laboratory information system integration",
+          "quantity": 1,
+          "price": 55000,
+          "total": 55000
+        },
+        {
+          "id": "qli_008_003",
+          "product": "Cloud Storage",
+          "description": "Secure cloud storage - 50TB annual",
+          "quantity": 1,
+          "price": 18000,
+          "total": 18000
+        }
+      ],
+      "subtotal": 253000,
+      "taxRate": 10,
+      "discount": 6000,
+      "grandTotal": 272300,
+      "status": "Sent",
+      "statusHistory": [
+        {
+          "id": "sh_008_001",
+          "status": "Draft",
+          "timestamp": "2024-02-12T15:20:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_008_002",
+          "status": "Sent",
+          "timestamp": "2024-02-13T11:00:00Z",
+          "notes": "Quote sent to client"
+        }
+      ],
+      "notes": "Technical review scheduled for next week",
+      "createdAt": "2024-02-12T15:20:00Z"
+    },
+    {
+      "id": "quote_009",
+      "quoteNumber": "Q-2023-0042",
+      "contactId": "cont_007",
+      "companyId": "comp_007",
+      "dealId": "deal_007",
+      "quoteDate": "2023-12-01T00:00:00Z",
+      "expiryDate": "2024-01-01T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_009_001",
+          "product": "Data Backup Solution",
+          "description": "Enterprise backup and disaster recovery",
+          "quantity": 1,
+          "price": 75000,
+          "total": 75000
+        },
+        {
+          "id": "qli_009_002",
+          "product": "Sync Services",
+          "description": "Real-time data synchronization - Annual",
+          "quantity": 1,
+          "price": 35000,
+          "total": 35000
+        }
+      ],
+      "subtotal": 110000,
+      "taxRate": 10,
+      "discount": 0,
+      "grandTotal": 121000,
+      "status": "Expired",
+      "statusHistory": [
+        {
+          "id": "sh_009_001",
+          "status": "Draft",
+          "timestamp": "2023-12-01T11:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_009_002",
+          "status": "Sent",
+          "timestamp": "2023-12-01T15:30:00Z",
+          "notes": "Quote sent to client"
+        },
+        {
+          "id": "sh_009_003",
+          "status": "Expired",
+          "timestamp": "2024-01-01T00:00:00Z",
+          "notes": "Quote expired without response"
+        }
+      ],
+      "notes": "Quote expired. Need to follow up with updated pricing",
+      "createdAt": "2023-12-01T11:00:00Z"
+    },
+    {
+      "id": "quote_010",
+      "quoteNumber": "Q-2024-0010",
+      "contactId": "cont_013",
+      "companyId": "comp_003",
+      "dealId": "deal_013",
+      "quoteDate": "2024-02-08T00:00:00Z",
+      "expiryDate": "2024-03-08T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_010_001",
+          "product": "Patient Records Management",
+          "description": "Electronic health records system with 150 user licenses",
+          "quantity": 1,
+          "price": 165000,
+          "total": 165000
+        },
+        {
+          "id": "qli_010_002",
+          "product": "Telemedicine Module",
+          "description": "Video consultation and remote monitoring",
+          "quantity": 1,
+          "price": 42000,
+          "total": 42000
+        },
+        {
+          "id": "qli_010_003",
+          "product": "Mobile App",
+          "description": "Patient mobile app for iOS and Android",
+          "quantity": 1,
+          "price": 28000,
+          "total": 28000
+        },
+        {
+          "id": "qli_010_004",
+          "product": "Implementation Services",
+          "description": "Setup, configuration, and staff training",
+          "quantity": 1,
+          "price": 35000,
+          "total": 35000
+        }
+      ],
+      "subtotal": 270000,
+      "taxRate": 10,
+      "discount": 12000,
+      "grandTotal": 285000,
+      "status": "Sent",
+      "statusHistory": [
+        {
+          "id": "sh_010_001",
+          "status": "Draft",
+          "timestamp": "2024-02-08T14:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_010_002",
+          "status": "Sent",
+          "timestamp": "2024-02-09T10:00:00Z",
+          "notes": "Quote sent to client"
+        }
+      ],
+      "notes": "Includes 3 months of post-launch support",
+      "createdAt": "2024-02-08T14:00:00Z"
+    },
+    {
+      "id": "quote_011",
+      "quoteNumber": "Q-2024-0011",
+      "contactId": "cont_014",
+      "companyId": "comp_004",
+      "dealId": "deal_014",
+      "quoteDate": "2024-01-15T00:00:00Z",
+      "expiryDate": "2024-02-15T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_011_001",
+          "product": "Banking Infrastructure",
+          "description": "Core banking system modernization",
+          "quantity": 1,
+          "price": 280000,
+          "total": 280000
+        },
+        {
+          "id": "qli_011_002",
+          "product": "Mobile Banking Platform",
+          "description": "Native mobile banking apps with biometric auth",
+          "quantity": 1,
+          "price": 85000,
+          "total": 85000
+        },
+        {
+          "id": "qli_011_003",
+          "product": "Security Suite",
+          "description": "Multi-factor authentication and encryption",
+          "quantity": 1,
+          "price": 45000,
+          "total": 45000
+        }
+      ],
+      "subtotal": 410000,
+      "taxRate": 10,
+      "discount": 20000,
+      "grandTotal": 431000,
+      "status": "Rejected",
+      "statusHistory": [
+        {
+          "id": "sh_011_001",
+          "status": "Draft",
+          "timestamp": "2024-01-15T09:00:00Z",
+          "notes": "Quote created"
+        },
+        {
+          "id": "sh_011_002",
+          "status": "Sent",
+          "timestamp": "2024-01-16T14:00:00Z",
+          "notes": "Quote sent to client"
+        },
+        {
+          "id": "sh_011_003",
+          "status": "Rejected",
+          "timestamp": "2024-02-10T11:30:00Z",
+          "notes": "Client opted for different vendor"
+        }
+      ],
+      "notes": "Customer opted for different vendor due to lower pricing",
+      "createdAt": "2024-01-15T09:00:00Z"
+    },
+    {
+      "id": "quote_012",
+      "quoteNumber": "Q-2024-0012",
+      "contactId": "cont_017",
+      "companyId": "comp_007",
+      "dealId": null,
+      "quoteDate": "2024-02-14T00:00:00Z",
+      "expiryDate": "2024-03-14T00:00:00Z",
+      "lineItems": [
+        {
+          "id": "qli_012_001",
+          "product": "Cloud Backup Pro",
+          "description": "Professional cloud backup solution - 10TB storage",
+          "quantity": 1,
+          "price": 42000,
+          "total": 42000
+        },
+        {
+          "id": "qli_012_002",
+          "product": "Disaster Recovery",
+          "description": "Business continuity and disaster recovery services",
+          "quantity": 1,
+          "price": 28000,
+          "total": 28000
+        },
+        {
+          "id": "qli_012_003",
+          "product": "Monitoring Dashboard",
+          "description": "Real-time backup monitoring and alerts",
+          "quantity": 1,
+          "price": 8000,
+          "total": 8000
+        }
+      ],
+      "subtotal": 78000,
+      "taxRate": 10,
+      "discount": 3000,
+      "grandTotal": 82500,
+      "status": "Draft",
+      "statusHistory": [
+        {
+          "id": "sh_012_001",
+          "status": "Draft",
+          "timestamp": "2024-02-14T16:30:00Z",
+          "notes": "Quote created"
+        }
+      ],
+      "notes": "Preparing for initial presentation",
+      "createdAt": "2024-02-14T16:30:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "user_001",
+      "name": "Michael Anderson",
+      "email": "michael.anderson@startupcrm.com",
+      "role": "Admin",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": true,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": true,
+        "manageSettings": true,
+        "viewReports": true,
+        "exportData": true
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
+      "createdAt": "2023-01-15T09:00:00Z"
+    },
+    {
+      "id": "user_002",
+      "name": "Sarah Thompson",
+      "email": "sarah.thompson@startupcrm.com",
+      "role": "Sales Manager",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": true,
+        "manageSettings": false,
+        "viewReports": true,
+        "exportData": true
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+      "createdAt": "2023-02-20T10:30:00Z"
+    },
+    {
+      "id": "user_003",
+      "name": "James Wilson",
+      "email": "james.wilson@startupcrm.com",
+      "role": "Sales Rep",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": false,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
+      "createdAt": "2023-03-10T14:15:00Z"
+    },
+    {
+      "id": "user_004",
+      "name": "Emily Chen",
+      "email": "emily.chen@startupcrm.com",
+      "role": "Sales Rep",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": false,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+      "createdAt": "2023-04-05T11:20:00Z"
+    },
+    {
+      "id": "user_005",
+      "name": "Robert Martinez",
+      "email": "robert.martinez@startupcrm.com",
+      "role": "Sales Manager",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": true,
+        "manageSettings": false,
+        "viewReports": true,
+        "exportData": true
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Robert",
+      "createdAt": "2023-05-12T08:45:00Z"
+    },
+    {
+      "id": "user_006",
+      "name": "Jennifer Davis",
+      "email": "jennifer.davis@startupcrm.com",
+      "role": "Sales Rep",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": false,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jennifer",
+      "createdAt": "2023-06-18T13:30:00Z"
+    },
+    {
+      "id": "user_007",
+      "name": "David Kumar",
+      "email": "david.kumar@startupcrm.com",
+      "role": "Viewer",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": false,
+        "manageContacts": false,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": true,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+      "createdAt": "2023-07-22T16:00:00Z"
+    },
+    {
+      "id": "user_008",
+      "name": "Lisa Rodriguez",
+      "email": "lisa.rodriguez@startupcrm.com",
+      "role": "Sales Rep",
+      "status": "Inactive",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": false,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
+      "createdAt": "2023-08-15T09:30:00Z"
+    },
+    {
+      "id": "user_009",
+      "name": "Thomas Brown",
+      "email": "thomas.brown@startupcrm.com",
+      "role": "Viewer",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": false,
+        "manageContacts": false,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": true,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Thomas",
+      "createdAt": "2023-09-20T10:15:00Z"
+    },
+    {
+      "id": "user_010",
+      "name": "Amanda Garcia",
+      "email": "amanda.garcia@startupcrm.com",
+      "role": "Sales Rep",
+      "status": "Active",
+      "permissions": {
+        "manageUsers": false,
+        "manageDeals": true,
+        "manageContacts": true,
+        "manageCompanies": false,
+        "manageSettings": false,
+        "viewReports": false,
+        "exportData": false
+      },
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Amanda",
+      "createdAt": "2023-10-08T14:45:00Z"
+    }
+  ],
+  "companySettings": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "companyName": "Phoxta CRM",
+      "logo": null,
+      "currency": "USD",
+      "taxRate": 10,
+      "timezone": "America/New_York",
+      "address": "123 Business Avenue, Suite 100, San Francisco, CA 94105",
+      "phone": "+1-555-0100",
+      "email": "contact@startupcrm.com"
+    }
+  ],
+  "assetTags": [
+    {
+      "id": "atag_001",
+      "name": "Brand Colors",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "atag_002",
+      "name": "Logo Variations",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": "atag_003",
+      "name": "Marketing Materials",
+      "color": "#10B981"
+    },
+    {
+      "id": "atag_004",
+      "name": "Social Media",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "atag_005",
+      "name": "Print",
+      "color": "#EF4444"
+    },
+    {
+      "id": "atag_006",
+      "name": "Web",
+      "color": "#06B6D4"
+    },
+    {
+      "id": "atag_007",
+      "name": "Internal",
+      "color": "#6366F1"
+    }
+  ],
+  "assetCollections": [
+    {
+      "id": "coll_001",
+      "name": "Brand Identity",
+      "description": "Core brand identity assets including logos, colors, and fonts",
+      "parentId": null,
+      "assetCount": 12,
+      "createdAt": "2024-01-10T09:00:00Z"
+    },
+    {
+      "id": "coll_002",
+      "name": "Logos",
+      "description": "All logo variations and formats",
+      "parentId": "coll_001",
+      "assetCount": 6,
+      "createdAt": "2024-01-10T09:15:00Z"
+    },
+    {
+      "id": "coll_003",
+      "name": "Marketing",
+      "description": "Marketing and promotional materials",
+      "parentId": null,
+      "assetCount": 8,
+      "createdAt": "2024-01-12T10:30:00Z"
+    },
+    {
+      "id": "coll_004",
+      "name": "Social Media",
+      "description": "Social media graphics and templates",
+      "parentId": "coll_003",
+      "assetCount": 5,
+      "createdAt": "2024-01-12T11:00:00Z"
+    },
+    {
+      "id": "coll_005",
+      "name": "Product Photos",
+      "description": "Product photography and lifestyle images",
+      "parentId": null,
+      "assetCount": 10,
+      "createdAt": "2024-01-15T14:20:00Z"
+    },
+    {
+      "id": "coll_006",
+      "name": "Brand Guidelines",
+      "description": "Brand style guides and documentation",
+      "parentId": "coll_001",
+      "assetCount": 4,
+      "createdAt": "2024-01-10T10:00:00Z"
+    },
+    {
+      "id": "coll_007",
+      "name": "Video Assets",
+      "description": "Promotional videos and animations",
+      "parentId": "coll_003",
+      "assetCount": 3,
+      "createdAt": "2024-01-18T13:45:00Z"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset_001",
+      "name": "Primary Logo - Full Color",
+      "description": "Main company logo in full color for light backgrounds",
+      "type": "Logo",
+      "fileUrl": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200",
+      "fileSize": "245 KB",
+      "fileFormat": "SVG",
+      "dimensions": "2000x800",
+      "collectionIds": ["coll_001", "coll_002"],
+      "tagIds": ["atag_002", "atag_006"],
+      "isFavorite": true,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T09:30:00Z",
+      "updatedAt": "2024-01-10T09:30:00Z"
+    },
+    {
+      "id": "asset_002",
+      "name": "Logo - Monochrome White",
+      "description": "White version of logo for dark backgrounds",
+      "type": "Logo",
+      "fileUrl": "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=200",
+      "fileSize": "198 KB",
+      "fileFormat": "SVG",
+      "dimensions": "2000x800",
+      "collectionIds": ["coll_001", "coll_002"],
+      "tagIds": ["atag_002", "atag_006"],
+      "isFavorite": true,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T09:35:00Z",
+      "updatedAt": "2024-01-10T09:35:00Z"
+    },
+    {
+      "id": "asset_003",
+      "name": "Logo - Icon Only",
+      "description": "Simplified icon version for small spaces and app icons",
+      "type": "Logo",
+      "fileUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200",
+      "fileSize": "156 KB",
+      "fileFormat": "SVG",
+      "dimensions": "512x512",
+      "collectionIds": ["coll_001", "coll_002"],
+      "tagIds": ["atag_002", "atag_006", "atag_004"],
+      "isFavorite": false,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T09:40:00Z",
+      "updatedAt": "2024-01-10T09:40:00Z"
+    },
+    {
+      "id": "asset_004",
+      "name": "Brand Color Palette 2024",
+      "description": "Official brand color palette with primary and secondary colors",
+      "type": "Color Palette",
+      "fileUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=200",
+      "fileSize": "89 KB",
+      "fileFormat": "PNG",
+      "dimensions": "1600x1200",
+      "collectionIds": ["coll_001"],
+      "tagIds": ["atag_001", "atag_006"],
+      "isFavorite": true,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T10:15:00Z",
+      "updatedAt": "2024-01-10T10:15:00Z"
+    },
+    {
+      "id": "asset_005",
+      "name": "Brand Style Guide",
+      "description": "Complete brand guidelines including typography, colors, and usage rules",
+      "type": "Document",
+      "fileUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=200",
+      "fileSize": "4.2 MB",
+      "fileFormat": "PDF",
+      "collectionIds": ["coll_001", "coll_006"],
+      "tagIds": ["atag_007"],
+      "isFavorite": true,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T11:00:00Z",
+      "updatedAt": "2024-01-10T11:00:00Z"
+    },
+    {
+      "id": "asset_006",
+      "name": "Social Media Template - Instagram",
+      "description": "Instagram post template with brand elements",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200",
+      "fileSize": "1.8 MB",
+      "fileFormat": "PSD",
+      "dimensions": "1080x1080",
+      "collectionIds": ["coll_003", "coll_004"],
+      "tagIds": ["atag_004", "atag_003"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-12T14:30:00Z",
+      "updatedAt": "2024-01-12T14:30:00Z"
+    },
+    {
+      "id": "asset_007",
+      "name": "Social Media Template - LinkedIn",
+      "description": "LinkedIn post template with professional layout",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=200",
+      "fileSize": "2.1 MB",
+      "fileFormat": "PSD",
+      "dimensions": "1200x627",
+      "collectionIds": ["coll_003", "coll_004"],
+      "tagIds": ["atag_004", "atag_003"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-12T14:45:00Z",
+      "updatedAt": "2024-01-12T14:45:00Z"
+    },
+    {
+      "id": "asset_008",
+      "name": "Product Hero Image",
+      "description": "Main product hero image for website and marketing",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=200",
+      "fileSize": "3.4 MB",
+      "fileFormat": "JPG",
+      "dimensions": "3840x2160",
+      "collectionIds": ["coll_005"],
+      "tagIds": ["atag_006", "atag_003"],
+      "isFavorite": true,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-15T15:00:00Z",
+      "updatedAt": "2024-01-15T15:00:00Z"
+    },
+    {
+      "id": "asset_009",
+      "name": "Product Feature Showcase",
+      "description": "Product features and UI screenshots",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200",
+      "fileSize": "2.8 MB",
+      "fileFormat": "PNG",
+      "dimensions": "2560x1440",
+      "collectionIds": ["coll_005"],
+      "tagIds": ["atag_006", "atag_003"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-15T15:30:00Z",
+      "updatedAt": "2024-01-15T15:30:00Z"
+    },
+    {
+      "id": "asset_010",
+      "name": "Company Intro Video",
+      "description": "30-second company introduction video for website and presentations",
+      "type": "Video",
+      "fileUrl": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=200",
+      "fileSize": "24.5 MB",
+      "fileFormat": "MP4",
+      "dimensions": "1920x1080",
+      "collectionIds": ["coll_003", "coll_007"],
+      "tagIds": ["atag_003", "atag_006"],
+      "isFavorite": true,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-18T14:00:00Z",
+      "updatedAt": "2024-01-18T14:00:00Z"
+    },
+    {
+      "id": "asset_011",
+      "name": "Product Demo Video",
+      "description": "2-minute product demonstration video",
+      "type": "Video",
+      "fileUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=200",
+      "fileSize": "45.8 MB",
+      "fileFormat": "MP4",
+      "dimensions": "1920x1080",
+      "collectionIds": ["coll_003", "coll_007"],
+      "tagIds": ["atag_003", "atag_006"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-18T14:30:00Z",
+      "updatedAt": "2024-01-18T14:30:00Z"
+    },
+    {
+      "id": "asset_012",
+      "name": "Primary Font - Inter",
+      "description": "Primary typeface for all digital and print materials",
+      "type": "Font",
+      "fileUrl": "https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=200",
+      "fileSize": "892 KB",
+      "fileFormat": "TTF",
+      "collectionIds": ["coll_001"],
+      "tagIds": ["atag_006", "atag_005"],
+      "isFavorite": true,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T12:00:00Z",
+      "updatedAt": "2024-01-10T12:00:00Z"
+    },
+    {
+      "id": "asset_013",
+      "name": "Secondary Font - Poppins",
+      "description": "Secondary typeface for headings and emphasis",
+      "type": "Font",
+      "fileUrl": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=200",
+      "fileSize": "756 KB",
+      "fileFormat": "TTF",
+      "collectionIds": ["coll_001"],
+      "tagIds": ["atag_006", "atag_005"],
+      "isFavorite": false,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T12:15:00Z",
+      "updatedAt": "2024-01-10T12:15:00Z"
+    },
+    {
+      "id": "asset_014",
+      "name": "Email Newsletter Template",
+      "description": "Responsive email template for newsletters",
+      "type": "Document",
+      "fileUrl": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=200",
+      "fileSize": "456 KB",
+      "fileFormat": "HTML",
+      "collectionIds": ["coll_003"],
+      "tagIds": ["atag_003", "atag_006"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-16T10:00:00Z",
+      "updatedAt": "2024-01-16T10:00:00Z"
+    },
+    {
+      "id": "asset_015",
+      "name": "Presentation Template",
+      "description": "PowerPoint template with brand styling",
+      "type": "Document",
+      "fileUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200",
+      "fileSize": "2.3 MB",
+      "fileFormat": "PPTX",
+      "collectionIds": ["coll_001", "coll_006"],
+      "tagIds": ["atag_007", "atag_005"],
+      "isFavorite": false,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T13:00:00Z",
+      "updatedAt": "2024-01-10T13:00:00Z"
+    },
+    {
+      "id": "asset_016",
+      "name": "Business Card Template",
+      "description": "Print-ready business card template",
+      "type": "Document",
+      "fileUrl": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=200",
+      "fileSize": "1.2 MB",
+      "fileFormat": "AI",
+      "collectionIds": ["coll_001", "coll_006"],
+      "tagIds": ["atag_005", "atag_007"],
+      "isFavorite": false,
+      "uploadedBy": "team_004",
+      "createdAt": "2024-01-10T13:30:00Z",
+      "updatedAt": "2024-01-10T13:30:00Z"
+    },
+    {
+      "id": "asset_017",
+      "name": "Social Media Cover - Facebook",
+      "description": "Facebook cover image with brand elements",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=200",
+      "fileSize": "1.5 MB",
+      "fileFormat": "JPG",
+      "dimensions": "820x312",
+      "collectionIds": ["coll_003", "coll_004"],
+      "tagIds": ["atag_004"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-12T15:00:00Z",
+      "updatedAt": "2024-01-12T15:00:00Z"
+    },
+    {
+      "id": "asset_018",
+      "name": "Team Photo - Office",
+      "description": "Professional team photo for about page",
+      "type": "Image",
+      "fileUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200",
+      "fileSize": "3.1 MB",
+      "fileFormat": "JPG",
+      "dimensions": "2400x1600",
+      "collectionIds": ["coll_005"],
+      "tagIds": ["atag_006"],
+      "isFavorite": false,
+      "uploadedBy": "team_007",
+      "createdAt": "2024-01-15T16:00:00Z",
+      "updatedAt": "2024-01-15T16:00:00Z"
+    }
+  ],
+  "usageGuidelines": [
+    {
+      "id": "guide_001",
+      "assetId": "asset_001",
+      "title": "Primary Logo Usage",
+      "description": "Guidelines for proper usage of the primary logo",
+      "dosList": [
+        "Use on light backgrounds only",
+        "Maintain minimum clear space equal to the height of the 'R' letter",
+        "Use provided vector files for all applications",
+        "Scale proportionally"
+      ],
+      "dontsList": [
+        "Don't rotate or distort the logo",
+        "Don't change logo colors",
+        "Don't add effects or shadows",
+        "Don't place on busy backgrounds"
+      ]
+    },
+    {
+      "id": "guide_002",
+      "assetId": "asset_002",
+      "title": "White Logo Usage",
+      "description": "Guidelines for the white logo variant",
+      "dosList": [
+        "Use on dark backgrounds only",
+        "Ensure sufficient contrast with background",
+        "Maintain minimum clear space",
+        "Use for dark mode applications"
+      ],
+      "dontsList": [
+        "Don't use on light backgrounds",
+        "Don't apply additional white overlays",
+        "Don't reduce opacity below 100%",
+        "Don't change to other colors"
+      ]
+    },
+    {
+      "id": "guide_003",
+      "assetId": "asset_004",
+      "title": "Color Palette Guidelines",
+      "description": "Proper usage of brand colors",
+      "dosList": [
+        "Use primary blue as the main brand color",
+        "Use secondary colors for accents only",
+        "Maintain WCAG AA contrast ratios",
+        "Use provided hex values exactly"
+      ],
+      "dontsList": [
+        "Don't create new color variations",
+        "Don't use colors at reduced opacity without approval",
+        "Don't combine too many colors in one design",
+        "Don't use colors that aren't in the palette"
+      ]
+    }
+  ],
+  "colorPalettes": [
+    {
+      "id": "palette_001",
+      "name": "Primary Brand Colors",
+      "description": "Main brand color palette for all applications",
+      "colors": [
+        {
+          "id": "color_001",
+          "name": "Primary Blue",
+          "hex": "#3B82F6",
+          "rgb": "rgb(59, 130, 246)",
+          "usage": "Primary brand color, buttons, links"
+        },
+        {
+          "id": "color_002",
+          "name": "Dark Blue",
+          "hex": "#1E40AF",
+          "rgb": "rgb(30, 64, 175)",
+          "usage": "Headings, emphasis, hover states"
+        },
+        {
+          "id": "color_003",
+          "name": "Light Blue",
+          "hex": "#DBEAFE",
+          "rgb": "rgb(219, 234, 254)",
+          "usage": "Backgrounds, subtle accents"
+        },
+        {
+          "id": "color_004",
+          "name": "Neutral Gray",
+          "hex": "#6B7280",
+          "rgb": "rgb(107, 114, 128)",
+          "usage": "Body text, secondary information"
+        },
+        {
+          "id": "color_005",
+          "name": "Success Green",
+          "hex": "#10B981",
+          "rgb": "rgb(16, 185, 129)",
+          "usage": "Success messages, positive actions"
+        },
+        {
+          "id": "color_006",
+          "name": "Warning Orange",
+          "hex": "#F59E0B",
+          "rgb": "rgb(245, 158, 11)",
+          "usage": "Warnings, alerts"
+        }
+      ],
+      "assetId": "asset_004",
+      "createdAt": "2024-01-10T10:15:00Z"
+    }
+  ],
+  "fontAssets": [
+    {
+      "id": "font_001",
+      "assetId": "asset_012",
+      "fontFamily": "Inter",
+      "variants": [
+        {
+          "id": "variant_001",
+          "name": "Inter Regular",
+          "weight": "400",
+          "style": "Normal",
+          "fileUrl": "/fonts/inter-regular.ttf"
+        },
+        {
+          "id": "variant_002",
+          "name": "Inter Medium",
+          "weight": "500",
+          "style": "Normal",
+          "fileUrl": "/fonts/inter-medium.ttf"
+        },
+        {
+          "id": "variant_003",
+          "name": "Inter SemiBold",
+          "weight": "600",
+          "style": "Normal",
+          "fileUrl": "/fonts/inter-semibold.ttf"
+        },
+        {
+          "id": "variant_004",
+          "name": "Inter Bold",
+          "weight": "700",
+          "style": "Normal",
+          "fileUrl": "/fonts/inter-bold.ttf"
+        }
+      ],
+      "sampleText": "The quick brown fox jumps over the lazy dog",
+      "usage": "Body text, paragraphs, UI elements"
+    },
+    {
+      "id": "font_002",
+      "assetId": "asset_013",
+      "fontFamily": "Poppins",
+      "variants": [
+        {
+          "id": "variant_005",
+          "name": "Poppins Regular",
+          "weight": "400",
+          "style": "Normal",
+          "fileUrl": "/fonts/poppins-regular.ttf"
+        },
+        {
+          "id": "variant_006",
+          "name": "Poppins SemiBold",
+          "weight": "600",
+          "style": "Normal",
+          "fileUrl": "/fonts/poppins-semibold.ttf"
+        },
+        {
+          "id": "variant_007",
+          "name": "Poppins Bold",
+          "weight": "700",
+          "style": "Normal",
+          "fileUrl": "/fonts/poppins-bold.ttf"
+        }
+      ],
+      "sampleText": "The quick brown fox jumps over the lazy dog",
+      "usage": "Headings, titles, emphasis"
+    }
+  ],
+
+  "ecommerceCategories": [
+    { "id": "cat_001", "title": "Electronics", "isActive": true, "cover": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400" },
+    { "id": "cat_002", "title": "Clothing & Apparel", "isActive": true, "cover": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400" },
+    { "id": "cat_003", "title": "Home & Living", "isActive": true, "cover": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400" },
+    { "id": "cat_004", "title": "Sports & Outdoors", "isActive": true, "cover": "https://images.unsplash.com/photo-1461896836934-bd45ba243dee?w=400" },
+    { "id": "cat_005", "title": "Books & Stationery", "isActive": true, "cover": "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400" },
+    { "id": "cat_006", "title": "Health & Beauty", "isActive": true, "cover": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400" },
+    { "id": "cat_007", "title": "Food & Beverages", "isActive": false, "cover": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400" },
+    { "id": "cat_008", "title": "Toys & Games", "isActive": true, "cover": "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400" }
+  ],
+
+  "ecommerceProducts": [
+    { "id": "prod_001", "name": "Wireless Bluetooth Headphones", "description": "Premium noise-cancelling over-ear headphones with 30hr battery life", "price": 89.99, "stock": 145, "isActive": true, "categoryId": "cat_001", "categoryName": "Electronics", "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" },
+    { "id": "prod_002", "name": "Smart Watch Pro", "description": "Fitness tracker with heart rate, GPS, and sleep monitoring", "price": 199.99, "stock": 78, "isActive": true, "categoryId": "cat_001", "categoryName": "Electronics", "imageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" },
+    { "id": "prod_003", "name": "Organic Cotton T-Shirt", "description": "Eco-friendly unisex tee in 12 colours, sizes XS-3XL", "price": 29.99, "stock": 520, "isActive": true, "categoryId": "cat_002", "categoryName": "Clothing & Apparel", "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300" },
+    { "id": "prod_004", "name": "Denim Jacket – Classic Fit", "description": "Vintage wash denim jacket with brass hardware", "price": 79.50, "stock": 64, "isActive": true, "categoryId": "cat_002", "categoryName": "Clothing & Apparel", "imageUrl": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300" },
+    { "id": "prod_005", "name": "Ceramic Plant Pot Set (3)", "description": "Minimalist matte-finish planters in small, medium and large", "price": 34.00, "stock": 200, "isActive": true, "categoryId": "cat_003", "categoryName": "Home & Living", "imageUrl": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300" },
+    { "id": "prod_006", "name": "LED Desk Lamp", "description": "Adjustable colour temperature desk lamp with USB charging port", "price": 49.99, "stock": 310, "isActive": true, "categoryId": "cat_003", "categoryName": "Home & Living", "imageUrl": "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=300" },
+    { "id": "prod_007", "name": "Yoga Mat – Premium 6mm", "description": "Non-slip TPE eco yoga mat with carrying strap", "price": 39.99, "stock": 180, "isActive": true, "categoryId": "cat_004", "categoryName": "Sports & Outdoors", "imageUrl": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=300" },
+    { "id": "prod_008", "name": "Running Shoes – Ultra Boost", "description": "Lightweight running shoes with responsive cushioning", "price": 129.00, "stock": 92, "isActive": true, "categoryId": "cat_004", "categoryName": "Sports & Outdoors", "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" },
+    { "id": "prod_009", "name": "Hardcover Notebook A5", "description": "200-page dotted notebook with lay-flat binding", "price": 14.99, "stock": 600, "isActive": true, "categoryId": "cat_005", "categoryName": "Books & Stationery", "imageUrl": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=300" },
+    { "id": "prod_010", "name": "Fountain Pen Set", "description": "Brass fountain pen with 3 ink cartridges in gift box", "price": 54.99, "stock": 45, "isActive": true, "categoryId": "cat_005", "categoryName": "Books & Stationery", "imageUrl": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=300" },
+    { "id": "prod_011", "name": "Vitamin C Serum", "description": "30ml brightening serum with hyaluronic acid", "price": 24.99, "stock": 350, "isActive": true, "categoryId": "cat_006", "categoryName": "Health & Beauty", "imageUrl": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300" },
+    { "id": "prod_012", "name": "Bamboo Toothbrush Pack (4)", "description": "Biodegradable bamboo toothbrushes with charcoal bristles", "price": 9.99, "stock": 800, "isActive": true, "categoryId": "cat_006", "categoryName": "Health & Beauty", "imageUrl": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=300" },
+    { "id": "prod_013", "name": "Portable Bluetooth Speaker", "description": "Waterproof speaker with 12hr battery, deep bass", "price": 59.99, "stock": 230, "isActive": true, "categoryId": "cat_001", "categoryName": "Electronics", "imageUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=300" },
+    { "id": "prod_014", "name": "Wooden Building Blocks (50 pcs)", "description": "Natural wood educational toy set for ages 3+", "price": 27.99, "stock": 150, "isActive": true, "categoryId": "cat_008", "categoryName": "Toys & Games", "imageUrl": "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300" },
+    { "id": "prod_015", "name": "Stainless Steel Water Bottle", "description": "750ml insulated bottle keeps drinks cold 24hrs / hot 12hrs", "price": 22.50, "stock": 410, "isActive": true, "categoryId": "cat_004", "categoryName": "Sports & Outdoors", "imageUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300" }
+  ],
+
+  "ecommerceStores": [
+    { "id": "store_001", "title": "Downtown Flagship", "email": "downtown@phoxta.com", "gsm": "+1 555-0101", "address": "123 Main Street, New York, NY 10001", "isActive": true },
+    { "id": "store_002", "title": "Westfield Mall", "email": "westfield@phoxta.com", "gsm": "+1 555-0102", "address": "456 Shopping Blvd, Los Angeles, CA 90015", "isActive": true },
+    { "id": "store_003", "title": "Online Warehouse", "email": "warehouse@phoxta.com", "gsm": "+1 555-0103", "address": "789 Industrial Ave, Dallas, TX 75201", "isActive": true },
+    { "id": "store_004", "title": "Airport Express", "email": "airport@phoxta.com", "gsm": "+1 555-0104", "address": "Terminal 3, JFK International Airport, NY 11430", "isActive": false }
+  ],
+
+  "ecommerceCustomers": [
+    { "id": "cust_001", "firstName": "Alice", "lastName": "Johnson", "gender": "Female", "gsm": "+1 555-1001", "email": "alice.johnson@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice", "address": "101 Oak Lane, Brooklyn, NY 11201" },
+    { "id": "cust_002", "firstName": "Marcus", "lastName": "Chen", "gender": "Male", "gsm": "+1 555-1002", "email": "marcus.chen@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus", "address": "202 Pine Rd, San Francisco, CA 94102" },
+    { "id": "cust_003", "firstName": "Sofia", "lastName": "Ramirez", "gender": "Female", "gsm": "+1 555-1003", "email": "sofia.ramirez@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sofia", "address": "303 Cedar Ct, Miami, FL 33101" },
+    { "id": "cust_004", "firstName": "James", "lastName": "Williams", "gender": "Male", "gsm": "+1 555-1004", "email": "james.williams@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=James", "address": "404 Elm St, Chicago, IL 60601" },
+    { "id": "cust_005", "firstName": "Priya", "lastName": "Patel", "gender": "Female", "gsm": "+1 555-1005", "email": "priya.patel@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya", "address": "505 Maple Ave, Austin, TX 73301" },
+    { "id": "cust_006", "firstName": "Daniel", "lastName": "Kim", "gender": "Male", "gsm": "+1 555-1006", "email": "daniel.kim@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Daniel", "address": "606 Birch Blvd, Seattle, WA 98101" },
+    { "id": "cust_007", "firstName": "Emma", "lastName": "Thompson", "gender": "Female", "gsm": "+1 555-1007", "email": "emma.thompson@email.com", "isActive": false, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma", "address": "707 Walnut Dr, Boston, MA 02101" },
+    { "id": "cust_008", "firstName": "Omar", "lastName": "Hassan", "gender": "Male", "gsm": "+1 555-1008", "email": "omar.hassan@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Omar", "address": "808 Spruce Way, Denver, CO 80201" },
+    { "id": "cust_009", "firstName": "Lily", "lastName": "Nguyen", "gender": "Female", "gsm": "+1 555-1009", "email": "lily.nguyen@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Lily", "address": "909 Aspen Pl, Portland, OR 97201" },
+    { "id": "cust_010", "firstName": "Ryan", "lastName": "O'Brien", "gender": "Male", "gsm": "+1 555-1010", "email": "ryan.obrien@email.com", "isActive": true, "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Ryan", "address": "1010 Willow St, Nashville, TN 37201" }
+  ],
+
+  "ecommerceCouriers": [
+    { "id": "cour_001", "name": "David", "surname": "Martinez", "email": "david.m@delivery.com", "gender": "Male", "gsm": "+1 555-2001", "address": "55 Fleet St, New York, NY 10001", "accountNumber": "AC-10001", "licensePlate": "NYC-1234", "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=David", "storeId": "store_001", "storeName": "Downtown Flagship", "status": "Available", "vehicle": { "model": "Sprinter Van", "vehicleType": "Van", "color": "White", "year": "2023", "engineSize": "2.0L" } },
+    { "id": "cour_002", "name": "Sarah", "surname": "Lee", "email": "sarah.l@delivery.com", "gender": "Female", "gsm": "+1 555-2002", "address": "88 Speed Rd, Los Angeles, CA 90015", "accountNumber": "AC-10002", "licensePlate": "LA-5678", "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah", "storeId": "store_002", "storeName": "Westfield Mall", "status": "On delivery", "vehicle": { "model": "Transit Connect", "vehicleType": "Van", "color": "Blue", "year": "2024", "engineSize": "1.5L" } },
+    { "id": "cour_003", "name": "Kevin", "surname": "Brown", "email": "kevin.b@delivery.com", "gender": "Male", "gsm": "+1 555-2003", "address": "123 Logistics Dr, Dallas, TX 75201", "accountNumber": "AC-10003", "licensePlate": "TX-9012", "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kevin", "storeId": "store_003", "storeName": "Online Warehouse", "status": "Available", "vehicle": { "model": "E-Bike Cargo", "vehicleType": "Bike", "color": "Black", "year": "2025", "engineSize": "Electric" } },
+    { "id": "cour_004", "name": "Maria", "surname": "Garcia", "email": "maria.g@delivery.com", "gender": "Female", "gsm": "+1 555-2004", "address": "45 Express Ln, New York, NY 10001", "accountNumber": "AC-10004", "licensePlate": "NYC-3456", "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria", "storeId": "store_001", "storeName": "Downtown Flagship", "status": "Offline", "vehicle": { "model": "Nissan NV200", "vehicleType": "Van", "color": "Silver", "year": "2022", "engineSize": "2.0L" } },
+    { "id": "cour_005", "name": "Tyler", "surname": "Adams", "email": "tyler.a@delivery.com", "gender": "Male", "gsm": "+1 555-2005", "address": "67 Dispatch Ave, Chicago, IL 60601", "accountNumber": "AC-10005", "licensePlate": "CHI-7890", "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Tyler", "storeId": "store_003", "storeName": "Online Warehouse", "status": "Available", "vehicle": { "model": "Ford E-Transit", "vehicleType": "Van", "color": "White", "year": "2025", "engineSize": "Electric" } }
+  ],
+
+  "ecommerceOrders": [
+    { "id": "ord_001", "amount": 179.98, "status": "Delivered", "customerId": "cust_001", "customerName": "Alice Johnson", "storeId": "store_001", "storeName": "Downtown Flagship", "courierId": "cour_001", "courierName": "David Martinez", "notes": "Leave at front door", "createdAt": "2026-01-05T10:30:00Z" },
+    { "id": "ord_002", "amount": 89.99, "status": "Delivered", "customerId": "cust_002", "customerName": "Marcus Chen", "storeId": "store_002", "storeName": "Westfield Mall", "courierId": "cour_002", "courierName": "Sarah Lee", "notes": "", "createdAt": "2026-01-08T14:15:00Z" },
+    { "id": "ord_003", "amount": 329.48, "status": "Delivered", "customerId": "cust_003", "customerName": "Sofia Ramirez", "storeId": "store_003", "storeName": "Online Warehouse", "courierId": "cour_003", "courierName": "Kevin Brown", "notes": "Gift wrap requested", "createdAt": "2026-01-12T09:00:00Z" },
+    { "id": "ord_004", "amount": 54.98, "status": "Delivered", "customerId": "cust_004", "customerName": "James Williams", "storeId": "store_001", "storeName": "Downtown Flagship", "courierId": "cour_001", "courierName": "David Martinez", "notes": "", "createdAt": "2026-01-15T16:45:00Z" },
+    { "id": "ord_005", "amount": 199.99, "status": "Delivered", "customerId": "cust_005", "customerName": "Priya Patel", "storeId": "store_002", "storeName": "Westfield Mall", "courierId": "cour_004", "courierName": "Maria Garcia", "notes": "Ring doorbell on delivery", "createdAt": "2026-01-18T11:20:00Z" },
+    { "id": "ord_006", "amount": 129.00, "status": "On The Way", "customerId": "cust_006", "customerName": "Daniel Kim", "storeId": "store_003", "storeName": "Online Warehouse", "courierId": "cour_002", "courierName": "Sarah Lee", "notes": "", "createdAt": "2026-02-01T08:30:00Z" },
+    { "id": "ord_007", "amount": 244.97, "status": "Ready", "customerId": "cust_008", "customerName": "Omar Hassan", "storeId": "store_001", "storeName": "Downtown Flagship", "courierId": null, "courierName": "", "notes": "Fragile items", "createdAt": "2026-02-05T13:00:00Z" },
+    { "id": "ord_008", "amount": 64.98, "status": "On The Way", "customerId": "cust_009", "customerName": "Lily Nguyen", "storeId": "store_003", "storeName": "Online Warehouse", "courierId": "cour_005", "courierName": "Tyler Adams", "notes": "", "createdAt": "2026-02-08T15:10:00Z" },
+    { "id": "ord_009", "amount": 159.98, "status": "Pending", "customerId": "cust_010", "customerName": "Ryan O'Brien", "storeId": "store_002", "storeName": "Westfield Mall", "courierId": null, "courierName": "", "notes": "Birthday gift", "createdAt": "2026-02-10T10:00:00Z" },
+    { "id": "ord_010", "amount": 89.50, "status": "Pending", "customerId": "cust_001", "customerName": "Alice Johnson", "storeId": "store_001", "storeName": "Downtown Flagship", "courierId": null, "courierName": "", "notes": "", "createdAt": "2026-02-12T09:45:00Z" },
+    { "id": "ord_011", "amount": 42.49, "status": "Cancelled", "customerId": "cust_007", "customerName": "Emma Thompson", "storeId": "store_003", "storeName": "Online Warehouse", "courierId": null, "courierName": "", "notes": "Customer requested cancellation", "createdAt": "2026-01-20T17:30:00Z" },
+    { "id": "ord_012", "amount": 274.98, "status": "Delivered", "customerId": "cust_002", "customerName": "Marcus Chen", "storeId": "store_001", "storeName": "Downtown Flagship", "courierId": "cour_003", "courierName": "Kevin Brown", "notes": "", "createdAt": "2026-01-25T12:00:00Z" }
+  ],
+
+  "ecommerceOrderProducts": [
+    { "id": "op_001", "orderId": "ord_001", "productId": "prod_001", "quantity": 1, "price": 89.99, "productName": "Wireless Bluetooth Headphones", "productImageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" },
+    { "id": "op_002", "orderId": "ord_001", "productId": "prod_003", "quantity": 3, "price": 29.99, "productName": "Organic Cotton T-Shirt", "productImageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300" },
+    { "id": "op_003", "orderId": "ord_002", "productId": "prod_001", "quantity": 1, "price": 89.99, "productName": "Wireless Bluetooth Headphones", "productImageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" },
+    { "id": "op_004", "orderId": "ord_003", "productId": "prod_002", "quantity": 1, "price": 199.99, "productName": "Smart Watch Pro", "productImageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" },
+    { "id": "op_005", "orderId": "ord_003", "productId": "prod_008", "quantity": 1, "price": 129.00, "productName": "Running Shoes – Ultra Boost", "productImageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" },
+    { "id": "op_006", "orderId": "ord_004", "productId": "prod_009", "quantity": 2, "price": 14.99, "productName": "Hardcover Notebook A5", "productImageUrl": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=300" },
+    { "id": "op_007", "orderId": "ord_004", "productId": "prod_011", "quantity": 1, "price": 24.99, "productName": "Vitamin C Serum", "productImageUrl": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300" },
+    { "id": "op_008", "orderId": "ord_005", "productId": "prod_002", "quantity": 1, "price": 199.99, "productName": "Smart Watch Pro", "productImageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" },
+    { "id": "op_009", "orderId": "ord_006", "productId": "prod_008", "quantity": 1, "price": 129.00, "productName": "Running Shoes – Ultra Boost", "productImageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" },
+    { "id": "op_010", "orderId": "ord_007", "productId": "prod_004", "quantity": 1, "price": 79.50, "productName": "Denim Jacket – Classic Fit", "productImageUrl": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300" },
+    { "id": "op_011", "orderId": "ord_007", "productId": "prod_013", "quantity": 1, "price": 59.99, "productName": "Portable Bluetooth Speaker", "productImageUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=300" },
+    { "id": "op_012", "orderId": "ord_007", "productId": "prod_010", "quantity": 1, "price": 54.99, "productName": "Fountain Pen Set", "productImageUrl": "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=300" },
+    { "id": "op_013", "orderId": "ord_007", "productId": "prod_006", "quantity": 1, "price": 49.99, "productName": "LED Desk Lamp", "productImageUrl": "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=300" },
+    { "id": "op_014", "orderId": "ord_008", "productId": "prod_007", "quantity": 1, "price": 39.99, "productName": "Yoga Mat – Premium 6mm", "productImageUrl": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=300" },
+    { "id": "op_015", "orderId": "ord_008", "productId": "prod_011", "quantity": 1, "price": 24.99, "productName": "Vitamin C Serum", "productImageUrl": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=300" },
+    { "id": "op_016", "orderId": "ord_009", "productId": "prod_008", "quantity": 1, "price": 129.00, "productName": "Running Shoes – Ultra Boost", "productImageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" },
+    { "id": "op_017", "orderId": "ord_009", "productId": "prod_003", "quantity": 1, "price": 29.99, "productName": "Organic Cotton T-Shirt", "productImageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300" },
+    { "id": "op_018", "orderId": "ord_010", "productId": "prod_004", "quantity": 1, "price": 79.50, "productName": "Denim Jacket – Classic Fit", "productImageUrl": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=300" },
+    { "id": "op_019", "orderId": "ord_010", "productId": "prod_012", "quantity": 1, "price": 9.99, "productName": "Bamboo Toothbrush Pack (4)", "productImageUrl": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=300" },
+    { "id": "op_020", "orderId": "ord_011", "productId": "prod_015", "quantity": 1, "price": 22.50, "productName": "Stainless Steel Water Bottle", "productImageUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300" },
+    { "id": "op_021", "orderId": "ord_011", "productId": "prod_009", "quantity": 1, "price": 14.99, "productName": "Hardcover Notebook A5", "productImageUrl": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=300" },
+    { "id": "op_022", "orderId": "ord_012", "productId": "prod_002", "quantity": 1, "price": 199.99, "productName": "Smart Watch Pro", "productImageUrl": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" },
+    { "id": "op_023", "orderId": "ord_012", "productId": "prod_005", "quantity": 2, "price": 34.00, "productName": "Ceramic Plant Pot Set (3)", "productImageUrl": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300" }
+  ],
+
+  "ecommerceReviews": [
+    { "id": "rev_001", "courierId": "cour_001", "customerId": "cust_001", "customerName": "Alice Johnson", "orderId": "ord_001", "star": 5, "text": "Super fast delivery, package was in perfect condition!", "status": "approved", "createdAt": "2026-01-06T09:00:00Z" },
+    { "id": "rev_002", "courierId": "cour_002", "customerId": "cust_002", "customerName": "Marcus Chen", "orderId": "ord_002", "star": 4, "text": "Delivery was on time, friendly driver.", "status": "approved", "createdAt": "2026-01-09T18:30:00Z" },
+    { "id": "rev_003", "courierId": "cour_003", "customerId": "cust_003", "customerName": "Sofia Ramirez", "orderId": "ord_003", "star": 5, "text": "Amazing service! Gift wrapping was beautifully done.", "status": "approved", "createdAt": "2026-01-13T11:00:00Z" },
+    { "id": "rev_004", "courierId": "cour_001", "customerId": "cust_004", "customerName": "James Williams", "orderId": "ord_004", "star": 3, "text": "Delivery was okay but arrived a bit later than expected.", "status": "approved", "createdAt": "2026-01-16T20:00:00Z" },
+    { "id": "rev_005", "courierId": "cour_004", "customerId": "cust_005", "customerName": "Priya Patel", "orderId": "ord_005", "star": 5, "text": "Excellent! Very professional and careful with the package.", "status": "approved", "createdAt": "2026-01-19T14:00:00Z" },
+    { "id": "rev_006", "courierId": "cour_002", "customerId": "cust_006", "customerName": "Daniel Kim", "orderId": "ord_006", "star": 4, "text": "Good tracking updates throughout the delivery.", "status": "pending", "createdAt": "2026-02-02T10:00:00Z" },
+    { "id": "rev_007", "courierId": "cour_003", "customerId": "cust_002", "customerName": "Marcus Chen", "orderId": "ord_012", "star": 5, "text": "Kevin always delivers with a smile. Outstanding!", "status": "approved", "createdAt": "2026-01-26T08:00:00Z" },
+    { "id": "rev_008", "courierId": "cour_005", "customerId": "cust_009", "customerName": "Lily Nguyen", "orderId": "ord_008", "star": 2, "text": "Package arrived with minor damage to the outer box.", "status": "pending", "createdAt": "2026-02-09T16:30:00Z" }
+  ],
+
+  "staff": [
+    { "id": "staff_001", "firstName": "James", "lastName": "Mitchell", "email": "james.mitchell@phoxta.com", "phone": "+44 7700 900101", "department": "Engineering", "jobTitle": "Senior Developer", "employmentType": "Full-time", "salary": 72000, "startDate": "2023-03-15", "endDate": null, "status": "Active", "avatar": null, "notes": "Team lead for the backend services." },
+    { "id": "staff_002", "firstName": "Sarah", "lastName": "Williams", "email": "sarah.williams@phoxta.com", "phone": "+44 7700 900102", "department": "Design", "jobTitle": "UI/UX Designer", "employmentType": "Full-time", "salary": 58000, "startDate": "2023-06-01", "endDate": null, "status": "Active", "avatar": null, "notes": "Responsible for all product design work." },
+    { "id": "staff_003", "firstName": "Oliver", "lastName": "Thompson", "email": "oliver.thompson@phoxta.com", "phone": "+44 7700 900103", "department": "Marketing", "jobTitle": "Marketing Manager", "employmentType": "Full-time", "salary": 62000, "startDate": "2022-11-20", "endDate": null, "status": "Active", "avatar": null, "notes": "Leads digital marketing campaigns." },
+    { "id": "staff_004", "firstName": "Emily", "lastName": "Clarke", "email": "emily.clarke@phoxta.com", "phone": "+44 7700 900104", "department": "Sales", "jobTitle": "Sales Executive", "employmentType": "Full-time", "salary": 48000, "startDate": "2024-01-10", "endDate": null, "status": "Active", "avatar": null, "notes": "Handles enterprise client accounts." },
+    { "id": "staff_005", "firstName": "Daniel", "lastName": "Roberts", "email": "daniel.roberts@phoxta.com", "phone": "+44 7700 900105", "department": "Engineering", "jobTitle": "Frontend Developer", "employmentType": "Full-time", "salary": 65000, "startDate": "2023-09-01", "endDate": null, "status": "Active", "avatar": null, "notes": "Specialises in React and TypeScript." },
+    { "id": "staff_006", "firstName": "Charlotte", "lastName": "Evans", "email": "charlotte.evans@phoxta.com", "phone": "+44 7700 900106", "department": "HR", "jobTitle": "HR Coordinator", "employmentType": "Part-time", "salary": 32000, "startDate": "2024-03-15", "endDate": null, "status": "Active", "avatar": null, "notes": "Manages onboarding and employee relations." },
+    { "id": "staff_007", "firstName": "Mohammed", "lastName": "Ali", "email": "mohammed.ali@phoxta.com", "phone": "+44 7700 900107", "department": "Finance", "jobTitle": "Financial Analyst", "employmentType": "Full-time", "salary": 55000, "startDate": "2023-01-05", "endDate": null, "status": "On Leave", "avatar": null, "notes": "Currently on paternity leave until March." },
+    { "id": "staff_008", "firstName": "Sophie", "lastName": "Brown", "email": "sophie.brown@phoxta.com", "phone": "+44 7700 900108", "department": "Support", "jobTitle": "Customer Support Lead", "employmentType": "Full-time", "salary": 42000, "startDate": "2022-08-20", "endDate": null, "status": "Active", "avatar": null, "notes": "Oversees the support ticketing queue." },
+    { "id": "staff_009", "firstName": "Ryan", "lastName": "Patel", "email": "ryan.patel@phoxta.com", "phone": "+44 7700 900109", "department": "Engineering", "jobTitle": "QA Engineer", "employmentType": "Contract", "salary": 45000, "startDate": "2024-06-01", "endDate": "2025-06-01", "status": "Active", "avatar": null, "notes": "6-month contract for release testing." },
+    { "id": "staff_010", "firstName": "Amelia", "lastName": "Hughes", "email": "amelia.hughes@phoxta.com", "phone": "+44 7700 900110", "department": "Operations", "jobTitle": "Operations Intern", "employmentType": "Intern", "salary": 22000, "startDate": "2024-09-01", "endDate": "2025-03-01", "status": "Active", "avatar": null, "notes": "University placement student from Bristol." }
+  ],
+
+  "emailTemplates": [
+    { "id": "etpl_001", "name": "Order Confirmation", "subject": "Your order #{{orderNumber}} has been confirmed", "body": "<h2>Thank you for your order!</h2><p>Hi {{customerName}},</p><p>We've received your order <strong>#{{orderNumber}}</strong> for <strong>{{amount}}</strong>.</p><p>We'll notify you once your order has been dispatched.</p><p>Best regards,<br/>The Phoxta Team</p>", "category": "order", "variables": [{"name": "orderNumber", "defaultValue": ""}, {"name": "customerName", "defaultValue": ""}, {"name": "amount", "defaultValue": ""}], "isActive": true },
+    { "id": "etpl_002", "name": "Shipping Notification", "subject": "Your order #{{orderNumber}} has been shipped!", "body": "<h2>Your order is on its way!</h2><p>Hi {{customerName}},</p><p>Great news — your order <strong>#{{orderNumber}}</strong> has been dispatched and is on its way to you.</p><p>Estimated delivery: {{deliveryDate}}</p><p>Kind regards,<br/>The Phoxta Team</p>", "category": "order", "variables": [{"name": "orderNumber", "defaultValue": ""}, {"name": "customerName", "defaultValue": ""}, {"name": "deliveryDate", "defaultValue": ""}], "isActive": true },
+    { "id": "etpl_003", "name": "Welcome Email", "subject": "Welcome to Phoxta, {{customerName}}!", "body": "<h2>Welcome aboard!</h2><p>Hi {{customerName}},</p><p>Thank you for joining Phoxta. We're excited to have you!</p><p>If you have any questions, don't hesitate to reach out to our support team.</p><p>Cheers,<br/>The Phoxta Team</p>", "category": "general", "variables": [{"name": "customerName", "defaultValue": ""}], "isActive": true },
+    { "id": "etpl_004", "name": "Support Ticket Reply", "subject": "Re: Support Ticket #{{ticketNumber}}", "body": "<p>Hi {{customerName}},</p><p>Thank you for reaching out. We've reviewed your support request #{{ticketNumber}}.</p><p>{{responseBody}}</p><p>If you need further assistance, please reply to this email.</p><p>Best,<br/>Phoxta Support</p>", "category": "support", "variables": [{"name": "ticketNumber", "defaultValue": ""}, {"name": "customerName", "defaultValue": ""}, {"name": "responseBody", "defaultValue": ""}], "isActive": true },
+    { "id": "etpl_005", "name": "Monthly Newsletter", "subject": "Phoxta Monthly Update — {{month}}", "body": "<h2>Monthly Update</h2><p>Hi {{customerName}},</p><p>Here's what's new at Phoxta this month:</p><ul><li>{{highlight1}}</li><li>{{highlight2}}</li><li>{{highlight3}}</li></ul><p>Stay tuned for more updates!</p><p>The Phoxta Team</p>", "category": "marketing", "variables": [{"name": "month", "defaultValue": ""}, {"name": "customerName", "defaultValue": ""}, {"name": "highlight1", "defaultValue": ""}, {"name": "highlight2", "defaultValue": ""}, {"name": "highlight3", "defaultValue": ""}], "isActive": true },
+    { "id": "etpl_006", "name": "Invoice Reminder", "subject": "Invoice #{{invoiceNumber}} — Payment Due", "body": "<p>Hi {{customerName}},</p><p>This is a friendly reminder that invoice <strong>#{{invoiceNumber}}</strong> for <strong>{{amount}}</strong> is due on <strong>{{dueDate}}</strong>.</p><p>Please ensure payment is made by the due date.</p><p>Thank you,<br/>Phoxta Finance</p>", "category": "general", "variables": [{"name": "invoiceNumber", "defaultValue": ""}, {"name": "customerName", "defaultValue": ""}, {"name": "amount", "defaultValue": ""}, {"name": "dueDate", "defaultValue": ""}], "isActive": true }
+  ],
+
+  "emails": [
+    { "id": "em_001", "fromAddress": "sales@phoxta.com", "fromName": "Phoxta Sales", "toAddresses": ["alice.johnson@example.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "sales@phoxta.com", "subject": "Your order #1001 has been confirmed", "body": "<h2>Thank you for your order!</h2><p>Hi Alice,</p><p>We've received your order <strong>#1001</strong> for <strong>£349.97</strong>.</p><p>We'll notify you once your order has been dispatched.</p><p>Best regards,<br/>The Phoxta Team</p>", "status": "sent", "category": "order", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "Thank you for your order! Hi Alice, We've received your order #1001 for £349.97. We'll notify you once your order has been dispatched.", "messageId": "<em_001@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-01-15T10:30:00Z", "createdAt": "2026-01-15T10:30:00Z" },
+    { "id": "em_002", "fromAddress": "support@phoxta.com", "fromName": "Phoxta Support", "toAddresses": ["marcus.chen@example.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "support@phoxta.com", "subject": "Re: Support Ticket #2045", "body": "<p>Hi Marcus,</p><p>Thank you for reaching out. We've reviewed your support request #2045.</p><p>The issue with your order delivery has been escalated and you should receive an update within 24 hours.</p><p>Best,<br/>Phoxta Support</p>", "status": "sent", "category": "support", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "Hi Marcus, Thank you for reaching out. We've reviewed your support request #2045. The issue with your order delivery has been escalated.", "messageId": "<em_002@phoxta.app>", "threadId": "thread_support_2045", "inReplyTo": null, "errorMessage": "", "sentAt": "2026-01-18T14:15:00Z", "createdAt": "2026-01-18T14:15:00Z" },
+    { "id": "em_003", "fromAddress": "marketing@phoxta.com", "fromName": "Phoxta Marketing", "toAddresses": ["sofia.ramirez@example.com", "james.williams@example.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "marketing@phoxta.com", "subject": "Phoxta Monthly Update — January", "body": "<h2>Monthly Update</h2><p>Hi there,</p><p>Here's what's new at Phoxta this month:</p><ul><li>New product categories added</li><li>Improved order tracking</li><li>Customer loyalty programme launched</li></ul><p>Stay tuned for more updates!</p><p>The Phoxta Team</p>", "status": "sent", "category": "marketing", "folder": "sent", "isRead": true, "isStarred": true, "hasAttachments": false, "labels": [], "snippet": "Monthly Update Hi there, Here's what's new at Phoxta this month: New product categories added, Improved order tracking, Customer loyalty programme launched.", "messageId": "<em_003@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-01-31T09:00:00Z", "createdAt": "2026-01-31T09:00:00Z" },
+    { "id": "em_004", "fromAddress": "sales@phoxta.com", "fromName": "Phoxta Sales", "toAddresses": ["priya.patel@example.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "sales@phoxta.com", "subject": "Your order #1005 has been shipped!", "body": "<h2>Your order is on its way!</h2><p>Hi Priya,</p><p>Great news — your order <strong>#1005</strong> has been dispatched and is on its way to you.</p><p>Estimated delivery: 22 January 2026</p><p>Kind regards,<br/>The Phoxta Team</p>", "status": "sent", "category": "order", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": true, "labels": [], "snippet": "Your order is on its way! Hi Priya, Great news — your order #1005 has been dispatched. Estimated delivery: 22 January 2026.", "messageId": "<em_004@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-01-20T11:45:00Z", "createdAt": "2026-01-20T11:45:00Z" },
+    { "id": "em_005", "fromAddress": "hello@phoxta.com", "fromName": "Phoxta", "toAddresses": ["daniel.kim@example.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "hello@phoxta.com", "subject": "Welcome to Phoxta, Daniel!", "body": "<h2>Welcome aboard!</h2><p>Hi Daniel,</p><p>Thank you for joining Phoxta. We're excited to have you!</p><p>If you have any questions, don't hesitate to reach out to our support team.</p><p>Cheers,<br/>The Phoxta Team</p>", "status": "sent", "category": "general", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "Welcome aboard! Hi Daniel, Thank you for joining Phoxta. We're excited to have you! If you have any questions, don't hesitate to reach out.", "messageId": "<em_005@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-01T08:00:00Z", "createdAt": "2026-02-01T08:00:00Z" },
+    { "id": "em_006", "fromAddress": "support@phoxta.com", "fromName": "Phoxta Support", "toAddresses": ["lily.nguyen@example.com"], "ccAddresses": ["manager@phoxta.com"], "bccAddresses": [], "replyTo": "support@phoxta.com", "subject": "Re: Damaged package — Order #1008", "body": "<p>Hi Lily,</p><p>We sincerely apologise for the damage to your package. We've arranged a replacement to be sent out today at no extra cost.</p><p>You should receive the replacement within 3–5 business days.</p><p>Best,<br/>Phoxta Support</p>", "status": "sent", "category": "support", "folder": "sent", "isRead": true, "isStarred": true, "hasAttachments": false, "labels": [], "snippet": "Hi Lily, We sincerely apologise for the damage to your package. We've arranged a replacement to be sent out today at no extra cost.", "messageId": "<em_006@phoxta.app>", "threadId": "thread_order_1008", "inReplyTo": null, "errorMessage": "", "sentAt": "2026-02-10T16:00:00Z", "createdAt": "2026-02-10T16:00:00Z" },
+    { "id": "em_007", "fromAddress": "finance@phoxta.com", "fromName": "Phoxta Finance", "toAddresses": ["accounts@partner-corp.com"], "ccAddresses": [], "bccAddresses": ["cfo@phoxta.com"], "replyTo": "finance@phoxta.com", "subject": "Invoice #INV-2026-042 — Payment Due", "body": "<p>Hi there,</p><p>This is a friendly reminder that invoice <strong>#INV-2026-042</strong> for <strong>£4,250.00</strong> is due on <strong>28 February 2026</strong>.</p><p>Please ensure payment is made by the due date.</p><p>Thank you,<br/>Phoxta Finance</p>", "status": "sent", "category": "general", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": true, "labels": [], "snippet": "Hi there, This is a friendly reminder that invoice #INV-2026-042 for £4,250.00 is due on 28 February 2026.", "messageId": "<em_007@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-14T10:00:00Z", "createdAt": "2026-02-14T10:00:00Z" },
+    { "id": "em_008", "fromAddress": "marketing@phoxta.com", "fromName": "Phoxta Marketing", "toAddresses": ["subscribers@list.phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "marketing@phoxta.com", "subject": "Valentine's Day Special — 20% Off Everything!", "body": "<h2>❤️ Valentine's Day Sale</h2><p>For a limited time, enjoy <strong>20% off</strong> everything in our store.</p><p>Use code: <strong>LOVE20</strong> at checkout.</p><p>Offer ends 16 February 2026.</p><p>Happy shopping!<br/>The Phoxta Team</p>", "status": "sent", "category": "marketing", "folder": "sent", "isRead": true, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "Valentine's Day Sale For a limited time, enjoy 20% off everything in our store. Use code: LOVE20 at checkout.", "messageId": "<em_008@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-12T07:00:00Z", "createdAt": "2026-02-12T07:00:00Z" },
+    { "id": "em_009", "fromAddress": "sarah.johnson@clientcorp.com", "fromName": "Sarah Johnson", "toAddresses": ["hello@phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "sarah.johnson@clientcorp.com", "subject": "Re: Project Update — Q1 Report", "body": "<p>Hi,</p><p>Thanks for the update. The Q1 numbers look great — I've forwarded the summary to the leadership team.</p><p>Let's schedule a quick call tomorrow to review next steps.</p><p>Best,<br/>Sarah</p>", "status": "received", "category": "general", "folder": "inbox", "isRead": false, "isStarred": true, "hasAttachments": false, "labels": [], "snippet": "Hi, Thanks for the update. The Q1 numbers look great — I've forwarded the summary to the leadership team. Let's schedule a quick call tomorrow.", "messageId": "<em_009@phoxta.app>", "threadId": "thread_q1_report", "inReplyTo": null, "errorMessage": "", "sentAt": "2026-02-16T09:30:00Z", "createdAt": "2026-02-16T09:30:00Z" },
+    { "id": "em_010", "fromAddress": "orders@shopify.example.com", "fromName": "Order System", "toAddresses": ["hello@phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "orders@shopify.example.com", "subject": "New Order #10482 — £249.00", "body": "<p>A new order has been placed.</p><p><strong>Order #10482</strong><br/>Customer: Mike Chen<br/>Total: £249.00<br/>Items: Premium Widget (x2)</p><p>Shipping: Express (2-day)</p>", "status": "received", "category": "order", "folder": "inbox", "isRead": false, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "A new order has been placed. Order #10482 Customer: Mike Chen Total: £249.00 Items: Premium Widget (x2) Shipping: Express (2-day).", "messageId": "<em_010@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-16T07:15:00Z", "createdAt": "2026-02-16T07:15:00Z" },
+    { "id": "em_011", "fromAddress": "alex.rivera@clientcorp.com", "fromName": "Alex Rivera", "toAddresses": ["support@phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "alex.rivera@clientcorp.com", "subject": "Support Ticket #871 — Login issue", "body": "<p>Hello Support,</p><p>I'm unable to log into my account since this morning. I've tried resetting my password but the reset email never arrives.</p><p>Can you please check if my account is locked?</p><p>Account email: alex@clientcorp.com</p><p>Thanks,<br/>Alex</p>", "status": "received", "category": "support", "folder": "inbox", "isRead": true, "isStarred": false, "hasAttachments": false, "labels": [], "snippet": "Hello Support, I'm unable to log into my account since this morning. I've tried resetting my password but the reset email never arrives.", "messageId": "<em_011@phoxta.app>", "threadId": "thread_ticket_871", "inReplyTo": null, "errorMessage": "", "sentAt": "2026-02-15T16:00:00Z", "createdAt": "2026-02-15T16:00:00Z" },
+    { "id": "em_012", "fromAddress": "noreply@mailchimp.example.com", "fromName": "Marketing Platform", "toAddresses": ["marketing@phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "", "subject": "Campaign Results: February Newsletter", "body": "<p>Your campaign \"February Newsletter\" was sent to 2,450 recipients.</p><p>Open Rate: 34.2%<br/>Click Rate: 8.7%<br/>Unsubscribes: 3</p><p>Top clicked link: /winter-clearance (214 clicks)</p>", "status": "received", "category": "marketing", "folder": "inbox", "isRead": false, "isStarred": false, "hasAttachments": true, "labels": [], "snippet": "Your campaign \"February Newsletter\" was sent to 2,450 recipients. Open Rate: 34.2% Click Rate: 8.7% Unsubscribes: 3.", "messageId": "<em_012@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-15T10:00:00Z", "createdAt": "2026-02-15T10:00:00Z" },
+    { "id": "em_013", "fromAddress": "david.park@partner.io", "fromName": "David Park", "toAddresses": ["hello@phoxta.com"], "ccAddresses": [], "bccAddresses": [], "replyTo": "david.park@partner.io", "subject": "Partnership Proposal — 2026 Integration", "body": "<p>Hi there,</p><p>Following up on our discussion at the conference last week. We'd love to explore a deeper integration between our platforms.</p><p>I've drafted a brief proposal outlining the key areas we think could benefit both teams.</p><p>Would next Wednesday at 2pm work for a call?</p><p>Regards,<br/>David</p>", "status": "received", "category": "general", "folder": "inbox", "isRead": true, "isStarred": false, "hasAttachments": true, "labels": [], "snippet": "Hi there, Following up on our discussion at the conference last week. We'd love to explore a deeper integration between our platforms.", "messageId": "<em_013@phoxta.app>", "threadId": null, "errorMessage": "", "sentAt": "2026-02-14T14:30:00Z", "createdAt": "2026-02-14T14:30:00Z" }
+  ]
+}

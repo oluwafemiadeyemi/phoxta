@@ -311,6 +311,31 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('design-exports', 'design-exports', false)
 ON CONFLICT (id) DO NOTHING;
 
+-- CRM Storage Buckets
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('profile_images', 'profile_images', true)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('task_attachments', 'task_attachments', true)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('chat_uploads', 'chat_uploads', false)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('project_images', 'project_images', true)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('product-images', 'product-images', true)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('landing-assets', 'landing-assets', true)
+ON CONFLICT (id) DO NOTHING;
+
 
 -- ===========================================================================
 -- STORAGE RLS POLICIES
@@ -342,6 +367,87 @@ CREATE POLICY "se_insert" ON storage.objects FOR INSERT
 DROP POLICY IF EXISTS "se_update" ON storage.objects;
 CREATE POLICY "se_update" ON storage.objects FOR UPDATE
   USING (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+
+-- CRM Storage Policies: profile_images (user-scoped, public bucket)
+DROP POLICY IF EXISTS "crm_profile_select" ON storage.objects;
+CREATE POLICY "crm_profile_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'profile_images');
+DROP POLICY IF EXISTS "crm_profile_insert" ON storage.objects;
+CREATE POLICY "crm_profile_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'profile_images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_profile_update" ON storage.objects;
+CREATE POLICY "crm_profile_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'profile_images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_profile_delete" ON storage.objects;
+CREATE POLICY "crm_profile_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'profile_images' AND auth.uid() IS NOT NULL);
+
+-- CRM Storage Policies: task_attachments (user-scoped, public bucket)
+DROP POLICY IF EXISTS "crm_task_att_select" ON storage.objects;
+CREATE POLICY "crm_task_att_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'task_attachments');
+DROP POLICY IF EXISTS "crm_task_att_insert" ON storage.objects;
+CREATE POLICY "crm_task_att_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'task_attachments' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_task_att_update" ON storage.objects;
+CREATE POLICY "crm_task_att_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'task_attachments' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_task_att_delete" ON storage.objects;
+CREATE POLICY "crm_task_att_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'task_attachments' AND auth.uid() IS NOT NULL);
+
+-- CRM Storage Policies: chat_uploads (private, user-scoped by folder)
+DROP POLICY IF EXISTS "crm_chat_select" ON storage.objects;
+CREATE POLICY "crm_chat_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'chat_uploads' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_chat_insert" ON storage.objects;
+CREATE POLICY "crm_chat_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'chat_uploads' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_chat_delete" ON storage.objects;
+CREATE POLICY "crm_chat_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'chat_uploads' AND auth.uid() IS NOT NULL);
+
+-- CRM Storage Policies: project_images (public bucket)
+DROP POLICY IF EXISTS "crm_proj_img_select" ON storage.objects;
+CREATE POLICY "crm_proj_img_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'project_images');
+DROP POLICY IF EXISTS "crm_proj_img_insert" ON storage.objects;
+CREATE POLICY "crm_proj_img_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'project_images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_proj_img_update" ON storage.objects;
+CREATE POLICY "crm_proj_img_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'project_images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_proj_img_delete" ON storage.objects;
+CREATE POLICY "crm_proj_img_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'project_images' AND auth.uid() IS NOT NULL);
+
+-- CRM Storage Policies: product-images (public bucket)
+DROP POLICY IF EXISTS "crm_product_img_select" ON storage.objects;
+CREATE POLICY "crm_product_img_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'product-images');
+DROP POLICY IF EXISTS "crm_product_img_insert" ON storage.objects;
+CREATE POLICY "crm_product_img_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'product-images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_product_img_update" ON storage.objects;
+CREATE POLICY "crm_product_img_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'product-images' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_product_img_delete" ON storage.objects;
+CREATE POLICY "crm_product_img_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'product-images' AND auth.uid() IS NOT NULL);
+
+-- CRM Storage Policies: landing-assets (public bucket)
+DROP POLICY IF EXISTS "crm_landing_select" ON storage.objects;
+CREATE POLICY "crm_landing_select" ON storage.objects FOR SELECT
+  USING (bucket_id = 'landing-assets');
+DROP POLICY IF EXISTS "crm_landing_insert" ON storage.objects;
+CREATE POLICY "crm_landing_insert" ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'landing-assets' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_landing_update" ON storage.objects;
+CREATE POLICY "crm_landing_update" ON storage.objects FOR UPDATE
+  USING (bucket_id = 'landing-assets' AND auth.uid() IS NOT NULL);
+DROP POLICY IF EXISTS "crm_landing_delete" ON storage.objects;
+CREATE POLICY "crm_landing_delete" ON storage.objects FOR DELETE
+  USING (bucket_id = 'landing-assets' AND auth.uid() IS NOT NULL);
 
 
 -- ===========================================================================
