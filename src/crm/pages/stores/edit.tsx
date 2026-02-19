@@ -22,6 +22,13 @@ import {
   Trash2,
   AlertTriangle,
   Upload,
+  CreditCard,
+  Building2,
+  Percent,
+  Banknote,
+  Eye,
+  EyeOff,
+  Palette,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@crm/components/ui/card";
@@ -93,6 +100,41 @@ export default function StoresEdit() {
   const heroFileInputRef = useRef<HTMLInputElement>(null);
   const bannerFileInputRef = useRef<HTMLInputElement>(null);
 
+  // Logo state
+  const [logoLightUrl, setLogoLightUrl] = useState("");
+  const [logoDarkUrl, setLogoDarkUrl] = useState("");
+  const [isUploadingLogoLight, setIsUploadingLogoLight] = useState(false);
+  const [isUploadingLogoDark, setIsUploadingLogoDark] = useState(false);
+  const [logoLightUploadProgress, setLogoLightUploadProgress] = useState("");
+  const [logoDarkUploadProgress, setLogoDarkUploadProgress] = useState("");
+  const logoLightFileInputRef = useRef<HTMLInputElement>(null);
+  const logoDarkFileInputRef = useRef<HTMLInputElement>(null);
+
+  // Payment settings state
+  const [stripePublishableKey, setStripePublishableKey] = useState("");
+  const [stripeSecretKey, setStripeSecretKey] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [bankAccountName, setBankAccountName] = useState("");
+  const [bankAccountNumber, setBankAccountNumber] = useState("");
+  const [bankSortCode, setBankSortCode] = useState("");
+  const [bankIban, setBankIban] = useState("");
+  const [bankReferencePrefix, setBankReferencePrefix] = useState("ORD");
+  const [showStripeSecret, setShowStripeSecret] = useState(false);
+
+  // Tax settings state
+  const [taxEnabled, setTaxEnabled] = useState(false);
+  const [taxRate, setTaxRate] = useState(0);
+  const [taxLabel, setTaxLabel] = useState("VAT");
+
+  // Branding settings state
+  const [brandPrimary, setBrandPrimary] = useState("");
+  const [brandSecondary, setBrandSecondary] = useState("");
+  const [brandAccent, setBrandAccent] = useState("");
+  const [brandBackground, setBrandBackground] = useState("");
+  const [brandForeground, setBrandForeground] = useState("");
+  const [brandMuted, setBrandMuted] = useState("");
+  const [brandSchemeName, setBrandSchemeName] = useState("");
+
   const [isSaving, setIsSaving] = useState(false);
   const { mutate: updateStore } = useUpdate();
   const { mutate: deleteStore } = useDelete();
@@ -149,6 +191,8 @@ export default function StoresEdit() {
       setAddress(store.address || "");
       setIsActive(store.isActive);
       setHeroImageUrl(store.heroImageUrl || "");
+      setLogoLightUrl(store.logoLightUrl || "");
+      setLogoDarkUrl(store.logoDarkUrl || "");
       setHeroTitle(store.heroTitle || "");
       setHeroSubtitle(store.heroSubtitle || "");
       setHeroBadgeText(store.heroBadgeText || "");
@@ -159,6 +203,25 @@ export default function StoresEdit() {
       setHeroTypewriterInput("");
       setHeroProductIds(store.heroProductIds || []);
       setHeroBanners(store.heroBanners || []);
+      setStripePublishableKey(store.stripePublishableKey || "");
+      setStripeSecretKey((store as any).stripeSecretKey || "");
+      setBankName(store.bankName || "");
+      setBankAccountName(store.bankAccountName || "");
+      setBankAccountNumber(store.bankAccountNumber || "");
+      setBankSortCode(store.bankSortCode || "");
+      setBankIban(store.bankIban || "");
+      setBankReferencePrefix(store.bankReferencePrefix || "ORD");
+      setTaxEnabled(store.taxEnabled || false);
+      setTaxRate(store.taxRate || 0);
+      setTaxLabel(store.taxLabel || "VAT");
+      setBrandPrimary(store.brandPrimary || "");
+      setBrandSecondary(store.brandSecondary || "");
+      setBrandAccent(store.brandAccent || "");
+      setBrandBackground(store.brandBackground || "");
+      setBrandForeground(store.brandForeground || "");
+      setBrandMuted(store.brandMuted || "");
+      setBrandSchemeName(store.brandSchemeName || "");
+      setShowStripeSecret(false);
       setIsEditing(true);
     }
   };
@@ -176,6 +239,8 @@ export default function StoresEdit() {
           gsm,
           address,
           isActive,
+          logoLightUrl: logoLightUrl || null,
+          logoDarkUrl: logoDarkUrl || null,
           heroImageUrl: heroImageUrl || null,
           heroTitle: heroTitle || null,
           heroSubtitle: heroSubtitle || null,
@@ -186,6 +251,24 @@ export default function StoresEdit() {
           heroTypewriterWords: heroTypewriterWords.length > 0 ? heroTypewriterWords : null,
           heroProductIds: heroProductIds.length > 0 ? heroProductIds : null,
           heroBanners: heroBanners.length > 0 ? heroBanners : null,
+          stripePublishableKey: stripePublishableKey || null,
+          stripeSecretKey: stripeSecretKey || null,
+          bankName: bankName || null,
+          bankAccountName: bankAccountName || null,
+          bankAccountNumber: bankAccountNumber || null,
+          bankSortCode: bankSortCode || null,
+          bankIban: bankIban || null,
+          bankReferencePrefix: bankReferencePrefix || "ORD",
+          taxEnabled,
+          taxRate: taxRate || 0,
+          taxLabel: taxLabel || "VAT",
+          brandPrimary: brandPrimary || null,
+          brandSecondary: brandSecondary || null,
+          brandAccent: brandAccent || null,
+          brandBackground: brandBackground || null,
+          brandForeground: brandForeground || null,
+          brandMuted: brandMuted || null,
+          brandSchemeName: brandSchemeName || null,
         },
       },
       {
@@ -358,6 +441,199 @@ export default function StoresEdit() {
             </CardContent>
           </Card>
 
+          {/* Store Logo */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ImageIcon className="h-5 w-5" />
+                Store Logo
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Upload a light and dark version of your logo. The storefront will automatically pick the right one based on your brand colour.
+              </p>
+            </CardHeader>
+            <CardContent>
+              {isEditing ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Light Logo */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-semibold">Light Logo <span className="font-normal text-muted-foreground">(for dark backgrounds)</span></Label>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-xl border bg-gray-900">
+                      {logoLightUrl ? (
+                        <div className="relative w-full h-24 flex items-center justify-center group">
+                          <img
+                            src={logoLightUrl}
+                            alt="Light logo preview"
+                            className="max-h-24 w-auto max-w-full object-contain"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setLogoLightUrl("")}
+                            className="absolute top-0 right-0 p-1 rounded-full bg-destructive/90 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="w-full h-24 rounded-lg border border-dashed border-white/20 flex items-center justify-center">
+                          <StoreIcon className="h-10 w-10 text-white/20" />
+                        </div>
+                      )}
+                      <input
+                        ref={logoLightFileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          setIsUploadingLogoLight(true);
+                          setLogoLightUploadProgress("Uploading...");
+                          try {
+                            const { data: { user } } = await supabaseClient.auth.getUser();
+                            if (!user) throw new Error("Not authenticated");
+                            const ext = file.name.split(".").pop() || "png";
+                            const fileName = `${user.id}/logo-light/${crypto.randomUUID()}.${ext}`;
+                            const { error: uploadError } = await supabaseClient.storage
+                              .from("product-images")
+                              .upload(fileName, file, { contentType: file.type, upsert: false });
+                            if (uploadError) throw uploadError;
+                            const { data: urlData } = supabaseClient.storage
+                              .from("product-images")
+                              .getPublicUrl(fileName);
+                            setLogoLightUrl(urlData.publicUrl);
+                            setLogoLightUploadProgress("Uploaded!");
+                            setTimeout(() => setLogoLightUploadProgress(""), 2500);
+                          } catch (err) {
+                            console.error("Light logo upload failed:", err);
+                            setLogoLightUploadProgress("Upload failed. Try again.");
+                            setTimeout(() => setLogoLightUploadProgress(""), 3000);
+                          } finally {
+                            setIsUploadingLogoLight(false);
+                            if (logoLightFileInputRef.current) logoLightFileInputRef.current.value = "";
+                          }
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        size="sm"
+                        disabled={isUploadingLogoLight}
+                        onClick={() => logoLightFileInputRef.current?.click()}
+                        className="gap-2 w-full"
+                      >
+                        <Upload className="h-4 w-4" />
+                        {isUploadingLogoLight ? "Uploading..." : "Upload Light Logo"}
+                      </Button>
+                      {logoLightUploadProgress && (
+                        <p className="text-xs text-white/60">{logoLightUploadProgress}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Dark Logo */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-semibold">Dark Logo <span className="font-normal text-muted-foreground">(for light backgrounds)</span></Label>
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-xl border bg-white">
+                      {logoDarkUrl ? (
+                        <div className="relative w-full h-24 flex items-center justify-center group">
+                          <img
+                            src={logoDarkUrl}
+                            alt="Dark logo preview"
+                            className="max-h-24 w-auto max-w-full object-contain"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setLogoDarkUrl("")}
+                            className="absolute top-0 right-0 p-1 rounded-full bg-destructive/90 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="w-full h-24 rounded-lg border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
+                          <StoreIcon className="h-10 w-10 text-muted-foreground/20" />
+                        </div>
+                      )}
+                      <input
+                        ref={logoDarkFileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          setIsUploadingLogoDark(true);
+                          setLogoDarkUploadProgress("Uploading...");
+                          try {
+                            const { data: { user } } = await supabaseClient.auth.getUser();
+                            if (!user) throw new Error("Not authenticated");
+                            const ext = file.name.split(".").pop() || "png";
+                            const fileName = `${user.id}/logo-dark/${crypto.randomUUID()}.${ext}`;
+                            const { error: uploadError } = await supabaseClient.storage
+                              .from("product-images")
+                              .upload(fileName, file, { contentType: file.type, upsert: false });
+                            if (uploadError) throw uploadError;
+                            const { data: urlData } = supabaseClient.storage
+                              .from("product-images")
+                              .getPublicUrl(fileName);
+                            setLogoDarkUrl(urlData.publicUrl);
+                            setLogoDarkUploadProgress("Uploaded!");
+                            setTimeout(() => setLogoDarkUploadProgress(""), 2500);
+                          } catch (err) {
+                            console.error("Dark logo upload failed:", err);
+                            setLogoDarkUploadProgress("Upload failed. Try again.");
+                            setTimeout(() => setLogoDarkUploadProgress(""), 3000);
+                          } finally {
+                            setIsUploadingLogoDark(false);
+                            if (logoDarkFileInputRef.current) logoDarkFileInputRef.current.value = "";
+                          }
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={isUploadingLogoDark}
+                        onClick={() => logoDarkFileInputRef.current?.click()}
+                        className="gap-2 w-full"
+                      >
+                        <Upload className="h-4 w-4" />
+                        {isUploadingLogoDark ? "Uploading..." : "Upload Dark Logo"}
+                      </Button>
+                      {logoDarkUploadProgress && (
+                        <p className="text-xs text-muted-foreground">{logoDarkUploadProgress}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Light Logo</p>
+                    <div className="flex items-center justify-center h-24 rounded-xl bg-gray-900 border p-3">
+                      {store?.logoLightUrl ? (
+                        <img src={store.logoLightUrl} alt="Light logo" className="max-h-20 w-auto object-contain" />
+                      ) : (
+                        <StoreIcon className="h-8 w-8 text-white/20" />
+                      )}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">Dark Logo</p>
+                    <div className="flex items-center justify-center h-24 rounded-xl bg-white border p-3">
+                      {store?.logoDarkUrl ? (
+                        <img src={store.logoDarkUrl} alt="Dark logo" className="max-h-20 w-auto object-contain" />
+                      ) : (
+                        <StoreIcon className="h-8 w-8 text-muted-foreground/20" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Hero Settings */}
           <Card>
             <CardHeader>
@@ -451,94 +727,6 @@ export default function StoresEdit() {
                         </p>
                       </div>
                     </div>
-                  </div>
-
-                  <Separator />
-
-                  {/* Banner Carousel Upload */}
-                  <div className="space-y-3">
-                    <Label className="flex items-center gap-2">
-                      <ImageIcon className="h-4 w-4" />
-                      Banner Carousel
-                    </Label>
-                    <p className="text-xs text-muted-foreground">
-                      Upload square banner images for the hero carousel. They will auto-rotate for your customers.
-                    </p>
-
-                    {/* Existing banners */}
-                    {heroBanners.length > 0 && (
-                      <div className="grid grid-cols-3 gap-2">
-                        {heroBanners.map((url, idx) => (
-                          <div key={idx} className="relative group aspect-square rounded-lg overflow-hidden border bg-muted">
-                            <img
-                              src={url}
-                              alt={`Banner ${idx + 1}`}
-                              className="w-full h-full object-cover"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => setHeroBanners((prev) => prev.filter((_, i) => i !== idx))}
-                              className="absolute top-1 right-1 p-1 rounded-full bg-destructive/90 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                              <X className="h-3 w-3" />
-                            </button>
-                            <div className="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
-                              {idx + 1}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <input
-                      ref={bannerFileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={async (e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-                        setIsUploadingBanner(true);
-                        setBannerUploadProgress("Uploading...");
-                        try {
-                          const { data: { user } } = await supabaseClient.auth.getUser();
-                          if (!user) throw new Error("Not authenticated");
-                          const ext = file.name.split(".").pop() || "png";
-                          const fileName = `${user.id}/banners/${crypto.randomUUID()}.${ext}`;
-                          const { error: uploadError } = await supabaseClient.storage
-                            .from("product-images")
-                            .upload(fileName, file, { contentType: file.type, upsert: false });
-                          if (uploadError) throw uploadError;
-                          const { data: urlData } = supabaseClient.storage
-                            .from("product-images")
-                            .getPublicUrl(fileName);
-                          setHeroBanners((prev) => [...prev, urlData.publicUrl]);
-                          setBannerUploadProgress("Uploaded!");
-                          setTimeout(() => setBannerUploadProgress(""), 2500);
-                        } catch (err) {
-                          console.error("Banner upload failed:", err);
-                          setBannerUploadProgress("Upload failed. Try again.");
-                          setTimeout(() => setBannerUploadProgress(""), 3000);
-                        } finally {
-                          setIsUploadingBanner(false);
-                          if (bannerFileInputRef.current) bannerFileInputRef.current.value = "";
-                        }
-                      }}
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={isUploadingBanner}
-                      onClick={() => bannerFileInputRef.current?.click()}
-                      className="gap-2"
-                    >
-                      <Upload className="h-4 w-4" />
-                      {isUploadingBanner ? "Uploading..." : "Add Banner"}
-                    </Button>
-                    {bannerUploadProgress && (
-                      <p className="text-xs text-muted-foreground">{bannerUploadProgress}</p>
-                    )}
                   </div>
 
                   <Separator />
@@ -664,6 +852,421 @@ export default function StoresEdit() {
                       </div>
                     </>
                   )}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Branding Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Palette className="h-5 w-5" />
+                Branding & Colors
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {isEditing ? (
+                <>
+                  {/* Suggested Color Schemes */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-semibold">Suggested Color Schemes</Label>
+                    <p className="text-xs text-muted-foreground">Click a scheme to apply it instantly, then customise individual colors below.</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                      {[
+                        { name: "Modern Minimal", primary: "#18181b", secondary: "#f4f4f5", accent: "#2563eb", background: "#ffffff", foreground: "#18181b", muted: "#71717a" },
+                        { name: "Ocean Blue", primary: "#0369a1", secondary: "#e0f2fe", accent: "#0ea5e9", background: "#f0f9ff", foreground: "#1e293b", muted: "#64748b" },
+                        { name: "Forest Green", primary: "#15803d", secondary: "#dcfce7", accent: "#22c55e", background: "#f0fdf4", foreground: "#1e293b", muted: "#64748b" },
+                        { name: "Royal Purple", primary: "#7c3aed", secondary: "#ede9fe", accent: "#a78bfa", background: "#faf5ff", foreground: "#1e1b2e", muted: "#6b7280" },
+                        { name: "Warm Sunset", primary: "#ea580c", secondary: "#fff7ed", accent: "#f97316", background: "#fffbeb", foreground: "#1c1917", muted: "#78716c" },
+                        { name: "Rose Gold", primary: "#be185d", secondary: "#fce7f3", accent: "#ec4899", background: "#fdf2f8", foreground: "#1e1e1e", muted: "#6b7280" },
+                        { name: "Slate Dark", primary: "#e2e8f0", secondary: "#334155", accent: "#38bdf8", background: "#0f172a", foreground: "#f1f5f9", muted: "#94a3b8" },
+                        { name: "Luxe Gold", primary: "#b45309", secondary: "#fef3c7", accent: "#d97706", background: "#fffbeb", foreground: "#1c1917", muted: "#78716c" },
+                      ].map((scheme) => (
+                        <button
+                          key={scheme.name}
+                          type="button"
+                          onClick={() => {
+                            setBrandPrimary(scheme.primary);
+                            setBrandSecondary(scheme.secondary);
+                            setBrandAccent(scheme.accent);
+                            setBrandBackground(scheme.background);
+                            setBrandForeground(scheme.foreground);
+                            setBrandMuted(scheme.muted);
+                            setBrandSchemeName(scheme.name);
+                          }}
+                          className={`group relative rounded-xl border-2 p-3 text-left transition-all hover:shadow-md ${
+                            brandSchemeName === scheme.name
+                              ? "border-primary ring-2 ring-primary/20"
+                              : "border-muted hover:border-foreground/20"
+                          }`}
+                        >
+                          <div className="flex gap-1 mb-2">
+                            {[scheme.primary, scheme.secondary, scheme.accent, scheme.background, scheme.foreground].map((color, i) => (
+                              <div
+                                key={i}
+                                className="h-5 w-5 rounded-full border border-black/10"
+                                style={{ backgroundColor: color }}
+                              />
+                            ))}
+                          </div>
+                          <p className="text-xs font-medium truncate">{scheme.name}</p>
+                          {brandSchemeName === scheme.name && (
+                            <div className="absolute top-1.5 right-1.5">
+                              <CheckCircle2 className="h-4 w-4 text-primary" />
+                            </div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Custom Color Pickers */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-semibold">Custom Colors</Label>
+                    <p className="text-xs text-muted-foreground">Fine-tune each color. Changes override the selected scheme.</p>
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {[
+                        { label: "Primary", value: brandPrimary, setter: setBrandPrimary, desc: "Buttons, links, active elements" },
+                        { label: "Secondary", value: brandSecondary, setter: setBrandSecondary, desc: "Cards, subtle backgrounds" },
+                        { label: "Accent", value: brandAccent, setter: setBrandAccent, desc: "Highlights, badges, hover states" },
+                        { label: "Background", value: brandBackground, setter: setBrandBackground, desc: "Page background color" },
+                        { label: "Foreground", value: brandForeground, setter: setBrandForeground, desc: "Main text color" },
+                        { label: "Muted", value: brandMuted, setter: setBrandMuted, desc: "Subtle text, borders" },
+                      ].map(({ label, value, setter, desc }) => (
+                        <div key={label} className="space-y-1.5">
+                          <Label className="text-xs font-medium">{label}</Label>
+                          <div className="flex items-center gap-2">
+                            <div className="relative">
+                              <input
+                                type="color"
+                                value={value || "#000000"}
+                                onChange={e => { setter(e.target.value); setBrandSchemeName("Custom"); }}
+                                className="h-9 w-9 rounded-lg border cursor-pointer appearance-none bg-transparent p-0.5"
+                              />
+                            </div>
+                            <Input
+                              value={value}
+                              onChange={e => { setter(e.target.value); setBrandSchemeName("Custom"); }}
+                              placeholder="#000000"
+                              className="font-mono text-xs h-9"
+                            />
+                          </div>
+                          <p className="text-[10px] text-muted-foreground">{desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Live Preview */}
+                  {brandPrimary && (
+                    <>
+                      <Separator />
+                      <div className="space-y-3">
+                        <Label className="text-sm font-semibold">Preview</Label>
+                        <div
+                          className="rounded-xl border overflow-hidden"
+                          style={{ backgroundColor: brandBackground || "#ffffff", color: brandForeground || "#000000" }}
+                        >
+                          {/* Preview navbar */}
+                          <div className="px-4 py-3 flex items-center justify-between" style={{ backgroundColor: brandPrimary, color: brandSecondary || "#ffffff" }}>
+                            <span className="text-sm font-bold">{store?.title || "Your Store"}</span>
+                            <div className="flex gap-2">
+                              <div className="h-6 w-12 rounded text-[10px] flex items-center justify-center font-medium" style={{ backgroundColor: brandAccent || brandPrimary, color: "#fff" }}>Shop</div>
+                            </div>
+                          </div>
+                          {/* Preview body */}
+                          <div className="p-4 space-y-3">
+                            <div className="h-3 rounded-full w-3/4" style={{ backgroundColor: brandForeground || "#000", opacity: 0.7 }} />
+                            <div className="h-3 rounded-full w-1/2" style={{ backgroundColor: brandMuted || "#999", opacity: 0.5 }} />
+                            <div className="flex gap-2 mt-3">
+                              <div className="h-8 px-3 rounded-lg text-xs flex items-center font-medium" style={{ backgroundColor: brandPrimary, color: brandSecondary || "#fff" }}>Add to Cart</div>
+                              <div className="h-8 px-3 rounded-lg text-xs flex items-center font-medium border" style={{ borderColor: brandPrimary, color: brandPrimary }}>Wishlist</div>
+                            </div>
+                            {/* Product cards */}
+                            <div className="grid grid-cols-3 gap-2 mt-2">
+                              {[1, 2, 3].map(i => (
+                                <div key={i} className="rounded-lg p-2 border" style={{ backgroundColor: brandSecondary || "#f5f5f5", borderColor: brandMuted || "#e5e5e5" }}>
+                                  <div className="h-10 rounded mb-1.5" style={{ backgroundColor: brandMuted || "#e5e5e5" }} />
+                                  <div className="h-2 rounded-full w-3/4 mb-1" style={{ backgroundColor: brandForeground || "#000", opacity: 0.5 }} />
+                                  <div className="h-2 rounded-full w-1/2" style={{ backgroundColor: brandAccent || brandPrimary, opacity: 0.8 }} />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Clear branding */}
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="text-xs text-muted-foreground"
+                      onClick={() => {
+                        setBrandPrimary("");
+                        setBrandSecondary("");
+                        setBrandAccent("");
+                        setBrandBackground("");
+                        setBrandForeground("");
+                        setBrandMuted("");
+                        setBrandSchemeName("");
+                      }}
+                    >
+                      <X className="h-3 w-3 mr-1" />
+                      Reset to Default
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <div className="space-y-3">
+                  {store?.brandSchemeName ? (
+                    <>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="default">{store.brandSchemeName}</Badge>
+                      </div>
+                      <div className="flex gap-1.5 mt-2">
+                        {[store.brandPrimary, store.brandSecondary, store.brandAccent, store.brandBackground, store.brandForeground, store.brandMuted].filter(Boolean).map((color, i) => (
+                          <div key={i} className="flex flex-col items-center gap-1">
+                            <div className="h-8 w-8 rounded-full border border-black/10" style={{ backgroundColor: color }} />
+                            <span className="text-[10px] text-muted-foreground font-mono">{color}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">Default</Badge>
+                      <span className="text-xs text-muted-foreground">Using system default colors</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Payment & Tax Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5" />
+                Payment & Tax Settings
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {isEditing ? (
+                <>
+                  {/* Stripe Settings */}
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Banknote className="h-4 w-4" />
+                      Card Payments (Stripe)
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      Enter your Stripe API keys to accept card payments. Get them from{" "}
+                      <a href="https://dashboard.stripe.com/apikeys" target="_blank" rel="noopener noreferrer" className="text-primary underline">dashboard.stripe.com</a>.
+                    </p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="stripePublishableKey">Publishable Key</Label>
+                        <Input
+                          id="stripePublishableKey"
+                          placeholder="pk_live_..."
+                          value={stripePublishableKey}
+                          onChange={e => setStripePublishableKey(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="stripeSecretKey">Secret Key</Label>
+                        <div className="relative">
+                          <Input
+                            id="stripeSecretKey"
+                            type={showStripeSecret ? "text" : "password"}
+                            placeholder="sk_live_..."
+                            value={stripeSecretKey}
+                            onChange={e => setStripeSecretKey(e.target.value)}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            onClick={() => setShowStripeSecret(!showStripeSecret)}
+                          >
+                            {showStripeSecret ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Bank Transfer Settings */}
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Bank Transfer
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      Customers can pay via bank transfer. These details will be shown at checkout.
+                    </p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="bankName">Bank Name</Label>
+                        <Input
+                          id="bankName"
+                          placeholder="e.g. Barclays"
+                          value={bankName}
+                          onChange={e => setBankName(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bankAccountName">Account Name</Label>
+                        <Input
+                          id="bankAccountName"
+                          placeholder="e.g. My Store Ltd"
+                          value={bankAccountName}
+                          onChange={e => setBankAccountName(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bankAccountNumber">Account Number</Label>
+                        <Input
+                          id="bankAccountNumber"
+                          placeholder="e.g. 12345678"
+                          value={bankAccountNumber}
+                          onChange={e => setBankAccountNumber(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bankSortCode">Sort Code</Label>
+                        <Input
+                          id="bankSortCode"
+                          placeholder="e.g. 12-34-56"
+                          value={bankSortCode}
+                          onChange={e => setBankSortCode(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bankIban">IBAN (optional)</Label>
+                        <Input
+                          id="bankIban"
+                          placeholder="e.g. GB29NWBK60161331926819"
+                          value={bankIban}
+                          onChange={e => setBankIban(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="bankReferencePrefix">Payment Reference Prefix</Label>
+                        <Input
+                          id="bankReferencePrefix"
+                          placeholder="e.g. ORD"
+                          value={bankReferencePrefix}
+                          onChange={e => setBankReferencePrefix(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  {/* Tax Settings */}
+                  <div className="space-y-4">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Percent className="h-4 w-4" />
+                      Tax Settings
+                    </h4>
+                    <div className="flex items-center justify-between rounded-lg border p-4">
+                      <div className="space-y-0.5">
+                        <Label className="text-sm font-medium">Enable Tax</Label>
+                        <p className="text-xs text-muted-foreground">
+                          Add tax to customer orders at checkout
+                        </p>
+                      </div>
+                      <Switch
+                        checked={taxEnabled}
+                        onCheckedChange={setTaxEnabled}
+                      />
+                    </div>
+                    {taxEnabled && (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="taxRate">Tax Rate (%)</Label>
+                          <Input
+                            id="taxRate"
+                            type="number"
+                            min={0}
+                            max={100}
+                            step={0.01}
+                            placeholder="e.g. 20"
+                            value={taxRate || ""}
+                            onChange={e => setTaxRate(parseFloat(e.target.value) || 0)}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="taxLabel">Tax Label</Label>
+                          <Input
+                            id="taxLabel"
+                            placeholder="e.g. VAT, GST, Sales Tax"
+                            value={taxLabel}
+                            onChange={e => setTaxLabel(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <div className="space-y-4">
+                  {/* View mode */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Banknote className="h-4 w-4" />
+                      Card Payments
+                    </h4>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={store?.stripePublishableKey ? "default" : "secondary"}>
+                        {store?.stripePublishableKey ? "Configured" : "Not configured"}
+                      </Badge>
+                      {store?.stripePublishableKey && (
+                        <span className="text-xs text-muted-foreground">pk_...{store.stripePublishableKey.slice(-8)}</span>
+                      )}
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Building2 className="h-4 w-4" />
+                      Bank Transfer
+                    </h4>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={store?.bankName ? "default" : "secondary"}>
+                        {store?.bankName ? "Configured" : "Not configured"}
+                      </Badge>
+                      {store?.bankName && (
+                        <span className="text-xs text-muted-foreground">{store.bankName} - {store.bankAccountName}</span>
+                      )}
+                    </div>
+                  </div>
+                  <Separator />
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-semibold flex items-center gap-2">
+                      <Percent className="h-4 w-4" />
+                      Tax
+                    </h4>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={store?.taxEnabled ? "default" : "secondary"}>
+                        {store?.taxEnabled ? "Enabled" : "Disabled"}
+                      </Badge>
+                      {store?.taxEnabled && (
+                        <span className="text-xs text-muted-foreground">{store.taxRate}% {store.taxLabel}</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </CardContent>

@@ -31,6 +31,8 @@ export interface IStore {
   address: string;
   isActive: boolean;
   createdAt: string;
+  logoLightUrl?: string;
+  logoDarkUrl?: string;
   heroImageUrl?: string;
   heroTitle?: string;
   heroSubtitle?: string;
@@ -41,6 +43,23 @@ export interface IStore {
   heroTypewriterWords?: string[];
   heroProductIds?: string[];
   heroBanners?: string[];
+  stripePublishableKey?: string;
+  bankName?: string;
+  bankAccountName?: string;
+  bankAccountNumber?: string;
+  bankSortCode?: string;
+  bankIban?: string;
+  bankReferencePrefix?: string;
+  taxEnabled?: boolean;
+  taxRate?: number;
+  taxLabel?: string;
+  brandPrimary?: string;
+  brandSecondary?: string;
+  brandAccent?: string;
+  brandBackground?: string;
+  brandForeground?: string;
+  brandMuted?: string;
+  brandSchemeName?: string;
 }
 
 export interface ICustomer {

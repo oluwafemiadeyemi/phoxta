@@ -41,7 +41,7 @@ export function StorefrontCart({
 }: StorefrontCartProps) {
   return (
     <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
-      <SheetContent className="flex flex-col w-full sm:max-w-md p-0">
+      <SheetContent className="flex flex-col p-0 w-full h-auto max-h-[75vh] inset-y-auto left-0 bottom-0 rounded-t-2xl border-l-0 border-t sm:h-full sm:max-h-full sm:inset-y-0 sm:left-auto sm:bottom-auto sm:max-w-md sm:rounded-none sm:border-l sm:border-t-0">
         <SheetHeader className="px-6 pt-6 pb-4">
           <SheetTitle className="flex items-center gap-2">
             <ShoppingCart className="h-5 w-5" />

@@ -38,6 +38,14 @@ const resourceToTable: Record<string, string> = {
   taxRecords: "tax_records",
   financialAccounts: "financial_accounts",
   budgets: "budgets",
+  // Messaging feature
+  messagingConfig: "messaging_config",
+  messagingConversations: "messaging_conversations",
+  messagingMessages: "messaging_messages",
+  messagingTemplates: "messaging_templates",
+  messagingQuickReplies: "messaging_quick_replies",
+  messagingAutomations: "messaging_automations",
+  messagingAnalytics: "messaging_analytics",
 };
 
 const isUserScopedTable = (tableName: string) => {

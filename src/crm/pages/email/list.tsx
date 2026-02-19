@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTable, useDelete, useUpdate, useUpdateMany, useList, HttpError } from "@refinedev/core";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -231,6 +231,35 @@ export default function EmailList() {
     // Refresh the table to show new emails
     refetch();
   };
+
+  /* ---- Auto-sync: poll every 60s + initial sync on mount ---- */
+  const autoSyncRef = useRef(false);
+  useEffect(() => {
+    // Silently sync in the background (no UI spinners for auto-sync)
+    const silentSync = async () => {
+      if (accounts.length === 0) return;
+      for (const account of accounts) {
+        try {
+          await fetch("/api/email/fetch", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ accountId: account.id }),
+          });
+        } catch { /* silent */ }
+      }
+      refetch();
+    };
+
+    // Initial sync on first render (once accounts are loaded)
+    if (accounts.length > 0 && !autoSyncRef.current) {
+      autoSyncRef.current = true;
+      silentSync();
+    }
+
+    // Poll every 60 seconds
+    const interval = setInterval(silentSync, 60_000);
+    return () => clearInterval(interval);
+  }, [accounts, refetch]);
 
   /* ---- Mark read ---- */
   const handleMarkRead = (emailId: string) => {

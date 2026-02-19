@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabaseServer";
+import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabaseServer";
 import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
-  try {
-    const supabase = await createServerSupabaseClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  let parsedEmailId: string | undefined;
+  let parsedUserId: string | undefined;
 
+  try {
+    // Support both cookie-based auth (browser) and service-role with userId (assistant/autopilot)
     const body = await req.json();
     const {
       emailId,
@@ -23,7 +19,29 @@ export async function POST(req: NextRequest) {
       body: htmlBody,
       fromAddress,
       fromName,
+      userId: serviceUserId, // Optional: passed by assistant/autopilot tools
     } = body;
+
+    parsedEmailId = emailId;
+
+    let supabase: any;
+    let userId: string;
+
+    if (serviceUserId) {
+      // Server-to-server call from assistant/autopilot — use service role
+      supabase = createServiceRoleClient();
+      userId = serviceUserId;
+    } else {
+      // Browser call — use cookie-based auth
+      supabase = await createServerSupabaseClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      userId = user.id;
+    }
+
+    parsedUserId = userId;
 
     if (!accountId) {
       return NextResponse.json(
@@ -32,11 +50,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Fetch the email account (RLS ensures it belongs to this user)
+    // Fetch the email account
     const { data: account, error: accErr } = await supabase
       .from("email_accounts")
       .select("*")
       .eq("id", accountId)
+      .eq("user_id", userId)
       .single();
 
     if (accErr || !account) {
@@ -96,7 +115,7 @@ export async function POST(req: NextRequest) {
           sent_at: new Date().toISOString(),
         })
         .eq("id", emailId)
-        .eq("user_id", user.id);
+        .eq("user_id", userId);
     }
 
     return NextResponse.json({
@@ -109,22 +128,16 @@ export async function POST(req: NextRequest) {
 
     // Try to mark the email as failed
     try {
-      const body = await req.clone().json().catch(() => ({}));
-      if (body.emailId) {
-        const supabase = await createServerSupabaseClient();
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (user) {
-          await supabase
-            .from("emails")
-            .update({
-              status: "failed",
-              error_message: err.message || "Unknown send error",
-            })
-            .eq("id", body.emailId)
-            .eq("user_id", user.id);
-        }
+      if (parsedEmailId && parsedUserId) {
+        const svc = createServiceRoleClient();
+        await svc
+          .from("emails")
+          .update({
+            status: "failed",
+            error_message: err.message || "Unknown send error",
+          })
+          .eq("id", parsedEmailId)
+          .eq("user_id", parsedUserId);
       }
     } catch {
       // Ignore error-reporting errors

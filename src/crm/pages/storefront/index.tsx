@@ -5,8 +5,6 @@ import { ArrowUp, CheckCircle2, ShoppingCart, Search, X } from "lucide-react";
 
 import { StorefrontNavbar } from "./components/navbar";
 import { StorefrontHero } from "./components/hero";
-import { StorefrontCategoryBar } from "./components/category-bar";
-import { StorefrontCategorySidebar } from "./components/category-sidebar";
 import { StorefrontProductGrid } from "./components/product-grid";
 import { StorefrontCart } from "./components/cart";
 import { StorefrontProductModal } from "./components/product-modal";
@@ -14,6 +12,7 @@ import { StorefrontCheckout } from "./components/checkout";
 import { StorefrontFooter } from "./components/footer";
 import { StorefrontAuthModal, type StoreCustomer } from "./components/auth-modal";
 import { StorefrontAccountDashboard } from "./components/account-dashboard";
+import { StorefrontChatWidget } from "./components/chat-widget";
 
 export interface CartItem {
   product: IProduct;
@@ -26,6 +25,8 @@ export interface StoreInfo {
   email: string;
   gsm: string;
   address: string;
+  logoLightUrl?: string;
+  logoDarkUrl?: string;
   heroImageUrl?: string;
   heroTitle?: string;
   heroSubtitle?: string;
@@ -36,6 +37,23 @@ export interface StoreInfo {
   heroTypewriterWords?: string[];
   heroProductIds?: string[];
   heroBanners?: string[];
+  stripePublishableKey?: string;
+  bankName?: string;
+  bankAccountName?: string;
+  bankAccountNumber?: string;
+  bankSortCode?: string;
+  bankIban?: string;
+  bankReferencePrefix?: string;
+  taxEnabled?: boolean;
+  taxRate?: number;
+  taxLabel?: string;
+  brandPrimary?: string;
+  brandSecondary?: string;
+  brandAccent?: string;
+  brandBackground?: string;
+  brandForeground?: string;
+  brandMuted?: string;
+  brandSchemeName?: string;
 }
 
 /** Convert a store title to a URL-friendly slug */
@@ -115,6 +133,20 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Listen for product-open events from chat widget (product recommendations)
+  useEffect(() => {
+    const handleOpenProduct = (e: Event) => {
+      const productId = (e as CustomEvent).detail?.productId;
+      if (!productId || !products.length) return;
+      const product = products.find((p) => p.id === productId);
+      if (product) {
+        setSelectedProduct(product);
+      }
+    };
+    window.addEventListener("phoxta:openProduct", handleOpenProduct);
+    return () => window.removeEventListener("phoxta:openProduct", handleOpenProduct);
+  }, [products]);
+
   // Load store data
   useEffect(() => {
     if (!storeName) return;
@@ -144,6 +176,8 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
           email: storeData.email,
           gsm: storeData.gsm,
           address: storeData.address,
+          logoLightUrl: storeData.logo_light_url ?? undefined,
+          logoDarkUrl: storeData.logo_dark_url ?? undefined,
           heroImageUrl: storeData.hero_image_url ?? undefined,
           heroTitle: storeData.hero_title ?? undefined,
           heroSubtitle: storeData.hero_subtitle ?? undefined,
@@ -154,6 +188,23 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
           heroTypewriterWords: storeData.hero_typewriter_words ?? undefined,
           heroProductIds: storeData.hero_product_ids ?? undefined,
           heroBanners: storeData.hero_banners ?? undefined,
+          stripePublishableKey: storeData.stripe_publishable_key ?? undefined,
+          bankName: storeData.bank_name ?? undefined,
+          bankAccountName: storeData.bank_account_name ?? undefined,
+          bankAccountNumber: storeData.bank_account_number ?? undefined,
+          bankSortCode: storeData.bank_sort_code ?? undefined,
+          bankIban: storeData.bank_iban ?? undefined,
+          bankReferencePrefix: storeData.bank_reference_prefix ?? undefined,
+          taxEnabled: storeData.tax_enabled ?? false,
+          taxRate: storeData.tax_rate ?? 0,
+          taxLabel: storeData.tax_label ?? 'VAT',
+          brandPrimary: storeData.brand_primary ?? undefined,
+          brandSecondary: storeData.brand_secondary ?? undefined,
+          brandAccent: storeData.brand_accent ?? undefined,
+          brandBackground: storeData.brand_background ?? undefined,
+          brandForeground: storeData.brand_foreground ?? undefined,
+          brandMuted: storeData.brand_muted ?? undefined,
+          brandSchemeName: storeData.brand_scheme_name ?? undefined,
         });
 
         // Fetch user_id for this store to get their products
@@ -219,6 +270,23 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
 
     fetchStoreData();
   }, [storeName]);
+
+  // Deep-link: auto-open product modal from ?product={id} (e.g. from email links)
+  useEffect(() => {
+    if (!products.length) return;
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("product");
+    if (productId) {
+      const product = products.find((p) => p.id === productId);
+      if (product) {
+        setSelectedProduct(product);
+        // Clean up URL without reload
+        const url = new URL(window.location.href);
+        url.searchParams.delete("product");
+        window.history.replaceState({}, "", url.pathname + url.search);
+      }
+    }
+  }, [products]);
 
   // Filtered products
   const filteredProducts = useMemo(() => {
@@ -330,8 +398,73 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
     );
   }
 
+  // Build branding CSS overrides
+  const brandingStyle: React.CSSProperties = {};
+  if (store?.brandBackground) brandingStyle.backgroundColor = store.brandBackground;
+  if (store?.brandForeground) brandingStyle.color = store.brandForeground;
+
+  // Convert hex to HSL for Tailwind CSS variable overrides
+  function hexToHSL(hex: string): string | null {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return null;
+    let r = parseInt(result[1], 16) / 255;
+    let g = parseInt(result[2], 16) / 255;
+    let b = parseInt(result[3], 16) / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0;
+    const l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+    return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+  }
+
+  // Determine if a hex color is dark using proper sRGB linearization
+  function isDark(hex: string): boolean {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return false;
+    const toLinear = (c: number) => {
+      const s = c / 255;
+      return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+    };
+    const r = toLinear(parseInt(result[1], 16));
+    const g = toLinear(parseInt(result[2], 16));
+    const b = toLinear(parseInt(result[3], 16));
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return luminance < 0.4;
+  }
+
+  // Auto-pick contrasting foreground for any background color
+  function contrastForeground(bgHex: string): string {
+    return isDark(bgHex) ? "0 0% 100%" : "0 0% 5%";
+  }
+
+  const brandCSS = store ? [
+    store.brandPrimary && `--primary: ${hexToHSL(store.brandPrimary)};`,
+    store.brandSecondary && `--secondary: ${hexToHSL(store.brandSecondary)};`,
+    store.brandAccent && `--accent: ${hexToHSL(store.brandAccent)};`,
+    store.brandBackground && `--background: ${hexToHSL(store.brandBackground)};`,
+    store.brandForeground && `--foreground: ${hexToHSL(store.brandForeground)};`,
+    store.brandMuted && `--muted: ${hexToHSL(store.brandMuted)};`,
+    store.brandPrimary && `--primary-foreground: ${contrastForeground(store.brandPrimary)};`,
+    store.brandSecondary && `--secondary-foreground: ${contrastForeground(store.brandSecondary)};`,
+    store.brandAccent && `--accent-foreground: ${contrastForeground(store.brandAccent)};`,
+    store.brandForeground && `--muted-foreground: ${hexToHSL(store.brandForeground)}; --card-foreground: ${hexToHSL(store.brandForeground)};`,
+    store.brandBackground && `--card: ${hexToHSL(store.brandBackground)};`,
+    store.brandAccent && `--ring: ${hexToHSL(store.brandAccent)};`,
+  ].filter(Boolean).join("\n") : "";
+
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col" style={brandingStyle}>
+      {brandCSS && (
+        <style dangerouslySetInnerHTML={{ __html: `.min-h-screen { ${brandCSS} }` }} />
+      )}
       <StorefrontNavbar
         storeName={store.title}
         cartCount={cartCount}
@@ -349,6 +482,13 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
         onSignInClick={() => setAuthModalOpen(true)}
         onAccountClick={() => setShowAccountDashboard(true)}
         onSignOut={handleSignOut}
+        brandPrimary={store.brandPrimary}
+        storeLogoLight={store.logoLightUrl}
+        storeLogoDark={store.logoDarkUrl}
+        storePhone={store.gsm}
+        storeEmail={store.email}
+        categories={categories}
+        onCategoryChange={handleCategoryChange}
       />
 
       <StorefrontHero
@@ -366,87 +506,66 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
         heroTypewriterWords={store.heroTypewriterWords}
         heroProductIds={store.heroProductIds}
         heroBanners={store.heroBanners}
+        brandPrimary={store.brandPrimary}
+        brandSecondary={store.brandSecondary}
+        brandAccent={store.brandAccent}
+        brandBackground={store.brandBackground}
+        brandForeground={store.brandForeground}
+        brandMuted={store.brandMuted}
       />
 
-      <main className="flex-1 w-full py-5 sm:py-8">
-        {/* Mobile: horizontal category bar */}
-        <div className="px-3 sm:px-6 lg:px-8 md:hidden">
-          <StorefrontCategoryBar
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={handleCategoryChange}
-            productCounts={products.reduce(
-              (acc, p) => {
-                if (p.categoryId) {
-                  acc[p.categoryId] = (acc[p.categoryId] || 0) + 1;
-                }
-                return acc;
-              },
-              {} as Record<string, number>
-            )}
-            totalCount={products.length}
-          />
-        </div>
-
-        <div className="flex gap-0">
-          {/* Desktop: category side panel flush to the left */}
-          <div className="hidden md:block pl-2 lg:pl-4">
-            <StorefrontCategorySidebar
-              categories={categories}
-              activeCategory={activeCategory}
-              onCategoryChange={handleCategoryChange}
-              productCounts={products.reduce(
-                (acc, p) => {
-                  if (p.categoryId) {
-                    acc[p.categoryId] = (acc[p.categoryId] || 0) + 1;
-                  }
-                  return acc;
-                },
-                {} as Record<string, number>
-              )}
-              totalCount={products.length}
-            />
-          </div>
-
-          {/* Product grid */}
-          <div className="flex-1 min-w-0 px-3 sm:px-6 lg:px-8">
-            {/* Search results banner */}
-            {searchQuery.trim() && (
-              <div className="flex items-center justify-between mb-4 px-4 py-3 rounded-xl bg-primary/5 border border-primary/10">
-                <div className="flex items-center gap-2">
-                  <Search className="h-4 w-4 text-primary" />
-                  <span className="text-sm">
-                    <span className="font-semibold">{filteredProducts.length}</span>{" "}
-                    {filteredProducts.length === 1 ? "result" : "results"} for{" "}
-                    <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
-                  </span>
-                </div>
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="text-xs text-primary hover:underline font-medium flex items-center gap-1"
-                >
-                  <X className="h-3 w-3" />
-                  Clear search
-                </button>
+      <main className="flex-1 w-full">
+        {/* Search results banner */}
+        {searchQuery.trim() && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-primary/5 border border-primary/10">
+              <div className="flex items-center gap-2">
+                <Search className="h-4 w-4 text-primary" />
+                <span className="text-sm">
+                  <span className="font-semibold">{filteredProducts.length}</span>{" "}
+                  {filteredProducts.length === 1 ? "result" : "results"} for{" "}
+                  <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
+                </span>
               </div>
-            )}
-            <StorefrontProductGrid
-              products={filteredProducts}
-              loading={loading}
-              onProductClick={setSelectedProduct}
-              onAddToCart={(product) => {
-                addToCart(product);
-                setCartToast(product.name);
-                setTimeout(() => setCartToast(null), 2500);
-              }}
-              activeCategoryName={
-                activeCategory === "all"
-                  ? undefined
-                  : categories.find((c) => c.id === activeCategory)?.title
-              }
-            />
+              <button
+                onClick={() => setSearchQuery("")}
+                className="text-xs text-primary hover:underline font-medium flex items-center gap-1"
+              >
+                <X className="h-3 w-3" />
+                Clear search
+              </button>
+            </div>
           </div>
-        </div>
+        )}
+
+        <StorefrontProductGrid
+          products={filteredProducts}
+          loading={loading}
+          onProductClick={setSelectedProduct}
+          onAddToCart={(product) => {
+            addToCart(product);
+            setCartToast(product.name);
+            setTimeout(() => setCartToast(null), 2500);
+          }}
+          activeCategoryName={
+            activeCategory === "all"
+              ? undefined
+              : categories.find((c) => c.id === activeCategory)?.title
+          }
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+          productCounts={products.reduce(
+            (acc, p) => {
+              if (p.categoryId) {
+                acc[p.categoryId] = (acc[p.categoryId] || 0) + 1;
+              }
+              return acc;
+            },
+            {} as Record<string, number>
+          )}
+          totalCount={products.length}
+        />
       </main>
 
       <StorefrontFooter storeName={store.title} storeEmail={store.email} storePhone={store.gsm} storeAddress={store.address} />
@@ -481,6 +600,10 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
         total={cartTotal}
         storeId={store?.id ?? ""}
         customer={customer}
+        taxEnabled={store?.taxEnabled}
+        taxRate={store?.taxRate}
+        taxLabel={store?.taxLabel}
+        stripePublishableKey={store?.stripePublishableKey}
         onOrderComplete={() => {
           clearCart();
           setCheckoutOpen(false);
@@ -526,6 +649,9 @@ export default function StorefrontPage({ storeSlug }: { storeSlug?: string }) {
         storeName={store.title}
         onAuthSuccess={(c) => setCustomer(c)}
       />
+
+      {/* Chat Widget */}
+      <StorefrontChatWidget storeId={store.id} color={store.brandPrimary} customer={customer} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabaseServer";
+import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabaseServer";
 import { ImapFlow } from "imapflow";
 import { simpleParser, ParsedMail } from "mailparser";
 
@@ -7,16 +7,30 @@ export const maxDuration = 30; // Allow up to 30s for IMAP fetch
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createServerSupabaseClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const body = await req.json();
-    const { accountId } = body;
+    const { accountId, userId: serviceUserId } = body;
+
+    // Support two auth modes:
+    // 1. Cookie-based (normal user request)
+    // 2. Service-role (autopilot / internal calls pass userId)
+    let userId: string;
+    let supabase: any;
+
+    if (serviceUserId) {
+      // Service-role auth — trusted internal caller (autopilot)
+      supabase = createServiceRoleClient();
+      userId = serviceUserId;
+    } else {
+      // Cookie-based auth — normal user
+      supabase = await createServerSupabaseClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      userId = user.id;
+    }
 
     if (!accountId) {
       return NextResponse.json(
@@ -55,7 +69,7 @@ export async function POST(req: NextRequest) {
     const { data: existingEmails } = await supabase
       .from("emails")
       .select("external_id")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .eq("account_id", accountId)
       .not("external_id", "is", null);
 
@@ -156,7 +170,7 @@ export async function POST(req: NextRequest) {
           const sentAt = parsed.date?.toISOString() || new Date().toISOString();
 
           const { error: insertErr } = await supabase.from("emails").insert({
-            user_id: user.id,
+            user_id: userId,
             account_id: accountId,
             external_id: externalId,
             message_id: messageId,

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { ImageOff, ChevronRight, Grid3X3 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ImageOff, ArrowRight, Sparkles } from "lucide-react";
 import type { IProduct, ICategory } from "@crm/types/finefoods";
 
 interface StorefrontHeroProps {
@@ -17,124 +17,285 @@ interface StorefrontHeroProps {
   heroTypewriterWords?: string[];
   heroProductIds?: string[];
   heroBanners?: string[];
+  brandPrimary?: string;
+  brandSecondary?: string;
+  brandAccent?: string;
+  brandBackground?: string;
+  brandForeground?: string;
+  brandMuted?: string;
 }
 
-/* ─── Constellation Stars Canvas ─── */
-function ConstellationCanvas({ className }: { className?: string }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: -9999, y: -9999 });
-  const starsRef = useRef<{ x: number; y: number; vx: number; vy: number; r: number; o: number; conn: boolean }[]>([]);
-  const rafRef = useRef<number>(0);
-
-  const init = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const dpr = typeof devicePixelRatio !== "undefined" ? devicePixelRatio : 1;
-    const w = (canvas.width = canvas.offsetWidth * dpr);
-    const h = (canvas.height = canvas.offsetHeight * dpr);
-    const count = Math.floor((w * h) / 50000);
-    const stars: typeof starsRef.current = [];
-    for (let i = 0; i < count; i++) {
-      stars.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
-        r: Math.random() * 0.9 + 0.3,
-        o: Math.random() * 0.3 + 0.12,
-        conn: Math.random() < 0.12,
-      });
-    }
-    starsRef.current = stars;
-  }, []);
+/* ─── Typewriter Hook ─── */
+function useTypewriter(words: string[], typingSpeed = 80, deletingSpeed = 50, pauseTime = 2000) {
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    init();
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const dpr = typeof devicePixelRatio !== "undefined" ? devicePixelRatio : 1;
-    const LINE_DIST = 80 * dpr;
-    const MOUSE_DIST = 120 * dpr;
+    if (words.length === 0) return;
+    const currentWord = words[wordIndex % words.length];
 
-    const draw = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      const stars = starsRef.current;
-      const mx = mouseRef.current.x * dpr;
-      const my = mouseRef.current.y * dpr;
-
-      for (const s of stars) {
-        s.x += s.vx;
-        s.y += s.vy;
-        if (s.x < 0) s.x = w;
-        if (s.x > w) s.x = 0;
-        if (s.y < 0) s.y = h;
-        if (s.y > h) s.y = 0;
-      }
-
-      for (let i = 0; i < stars.length; i++) {
-        if (!stars[i].conn) continue;
-        for (let j = i + 1; j < stars.length; j++) {
-          if (!stars[j].conn) continue;
-          const dx = stars[i].x - stars[j].x;
-          const dy = stars[i].y - stars[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < LINE_DIST) {
-            ctx.beginPath();
-            ctx.moveTo(stars[i].x, stars[i].y);
-            ctx.lineTo(stars[j].x, stars[j].y);
-            ctx.strokeStyle = `rgba(148,163,184,${0.08 * (1 - dist / LINE_DIST)})`;
-            ctx.lineWidth = 0.5 * dpr;
-            ctx.stroke();
-          }
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setText(currentWord.substring(0, text.length + 1));
+        if (text.length + 1 === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), pauseTime);
+        }
+      } else {
+        setText(currentWord.substring(0, text.length - 1));
+        if (text.length === 0) {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
         }
       }
+    }, isDeleting ? deletingSpeed : typingSpeed);
 
-      for (const s of stars) {
-        const mdx = s.x - mx;
-        const mdy = s.y - my;
-        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < MOUSE_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(s.x, s.y);
-          ctx.lineTo(mx, my);
-          ctx.strokeStyle = `rgba(99,102,241,${0.18 * (1 - mDist / MOUSE_DIST)})`;
-          ctx.lineWidth = 0.5 * dpr;
-          ctx.stroke();
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pauseTime]);
+
+  return text;
+}
+
+/* ─── Animated Mesh Gradient Background ─── */
+interface HeroBackgroundProps {
+  brandPrimary?: string;
+  brandBackground?: string;
+}
+
+function hexToRgba(hex: string, alpha: number): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return `rgba(99,102,241,${alpha})`;
+  return `rgba(${parseInt(result[1], 16)},${parseInt(result[2], 16)},${parseInt(result[3], 16)},${alpha})`;
+}
+
+function isDarkColor(hex: string): boolean {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return true;
+  const toLinear = (c: number) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  };
+  const L = 0.2126 * toLinear(parseInt(result[1], 16)) + 0.7152 * toLinear(parseInt(result[2], 16)) + 0.0722 * toLinear(parseInt(result[3], 16));
+  return L < 0.4;
+}
+
+function HeroBackground({ brandPrimary, brandBackground }: HeroBackgroundProps) {
+  // Use only primary color at varying opacities for the entire background
+  const c = brandPrimary || "#6366f1";
+  const bg = brandBackground || "#f8fafc";
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <style>{`
+        @keyframes mesh-float-1 {
+          0%, 100% { transform: translate(0%, 0%) scale(1); }
+          25% { transform: translate(15%, -20%) scale(1.1); }
+          50% { transform: translate(-10%, 15%) scale(0.95); }
+          75% { transform: translate(20%, 10%) scale(1.05); }
         }
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(100,116,139,${s.o})`;
-        ctx.fill();
-      }
+        @keyframes mesh-float-2 {
+          0%, 100% { transform: translate(0%, 0%) scale(1); }
+          25% { transform: translate(-20%, 15%) scale(1.15); }
+          50% { transform: translate(15%, -10%) scale(0.9); }
+          75% { transform: translate(-5%, -20%) scale(1.1); }
+        }
+        @keyframes mesh-float-3 {
+          0%, 100% { transform: translate(0%, 0%) scale(1.05); }
+          33% { transform: translate(10%, 20%) scale(0.95); }
+          66% { transform: translate(-15%, -10%) scale(1.1); }
+        }
+        @keyframes mesh-float-4 {
+          0%, 100% { transform: translate(0%, 0%) scale(1); }
+          20% { transform: translate(-10%, -15%) scale(1.1); }
+          40% { transform: translate(20%, 5%) scale(0.95); }
+          60% { transform: translate(-5%, 20%) scale(1.08); }
+          80% { transform: translate(15%, -10%) scale(1); }
+        }
+        @keyframes aurora-wave {
+          0% { transform: translateX(-100%) skewX(-15deg); opacity: 0; }
+          20% { opacity: 0.6; }
+          50% { transform: translateX(20%) skewX(-15deg); opacity: 0.4; }
+          80% { opacity: 0.6; }
+          100% { transform: translateX(100%) skewX(-15deg); opacity: 0; }
+        }
+        @keyframes grid-pulse {
+          0%, 100% { opacity: 0.03; }
+          50% { opacity: 0.07; }
+        }
+        @keyframes sparkle-float {
+          0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+      `}</style>
 
-      rafRef.current = requestAnimationFrame(draw);
-    };
+      {/* Base gradient — primary tinted */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(135deg, ${bg} 0%, ${hexToRgba(c, 0.04)} 25%, ${hexToRgba(c, 0.06)} 50%, ${hexToRgba(c, 0.03)} 75%, ${bg} 100%)`,
+        }}
+      />
 
-    rafRef.current = requestAnimationFrame(draw);
+      {/* Animated grid overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(${hexToRgba(c, 0.06)} 1px, transparent 1px),
+            linear-gradient(90deg, ${hexToRgba(c, 0.06)} 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+          animation: "grid-pulse 6s ease-in-out infinite",
+        }}
+      />
 
-    const handleResize = () => init();
-    window.addEventListener("resize", handleResize);
-    const handleMouse = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-    const handleLeave = () => { mouseRef.current = { x: -9999, y: -9999 }; };
-    canvas.addEventListener("mousemove", handleMouse);
-    canvas.addEventListener("mouseleave", handleLeave);
+      {/* Mesh gradient orbs — all primary color at different opacities/sizes */}
+      <div
+        className="absolute w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] rounded-full opacity-[0.35]"
+        style={{
+          top: "-15%",
+          left: "-10%",
+          background: `radial-gradient(circle, ${hexToRgba(c, 0.5)} 0%, ${hexToRgba(c, 0.15)} 40%, transparent 70%)`,
+          animation: "mesh-float-1 20s ease-in-out infinite",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full opacity-[0.25]"
+        style={{
+          top: "20%",
+          right: "-5%",
+          background: `radial-gradient(circle, ${hexToRgba(c, 0.4)} 0%, ${hexToRgba(c, 0.1)} 45%, transparent 70%)`,
+          animation: "mesh-float-2 25s ease-in-out infinite",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] rounded-full opacity-[0.2]"
+        style={{
+          bottom: "-10%",
+          left: "30%",
+          background: `radial-gradient(circle, ${hexToRgba(c, 0.35)} 0%, ${hexToRgba(c, 0.1)} 45%, transparent 70%)`,
+          animation: "mesh-float-3 22s ease-in-out infinite",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] rounded-full opacity-[0.18]"
+        style={{
+          top: "50%",
+          left: "10%",
+          background: `radial-gradient(circle, ${hexToRgba(c, 0.3)} 0%, ${hexToRgba(c, 0.08)} 40%, transparent 70%)`,
+          animation: "mesh-float-4 28s ease-in-out infinite",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] rounded-full opacity-[0.15]"
+        style={{
+          top: "10%",
+          left: "50%",
+          background: `radial-gradient(circle, ${hexToRgba(c, 0.3)} 0%, ${hexToRgba(c, 0.08)} 40%, transparent 70%)`,
+          animation: "mesh-float-1 18s ease-in-out infinite reverse",
+          filter: "blur(60px)",
+        }}
+      />
 
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("mousemove", handleMouse);
-      canvas.removeEventListener("mouseleave", handleLeave);
-    };
-  }, [init]);
+      {/* Aurora wave streaks — primary only */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute top-[20%] w-[120%] h-[120px] sm:h-[180px] opacity-[0.12]"
+          style={{
+            background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(c, 0.6)} 20%, ${hexToRgba(c, 0.4)} 50%, ${hexToRgba(c, 0.3)} 80%, transparent 100%)`,
+            animation: "aurora-wave 12s ease-in-out infinite",
+            filter: "blur(40px)",
+          }}
+        />
+        <div
+          className="absolute top-[55%] w-[120%] h-[100px] sm:h-[140px] opacity-[0.08]"
+          style={{
+            background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(c, 0.4)} 30%, ${hexToRgba(c, 0.5)} 60%, ${hexToRgba(c, 0.3)} 90%, transparent 100%)`,
+            animation: "aurora-wave 16s ease-in-out infinite 4s",
+            filter: "blur(40px)",
+          }}
+        />
+      </div>
 
-  return <canvas ref={canvasRef} className={className} style={{ width: "100%", height: "100%" }} />;
+      {/* Floating sparkle particles — all primary */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: `${2 + Math.random() * 3}px`,
+            height: `${2 + Math.random() * 3}px`,
+            left: `${10 + i * 11}%`,
+            bottom: "-5%",
+            background: hexToRgba(c, 0.3 + (i % 3) * 0.15),
+            boxShadow: `0 0 ${4 + i * 2}px ${2 + i}px ${hexToRgba(c, 0.2 + (i % 2) * 0.1)}`,
+            animation: `sparkle-float ${14 + i * 3}s linear infinite ${i * 2}s`,
+          }}
+        />
+      ))}
+
+      {/* Bright wash behind text area (left side on desktop) */}
+      <div
+        className="hidden lg:block absolute"
+        style={{
+          top: "5%",
+          left: "-5%",
+          width: "60%",
+          height: "90%",
+          background: `radial-gradient(ellipse at 30% 50%, ${hexToRgba(bg, 0.92)} 0%, ${hexToRgba(bg, 0.7)} 35%, ${hexToRgba(bg, 0.3)} 65%, transparent 85%)`,
+          filter: "blur(20px)",
+        }}
+      />
+
+      {/* Decorative geometric shapes */}
+      <div
+        className="absolute top-[15%] left-[8%] w-20 h-20 sm:w-28 sm:h-28 rounded-2xl opacity-40"
+        style={{
+          border: `1px solid ${hexToRgba(c, 0.3)}`,
+          transform: "rotate(15deg)",
+          animation: "mesh-float-1 15s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute bottom-[20%] right-[12%] w-16 h-16 sm:w-24 sm:h-24 rounded-full opacity-30"
+        style={{
+          border: `1px solid ${hexToRgba(c, 0.25)}`,
+          animation: "mesh-float-2 18s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute top-[60%] left-[45%] w-12 h-12 sm:w-16 sm:h-16 rounded-lg opacity-25"
+        style={{
+          border: `1px solid ${hexToRgba(c, 0.2)}`,
+          transform: "rotate(45deg)",
+          animation: "mesh-float-3 20s ease-in-out infinite",
+        }}
+      />
+
+      {/* Subtle noise texture overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "128px 128px",
+        }}
+      />
+
+      {/* Bottom gradient fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24"
+        style={{
+          background: `linear-gradient(to top, ${hexToRgba(bg, 0.9)}, transparent)`,
+        }}
+      />
+    </div>
+  );
 }
 
 /* ─── Swerve colors for floating cards ─── */
@@ -145,115 +306,10 @@ const swerveColors = [
   ["#a855f7", "#ec4899", "#d946ef"],
 ];
 
-/* ─── Category Sidebar with Glassmorphism ─── */
-function CategorySidebar({ categories, products }: { categories: ICategory[]; products: IProduct[] }) {
-  const [hoveredCat, setHoveredCat] = useState<string | null>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleMouseEnter = (catId: string) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setHoveredCat(catId);
-  };
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setHoveredCat(null), 200);
-  };
-
-  const getProductsForCategory = (catId: string) =>
-    products.filter((p) => p.categoryId === catId).slice(0, 4);
-
-  if (categories.length === 0) return null;
-
-  return (
-    <div className="hidden lg:flex flex-col flex-shrink-0 z-20 relative">
-      <div
-        className="rounded-2xl border border-white/30 shadow-xl px-1 py-2 space-y-0.5 min-w-[180px]"
-        style={{
-          background: "rgba(255,255,255,0.55)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-        }}
-      >
-        <div className="flex items-center gap-2 px-3 py-1.5 mb-1">
-          <Grid3X3 className="h-3.5 w-3.5 text-indigo-500" />
-          <span className="text-[11px] font-bold text-gray-700 uppercase tracking-wider">Categories</span>
-        </div>
-        {categories.slice(0, 8).map((cat) => (
-          <div
-            key={cat.id}
-            className="relative"
-            onMouseEnter={() => handleMouseEnter(cat.id)}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button
-              className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-left text-sm font-medium transition-all cursor-pointer ${
-                hoveredCat === cat.id
-                  ? "bg-white/80 text-gray-900 shadow-sm"
-                  : "text-gray-600 hover:bg-white/50 hover:text-gray-800"
-              }`}
-            >
-              <span className="truncate text-[13px]">{cat.title}</span>
-              <ChevronRight className={`h-3.5 w-3.5 shrink-0 transition-transform ${
-                hoveredCat === cat.id ? "translate-x-0.5 text-indigo-500" : "text-gray-400"
-              }`} />
-            </button>
-
-            {/* Hover popup */}
-            {hoveredCat === cat.id && (() => {
-              const catProducts = getProductsForCategory(cat.id);
-              if (catProducts.length === 0) return null;
-              return (
-                <div
-                  className="absolute left-full top-0 ml-2 z-30 rounded-2xl border border-white/30 shadow-2xl p-3 min-w-[260px]"
-                  style={{
-                    background: "rgba(255,255,255,0.7)",
-                    backdropFilter: "blur(20px)",
-                    WebkitBackdropFilter: "blur(20px)",
-                  }}
-                  onMouseEnter={() => handleMouseEnter(cat.id)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <p className="text-xs font-bold text-gray-700 mb-2 px-1">{cat.title}</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {catProducts.map((product) => (
-                      <div
-                        key={product.id}
-                        className="group rounded-xl overflow-hidden bg-white/60 border border-gray-200/60 hover:shadow-md transition-all"
-                      >
-                        <div className="aspect-square w-full bg-gray-100 relative overflow-hidden">
-                          {product.imageUrl ? (
-                            <img
-                              src={product.imageUrl}
-                              alt={product.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <ImageOff className="h-5 w-5 text-gray-300" />
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-1.5">
-                          <p className="text-[10px] font-semibold text-gray-800 truncate">{product.name}</p>
-                          <p className="text-[10px] font-bold text-indigo-600">£{product.price.toFixed(2)}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function StorefrontHero({
   storeName,
   productCount,
   products = [],
-  categories = [],
   heroTitle,
   heroSubtitle,
   heroBadgeText,
@@ -263,7 +319,12 @@ export function StorefrontHero({
   heroRatingText,
   heroTypewriterWords,
   heroProductIds,
-  heroBanners = [],
+  brandPrimary,
+  brandSecondary,
+  brandAccent,
+  brandBackground,
+  brandForeground,
+  brandMuted,
 }: StorefrontHeroProps) {
   /* Pick products for floating cards */
   let heroProducts: IProduct[];
@@ -285,20 +346,19 @@ export function StorefrontHero({
     heroImageUrl ||
     "https://www.pngall.com/wp-content/uploads/5/African-Woman-PNG-Image.png";
 
-  /* ─── Banner Carousel ─── */
-  const [bannerIndex, setBannerIndex] = useState(0);
-  const bannerCount = heroBanners.length;
+  /* ─── Typewriter for rotating words ─── */
+  const typewriterText = useTypewriter(heroTypewriterWords ?? [], 80, 50, 2000);
+  const hasTypewriter = heroTypewriterWords && heroTypewriterWords.length > 0;
 
-  useEffect(() => {
-    if (bannerCount <= 1) return;
-    const timer = setInterval(() => {
-      setBannerIndex((prev) => (prev + 1) % bannerCount);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [bannerCount]);
+  /* ─── Resolved display values ─── */
+  const displayTitle = heroTitle || storeName;
+  const displaySubtitle = heroSubtitle || `Discover ${productCount} handpicked products curated just for you.`;
+  const displayBadge = heroBadgeText || "New Collection";
+  const displayCta = heroCtaText || "Shop Now";
+
 
   return (
-    <section className="relative overflow-hidden bg-white text-gray-900">
+    <section className="relative overflow-hidden text-gray-900">
       {/* Keyframe styles */}
       <style>{`
         @keyframes hero-bounce-slow {
@@ -321,9 +381,9 @@ export function StorefrontHero({
           0% { background-position: 200% center; }
           100% { background-position: -200% center; }
         }
-        @keyframes textBounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
+        @keyframes cursor-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
         .hero-float-1 { animation: hero-bounce-slow 4s ease-in-out infinite; }
         .hero-float-2 { animation: hero-bounce-slow-alt 5s ease-in-out infinite 0.5s; }
@@ -334,40 +394,36 @@ export function StorefrontHero({
         .hero-fade-in-d2 { animation: hero-fade-in 0.8s ease-out 0.3s forwards; opacity: 0; }
         .hero-fade-in-d3 { animation: hero-fade-in 0.8s ease-out 0.45s forwards; opacity: 0; }
         .hero-fade-in-d4 { animation: hero-fade-in 0.8s ease-out 0.6s forwards; opacity: 0; }
+        .typewriter-cursor {
+          display: inline-block;
+          width: 3px;
+          margin-left: 2px;
+          background: linear-gradient(135deg, #6366f1, #8b5cf6);
+          animation: cursor-blink 0.8s step-end infinite;
+        }
       `}</style>
 
-      {/* Constellation canvas background */}
-      <div className="absolute inset-0 pointer-events-none z-0" style={{ opacity: 0.25 }}>
-        <ConstellationCanvas className="absolute inset-0" />
-      </div>
+      {/* Animated mesh gradient background */}
+      <HeroBackground
+        brandPrimary={brandPrimary}
+        brandBackground={brandBackground}
+      />
 
-      {/* Colorful gradient glows (Phoxta-style) */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[45%] w-[320px] h-[260px] sm:w-[500px] sm:h-[400px] md:w-[700px] md:h-[500px]" style={{ filter: "blur(80px)" }}>
-          <div className="absolute inset-0 m-auto w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] md:w-[200px] md:h-[200px] rounded-full" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)" }} />
-          <div className="absolute inset-0 m-auto w-[220px] h-[160px] sm:w-[340px] sm:h-[240px] md:w-[420px] md:h-[280px] rounded-full opacity-30" style={{ background: "radial-gradient(ellipse at center, rgba(99,102,241,0.4) 0%, transparent 60%)" }} />
-          <div className="absolute inset-0 m-auto w-[180px] h-[200px] sm:w-[280px] sm:h-[320px] md:w-[340px] md:h-[380px] rounded-full opacity-25 rotate-[30deg]" style={{ background: "radial-gradient(ellipse at center, rgba(168,85,247,0.35) 0%, transparent 55%)" }} />
-          <div className="absolute inset-0 m-auto w-[200px] h-[140px] sm:w-[320px] sm:h-[200px] md:w-[400px] md:h-[250px] rounded-full opacity-20 -rotate-[20deg]" style={{ background: "radial-gradient(ellipse at center, rgba(59,130,246,0.35) 0%, transparent 55%)" }} />
-          <div className="absolute inset-0 m-auto w-[140px] h-[160px] sm:w-[200px] sm:h-[240px] md:w-[250px] md:h-[300px] rounded-full opacity-15 -translate-x-[40px] sm:-translate-x-[60px]" style={{ background: "radial-gradient(ellipse at center, rgba(244,114,182,0.3) 0%, transparent 55%)" }} />
-          <div className="absolute inset-0 m-auto w-[120px] h-[100px] sm:w-[170px] sm:h-[140px] md:w-[210px] md:h-[170px] rounded-full opacity-15 translate-y-[30px]" style={{ background: "radial-gradient(ellipse at center, rgba(52,211,153,0.25) 0%, transparent 60%)" }} />
-        </div>
-      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-10 sm:py-16 lg:py-28">
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
-
-        {/* Right: model image – hidden on mobile */}
-        <div className="hidden lg:block absolute right-4 xl:right-16 top-1/2 -translate-y-[58%] z-10">
+        {/* Hero image: stacked on mobile, absolute on desktop */}
+        <div className="flex justify-center mb-14 lg:mb-0 lg:absolute lg:right-4 xl:right-16 lg:top-1/2 lg:-translate-y-[58%] lg:z-10">
           <div className="relative">
             <div className="absolute inset-x-0 bottom-0 h-[75%] rounded-3xl bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200 shadow-xl" />
             <img
               src={modelImageUrl}
               alt="Store feature"
-              className="relative w-72 xl:w-96 h-[26rem] xl:h-[32rem] object-contain object-bottom drop-shadow-2xl"
+              className="relative w-72 sm:w-80 md:w-[22rem] lg:w-96 xl:w-[28rem] h-[22rem] sm:h-[26rem] md:h-[28rem] lg:h-[30rem] xl:h-[36rem] object-contain object-bottom drop-shadow-2xl"
             />
 
             {/* Floating product cards overlaying the hero image */}
             {leftProducts.length > 0 && leftProducts[0] && (
-              <div className="absolute -left-16 xl:-left-20 top-1/2 -translate-y-1/2 z-20 hero-float-1">
+              <div className="absolute -left-10 sm:-left-12 lg:-left-16 xl:-left-20 top-1/2 -translate-y-1/2 z-20 hero-float-1">
                 <FloatingProductCard
                   product={leftProducts[0]}
                   floatClass=""
@@ -377,7 +433,7 @@ export function StorefrontHero({
               </div>
             )}
             {leftProducts.length > 1 && leftProducts[1] && (
-              <div className="absolute left-1/2 -translate-x-1/2 -bottom-10 xl:-bottom-12 z-20 hero-float-2">
+              <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 sm:-bottom-8 lg:-bottom-10 xl:-bottom-12 z-20 hero-float-2">
                 <FloatingProductCard
                   product={leftProducts[1]}
                   floatClass=""
@@ -387,7 +443,7 @@ export function StorefrontHero({
               </div>
             )}
             {leftProducts.length > 2 && leftProducts[2] && (
-              <div className="absolute -right-16 xl:-right-20 top-1/3 -translate-y-1/2 z-20 hero-float-3">
+              <div className="absolute -right-10 sm:-right-12 lg:-right-16 xl:-right-20 top-1/3 -translate-y-1/2 z-20 hero-float-3">
                 <FloatingProductCard
                   product={leftProducts[2]}
                   floatClass=""
@@ -397,7 +453,7 @@ export function StorefrontHero({
               </div>
             )}
             {leftProducts.length > 3 && leftProducts[3] && (
-              <div className="absolute -right-12 xl:-right-16 bottom-[15%] z-20 hero-float-4">
+              <div className="absolute -right-8 sm:-right-10 lg:-right-12 xl:-right-16 bottom-[15%] z-20 hero-float-4">
                 <FloatingProductCard
                   product={leftProducts[3]}
                   floatClass=""
@@ -409,112 +465,65 @@ export function StorefrontHero({
           </div>
         </div>
 
-        {/* Banner Carousel + Categories in a row (desktop) */}
-        <div className="hidden lg:flex items-start gap-6 relative z-15 max-w-[60%] -ml-2">
-          {/* Banner Carousel */}
-          {heroBanners.length > 0 ? (
-            <div className="shrink-0 pt-4 hero-fade-in">
-              <div className="relative w-[360px] xl:w-[420px] aspect-square rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50">
-                {heroBanners.map((url, i) => (
-                  <img
-                    key={i}
-                    src={url}
-                    alt={`Banner ${i + 1}`}
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                    style={{ opacity: i === bannerIndex ? 1 : 0 }}
-                  />
-                ))}
-                {/* Dot indicators */}
-                {heroBanners.length > 1 && (
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                    {heroBanners.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setBannerIndex(i)}
-                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                          i === bannerIndex
-                            ? "bg-white scale-110 shadow-md"
-                            : "bg-white/50 hover:bg-white/70"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div className="shrink-0 pt-4 hero-fade-in">
-              <div className="w-[360px] xl:w-[420px] aspect-square rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50 flex items-center justify-center">
-                <p className="text-sm text-gray-400">No banners uploaded</p>
-              </div>
-            </div>
-          )}
+        {/* Hero Text Content */}
+        <div className="relative z-15 max-w-xl lg:max-w-[55%] xl:max-w-[50%] text-center lg:text-left mx-auto lg:mx-0">
+          {/* Badge */}
+          <div className="hero-fade-in mb-3 lg:mb-6">
+            <span className="inline-flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-1 lg:py-1.5 rounded-full text-[10px] lg:text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary border border-primary/20 shadow-sm">
+              <Sparkles className="h-3 w-3 lg:h-3.5 lg:w-3.5" />
+              {displayBadge}
+            </span>
+          </div>
 
-          {/* Category sidebar */}
-          <CategorySidebar categories={categories} products={products} />
+          {/* Title */}
+          <h1 className="hero-fade-in-d1 text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1]">
+            {displayTitle}
+            {hasTypewriter && (
+              <>
+                <br />
+                <span
+                  className="bg-clip-text text-transparent text-primary"
+                  style={{
+                    backgroundImage: brandPrimary
+                      ? `linear-gradient(135deg, ${brandPrimary} 0%, ${brandAccent || brandPrimary} 50%, ${brandSecondary || brandPrimary} 100%)`
+                      : "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)",
+                    backgroundSize: "200% auto",
+                    animation: "shimmer-text 4s linear infinite",
+                  }}
+                >
+                  {typewriterText}
+                </span>
+                <span className="typewriter-cursor h-[0.9em] align-middle" />
+              </>
+            )}
+          </h1>
+
+          {/* Subtitle */}
+          <p className="hero-fade-in-d2 mt-3 lg:mt-5 text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
+            {displaySubtitle}
+          </p>
+
+          {/* CTA Button */}
+          <div className="hero-fade-in-d3 mt-5 lg:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <a
+              href={heroCtaLink || "#products"}
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
+              style={{
+                background: brandPrimary
+                  ? `linear-gradient(135deg, ${brandPrimary}, ${brandAccent || brandPrimary})`
+                  : "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                color: brandPrimary
+                  ? (isDarkColor(brandPrimary) ? "#ffffff" : "#1e293b")
+                  : "#ffffff",
+              }}
+            >
+              {displayCta}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+
+
         </div>
-
-        {/* Mobile: Banner Carousel */}
-        {heroBanners.length > 0 && (
-          <div className="lg:hidden max-w-sm mx-auto hero-fade-in">
-            <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50">
-              {heroBanners.map((url, i) => (
-                <img
-                  key={i}
-                  src={url}
-                  alt={`Banner ${i + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                  style={{ opacity: i === bannerIndex ? 1 : 0 }}
-                />
-              ))}
-              {heroBanners.length > 1 && (
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                  {heroBanners.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setBannerIndex(i)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                        i === bannerIndex
-                          ? "bg-white scale-110 shadow-md"
-                          : "bg-white/50 hover:bg-white/70"
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Mobile: Horizontal scrolling product cards */}
-        {leftProducts.length > 0 && (
-          <div className="lg:hidden mt-10 -mx-4 px-4">
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
-              {leftProducts.map((product) => (
-                <div key={product.id} className="snap-start shrink-0">
-                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-gray-50 shadow-lg border border-gray-200">
-                    {product.imageUrl ? (
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <ImageOff className="h-6 w-6 text-gray-300" />
-                      </div>
-                    )}
-                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-1.5 py-1">
-                      <p className="text-[9px] sm:text-[10px] font-medium text-white truncate">
-                        {product.name}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -541,7 +550,7 @@ function FloatingProductCard({
       className={`relative ${floatClass}`}
       style={{ animationDelay: `${delay}s` }}
     >
-      <div className="relative w-28 h-28 xl:w-32 xl:h-32 rounded-2xl overflow-hidden bg-gray-50 shadow-xl border border-gray-200">
+      <div className="relative w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 md:w-[6.5rem] md:h-[6.5rem] lg:w-32 lg:h-32 xl:w-36 xl:h-36 rounded-2xl overflow-hidden bg-gray-50 shadow-xl border border-gray-200">
         {product.imageUrl ? (
           <img
             src={product.imageUrl}

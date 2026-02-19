@@ -24,6 +24,7 @@ import {
   UserCog,
   Mail,
   Landmark,
+  MessageCircle,
 } from "lucide-react";
 
 import { RefineAiErrorComponent } from "@crm/components/catch-all";
@@ -74,6 +75,7 @@ import CouriersList from "@crm/pages/couriers/list";
 import CouriersEdit from "@crm/pages/couriers/edit";
 import CustomersList from "@crm/pages/customers/list";
 import FinancePage from "@crm/pages/finance";
+import MessagingPage from "@crm/pages/messaging";
 
 const DEFAULT_LOGO = "/phoxta-logo.png";
 
@@ -262,6 +264,14 @@ const CrmApp = () => {
             },
           },
           {
+            name: "messaging",
+            list: "/messaging",
+            meta: {
+              label: "Messaging",
+              icon: <MessageCircle />,
+            },
+          },
+          {
             name: "finance",
             list: "/finance",
             meta: {
@@ -365,6 +375,8 @@ const CrmApp = () => {
             <Route path="/couriers/edit/:id" element={<CouriersEdit />} />
 
             <Route path="/customers" element={<CustomersList />} />
+
+            <Route path="/messaging" element={<MessagingPage />} />
 
             <Route path="/finance" element={<FinancePage />} />
 

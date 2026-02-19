@@ -58,10 +58,10 @@ export function StorefrontProductModal({
         }
       }}
     >
-      <DialogContent className="sm:max-w-2xl p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-2xl p-0 overflow-hidden max-h-[75vh] overflow-y-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
           {/* Product Image */}
-          <div className="aspect-square bg-muted/50 relative overflow-hidden">
+          <div className="aspect-[4/3] sm:aspect-square bg-muted/50 relative overflow-hidden">
             {product.imageUrl ? (
               <img
                 src={product.imageUrl}
