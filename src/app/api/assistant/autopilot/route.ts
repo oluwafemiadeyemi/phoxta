@@ -236,7 +236,7 @@ You are running in AUTOPILOT MODE — you must take action on pending work WITHO
 - **Be professional** in all message and email replies — represent the business well.
 - Keep customer replies concise, warm, and helpful.
 - When sending chat messages, write plain text only (no markdown, no bold, no links).
-- When sending emails, write clean HTML.
+- When sending emails, write clean, mobile-friendly HTML. Keep paragraphs short, use generous spacing, and avoid fixed widths. The system wraps your HTML in a responsive template automatically.
 - When a customer asks about products, ALWAYS use list_records first to fetch product data, then include productIds in your send_chat_message or reply_email call.
 - For each action you take, include it in your final summary.
 - If there's nothing to do, respond with "All clear — nothing needs attention right now."
@@ -520,13 +520,13 @@ async function buildEmailProductCards(
   const fmtPrice = (p: number) =>
     new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(p);
 
-  // Build each product card as a table cell (2 per row, side-by-side)
+  // Build each product card as a table cell (2 per row on desktop, stacked on mobile)
   const cardCells = products.map((prod: any) => {
     const productUrl = storeSlug ? `${appUrl}/store/${storeSlug}?product=${prod.id}` : "";
 
     const imgHtml = prod.image_url
-      ? `<img src="${prod.image_url}" alt="${prod.name}" width="260" height="325" style="width:100%;height:325px;object-fit:cover;display:block;border-radius:16px 16px 0 0;" />`
-      : `<div style="width:100%;height:325px;background:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);border-radius:16px 16px 0 0;text-align:center;line-height:325px;color:#9ca3af;font-size:14px;">No image</div>`;
+      ? `<img src="${prod.image_url}" alt="${prod.name}" width="260" class="product-img" style="width:100%;height:325px;object-fit:cover;display:block;border-radius:16px 16px 0 0;" />`
+      : `<div class="product-img" style="width:100%;height:325px;background:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);border-radius:16px 16px 0 0;text-align:center;line-height:325px;color:#9ca3af;font-size:14px;">No image</div>`;
 
     const categoryHtml = prod.category_name
       ? `<p style="margin:0 0 4px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;font-weight:600;">${prod.category_name}</p>`
@@ -543,7 +543,7 @@ async function buildEmailProductCards(
       : "";
 
     return `<td style="width:50%;padding:8px;vertical-align:top;">
-      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #f3f4f6;">
+      <div class="product-card" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #f3f4f6;">
         ${imgHtml}
         <div style="padding:16px 16px 20px;">
           ${categoryHtml}
@@ -556,15 +556,15 @@ async function buildEmailProductCards(
     </td>`;
   });
 
-  // Arrange cards in rows of 2 (side-by-side)
+  // Arrange cards in rows of 2 (side-by-side on desktop, stacked on mobile via CSS)
   const rows: string[] = [];
   for (let i = 0; i < cardCells.length; i += 2) {
     const cell1 = cardCells[i];
     const cell2 = cardCells[i + 1] || '<td style="width:50%;padding:8px;"></td>';
-    rows.push(`<tr>${cell1}${cell2}</tr>`);
+    rows.push(`<tr class="product-row">${cell1}${cell2}</tr>`);
   }
 
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;max-width:600px;"><tbody>${rows.join("")}</tbody></table>`;
+  return `<table class="product-grid" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;max-width:600px;"><tbody>${rows.join("")}</tbody></table>`;
 }
 
 // ── Execute autopilot tool ──────────────────────────────────

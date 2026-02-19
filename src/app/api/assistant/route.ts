@@ -319,13 +319,13 @@ async function buildEmailProductCards(
   const fmtPrice = (p: number) =>
     new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(p);
 
-  // Build each product card as a table cell (2 per row, side-by-side)
+  // Build each product card as a table cell (2 per row on desktop, stacked on mobile)
   const cardCells = products.map((prod: any) => {
     const productUrl = storeSlug ? `${appUrl}/store/${storeSlug}?product=${prod.id}` : "";
 
     const imgHtml = prod.image_url
-      ? `<img src="${prod.image_url}" alt="${prod.name}" width="260" height="325" style="width:100%;height:325px;object-fit:cover;display:block;border-radius:16px 16px 0 0;" />`
-      : `<div style="width:100%;height:325px;background:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);border-radius:16px 16px 0 0;text-align:center;line-height:325px;color:#9ca3af;font-size:14px;">No image</div>`;
+      ? `<img src="${prod.image_url}" alt="${prod.name}" width="260" class="product-img" style="width:100%;height:325px;object-fit:cover;display:block;border-radius:16px 16px 0 0;" />`
+      : `<div class="product-img" style="width:100%;height:325px;background:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);border-radius:16px 16px 0 0;text-align:center;line-height:325px;color:#9ca3af;font-size:14px;">No image</div>`;
 
     const categoryHtml = prod.category_name
       ? `<p style="margin:0 0 4px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#9ca3af;font-weight:600;">${prod.category_name}</p>`
@@ -342,7 +342,7 @@ async function buildEmailProductCards(
       : "";
 
     return `<td style="width:50%;padding:8px;vertical-align:top;">
-      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #f3f4f6;">
+      <div class="product-card" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);border:1px solid #f3f4f6;">
         ${imgHtml}
         <div style="padding:16px 16px 20px;">
           ${categoryHtml}
@@ -355,15 +355,15 @@ async function buildEmailProductCards(
     </td>`;
   });
 
-  // Arrange cards in rows of 2 (side-by-side)
+  // Arrange cards in rows of 2 (side-by-side on desktop, stacked on mobile via CSS)
   const rows: string[] = [];
   for (let i = 0; i < cardCells.length; i += 2) {
     const cell1 = cardCells[i];
     const cell2 = cardCells[i + 1] || '<td style="width:50%;padding:8px;"></td>';
-    rows.push(`<tr>${cell1}${cell2}</tr>`);
+    rows.push(`<tr class="product-row">${cell1}${cell2}</tr>`);
   }
 
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;max-width:600px;"><tbody>${rows.join("")}</tbody></table>`;
+  return `<table class="product-grid" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0;max-width:600px;"><tbody>${rows.join("")}</tbody></table>`;
 }
 
 // ── System prompt ───────────────────────────────────────────
@@ -414,7 +414,8 @@ You have access to tools that let you:
 - Use send_email to compose and send new emails. The system automatically picks the user's default email account.
 - Use reply_email to reply to received emails — it handles Re: subject, In-Reply-To headers, and quoting.
 - Use list_inbox_emails with unreadOnly=true to check for new mail that needs attention.
-- Email body is HTML — use <p>, <br>, <strong>, <ul>/<li> tags for professional formatting.
+- Email body is HTML — the system automatically wraps it in a mobile-responsive template. Write clean, simple HTML using <p>, <br>, <strong>, <ul>/<li> tags.
+- **Mobile-first design**: Keep paragraphs short, use generous spacing (margin/padding), avoid fixed widths. The email will be viewed on phones. Use inline styles only.
 - When replying to customer inquiries, be professional, warm, and concise.
 - Link emails to relevant CRM records (contacts, customers, orders, deals) when possible.
 9. **Product emails**: When answering questions about available products via email (send_email or reply_email), always pass the product IDs in the productIds parameter. This auto-generates beautiful product cards with images and "View Product" links in the email — do NOT try to build product HTML yourself.

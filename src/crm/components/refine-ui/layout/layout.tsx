@@ -8,7 +8,6 @@ import { Header } from "@crm/components/refine-ui/layout/header";
 import { ThemeProvider } from "@crm/components/refine-ui/theme/theme-provider";
 import { cn } from "@crm/lib/utils";
 import { Menu } from "lucide-react";
-import { FocusOrb } from "@crm/components/focus-orb";
 import { PhoxtaAssistant } from "@crm/components/phoxta-assistant";
 
 export function Layout({ children }: PropsWithChildren) {
@@ -39,7 +38,6 @@ export function Layout({ children }: PropsWithChildren) {
             )}
           >
             {children}
-            <FocusOrb />
             <PhoxtaAssistant />
           </main>
           <MobileBottomNav />

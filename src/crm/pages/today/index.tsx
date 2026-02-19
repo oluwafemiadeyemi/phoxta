@@ -17,10 +17,8 @@ import type { Deal, Quote, Task } from "@crm/types";
 import { Card } from "@crm/components/ui/card";
 import { Button } from "@crm/components/ui/button";
 import { Badge } from "@crm/components/ui/badge";
-import { Switch } from "@crm/components/ui/switch";
 import { Progress } from "@crm/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@crm/components/ui/tabs";
-import { FocusModeTimer } from "@crm/components/focus-mode-timer";
 import { QuickAddDialog } from "@crm/components/quick-add-dialog";
 import { computePipelineHealth } from "@crm/lib/engagement";
 import { useEngagement } from "@crm/hooks/use-engagement";
@@ -41,7 +39,7 @@ function isSameDay(dateStr: string, day: Date) {
 export default function TodayPage() {
   const navigate = useNavigate();
   const [quickAddOpen, setQuickAddOpen] = useState(false);
-  const [showTemplates, setShowTemplates] = useState(true);
+
   const [optimizeFor, setOptimizeFor] = useState<OptimizeFor>(() => getPersonalizationSettings().optimizeFor);
 
   const { streak } = useEngagement();
@@ -364,7 +362,6 @@ export default function TodayPage() {
         <Tabs defaultValue="plan" className="w-full">
           <TabsList className="w-full justify-between md:justify-start md:gap-2">
             <TabsTrigger value="plan">Plan</TabsTrigger>
-            <TabsTrigger value="focus">Focus</TabsTrigger>
           </TabsList>
 
           <TabsContent value="plan">
@@ -393,7 +390,7 @@ export default function TodayPage() {
                   {nextBestActions.length === 0 ? (
                     <div className="rounded-xl border bg-muted/30 p-8 text-center text-muted-foreground">
                       <Sparkles className="h-6 w-6 mx-auto mb-2" />
-                      All clear. Start a focus session or quick add.
+                      All clear — nothing needs attention right now.
                     </div>
                   ) : (
                     nextBestActions.map((a) => (
@@ -519,7 +516,7 @@ export default function TodayPage() {
                   {overdueTasks.length === 0 && dueTodayTasks.length === 0 && quotesExpiringSoon.length === 0 && (
                     <div className="rounded-xl border bg-muted/30 p-8 text-center text-muted-foreground">
                       <Sparkles className="h-6 w-6 mx-auto mb-2" />
-                      Clear day. Create a quick win and start a focus session.
+                      Clear day — create a quick win to keep momentum.
                     </div>
                   )}
                 </div>
@@ -549,68 +546,11 @@ export default function TodayPage() {
             </div>
           </TabsContent>
 
-          <TabsContent value="focus">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <FocusModeTimer />
 
-              <Card className="p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-lg font-semibold">Templates</div>
-                    <div className="text-sm text-muted-foreground">Copy/paste to move faster</div>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="text-muted-foreground">Show</span>
-                    <Switch checked={showTemplates} onCheckedChange={(v) => setShowTemplates(Boolean(v))} />
-                  </div>
-                </div>
-
-                {showTemplates && (
-                  <div className="mt-4 space-y-3">
-                    <TemplateCard
-                      title="Quote follow-up"
-                      body={`Hi {{name}},\n\nJust a quick follow-up on quote {{quote_number}}. Happy to answer any questions or adjust scope.\n\nWould you like to proceed this week?\n\nThanks,\n{{your_name}}`}
-                    />
-                    <TemplateCard
-                      title="Deal next step"
-                      body={`Hi {{name}},\n\nBased on our last chat, the next best step is {{next_step}}.\n\nDoes {{proposed_time}} work for a quick call?\n\nThanks,\n{{your_name}}`}
-                    />
-                    <TemplateCard
-                      title="Project update"
-                      body={`Project update:\n- Done: {{done}}\n- Next: {{next}}\n- Risks: {{risks}}\n\nETA: {{eta}}`}
-                    />
-                  </div>
-                )}
-              </Card>
-            </div>
-          </TabsContent>
         </Tabs>
 
         <QuickAddDialog open={quickAddOpen} onOpenChange={setQuickAddOpen} />
       </div>
-    </div>
-  );
-}
-
-function TemplateCard(props: { title: string; body: string }) {
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(props.body);
-    } catch {
-      // ignore
-    }
-  };
-
-  return (
-    <div className="rounded-md border p-3">
-      <div className="flex items-center justify-between gap-2">
-        <div className="font-medium">{props.title}</div>
-        <Button size="sm" variant="outline" onClick={copy}>
-          <ClipboardCopy className="h-4 w-4 mr-2" />
-          Copy
-        </Button>
-      </div>
-      <pre className="mt-2 whitespace-pre-wrap text-sm text-muted-foreground">{props.body}</pre>
     </div>
   );
 }

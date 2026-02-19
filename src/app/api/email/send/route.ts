@@ -93,6 +93,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Wrap body in a mobile-responsive HTML email template
+    const responsiveHtml = wrapInResponsiveTemplate(htmlBody || "");
+
     // Send the email
     const info = await transporter.sendMail({
       from: fromName ? `"${fromName}" <${fromAddress}>` : fromAddress,
@@ -100,7 +103,7 @@ export async function POST(req: NextRequest) {
       cc: cc && cc.length > 0 ? (Array.isArray(cc) ? cc.join(", ") : cc) : undefined,
       bcc: bcc && bcc.length > 0 ? (Array.isArray(bcc) ? bcc.join(", ") : bcc) : undefined,
       subject: subject || "(No subject)",
-      html: htmlBody || "",
+      html: responsiveHtml,
     });
 
     // Update the email record status to "sent"
@@ -151,6 +154,52 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     );
   }
+}
+
+/** Wrap raw HTML body in a mobile-responsive email document */
+function wrapInResponsiveTemplate(body: string): string {
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no" />
+  <title></title>
+  <!--[if mso]>
+  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+  <![endif]-->
+  <style>
+    /* Reset */
+    body, html { margin:0; padding:0; width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:15px; line-height:1.6; color:#1f2937; background-color:#f9fafb; }
+    img { max-width:100%; height:auto; border:0; display:block; }
+    table { border-collapse:collapse; }
+    a { color:#6366f1; }
+
+    /* Mobile-responsive product cards */
+    @media only screen and (max-width: 620px) {
+      .email-container { width:100% !important; padding:12px !important; }
+      .product-row td { display:block !important; width:100% !important; padding:6px 0 !important; }
+      .product-row td .product-card { max-width:100% !important; }
+      .product-grid { width:100% !important; }
+      .product-img { height:280px !important; }
+      h1, h2, h3,
+      .email-container h1,
+      .email-container h2,
+      .email-container h3 { word-break:break-word; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f9fafb;">
+  <center>
+    <div class="email-container" style="max-width:600px;margin:0 auto;padding:24px 16px;background-color:#ffffff;">
+      ${body}
+    </div>
+  </center>
+</body>
+</html>`;
 }
 
 function formatSmtpError(msg: string): string {
