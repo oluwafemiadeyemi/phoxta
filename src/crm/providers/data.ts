@@ -400,7 +400,10 @@ export const dataProvider: DataProvider = {
         data: transformedData,
         total: count || 0,
       };
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.name === "AbortError" || error?.message?.includes("aborted")) {
+        return { data: [], total: 0 };
+      }
       console.error(`[Supabase] Error in getList for ${resource}:`, formatError(error));
       throw error;
     }
@@ -449,7 +452,11 @@ export const dataProvider: DataProvider = {
       return {
         data: transformedData,
       };
-    } catch (error) {
+    } catch (error: any) {
+      // Ignore AbortError — happens when React unmounts before the fetch completes
+      if (error?.name === "AbortError" || error?.message?.includes("aborted")) {
+        return { data: { id } as any };
+      }
       console.error(`[Supabase] Error in getOne for ${resource}:`, formatError(error));
       throw error;
     }

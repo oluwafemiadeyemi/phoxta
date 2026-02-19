@@ -1043,8 +1043,15 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Ask AI what to do and let it execute
-    const OpenAI = (await import("openai")).default;
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    let OpenAI: any;
+    let openai: any;
+    try {
+      OpenAI = (await import("openai")).default;
+      openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    } catch (initErr: any) {
+      console.error("Autopilot: Failed to init OpenAI:", initErr);
+      return Response.json({ error: "Failed to initialise AI client: " + (initErr?.message || "unknown"), actions: [], summary: "Autopilot failed to start." }, { status: 500 });
+    }
 
     let messages: any[] = [
       { role: "system", content: AUTOPILOT_SYSTEM },
@@ -1059,14 +1066,35 @@ export async function POST(req: NextRequest) {
       // On the last iteration, force the AI to produce a text summary instead of more tool calls
       const isLastIteration = iteration === MAX_ITERATIONS;
 
-      const response = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        temperature: 0.3,
-        max_tokens: 2048,
-        messages,
-        tools: AUTOPILOT_TOOLS,
-        tool_choice: isLastIteration ? "none" : "auto",
-      });
+      let response: any;
+      try {
+        response = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          temperature: 0.3,
+          max_tokens: 2048,
+          messages,
+          tools: AUTOPILOT_TOOLS,
+          tool_choice: isLastIteration ? "none" : "auto",
+        });
+      } catch (aiErr: any) {
+        console.error("Autopilot: OpenAI API error:", aiErr?.message || aiErr);
+        // Return partial results if we already have them
+        return Response.json({
+          actions,
+          summary: `Autopilot encountered an AI error after ${actions.length} action(s): ${aiErr?.message || "Unknown AI error"}`,
+          scannedAt: new Date().toISOString(),
+          pendingCounts: {
+            unreadMessages: work.unreadConversations.length,
+            pendingOrders: work.pendingOrders.length,
+            overdueTasks: work.overdueTasks.length,
+            newLeads: work.newLeads.length,
+            draftQuotes: work.draftQuotes.length,
+            urgentDeals: work.urgentDeals.length,
+            lowStock: work.lowStockProducts.length,
+            unreadEmails: work.unreadEmails.length,
+          },
+        });
+      }
 
       const choice = response.choices[0];
       const message = choice.message;
@@ -1075,10 +1103,18 @@ export async function POST(req: NextRequest) {
         messages.push(message as any);
 
         const toolResults = await Promise.all(
-          message.tool_calls.map(async (tc) => {
+          message.tool_calls.map(async (tc: any) => {
             const fn = (tc as any).function;
-            const args = JSON.parse(fn.arguments || "{}");
-            const result = await executeAutopilotTool(fn.name, args, userId);
+            let args: any;
+            let result: any;
+            try {
+              args = JSON.parse(fn.arguments || "{}");
+              result = await executeAutopilotTool(fn.name, args, userId);
+            } catch (toolErr: any) {
+              console.error(`Autopilot: Tool ${fn.name} failed:`, toolErr?.message || toolErr);
+              args = args || {};
+              result = { error: `Tool execution failed: ${toolErr?.message || "Unknown error"}` };
+            }
 
             // Log the action
             actions.push({

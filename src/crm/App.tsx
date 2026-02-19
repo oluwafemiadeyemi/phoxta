@@ -269,6 +269,7 @@ const CrmApp = () => {
             meta: {
               label: "Messaging",
               icon: <MessageCircle />,
+              parent: "e-commerce",
             },
           },
           {

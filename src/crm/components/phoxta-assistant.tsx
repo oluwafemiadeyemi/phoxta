@@ -580,13 +580,15 @@ export function PhoxtaAssistant() {
 
   return (
     <>
-      {/* ── Backdrop (identical to FocusOrb z-[68]) ─────────── */}
+      {/* ── Backdrop ─────────────────────────────────────── */}
       <div
         aria-hidden={!open}
-        className={
-          "fixed inset-0 z-[71] bg-white/60 backdrop-blur-[2px] transition-opacity duration-200 dark:bg-black/40 " +
-          (open ? "opacity-100" : "pointer-events-none opacity-0")
-        }
+        className={cn(
+          "fixed inset-0 z-[71] transition-opacity duration-200",
+          // Mobile: no backdrop (panel is full-screen); Desktop: light blur
+          "hidden sm:block sm:bg-white/60 sm:backdrop-blur-[2px] dark:sm:bg-black/40",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
         onClick={() => setOpen(false)}
       />
 
@@ -621,26 +623,39 @@ export function PhoxtaAssistant() {
       {/* ── Chat Panel (glass morphism popup, like FocusOrb) ── */}
       <div
         aria-hidden={!open}
-        className={
-          "fixed z-[72] transition-opacity duration-200 " +
-          (open ? "opacity-100" : "pointer-events-none opacity-0")
-        }
-        style={{ left: popupPosition.left, top: popupPosition.top }}
+        className={cn(
+          "fixed z-[72] transition-all duration-200",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+          // Mobile: full-screen overlay; Desktop: positioned popup
+          "inset-0 sm:inset-auto",
+        )}
+        style={typeof window !== "undefined" && window.innerWidth >= 640 ? { left: popupPosition.left, top: popupPosition.top } : undefined}
       >
-        <div ref={popupRef} className="relative w-[340px] sm:w-[380px] md:w-[420px] max-w-[calc(100vw-24px)]">
-          {/* ── Aura glow (identical to FocusOrb) ────────────── */}
-          <div aria-hidden="true" className="pointer-events-none absolute -inset-5 sm:-inset-6 rounded-[28px] opacity-45 blur-xl sm:blur-2xl">
+        <div ref={popupRef} className={cn(
+          "relative",
+          // Mobile: full screen; Desktop: fixed-width popup
+          "w-full h-full sm:h-auto sm:w-[380px] md:w-[420px] sm:max-w-[calc(100vw-24px)]",
+        )}>
+          {/* ── Aura glow (hidden on mobile for performance) ── */}
+          <div aria-hidden="true" className="pointer-events-none absolute -inset-5 sm:-inset-6 rounded-[28px] opacity-45 blur-xl sm:blur-2xl hidden sm:block">
             <div className="focus-popup-aura absolute inset-0 rounded-[28px] bg-[linear-gradient(120deg,rgba(168,85,247,0.22),rgba(59,130,246,0.20),rgba(6,182,212,0.20),rgba(168,85,247,0.22))]" />
             <div className="focus-popup-aura-slow absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.18),transparent_60%)]" />
           </div>
 
           {/* ── Glass shell ──────────────────────────────────── */}
-          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-white/20 bg-background/35 shadow-2xl ring-1 ring-white/15 backdrop-blur-xl supports-[backdrop-filter]:bg-background/25 dark:border-white/10 dark:ring-white/10 max-h-[min(560px,calc(100vh-120px))]">
+          <div className={cn(
+            "relative flex flex-col overflow-hidden shadow-2xl backdrop-blur-xl",
+            // Mobile: full-screen, square corners, solid bg
+            "h-full rounded-none bg-background/95 sm:rounded-2xl sm:bg-background/80",
+            "border-0 sm:border sm:border-white/20 sm:ring-1 sm:ring-white/15",
+            "dark:bg-background/90 dark:sm:bg-background/70 dark:sm:border-white/10 dark:sm:ring-white/10",
+            "sm:max-h-[min(560px,calc(100vh-120px))]",
+          )}>
             {/* Header */}
-            <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-background/20 px-3 py-2 shrink-0">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground select-none">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span className="font-medium">Phoxta Assistant</span>
+            <div className="flex items-center justify-between gap-2 border-b border-white/10 bg-background/30 px-3 py-2.5 sm:py-2 shrink-0">
+              <div className="flex items-center gap-2 text-xs sm:text-xs text-foreground/80 select-none">
+                <Sparkles className="h-4 w-4 sm:h-3.5 sm:w-3.5 text-primary" />
+                <span className="font-semibold sm:font-medium">Phoxta Assistant</span>
               </div>
               <div className="flex items-center gap-1">
                 {/* Autopilot toggle */}
@@ -685,12 +700,12 @@ export function PhoxtaAssistant() {
             </div>
 
             {/* Tab bar */}
-            <div className="flex border-b border-white/10 bg-background/10 shrink-0">
+            <div className="flex border-b border-white/10 bg-background/15 shrink-0">
               <button
                 type="button" data-no-drag
                 onClick={() => setActiveTab("chat")}
                 className={cn(
-                  "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[11px] font-medium transition-colors",
+                  "flex-1 flex items-center justify-center gap-1.5 py-2.5 sm:py-1.5 text-xs sm:text-[11px] font-medium transition-colors",
                   activeTab === "chat" ? "text-foreground border-b-2 border-primary" : "text-muted-foreground hover:text-foreground/80",
                 )}
               >
@@ -701,7 +716,7 @@ export function PhoxtaAssistant() {
                 type="button" data-no-drag
                 onClick={() => setActiveTab("activity")}
                 className={cn(
-                  "flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[11px] font-medium transition-colors relative",
+                  "flex-1 flex items-center justify-center gap-1.5 py-2.5 sm:py-1.5 text-xs sm:text-[11px] font-medium transition-colors relative",
                   activeTab === "activity" ? "text-foreground border-b-2 border-primary" : "text-muted-foreground hover:text-foreground/80",
                 )}
               >
@@ -716,8 +731,7 @@ export function PhoxtaAssistant() {
             {/* Messages area — scrollable */}
             <div
               ref={scrollRef}
-              className={cn("flex-1 overflow-y-auto overscroll-contain px-3 py-3 space-y-3 min-h-0", activeTab !== "chat" && "hidden")}
-              style={{ maxHeight: "calc(100% - 140px)" }}
+              className={cn("flex-1 overflow-y-auto overscroll-contain px-3 sm:px-3 py-3 space-y-3 min-h-0", activeTab !== "chat" && "hidden")}
             >
               {messages.length === 0 && !streaming && (
                 <div className="flex flex-col items-center justify-center py-6 text-center px-4 gap-3">
@@ -795,7 +809,7 @@ export function PhoxtaAssistant() {
 
             {/* Activity log tab */}
             {activeTab === "activity" && (
-              <div className="flex-1 overflow-y-auto overscroll-contain px-3 py-3 space-y-3 min-h-0" style={{ maxHeight: "calc(100% - 140px)" }}>
+              <div className="flex-1 overflow-y-auto overscroll-contain px-3 py-3 space-y-3 min-h-0">
                 {autopilotLogs.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-8 text-center gap-2">
                     <div className="w-10 h-10 rounded-xl bg-muted/30 flex items-center justify-center">
@@ -848,7 +862,7 @@ export function PhoxtaAssistant() {
             )}
 
             {/* Input area */}
-            <div className={cn("shrink-0 border-t border-white/10 bg-background/20 px-3 py-2", activeTab !== "chat" && "hidden")}>
+            <div className={cn("shrink-0 border-t border-white/10 bg-background/30 px-3 py-3 sm:py-2 pb-[max(env(safe-area-inset-bottom),12px)] sm:pb-2", activeTab !== "chat" && "hidden")}>
               {streaming && (
                 <button
                   type="button"
@@ -871,8 +885,8 @@ export function PhoxtaAssistant() {
                   rows={1}
                   disabled={streaming}
                   className={cn(
-                    "flex-1 resize-none rounded-lg border border-white/15 bg-white/5",
-                    "px-2.5 py-2 text-[13px] placeholder:text-muted-foreground/50",
+                    "flex-1 resize-none rounded-lg border border-white/15 bg-white/8",
+                    "px-3 py-2.5 sm:px-2.5 sm:py-2 text-sm sm:text-[13px] placeholder:text-muted-foreground/50",
                     "focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/30",
                     "disabled:opacity-50 disabled:cursor-not-allowed",
                     "max-h-[80px] scrollbar-thin",
@@ -925,10 +939,10 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
       <div
         className={cn(
-          "max-w-[85%] rounded-xl px-3 py-2",
+          "max-w-[85%] sm:max-w-[85%] rounded-xl px-3 py-2",
           isUser
             ? "bg-primary text-primary-foreground rounded-br-sm"
-            : "bg-white/8 text-foreground rounded-bl-sm dark:bg-white/5",
+            : "bg-white/12 text-foreground rounded-bl-sm dark:bg-white/8",
         )}
       >
         {/* Tool calls accordion */}

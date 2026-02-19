@@ -350,6 +350,7 @@ export default function DealsBoardPage() {
 
   const { mutate: updateDeal } = useUpdate<Deal>();
   const { show } = useNavigation();
+  const { formatCompact: fmtCompact } = useCurrency();
 
   const [dealOrderByStage, setDealOrderByStage] = useState<Record<StageName, string[]>>(() => {
     const empty: Record<StageName, string[]> = {
@@ -635,7 +636,7 @@ export default function DealsBoardPage() {
                 <DollarSign className="h-4 w-4 text-emerald-500" />
                 <span className="text-xs font-medium text-muted-foreground">Pipeline Value</span>
               </div>
-              <div className="text-xl font-bold">{useCurrency().formatCompact(totalValue)}</div>
+              <div className="text-xl font-bold">{fmtCompact(totalValue)}</div>
             </div>
             <div className="p-3.5 rounded-xl border border-border/60 bg-background">
               <div className="flex items-center gap-2 mb-1">
@@ -649,7 +650,7 @@ export default function DealsBoardPage() {
                 <Target className="h-4 w-4 text-amber-500" />
                 <span className="text-xs font-medium text-muted-foreground">Avg Deal</span>
               </div>
-              <div className="text-xl font-bold">{useCurrency().formatCompact(avgDealSize)}</div>
+              <div className="text-xl font-bold">{fmtCompact(avgDealSize)}</div>
             </div>
           </div>
 
