@@ -46,11 +46,24 @@ const resourceToTable: Record<string, string> = {
   messagingQuickReplies: "messaging_quick_replies",
   messagingAutomations: "messaging_automations",
   messagingAnalytics: "messaging_analytics",
+  // Content Studio
+  contentPosts: "content_posts",
+  contentChannels: "content_channels",
+  contentLabels: "content_labels",
+  contentMedia: "content_media",
+  contentIdeas: "content_ideas",
+  contentComments: "content_comments",
+  contentActivityLog: "content_activity_log",
+  contentTasks: "content_tasks",
+  contentSocialInbox: "content_social_inbox",
+  contentSocialAutomations: "content_social_automations",
+  contentCrossPosts: "content_cross_posts",
 };
 
 const isUserScopedTable = (tableName: string) => {
-  // Most app tables are scoped by user_id. Team members and attachments rely on RLS.
-  return tableName !== "team_members" && tableName !== "attachments";
+  // Most app tables are scoped by user_id. These tables rely on RLS or join-based access instead.
+  const nonUserScoped = ["team_members", "attachments", "content_cross_posts"];
+  return !nonUserScoped.includes(tableName);
 };
 
 // Helper: extract readable error info from Supabase PostgrestError objects

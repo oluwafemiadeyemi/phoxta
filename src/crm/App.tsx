@@ -25,6 +25,8 @@ import {
   Mail,
   Landmark,
   MessageCircle,
+  Newspaper,
+  Paintbrush,
 } from "lucide-react";
 
 import { RefineAiErrorComponent } from "@crm/components/catch-all";
@@ -76,6 +78,12 @@ import CouriersEdit from "@crm/pages/couriers/edit";
 import CustomersList from "@crm/pages/customers/list";
 import FinancePage from "@crm/pages/finance";
 import MessagingPage from "@crm/pages/messaging";
+
+// Content Management pages
+import ContentHubPage from "@crm/pages/content/list";
+import ContentCreate from "@crm/pages/content/create";
+import ContentEdit from "@crm/pages/content/edit";
+import ContentDesignerPage from "@crm/pages/content/designer";
 
 const DEFAULT_LOGO = "/phoxta-logo.png";
 
@@ -272,6 +280,34 @@ const CrmApp = () => {
               parent: "e-commerce",
             },
           },
+          // Content Management parent (collapsible group in sidebar)
+          {
+            name: "content-group",
+            meta: {
+              label: "Content",
+              icon: <Newspaper />,
+            },
+          },
+          {
+            name: "contentPosts",
+            list: "/content",
+            create: "/content/create",
+            edit: "/content/edit/:id",
+            meta: {
+              label: "Content Studio",
+              icon: <FileText />,
+              parent: "content-group",
+            },
+          },
+          {
+            name: "contentDesigner",
+            list: "/content/designer",
+            meta: {
+              label: "Designer",
+              icon: <Paintbrush />,
+              parent: "content-group",
+            },
+          },
           {
             name: "finance",
             list: "/finance",
@@ -378,6 +414,13 @@ const CrmApp = () => {
             <Route path="/customers" element={<CustomersList />} />
 
             <Route path="/messaging" element={<MessagingPage />} />
+
+            {/* Content Management routes */}
+            <Route path="/content" element={<ContentHubPage />} />
+            <Route path="/content/create" element={<ContentCreate />} />
+            <Route path="/content/edit/:id" element={<ContentEdit />} />
+            <Route path="/content/designer" element={<ContentDesignerPage />} />
+            <Route path="/content/designer/*" element={<ContentDesignerPage />} />
 
             <Route path="/finance" element={<FinancePage />} />
 
