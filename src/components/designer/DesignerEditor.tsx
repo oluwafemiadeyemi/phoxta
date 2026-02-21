@@ -42,7 +42,23 @@ export default function DesignerEditor({
   const setIsSaving = useDocumentStore((s) => s.setIsSaving);
   const setLastSavedAt = useDocumentStore((s) => s.setLastSavedAt);
   const previewMode = useUIStore((s) => s.previewMode);
+  const isMobile = useUIStore((s) => s.isMobile);
+  const setIsMobile = useUIStore((s) => s.setIsMobile);
   const setTool = useToolStore((s) => s.setTool);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const handler = (e: MediaQueryListEvent | MediaQueryList) =>
+      setIsMobile(e.matches);
+    handler(mq); // initial check
+    mq.addEventListener("change", handler as (e: MediaQueryListEvent) => void);
+    return () =>
+      mq.removeEventListener(
+        "change",
+        handler as (e: MediaQueryListEvent) => void,
+      );
+  }, [setIsMobile]);
 
   // Initialize project in store
   useEffect(() => {
@@ -185,9 +201,11 @@ export default function DesignerEditor({
     <div className="flex flex-col h-full w-full bg-background">
       <TopBar onSave={handleSave} onBack={onBack} />
 
-      <div className="flex flex-1 min-h-0">
-        <LeftRail />
-        <LeftPanel />
+      {/* Desktop: horizontal layout | Mobile: canvas fills, panels overlay */}
+      <div className="flex flex-1 min-h-0 relative">
+        {/* Left rail – hidden on mobile (bottom rail used instead) */}
+        {!isMobile && <LeftRail />}
+        {!isMobile && <LeftPanel />}
 
         {/* Canvas area */}
         <div className="flex-1 relative min-w-0">
@@ -199,8 +217,15 @@ export default function DesignerEditor({
           <Toolbar />
         </div>
 
-        <RightPanel />
+        {!isMobile && <RightPanel />}
+
+        {/* Mobile overlays */}
+        {isMobile && <LeftPanel />}
+        {isMobile && <RightPanel />}
       </div>
+
+      {/* Mobile bottom rail */}
+      {isMobile && <LeftRail />}
 
       {/* Modals */}
       <ExportModal />

@@ -20,6 +20,7 @@ import {
   RotateCw,
   Lock,
   Unlock,
+  X,
 } from "lucide-react";
 import { Input } from "@crm/components/ui/input";
 import { Label } from "@crm/components/ui/label";
@@ -61,6 +62,8 @@ export default function RightPanel() {
   const pushSnapshot = useDocumentStore((s) => s.pushSnapshot);
   const rightPanelOpen = useUIStore((s) => s.rightPanelOpen);
   const selectedObjectIds = useUIStore((s) => s.selectedObjectIds);
+  const isMobile = useUIStore((s) => s.isMobile);
+  const toggleRightPanel = useUIStore((s) => s.toggleRightPanel);
 
   const [props, setProps] = useState<ObjectProps | null>(null);
 
@@ -191,10 +194,18 @@ export default function RightPanel() {
 
   if (!rightPanelOpen) return null;
 
-  return (
-    <aside className="w-[260px] border-l bg-white dark:bg-neutral-950 shrink-0 flex flex-col">
-      <div className="h-10 border-b flex items-center px-3 shrink-0">
+  const panelContent = (
+    <>
+      <div className="h-10 border-b flex items-center justify-between px-3 shrink-0">
         <h2 className="text-sm font-semibold">Properties</h2>
+        {isMobile && (
+          <button
+            onClick={toggleRightPanel}
+            className="p-1.5 rounded-lg hover:bg-accent text-muted-foreground"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       <ScrollArea className="flex-1">
@@ -549,6 +560,28 @@ export default function RightPanel() {
           </div>
         )}
       </ScrollArea>
+    </>
+  );
+
+  // Mobile: fullscreen overlay from right
+  if (isMobile) {
+    return (
+      <>
+        <div
+          className="fixed inset-0 bg-black/40 z-40 transition-opacity"
+          onClick={toggleRightPanel}
+        />
+        <aside className="fixed inset-y-0 right-0 z-50 w-[85vw] max-w-[320px] bg-white dark:bg-neutral-950 shadow-2xl flex flex-col animate-in slide-in-from-right duration-200">
+          {panelContent}
+        </aside>
+      </>
+    );
+  }
+
+  // Desktop: inline side panel
+  return (
+    <aside className="w-[260px] border-l bg-white dark:bg-neutral-950 shrink-0 flex flex-col">
+      {panelContent}
     </aside>
   );
 }

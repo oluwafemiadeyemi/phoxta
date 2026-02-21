@@ -13,6 +13,9 @@ export interface UIState {
   activePanel: PanelTab | null;
   rightPanelOpen: boolean;
 
+  // Mobile detection
+  isMobile: boolean;
+
   // Zoom & viewport
   zoom: number;
   minZoom: number;
@@ -40,6 +43,9 @@ export interface UIActions {
   toggleLeftPanel: () => void;
   setActivePanel: (panel: PanelTab | null) => void;
   toggleRightPanel: () => void;
+
+  // Mobile
+  setIsMobile: (mobile: boolean) => void;
 
   // Zoom
   setZoom: (zoom: number) => void;
@@ -71,6 +77,7 @@ const initialState: UIState = {
   leftPanelOpen: true,
   activePanel: "templates",
   rightPanelOpen: true,
+  isMobile: false,
   zoom: 1,
   minZoom: 0.1,
   maxZoom: 5,
@@ -111,6 +118,16 @@ export const useUIStore = create<UIState & UIActions>()(
     toggleRightPanel: () =>
       set((s) => {
         s.rightPanelOpen = !s.rightPanelOpen;
+      }),
+
+    setIsMobile: (mobile) =>
+      set((s) => {
+        s.isMobile = mobile;
+        if (mobile) {
+          // Auto-close panels on mobile
+          s.leftPanelOpen = false;
+          s.rightPanelOpen = false;
+        }
       }),
 
     setZoom: (zoom) =>

@@ -27,6 +27,7 @@ import {
   PopoverTrigger,
 } from "@crm/components/ui/popover";
 import { useToolStore } from "@/stores/designer/toolStore";
+import { useUIStore } from "@/stores/designer/uiStore";
 import { cn } from "@/lib/utils";
 import type { ToolMode, ShapeKind } from "@/types/designer";
 
@@ -50,11 +51,19 @@ export default function Toolbar() {
   const setTool = useToolStore((s) => s.setTool);
   const shapeKind = useToolStore((s) => s.shapeKind);
   const setShapeKind = useToolStore((s) => s.setShapeKind);
+  const isMobile = useUIStore((s) => s.isMobile);
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-        <div className="flex items-center gap-1 bg-white dark:bg-neutral-950 border rounded-xl shadow-lg px-2 py-1.5">
+      {/* On mobile, float higher to clear the bottom rail */}
+      <div className={cn(
+        "absolute left-1/2 -translate-x-1/2 z-20",
+        isMobile ? "bottom-2" : "bottom-4",
+      )}>
+        <div className={cn(
+          "flex items-center gap-0.5 md:gap-1 bg-white dark:bg-neutral-950 border rounded-xl shadow-lg",
+          isMobile ? "px-1.5 py-1" : "px-2 py-1.5",
+        )}>
           {TOOLS.map(({ key, icon: Icon, label }) => (
             <Tooltip key={key}>
               <TooltipTrigger asChild>

@@ -343,37 +343,38 @@ export default function SitesPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link href="/app">
-              <Image src="/phoxta-logo.png" alt="Phoxta" width={120} height={120} className="rounded-2xl" />
+              <Image src="/phoxta-logo.png" alt="Phoxta" width={120} height={120} className="rounded-2xl w-16 h-16 sm:w-[120px] sm:h-[120px]" />
             </Link>
-            <div className="w-px h-6 bg-gray-200" />
-            <h1 className="text-lg font-semibold text-gray-900">Web Design</h1>
+            <div className="w-px h-6 bg-gray-200 hidden sm:block" />
+            <h1 className="text-base sm:text-lg font-semibold text-gray-900">Web Design</h1>
           </div>
-          <Link href="/app" className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1.5">
+          <Link href="/app" className="text-xs sm:text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-            Back to Hub
+            <span className="hidden sm:inline">Back to Hub</span>
+            <span className="sm:hidden">Back</span>
           </Link>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-10">
+      <main className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-10">
         {/* Template Gallery */}
-        <section className="mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose a Template</h2>
-            <p className="text-gray-500">Pick a website template to start customizing</p>
+        <section className="mb-10 sm:mb-16">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">Choose a Template</h2>
+            <p className="text-sm sm:text-base text-gray-500">Pick a website template to start customizing</p>
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-nowrap sm:flex-wrap sm:justify-center gap-2 mb-6 sm:mb-8 overflow-x-auto pb-2 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-hide">
             {(Object.keys(TEMPLATE_CATEGORIES) as TemplateCategory[]).map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 whitespace-nowrap shrink-0 ${
                   activeCategory === cat
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -388,7 +389,7 @@ export default function SitesPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {(activeCategory === 'All' ? TEMPLATES : TEMPLATES.filter(t => TEMPLATE_CATEGORIES[activeCategory].includes(t.id))).map((t) => (
               <div
                 key={t.id}
@@ -397,8 +398,8 @@ export default function SitesPage() {
                 {/* Preview area */}
                 <div className="relative overflow-hidden rounded-t-2xl">
                   <TemplateThumbnail templateId={t.id} />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 z-20" />
-                  <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 z-20 max-sm:hidden" />
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 max-sm:hidden">
                     <button
                       type="button"
                       onClick={() => setPreviewTemplate(t.id)}
@@ -416,12 +417,29 @@ export default function SitesPage() {
                   </div>
                 </div>
                 {/* Info */}
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-lg">{t.preview}</span>
-                    <h3 className="text-base font-semibold text-gray-900">{t.name}</h3>
+                    <h3 className="text-sm sm:text-base font-semibold text-gray-900">{t.name}</h3>
                   </div>
-                  <p className="text-sm text-gray-500 leading-relaxed">{t.description}</p>
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">{t.description}</p>
+                  {/* Mobile action buttons — always visible */}
+                  <div className="flex gap-2 mt-3 sm:hidden">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewTemplate(t.id)}
+                      className="flex-1 bg-gray-100 text-gray-700 text-xs font-semibold py-2.5 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+                    >
+                      Preview
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleCreateSite(t.id)}
+                      className="flex-1 bg-blue-600 text-white text-xs font-semibold py-2.5 rounded-full hover:bg-blue-700 transition-colors cursor-pointer"
+                    >
+                      Use Template
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -431,12 +449,12 @@ export default function SitesPage() {
         {/* Saved Sites */}
         {sites.length > 0 && (
           <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-gray-900">Your Sites</h2>
-              <span className="text-sm text-gray-400">{sites.length} site{sites.length !== 1 ? 's' : ''}</span>
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900">Your Sites</h2>
+              <span className="text-xs sm:text-sm text-gray-400">{sites.length} site{sites.length !== 1 ? 's' : ''}</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {sites.map((site) => {
                 const templateInfo = TEMPLATES.find(t => t.id === site.template)
                 return (
@@ -477,28 +495,29 @@ export default function SitesPage() {
         return (
           <div className="fixed inset-0 z-50 flex flex-col bg-black/60 backdrop-blur-sm" onClick={() => setPreviewTemplate(null)}>
             {/* Modal chrome */}
-            <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200 shadow-sm" onClick={e => e.stopPropagation()}>
-              <div className="flex items-center gap-3">
-                <span className="text-xl">{tpl?.preview}</span>
-                <div>
-                  <h3 className="text-sm font-bold text-gray-900">{tpl?.name}</h3>
-                  <p className="text-xs text-gray-500">{tpl?.description}</p>
+            <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 bg-white border-b border-gray-200 shadow-sm" onClick={e => e.stopPropagation()}>
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <span className="text-lg sm:text-xl shrink-0">{tpl?.preview}</span>
+                <div className="min-w-0">
+                  <h3 className="text-xs sm:text-sm font-bold text-gray-900 truncate">{tpl?.name}</h3>
+                  <p className="text-xs text-gray-500 hidden sm:block">{tpl?.description}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                 <button
                   type="button"
                   onClick={() => { setPreviewTemplate(null); handleCreateSite(previewTemplate) }}
-                  className="bg-blue-600 text-white text-sm font-semibold px-6 py-2 rounded-full hover:bg-blue-700 transition-colors cursor-pointer"
+                  className="bg-blue-600 text-white text-xs sm:text-sm font-semibold px-3 sm:px-6 py-1.5 sm:py-2 rounded-full hover:bg-blue-700 transition-colors cursor-pointer"
                 >
-                  Use Template →
+                  <span className="sm:hidden">Use</span>
+                  <span className="hidden sm:inline">Use Template →</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setPreviewTemplate(null)}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-pointer"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-pointer"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               </div>
             </div>

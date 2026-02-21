@@ -111,32 +111,34 @@ export default function DesignerDashboardPage() {
   return (
     <div className="h-full flex flex-col bg-background">
       {/* Header */}
-      <header className="border-b px-6 py-4 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-3">
-          <Paintbrush className="h-6 w-6 text-primary" />
-          <h1 className="text-xl font-bold">Designer</h1>
+      <header className="border-b px-4 md:px-6 py-3 md:py-4 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-2 md:gap-3">
+          <Paintbrush className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+          <h1 className="text-lg md:text-xl font-bold">Designer</h1>
         </div>
-        <Button onClick={() => setCreateOpen(true)} className="gap-2">
+        <Button onClick={() => setCreateOpen(true)} size="sm" className="gap-1.5 md:gap-2 h-8 md:h-9">
           <Plus className="h-4 w-4" />
-          New Design
+          <span className="hidden sm:inline">New Design</span>
+          <span className="sm:hidden">New</span>
         </Button>
       </header>
 
       {/* Toolbar */}
-      <div className="px-6 py-3 flex items-center gap-3 border-b shrink-0">
+      <div className="px-4 md:px-6 py-2 md:py-3 flex items-center gap-2 md:gap-3 border-b shrink-0">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-2.5 top-2 md:top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search designs…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8 h-9"
+            className="pl-8 h-8 md:h-9 text-sm"
           />
         </div>
         <div className="flex items-center gap-1 ml-auto">
           <Button
             variant={view === "grid" ? "default" : "ghost"}
             size="icon"
+            className="h-8 w-8"
             onClick={() => setView("grid")}
           >
             <LayoutGrid className="h-4 w-4" />
@@ -144,6 +146,7 @@ export default function DesignerDashboardPage() {
           <Button
             variant={view === "list" ? "default" : "ghost"}
             size="icon"
+            className="h-8 w-8"
             onClick={() => setView("list")}
           >
             <List className="h-4 w-4" />
@@ -152,7 +155,7 @@ export default function DesignerDashboardPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-auto px-6 py-4">
+      <div className="flex-1 overflow-auto px-4 md:px-6 py-3 md:py-4">
         {loading ? (
           <div className="flex items-center justify-center h-60">
             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -177,7 +180,7 @@ export default function DesignerDashboardPage() {
             )}
           </div>
         ) : view === "grid" ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
             {filtered.map((project) => (
               <Card
                 key={project.id}
@@ -193,13 +196,13 @@ export default function DesignerDashboardPage() {
                 >
                   <Paintbrush className="h-8 w-8 text-muted-foreground/30" />
                 </div>
-                <CardContent className="p-3">
+                <CardContent className="p-2 md:p-3">
                   <div className="flex items-center justify-between">
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium truncate">
+                      <p className="text-xs md:text-sm font-medium truncate">
                         {project.name}
                       </p>
-                      <p className="text-[10px] text-muted-foreground">
+                      <p className="text-[9px] md:text-[10px] text-muted-foreground">
                         {project.width} × {project.height}
                       </p>
                     </div>

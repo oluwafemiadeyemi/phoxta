@@ -36,7 +36,32 @@ const tabs: { key: PanelTab; icon: React.ElementType; label: string }[] = [
 export default function LeftRail() {
   const activePanel = useUIStore((s) => s.activePanel);
   const setActivePanel = useUIStore((s) => s.setActivePanel);
+  const isMobile = useUIStore((s) => s.isMobile);
 
+  // Mobile: horizontal bottom rail
+  if (isMobile) {
+    return (
+      <nav className="h-14 border-t bg-white dark:bg-neutral-950 flex items-center justify-around px-1 shrink-0 z-30">
+        {tabs.map(({ key, icon: Icon, label }) => (
+          <button
+            key={key}
+            onClick={() => setActivePanel(key)}
+            className={cn(
+              "flex flex-col items-center justify-center gap-0.5 px-1.5 py-1 rounded-lg transition-colors min-w-0",
+              activePanel === key
+                ? "text-primary"
+                : "text-muted-foreground",
+            )}
+          >
+            <Icon className="h-5 w-5" />
+            <span className="text-[9px] leading-none truncate">{label}</span>
+          </button>
+        ))}
+      </nav>
+    );
+  }
+
+  // Desktop: vertical side rail
   return (
     <TooltipProvider delayDuration={200}>
       <aside className="w-14 border-r bg-white dark:bg-neutral-950 flex flex-col items-center py-2 gap-1 shrink-0 z-10">
