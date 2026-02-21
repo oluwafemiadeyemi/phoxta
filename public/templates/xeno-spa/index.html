@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxe Spa — Beauty & Wellness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#faf8f6;--surface:#f0ece6;--card:#fff;--accent:#8b6f5e;--accent-l:#a0836f;--gold:#c5a47e;--text:#3d3029;--dim:#8a7e74;--white:#fff;--border:#e0d8ce}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,248,246,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cormorant',serif;font-size:28px;font-weight:600;color:var(--accent);letter-spacing:4px;text-transform:uppercase}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 28px;border-radius:2px;font-weight:600!important;letter-spacing:1px}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#faf8f6,#f0ece6);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+    .hero-tag{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:20px}
+    .hero h1{font-family:'Cormorant',serif;font-size:58px;line-height:1.05;font-weight:600;margin-bottom:20px}.hero h1 span{color:var(--gold)}
+    .hero p{font-size:16px;color:var(--dim);max-width:420px;margin-bottom:28px}
+    .btn-spa{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 36px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;transition:all .3s}.btn-spa:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:560px;object-fit:cover}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:10px}
+    .section-title{font-family:'Cormorant',serif;font-size:42px;font-weight:600;margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .treatments{background:var(--surface)}.treat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .treat-card{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:all .3s}.treat-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.04);transform:translateY(-4px)}
+    .treat-card img{width:100%;height:260px;object-fit:cover}.treat-body{padding:28px}
+    .treat-card h3{font-family:'Cormorant',serif;font-size:22px;font-weight:600;margin-bottom:6px}.treat-card p{font-size:13px;color:var(--dim);margin-bottom:16px}
+    .treat-meta{display:flex;justify-content:space-between;align-items:center}.treat-price{font-size:20px;font-weight:600;color:var(--accent)}.treat-dur{font-size:12px;color:var(--dim)}
+    .amenities{background:var(--bg)}.amen-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:60px;text-align:center}
+    .amen-card{padding:32px 20px}.amen-icon{width:56px;height:56px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px}
+    .amen-card h3{font-size:16px;font-weight:600;margin-bottom:4px}.amen-card p{font-size:13px;color:var(--dim)}
+    .cta-section{background:var(--accent);text-align:center}.cta-section h2{font-family:'Cormorant',serif;font-size:46px;color:var(--white);margin-bottom:12px}.cta-section p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 36px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#261e18;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'Cormorant',serif;font-size:22px;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--gold)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.treat-grid{grid-template-columns:repeat(2,1fr)}.amen-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:38px}.treat-grid,.amen-grid{grid-template-columns:1fr}.section-title{font-size:30px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">Luxe</div><div class="nav-links"><a href="#treatments" data-phoxta-link="navTr">Treatments</a><a href="#amenities" data-phoxta-link="navAm">Amenities</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Book Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-tag" data-phoxta="heroTag">Spa & Wellness</div><h1 data-phoxta="heroTitle">Indulge in Pure <span>Relaxation</span></h1><p data-phoxta="heroDesc">Escape the everyday with luxurious spa treatments, healing therapies and total tranquility.</p><a href="#treatments" class="btn-spa" data-phoxta-link="heroCta">View Treatments</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Spa" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="treatments" id="treatments"><div class="container"><p class="section-label" data-phoxta="trLabel">Our Treatments</p><h2 class="section-title" data-phoxta="trTitle">Signature Experiences</h2><div class="treat-grid">
+    <div class="treat-card"><img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Massage" data-phoxta-image="tr1Img"/><div class="treat-body"><h3 data-phoxta="tr1Title">Deep Tissue Massage</h3><p data-phoxta="tr1Desc">Full-body deep pressure massage for tension relief.</p><div class="treat-meta"><span class="treat-price" data-phoxta="tr1Price">$120</span><span class="treat-dur" data-phoxta="tr1Dur">60 min</span></div></div></div>
+    <div class="treat-card"><img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Facial" data-phoxta-image="tr2Img"/><div class="treat-body"><h3 data-phoxta="tr2Title">Luxury Facial</h3><p data-phoxta="tr2Desc">Anti-aging facial with organic serums and LED therapy.</p><div class="treat-meta"><span class="treat-price" data-phoxta="tr2Price">$150</span><span class="treat-dur" data-phoxta="tr2Dur">75 min</span></div></div></div>
+    <div class="treat-card"><img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Package" data-phoxta-image="tr3Img"/><div class="treat-body"><h3 data-phoxta="tr3Title">Day Spa Package</h3><p data-phoxta="tr3Desc">Massage, facial, body wrap and champagne lunch.</p><div class="treat-meta"><span class="treat-price" data-phoxta="tr3Price">$350</span><span class="treat-dur" data-phoxta="tr3Dur">4 hrs</span></div></div></div>
+  </div></div></section>
+  <section class="amenities" id="amenities"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="amLabel">Amenities</p><h2 class="section-title" data-phoxta="amTitle">Your Sanctuary Awaits</h2><div class="amen-grid">
+    <div class="amen-card"><div class="amen-icon"><i class="fa-solid fa-hot-tub-person"></i></div><h3 data-phoxta="am1Title">Hydrotherapy</h3><p data-phoxta="am1Desc">Heated pools, cold plunge and steam.</p></div>
+    <div class="amen-card"><div class="amen-icon"><i class="fa-solid fa-fire"></i></div><h3 data-phoxta="am2Title">Infrared Sauna</h3><p data-phoxta="am2Desc">Detox and recover in full-spectrum IR.</p></div>
+    <div class="amen-card"><div class="amen-icon"><i class="fa-solid fa-spa"></i></div><h3 data-phoxta="am3Title">Zen Garden</h3><p data-phoxta="am3Desc">Outdoor meditation and relaxation area.</p></div>
+    <div class="amen-card"><div class="amen-icon"><i class="fa-solid fa-champagne-glasses"></i></div><h3 data-phoxta="am4Title">Lounge Bar</h3><p data-phoxta="am4Desc">Herbal teas, juices and light bites.</p></div>
+  </div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Time to Unwind</h2><p data-phoxta="ctaDesc">Gift cards available. Couples packages start at $250.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn">Reserve Your Visit</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">Luxe</div><div class="footer-links"><a href="#treatments" data-phoxta-link="fl1">Treatments</a><a href="#amenities" data-phoxta-link="fl2">Amenities</a><a href="#cta" data-phoxta-link="fl3">Book</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Luxe Spa & Wellness. All rights reserved.</p></footer>
+</body>
+</html>

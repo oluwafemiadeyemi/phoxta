@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareWell — Modern Healthcare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #f0fdfa;
+      --accent: #0d9488;
+      --accent-light: #14b8a6;
+      --blue: #0ea5e9;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --border: #e2e8f0;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 22px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .nav-logo i { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: 10px 28px; border-radius: 100px; font-weight: 600 !important; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); padding: 140px 60px 80px; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--white); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 20px; box-shadow: 0 2px 8px rgba(13,148,136,0.1); }
+    .hero h1 { font-size: 52px; line-height: 1.15; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 17px; color: var(--text-light); max-width: 460px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; }
+    .btn-teal { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--white); padding: 14px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(13,148,136,0.2); }
+    .btn-teal:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; border: 2px solid var(--border); color: var(--text); padding: 12px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+
+    section { padding: 100px 60px; }
+    .section-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: 40px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .section-desc { font-size: 16px; color: var(--text-light); max-width: 520px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 40px 32px; transition: all 0.3s; }
+    .service-card:hover { border-color: var(--accent); box-shadow: 0 8px 30px rgba(13,148,136,0.08); transform: translateY(-4px); }
+    .service-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--secondary); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 24px; }
+    .service-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .service-card p { font-size: 14px; color: var(--text-light); }
+
+    .doctors { background: var(--secondary); }
+    .doctors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 60px; }
+    .doctor-card { background: var(--white); border-radius: 20px; overflow: hidden; text-align: center; transition: all 0.3s; }
+    .doctor-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .doctor-card img { width: 100%; height: 280px; object-fit: cover; }
+    .doctor-card-body { padding: 20px; }
+    .doctor-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .doctor-card p { font-size: 13px; color: var(--accent); font-weight: 500; }
+
+    .stats-section { background: var(--accent); padding: 60px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: center; }
+    .stat-num { font-size: 48px; font-weight: 700; color: var(--white); }
+    .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+
+    .testimonials { background: var(--white); }
+    .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 60px; }
+    .test-card { background: var(--secondary); border-radius: 20px; padding: 36px; }
+    .test-stars { color: #f59e0b; font-size: 14px; margin-bottom: 16px; }
+    .test-card .quote { font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+    .test-author { font-weight: 700; font-size: 14px; }
+    .test-role { font-size: 12px; color: var(--text-light); }
+
+    .cta-section { background: var(--primary); text-align: center; padding: 100px 60px; }
+    .cta-section h2 { font-size: 40px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+
+    footer { background: #0a0f1a; padding: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 8px; }
+    .footer-logo i { color: var(--accent-light); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent-light); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); margin-top: 32px; text-align: center; }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-img { display: none; }
+      .services-grid, .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 60px 24px; }
+      .hero { padding: 120px 24px 60px; }
+      .hero h1 { font-size: 36px; }
+      .services-grid, .doctors-grid, .test-grid, .stats-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 30px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-heart-pulse"></i> CareWell</div>
+    <div class="nav-links">
+      <a href="#services" data-phoxta-link="navServices">Services</a>
+      <a href="#doctors" data-phoxta-link="navDoctors">Doctors</a>
+      <a href="#testimonials" data-phoxta-link="navTest">Reviews</a>
+      <a href="#contact" class="nav-cta" data-phoxta-link="navCta">Book Appointment</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge" data-phoxta="heroBadge"><i class="fa-solid fa-shield-heart"></i> Trusted Healthcare</div>
+        <h1 data-phoxta="heroTitle">Your Health, Our <span>Priority</span></h1>
+        <p data-phoxta="heroDesc">Comprehensive medical care with compassion. Our team of board-certified specialists is here to keep you and your family healthy.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-teal" data-phoxta-link="heroCta1"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
+          <a href="#services" class="btn-outline" data-phoxta-link="heroCta2">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthcare" data-phoxta-image="heroImg" />
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-label" data-phoxta="servicesLabel">Our Services</p>
+      <h2 class="section-title" data-phoxta="servicesTitle">Expert Care Across All Specialties</h2>
+      <p class="section-desc" data-phoxta="servicesDesc">From routine check-ups to specialized treatments, we offer complete medical care under one roof.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-stethoscope"></i></div>
+          <h3 data-phoxta="svc1Title">General Medicine</h3>
+          <p data-phoxta="svc1Desc">Comprehensive primary care for patients of all ages, including preventive screenings and chronic disease management.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3 data-phoxta="svc2Title">Neurology</h3>
+          <p data-phoxta="svc2Desc">Expert diagnosis and treatment of disorders affecting the brain, spinal cord and nervous system.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-heart"></i></div>
+          <h3 data-phoxta="svc3Title">Cardiology</h3>
+          <p data-phoxta="svc3Desc">Advanced heart care including diagnostics, interventional procedures and cardiac rehabilitation programs.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-bone"></i></div>
+          <h3 data-phoxta="svc4Title">Orthopedics</h3>
+          <p data-phoxta="svc4Desc">Specialized care for musculoskeletal conditions, sports injuries and joint replacement surgery.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-baby"></i></div>
+          <h3 data-phoxta="svc5Title">Pediatrics</h3>
+          <p data-phoxta="svc5Desc">Gentle, compassionate healthcare for infants, children and adolescents through every stage of growth.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-tooth"></i></div>
+          <h3 data-phoxta="svc6Title">Dental Care</h3>
+          <p data-phoxta="svc6Desc">Complete dental services from routine cleanings to cosmetic dentistry and oral surgery.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div><div class="stat-num" data-phoxta="stat1Num">25+</div><div class="stat-label" data-phoxta="stat1Label">Years of Excellence</div></div>
+      <div><div class="stat-num" data-phoxta="stat2Num">50K+</div><div class="stat-label" data-phoxta="stat2Label">Patients Served</div></div>
+      <div><div class="stat-num" data-phoxta="stat3Num">30</div><div class="stat-label" data-phoxta="stat3Label">Specialists</div></div>
+      <div><div class="stat-num" data-phoxta="stat4Num">98%</div><div class="stat-label" data-phoxta="stat4Label">Patient Satisfaction</div></div>
+    </div>
+  </div>
+
+  <section class="doctors" id="doctors">
+    <div class="container">
+      <p class="section-label" data-phoxta="docsLabel">Our Doctors</p>
+      <h2 class="section-title" data-phoxta="docsTitle">Meet Our Specialists</h2>
+      <div class="doctors-grid">
+        <div class="doctor-card">
+          <img src="https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Doctor" data-phoxta-image="doc1Img" />
+          <div class="doctor-card-body">
+            <h4 data-phoxta="doc1Name">Dr. Sarah Mitchell</h4>
+            <p data-phoxta="doc1Role">Cardiologist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Doctor" data-phoxta-image="doc2Img" />
+          <div class="doctor-card-body">
+            <h4 data-phoxta="doc2Name">Dr. James Rodriguez</h4>
+            <p data-phoxta="doc2Role">Neurologist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://images.pexels.com/photos/5452268/pexels-photo-5452268.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Doctor" data-phoxta-image="doc3Img" />
+          <div class="doctor-card-body">
+            <h4 data-phoxta="doc3Name">Dr. Emily Chen</h4>
+            <p data-phoxta="doc3Role">Pediatrician</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Doctor" data-phoxta-image="doc4Img" />
+          <div class="doctor-card-body">
+            <h4 data-phoxta="doc4Name">Dr. David Watson</h4>
+            <p data-phoxta="doc4Role">Orthopedic Surgeon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <p class="section-label" data-phoxta="testLabel">Patient Reviews</p>
+      <h2 class="section-title" data-phoxta="testTitle">What Our Patients Say</h2>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="quote" data-phoxta="test1Quote">"The care I received at CareWell was exceptional. Dr. Mitchell took the time to explain everything and made me feel comfortable throughout my treatment."</p>
+          <p class="test-author" data-phoxta="test1Author">Robert Martinez</p>
+          <p class="test-role" data-phoxta="test1Role">Heart Surgery Patient</p>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="quote" data-phoxta="test2Quote">"My children love Dr. Chen! She's incredibly patient and kind. We've been bringing our entire family here for three years now."</p>
+          <p class="test-author" data-phoxta="test2Author">Jennifer Williams</p>
+          <p class="test-role" data-phoxta="test2Role">Parent of 3</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <h2 data-phoxta="ctaTitle">Your Health Can't Wait</h2>
+    <p data-phoxta="ctaDesc">Book your appointment today and take the first step towards better health.</p>
+    <a href="#" class="btn-teal" data-phoxta-link="ctaBtn"><i class="fa-solid fa-calendar-check"></i> Book Appointment Now</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-heart-pulse"></i> CareWell</div>
+      <div class="footer-links">
+        <a href="#services" data-phoxta-link="fLink1">Services</a>
+        <a href="#doctors" data-phoxta-link="fLink2">Doctors</a>
+        <a href="#testimonials" data-phoxta-link="fLink3">Reviews</a>
+        <a href="#contact" data-phoxta-link="fLink4">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 CareWell Medical Center. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

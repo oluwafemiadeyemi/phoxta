@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMA — Architecture Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fafafa;--surface:#f2f2f2;--card:#fff;--accent:#18181b;--text:#18181b;--dim:#71717a;--white:#fff;--border:#e4e4e7;--gold:#b8860b}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Space Grotesk',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,250,250,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:22px;font-weight:700;letter-spacing:6px;text-transform:uppercase}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;font-weight:500;color:var(--dim);transition:color .3s;text-transform:uppercase;letter-spacing:1px}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 28px;border-radius:2px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:var(--bg);padding:140px 60px 80px}.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+    .hero-line{width:48px;height:2px;background:var(--accent);margin-bottom:20px}
+    .hero h1{font-size:54px;line-height:1.1;font-weight:700;margin-bottom:20px}.hero h1 span{color:var(--gold)}
+    .hero p{font-size:16px;color:var(--dim);max-width:440px;margin-bottom:32px}
+    .btn-dark{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 36px;font-size:14px;font-weight:600;transition:all .3s;letter-spacing:1px;text-transform:uppercase}.btn-dark:hover{opacity:.85;transform:translateY(-2px)}
+    .hero-img img{width:100%;height:560px;object-fit:cover}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--dim);margin-bottom:10px}
+    .section-title{font-size:42px;font-weight:700;margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .projects{background:var(--bg)}.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:60px}
+    .proj-card{position:relative;overflow:hidden;aspect-ratio:16/10;cursor:pointer}.proj-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}.proj-card:hover img{transform:scale(1.05)}
+    .proj-overlay{position:absolute;bottom:0;left:0;right:0;padding:32px;background:linear-gradient(transparent,rgba(0,0,0,.7))}.proj-overlay h3{font-size:22px;font-weight:700;color:var(--white);margin-bottom:4px}.proj-overlay p{font-size:13px;color:rgba(255,255,255,.6)}
+    .approach{background:var(--surface)}.approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:60px}
+    .app-card{padding:36px 28px;border-left:2px solid var(--border);transition:border-color .3s}.app-card:hover{border-color:var(--accent)}
+    .app-num{font-size:44px;font-weight:700;color:var(--border);margin-bottom:12px}.app-card h3{font-size:18px;font-weight:600;margin-bottom:8px}.app-card p{font-size:13px;color:var(--dim)}
+    .awards{background:var(--bg)}.awards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px;text-align:center}
+    .award-card{padding:32px 20px;border:1px solid var(--border);transition:all .3s}.award-card:hover{border-color:var(--accent)}
+    .award-card i{font-size:28px;color:var(--gold);margin-bottom:12px}.award-card h3{font-size:15px;font-weight:600;margin-bottom:4px}.award-card p{font-size:12px;color:var(--dim)}
+    .cta-section{background:var(--accent);text-align:center}.cta-section h2{font-size:42px;font-weight:700;color:var(--white);margin-bottom:12px}.cta-section p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 36px;font-size:14px;font-weight:600;transition:all .3s;text-transform:uppercase;letter-spacing:1px}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:var(--accent);padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:18px;font-weight:700;color:var(--white);letter-spacing:6px;text-transform:uppercase}.footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.35);transition:color .3s}.footer-links a:hover{color:var(--white)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.15);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.projects-grid{grid-template-columns:1fr}.approach-grid{grid-template-columns:1fr}.awards-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:36px}.section-title{font-size:30px}.awards-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">FORMA</div><div class="nav-links"><a href="#projects" data-phoxta-link="navProj">Projects</a><a href="#approach" data-phoxta-link="navApp">Approach</a><a href="#awards" data-phoxta-link="navAwards">Awards</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Contact</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-line"></div><h1 data-phoxta="heroTitle">Designing Spaces That <span>Inspire</span></h1><p data-phoxta="heroDesc">Award-winning architecture studio crafting sustainable, human-centered spaces for living, working and thriving.</p><a href="#projects" class="btn-dark" data-phoxta-link="heroCta">View Projects</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Architecture" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="projects" id="projects"><div class="container"><p class="section-label" data-phoxta="projLabel">Selected Work</p><h2 class="section-title" data-phoxta="projTitle">Featured Projects</h2><div class="projects-grid">
+    <div class="proj-card"><img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Project" data-phoxta-image="p1Img"/><div class="proj-overlay"><h3 data-phoxta="p1Title">The Glass Pavilion</h3><p data-phoxta="p1Desc">Residential · Los Angeles, CA</p></div></div>
+    <div class="proj-card"><img src="https://images.pexels.com/photos/2119713/pexels-photo-2119713.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Project" data-phoxta-image="p2Img"/><div class="proj-overlay"><h3 data-phoxta="p2Title">Urban Loft Tower</h3><p data-phoxta="p2Desc">Commercial · New York, NY</p></div></div>
+    <div class="proj-card"><img src="https://images.pexels.com/photos/1838640/pexels-photo-1838640.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Project" data-phoxta-image="p3Img"/><div class="proj-overlay"><h3 data-phoxta="p3Title">Zen Garden Retreat</h3><p data-phoxta="p3Desc">Hospitality · Kyoto, Japan</p></div></div>
+    <div class="proj-card"><img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Project" data-phoxta-image="p4Img"/><div class="proj-overlay"><h3 data-phoxta="p4Title">The Curve Museum</h3><p data-phoxta="p4Desc">Cultural · London, UK</p></div></div>
+  </div></div></section>
+  <section class="approach" id="approach"><div class="container"><p class="section-label" data-phoxta="appLabel">Our Approach</p><h2 class="section-title" data-phoxta="appTitle">How We Work</h2><div class="approach-grid">
+    <div class="app-card"><div class="app-num">01</div><h3 data-phoxta="a1Title">Discover</h3><p data-phoxta="a1Desc">Deep research into context, culture and client vision to define the project DNA.</p></div>
+    <div class="app-card"><div class="app-num">02</div><h3 data-phoxta="a2Title">Design</h3><p data-phoxta="a2Desc">Iterative design process blending form, function and sustainability.</p></div>
+    <div class="app-card"><div class="app-num">03</div><h3 data-phoxta="a3Title">Deliver</h3><p data-phoxta="a3Desc">Meticulous execution with hands-on oversight from concept to completion.</p></div>
+  </div></div></section>
+  <section class="awards" id="awards"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="awLabel">Recognition</p><h2 class="section-title" data-phoxta="awTitle">Awards & Press</h2><div class="awards-grid">
+    <div class="award-card"><i class="fa-solid fa-trophy"></i><h3 data-phoxta="aw1Title">AIA Gold Medal</h3><p data-phoxta="aw1Desc">2024 · Excellence in Design</p></div>
+    <div class="award-card"><i class="fa-solid fa-award"></i><h3 data-phoxta="aw2Title">Pritzker Nominee</h3><p data-phoxta="aw2Desc">2023 · Architecture Prize</p></div>
+    <div class="award-card"><i class="fa-solid fa-star"></i><h3 data-phoxta="aw3Title">Dezeen Top 50</h3><p data-phoxta="aw3Desc">2023 · Global Studios</p></div>
+    <div class="award-card"><i class="fa-solid fa-leaf"></i><h3 data-phoxta="aw4Title">LEED Platinum</h3><p data-phoxta="aw4Desc">12 Certified Projects</p></div>
+  </div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Let's Build Something Extraordinary</h2><p data-phoxta="ctaDesc">We're always looking for visionary clients and meaningful projects.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn">Start a Conversation</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">FORMA</div><div class="footer-links"><a href="#projects" data-phoxta-link="fl1">Projects</a><a href="#approach" data-phoxta-link="fl2">Approach</a><a href="#awards" data-phoxta-link="fl3">Awards</a><a href="#cta" data-phoxta-link="fl4">Contact</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 FORMA Architecture. All rights reserved.</p></footer>
+</body>
+</html>

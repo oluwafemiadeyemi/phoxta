@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixRight — Home Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fff;--surface:#f0f9ff;--card:#fff;--accent:#0284c7;--accent-l:#38bdf8;--orange:#f97316;--text:#0c4a6e;--dim:#64748b;--white:#fff;--border:#bae6fd}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid #e0f2fe}
+    .nav-logo{font-size:22px;font-weight:800;color:var(--accent);display:flex;align-items:center;gap:8px}.nav-logo i{color:var(--orange)}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--orange)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:700!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,#fff,#f0f9ff);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:46px;line-height:1.15;font-weight:800;margin-bottom:18px}.hero h1 span{color:var(--orange)}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-plm{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--white);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;transition:all .3s;box-shadow:0 4px 16px rgba(249,115,22,.2)}.btn-plm:hover{transform:translateY(-2px)}
+    .btn-plm-outline{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--border);color:var(--accent);padding:12px 28px;border-radius:100px;font-size:15px;font-weight:600;transition:all .3s;margin-left:12px}.btn-plm-outline:hover{border-color:var(--accent)}
+    .hero-img img{width:100%;height:440px;object-fit:cover;border-radius:20px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:36px;font-weight:800;margin-bottom:12px}.section-desc{font-size:14px;color:var(--dim);max-width:460px}
+    .services{background:var(--bg)}.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .svc-card{background:var(--card);border:1px solid #e0f2fe;border-radius:16px;padding:28px;text-align:center;transition:all .3s}.svc-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.05);border-color:var(--accent-l);transform:translateY(-4px)}
+    .svc-icon{width:56px;height:56px;border-radius:16px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--orange);margin:0 auto 16px}
+    .svc-card h3{font-size:17px;font-weight:700;margin-bottom:6px}.svc-card p{font-size:13px;color:var(--dim)}
+    .why{background:var(--surface)}.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px;text-align:center}
+    .why-num{font-size:40px;font-weight:800;color:var(--orange)}.why-label{font-size:14px;font-weight:600;margin-top:4px}.why-desc{font-size:12px;color:var(--dim);margin-top:2px}
+    .cta-plm{background:var(--accent);text-align:center}
+    .cta-plm h2{font-size:36px;font-weight:800;color:var(--white);margin-bottom:12px}.cta-plm p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#0c4a6e;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:20px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo i{color:var(--orange)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--accent-l)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.why-grid{grid-template-columns:repeat(2,1fr)}.svc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:32px}.svc-grid,.why-grid{grid-template-columns:1fr}.section-title{font-size:26px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-wrench"></i> FixRight</div><div class="nav-links"><a href="#services" data-phoxta-link="navSvc">Services</a><a href="#why" data-phoxta-link="navWhy">Why Us</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Call Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">Home Repairs, <span>Done Right</span></h1><p data-phoxta="heroDesc">Licensed plumbers, electricians and handymen available 24/7. Fast, reliable service with upfront pricing — no surprises.</p><a href="#cta" class="btn-plm" data-phoxta-link="heroCta"><i class="fa-solid fa-phone"></i> Book a Pro</a><a href="#services" class="btn-plm-outline" data-phoxta-link="heroCta2">Our Services</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/8486972/pexels-photo-8486972.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Home Service" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="services" id="services"><div class="container"><p class="section-label" data-phoxta="svcLabel">Services</p><h2 class="section-title" data-phoxta="svcTitle">What We Fix</h2><div class="svc-grid">
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-faucet-drip"></i></div><h3 data-phoxta="s1Title">Plumbing</h3><p data-phoxta="s1Desc">Leak repair, drain cleaning, water heater installation and bathroom renovations.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-bolt"></i></div><h3 data-phoxta="s2Title">Electrical</h3><p data-phoxta="s2Desc">Panel upgrades, outlet installation, lighting and full electrical rewiring services.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-snowflake"></i></div><h3 data-phoxta="s3Title">HVAC</h3><p data-phoxta="s3Desc">AC repair, furnace maintenance, ductwork and smart thermostat installation.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-paintbrush"></i></div><h3 data-phoxta="s4Title">Painting</h3><p data-phoxta="s4Desc">Interior and exterior painting with premium paints and clean, professional results.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-hammer"></i></div><h3 data-phoxta="s5Title">Carpentry</h3><p data-phoxta="s5Desc">Custom cabinetry, deck building, door installation and structural repairs.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-house-chimney"></i></div><h3 data-phoxta="s6Title">Roofing</h3><p data-phoxta="s6Desc">Roof inspections, shingle repair, gutter cleaning and full roof replacements.</p></div>
+  </div></div></section>
+  <section class="why" id="why"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="whyLabel">Why Us</p><h2 class="section-title" data-phoxta="whyTitle">Trusted by Homeowners</h2><div class="why-grid">
+    <div><div class="why-num" data-phoxta="w1Num">15K+</div><div class="why-label" data-phoxta="w1Label">Jobs Completed</div></div>
+    <div><div class="why-num" data-phoxta="w2Num">4.9</div><div class="why-label" data-phoxta="w2Label">Customer Rating</div></div>
+    <div><div class="why-num" data-phoxta="w3Num">30m</div><div class="why-label" data-phoxta="w3Label">Avg Response Time</div></div>
+    <div><div class="why-num" data-phoxta="w4Num">100%</div><div class="why-label" data-phoxta="w4Label">Satisfaction Guarantee</div></div>
+  </div></div></section>
+  <section class="cta-plm" id="cta"><h2 data-phoxta="ctaTitle">Need a Fix? We're On It</h2><p data-phoxta="ctaDesc">Available 24/7 for emergencies. Get a free estimate in minutes — no obligation.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-phone"></i> Call (555) 123-4567</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-wrench"></i> FixRight</div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#why" data-phoxta-link="fl2">About</a><a href="#cta" data-phoxta-link="fl3">Contact</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 FixRight Home Services. Licensed &amp; Insured.</p></footer>
+</body>
+</html>

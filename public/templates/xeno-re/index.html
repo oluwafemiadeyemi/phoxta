@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saveur — Fine Dining</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --dark: #1C1917;
+      --dark-warm: #292524;
+      --cream: #FBF7F0;
+      --cream-dark: #F0E8DB;
+      --accent: #B45309;
+      --accent-light: #D97706;
+      --olive: #4D7C0F;
+      --text: #44403C;
+      --text-light: #78716C;
+      --white: #ffffff;
+      --border: #E7E0D6;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 0; background: rgba(251,247,240,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--dark); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: 10px 24px !important; border-radius: 4px; }
+    .nav-cta:hover { background: var(--dark) !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px 24px 100px; background: var(--dark); color: var(--white); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1080&fit=crop') center/cover; opacity: 0.25; }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-ornament { font-size: 14px; letter-spacing: 6px; text-transform: uppercase; color: var(--accent-light); margin-bottom: 24px; font-weight: 300; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; letter-spacing: 2px; }
+    .hero h1 em { font-style: italic; font-weight: 400; }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto 48px; line-height: 1.8; font-weight: 300; letter-spacing: 0.5px; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; }
+    .btn-accent { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--white); padding: 16px 36px; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+    .btn-accent:hover { background: var(--accent-light); }
+    .btn-light-outline { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 15px 36px; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+    .btn-light-outline:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+    /* INTRO */
+    .intro { padding: 120px 0; text-align: center; }
+    .intro-label { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
+    .intro h2 { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: var(--dark); margin-bottom: 24px; }
+    .intro p { font-size: 17px; color: var(--text-light); max-width: 600px; margin: 0 auto; line-height: 1.9; font-weight: 300; }
+    .intro-divider { width: 60px; height: 1px; background: var(--accent); margin: 40px auto; }
+
+    /* MENU HIGHLIGHTS */
+    .menu { background: var(--white); padding: 120px 0; }
+    .menu-header { text-align: center; margin-bottom: 72px; }
+    .section-label { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 600; color: var(--dark); }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px 80px; max-width: 900px; margin: 0 auto; }
+    .menu-item { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .menu-item-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+    .menu-item-info p { font-size: 14px; color: var(--text-light); font-weight: 300; }
+    .menu-item-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent); white-space: nowrap; margin-left: 16px; }
+
+    /* GALLERY */
+    .gallery { padding: 120px 0; }
+    .gallery-header { text-align: center; margin-bottom: 72px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery-item { aspect-ratio: 1; border-radius: 8px; overflow: hidden; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    /* HOURS & LOCATION */
+    .info { background: var(--dark); color: var(--white); padding: 120px 0; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; text-align: center; }
+    .info-block-icon { font-size: 24px; color: var(--accent-light); margin-bottom: 20px; }
+    .info-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+    .info-block p { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 300; line-height: 1.8; }
+
+    /* REVIEWS */
+    .reviews { padding: 120px 0; }
+    .reviews-header { text-align: center; margin-bottom: 72px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .review-card { padding: 40px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
+    .review-stars { color: var(--accent); font-size: 14px; margin-bottom: 20px; }
+    .review-card blockquote { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--text); line-height: 1.6; margin-bottom: 24px; }
+    .review-name { font-size: 14px; font-weight: 600; color: var(--dark); letter-spacing: 1px; text-transform: uppercase; }
+
+    /* RESERVATION CTA */
+    .reservations { background: var(--cream-dark); padding: 120px 0; text-align: center; }
+    .reservations-inner { max-width: 600px; margin: 0 auto; }
+    .reservations h2 { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: var(--dark); margin-bottom: 20px; }
+    .reservations p { font-size: 17px; color: var(--text-light); margin-bottom: 40px; font-weight: 300; line-height: 1.8; }
+    .reservations .btn-accent { border-radius: 4px; }
+
+    /* FOOTER */
+    .footer { padding: 48px 0; border-top: 1px solid var(--border); }
+    .footer .container { display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--dark); letter-spacing: 2px; text-transform: uppercase; }
+    .footer-copy { font-size: 13px; color: var(--text-light); font-weight: 300; }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-light); transition: all 0.3s; }
+    .footer-social a:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 120px 24px 80px; }
+      .hero h1 { font-size: 42px; }
+      section, .menu, .gallery, .reviews, .reservations, .info { padding: 80px 0; }
+      .menu-grid { grid-template-columns: 1fr; gap: 32px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-grid { grid-template-columns: 1fr; gap: 40px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .section-title, .intro h2, .reservations h2 { font-size: 36px; }
+      .footer .container { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo" data-phoxta="brand">Saveur</a>
+      <div class="nav-links">
+        <a href="#about" data-phoxta-link="nav1">Story</a>
+        <a href="#menu" data-phoxta-link="nav2">Menu</a>
+        <a href="#gallery" data-phoxta-link="nav3">Gallery</a>
+        <a href="#reviews" data-phoxta-link="nav4">Reviews</a>
+        <a href="#reserve" class="nav-cta" data-phoxta-link="cta">Reserve</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-ornament" data-phoxta="heroLabel">&#10022; Est. 2015 &#10022;</div>
+      <h1 data-phoxta="heroTitle">A culinary journey of <em>flavor</em> & craft</h1>
+      <p data-phoxta="heroSubtitle">Experience modern French cuisine rooted in tradition, crafted with the finest seasonal ingredients and served in an atmosphere of refined elegance.</p>
+      <div class="hero-btns">
+        <a href="#reserve" class="btn-accent" data-phoxta-link="heroCta1">Reserve a Table</a>
+        <a href="#menu" class="btn-light-outline" data-phoxta-link="heroCta2">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO / ABOUT -->
+  <section class="intro" id="about">
+    <div class="container">
+      <div class="intro-label" data-phoxta="aboutLabel">Our Story</div>
+      <h2 data-phoxta="aboutTitle">Where passion meets the plate</h2>
+      <div class="intro-divider"></div>
+      <p data-phoxta="aboutDesc">Founded by Chef Antoine Moreau, Saveur is a celebration of seasonal ingredients, classical techniques, and modern creativity. Every dish tells a story — of the land it comes from, the hands that crafted it, and the joy it brings to the table.</p>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="menu-header">
+        <div class="section-label" data-phoxta="menuLabel">Signature Dishes</div>
+        <h2 class="section-title" data-phoxta="menuTitle">From Our Kitchen</h2>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish1Name">Seared Duck Breast</h3>
+            <p data-phoxta="dish1Desc">Cherry gastrique, roasted beets, thyme jus</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish1Price">$42</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish2Name">Lobster Bisque</h3>
+            <p data-phoxta="dish2Desc">Cognac cream, chive oil, brioche crouton</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish2Price">$28</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish3Name">Truffle Risotto</h3>
+            <p data-phoxta="dish3Desc">Arborio rice, black truffle, aged parmesan</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish3Price">$36</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish4Name">Pan-Seared Salmon</h3>
+            <p data-phoxta="dish4Desc">Herb crust, fennel purée, lemon beurre blanc</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish4Price">$38</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish5Name">Beef Tenderloin</h3>
+            <p data-phoxta="dish5Desc">Red wine reduction, gratin dauphinois, asparagus</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish5Price">$54</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info">
+            <h3 data-phoxta="dish6Name">Crème Brûlée</h3>
+            <p data-phoxta="dish6Desc">Madagascar vanilla, caramelized sugar, fresh berries</p>
+          </div>
+          <div class="menu-item-price" data-phoxta="dish6Price">$16</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <div class="section-label" data-phoxta="galleryLabel">Gallery</div>
+        <h2 class="section-title" data-phoxta="galleryTitle">Moments at Saveur</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=500&fit=crop" alt="Dining" data-phoxta-image="gal1" /></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=500&fit=crop" alt="Food" data-phoxta-image="gal2" /></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&h=500&fit=crop" alt="Interior" data-phoxta-image="gal3" /></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=500&h=500&fit=crop" alt="Chef" data-phoxta-image="gal4" /></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=500&fit=crop" alt="Dish" data-phoxta-image="gal5" /></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=500&fit=crop" alt="Wine" data-phoxta-image="gal6" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION -->
+  <section class="info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-block">
+          <div class="info-block-icon"><i class="fas fa-clock"></i></div>
+          <h3 data-phoxta="hours1Title">Lunch</h3>
+          <p data-phoxta="hours1Desc">Tuesday – Sunday<br/>12:00 PM – 2:30 PM</p>
+        </div>
+        <div class="info-block">
+          <div class="info-block-icon"><i class="fas fa-utensils"></i></div>
+          <h3 data-phoxta="hours2Title">Dinner</h3>
+          <p data-phoxta="hours2Desc">Tuesday – Saturday<br/>6:00 PM – 10:30 PM</p>
+        </div>
+        <div class="info-block">
+          <div class="info-block-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3 data-phoxta="locationTitle">Location</h3>
+          <p data-phoxta="locationDesc">24 Rue de la Gastronomie<br/>Paris, 75008, France</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="reviews-header">
+        <div class="section-label" data-phoxta="reviewsLabel">Guest Reviews</div>
+        <h2 class="section-title" data-phoxta="reviewsTitle">What our guests say</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="rev1">"An unforgettable dining experience. Every course was a masterpiece of flavor and presentation. Saveur is truly something special."</blockquote>
+          <div class="review-name" data-phoxta="rev1Author">Marie Laurent</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="rev2">"The atmosphere, the service, the food — everything was impeccable. The truffle risotto alone is worth the visit. A gem in the heart of Paris."</blockquote>
+          <div class="review-name" data-phoxta="rev2Author">Thomas Bergmann</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="rev3">"Chef Moreau's passion shines through every dish. A perfect evening from start to finish. We'll be coming back for every anniversary."</blockquote>
+          <div class="review-name" data-phoxta="rev3Author">Elena Vasquez</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION CTA -->
+  <section class="reservations" id="reserve">
+    <div class="reservations-inner">
+      <div class="section-label" data-phoxta="resLabel">Reservations</div>
+      <h2 data-phoxta="resTitle">Join us for an evening to remember</h2>
+      <p data-phoxta="resDesc">Reserve your table today and experience the art of fine dining at Saveur. For parties of 8 or more, please call us directly.</p>
+      <a href="#" class="btn-accent" data-phoxta-link="resBtn"><span data-phoxta="resBtnText">Make a Reservation</span> <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo" data-phoxta="footerBrand">Saveur</div>
+      <div class="footer-copy" data-phoxta="footerCopy">&copy; 2024 Saveur. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="#" data-phoxta-link="social1"><i class="fab fa-instagram"></i></a>
+        <a href="#" data-phoxta-link="social2"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" data-phoxta-link="social3"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav')?.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

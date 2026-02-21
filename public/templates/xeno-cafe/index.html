@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brew & Bean — Specialty Coffee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#faf7f2;--surface:#f0ebe3;--card:#fff;--accent:#6b4226;--accent-l:#8b5e3c;--warm:#d4a574;--text:#3d2e1f;--dim:#8c7a66;--white:#fff;--border:#e5ddd2}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,242,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:var(--bg);padding:140px 60px 80px}.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);padding:8px 16px;border-radius:100px;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:20px}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:56px;line-height:1.1;color:var(--text);margin-bottom:18px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:16px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-brown{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-brown:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:520px;object-fit:cover;border-radius:20px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-family:'DM Serif Display',serif;font-size:40px;color:var(--text);margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .menu{background:var(--surface)}.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .menu-card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:all .3s}.menu-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06);transform:translateY(-4px)}
+    .menu-card img{width:100%;height:240px;object-fit:cover}.menu-body{padding:24px}
+    .menu-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:100px;background:rgba(107,66,38,.08);color:var(--accent);margin-bottom:10px}
+    .menu-card h3{font-size:18px;font-weight:600;margin-bottom:6px}.menu-card p{font-size:13px;color:var(--dim);margin-bottom:12px}.menu-price{font-size:20px;font-weight:700;color:var(--accent)}
+    .about{background:var(--bg)}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+    .about-img img{width:100%;height:440px;object-fit:cover;border-radius:20px}
+    .about-feats{margin-top:28px}.about-feat{display:flex;gap:14px;margin-bottom:20px}
+    .about-feat i{width:40px;height:40px;border-radius:10px;background:var(--surface);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    .about-feat h4{font-size:15px;font-weight:600;margin-bottom:2px}.about-feat p{font-size:13px;color:var(--dim)}
+    .cta-section{background:var(--accent);text-align:center}.cta-section h2{font-family:'DM Serif Display',serif;font-size:42px;color:var(--white);margin-bottom:12px}.cta-section p{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 32px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    footer{background:#2a1f14;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--warm)}.footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.35);transition:color .3s}.footer-links a:hover{color:var(--warm)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.15);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner,.about-grid{grid-template-columns:1fr}.hero-img,.about-img{display:none}.menu-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:36px}.menu-grid{grid-template-columns:1fr}.section-title{font-size:30px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">Brew & Bean</div><div class="nav-links"><a href="#menu" data-phoxta-link="navMenu">Menu</a><a href="#about" data-phoxta-link="navAbout">About</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Visit Us</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-badge" data-phoxta="heroBadge"><i class="fa-solid fa-mug-hot"></i> Specialty Coffee</div><h1 data-phoxta="heroTitle">Life Begins After <span>Coffee</span></h1><p data-phoxta="heroDesc">Hand-crafted specialty coffee, fresh pastries & a cozy atmosphere to work, relax or connect.</p><a href="#menu" class="btn-brown" data-phoxta-link="heroCta"><i class="fa-solid fa-mug-hot"></i> Explore Menu</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coffee" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="menu" id="menu"><div class="container"><p class="section-label" data-phoxta="menuLabel">Our Menu</p><h2 class="section-title" data-phoxta="menuTitle">Signature Drinks</h2><p class="section-desc" data-phoxta="menuDesc">Ethically sourced beans, roasted locally, brewed to perfection.</p><div class="menu-grid">
+    <div class="menu-card"><img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Drink" data-phoxta-image="m1Img"/><div class="menu-body"><span class="menu-tag" data-phoxta="m1Tag">Bestseller</span><h3 data-phoxta="m1Title">Caramel Latte</h3><p data-phoxta="m1Desc">Rich espresso with steamed milk and house-made caramel.</p><div class="menu-price" data-phoxta="m1Price">$5.50</div></div></div>
+    <div class="menu-card"><img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Drink" data-phoxta-image="m2Img"/><div class="menu-body"><span class="menu-tag" data-phoxta="m2Tag">Popular</span><h3 data-phoxta="m2Title">Cold Brew</h3><p data-phoxta="m2Desc">24-hour steeped cold brew, smooth and refreshing over ice.</p><div class="menu-price" data-phoxta="m2Price">$4.75</div></div></div>
+    <div class="menu-card"><img src="https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Drink" data-phoxta-image="m3Img"/><div class="menu-body"><span class="menu-tag" data-phoxta="m3Tag">New</span><h3 data-phoxta="m3Title">Matcha Oat Latte</h3><p data-phoxta="m3Desc">Ceremonial grade matcha with creamy oat milk.</p><div class="menu-price" data-phoxta="m3Price">$6.00</div></div></div>
+  </div></div></section>
+  <section class="about" id="about"><div class="container"><div class="about-grid"><div class="about-img"><img src="https://images.pexels.com/photos/1024359/pexels-photo-1024359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cafe interior" data-phoxta-image="aboutImg"/></div><div><p class="section-label" data-phoxta="aboutLabel">Our Story</p><h2 class="section-title" data-phoxta="aboutTitle">More Than Just Coffee</h2><p class="section-desc" data-phoxta="aboutDesc">Since 2019 we've been on a mission to serve the perfect cup while supporting sustainable farming communities.</p><div class="about-feats">
+    <div class="about-feat"><i class="fa-solid fa-leaf"></i><div><h4 data-phoxta="af1Title">Organic & Fair Trade</h4><p data-phoxta="af1Desc">All beans sourced from certified sustainable farms.</p></div></div>
+    <div class="about-feat"><i class="fa-solid fa-fire"></i><div><h4 data-phoxta="af2Title">Roasted In-House</h4><p data-phoxta="af2Desc">Small-batch roasting for maximum freshness and flavor.</p></div></div>
+    <div class="about-feat"><i class="fa-solid fa-heart"></i><div><h4 data-phoxta="af3Title">Community Space</h4><p data-phoxta="af3Desc">Free Wi-Fi, cozy seating, and local art on our walls.</p></div></div>
+  </div></div></div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Come Say Hello</h2><p data-phoxta="ctaDesc">Open daily 7am–7pm. Join our loyalty program for a free drink on your birthday.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-location-dot"></i> Find Us</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">Brew & Bean</div><div class="footer-links"><a href="#menu" data-phoxta-link="fl1">Menu</a><a href="#about" data-phoxta-link="fl2">Story</a><a href="#cta" data-phoxta-link="fl3">Visit</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Brew & Bean Coffee. All rights reserved.</p></footer>
+</body>
+</html>

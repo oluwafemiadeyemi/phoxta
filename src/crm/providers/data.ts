@@ -58,6 +58,17 @@ const resourceToTable: Record<string, string> = {
   contentSocialInbox: "content_social_inbox",
   contentSocialAutomations: "content_social_automations",
   contentCrossPosts: "content_cross_posts",
+  // Website Builder
+  websiteSites: "website_sites",
+  websitePages: "website_pages",
+  websiteBreakpoints: "website_breakpoints",
+  websiteElements: "website_elements",
+  websiteGlobalStyles: "website_global_styles",
+  websiteAssets: "website_assets",
+  websiteCollections: "website_collections",
+  websiteCollectionFields: "website_collection_fields",
+  websiteCollectionItems: "website_collection_items",
+  websiteInteractions: "website_interactions",
 };
 
 const isUserScopedTable = (tableName: string) => {

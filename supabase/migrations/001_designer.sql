@@ -26,12 +26,16 @@ CREATE INDEX IF NOT EXISTS idx_design_projects_deleted
 
 ALTER TABLE design_projects ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dp_select" ON design_projects;
 CREATE POLICY "dp_select" ON design_projects FOR SELECT
   USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dp_insert" ON design_projects;
 CREATE POLICY "dp_insert" ON design_projects FOR INSERT
   WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dp_update" ON design_projects;
 CREATE POLICY "dp_update" ON design_projects FOR UPDATE
   USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dp_delete" ON design_projects;
 CREATE POLICY "dp_delete" ON design_projects FOR DELETE
   USING (auth.uid() = user_id);
 
@@ -46,12 +50,16 @@ CREATE TABLE IF NOT EXISTS design_documents (
 
 ALTER TABLE design_documents ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dd_select" ON design_documents;
 CREATE POLICY "dd_select" ON design_documents FOR SELECT
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dd_insert" ON design_documents;
 CREATE POLICY "dd_insert" ON design_documents FOR INSERT
   WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dd_update" ON design_documents;
 CREATE POLICY "dd_update" ON design_documents FOR UPDATE
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dd_delete" ON design_documents;
 CREATE POLICY "dd_delete" ON design_documents FOR DELETE
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
 
@@ -73,12 +81,16 @@ CREATE INDEX IF NOT EXISTS idx_design_pages_project
 
 ALTER TABLE design_pages ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dpg_select" ON design_pages;
 CREATE POLICY "dpg_select" ON design_pages FOR SELECT
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dpg_insert" ON design_pages;
 CREATE POLICY "dpg_insert" ON design_pages FOR INSERT
   WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dpg_update" ON design_pages;
 CREATE POLICY "dpg_update" ON design_pages FOR UPDATE
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dpg_delete" ON design_pages;
 CREATE POLICY "dpg_delete" ON design_pages FOR DELETE
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
 
@@ -100,9 +112,13 @@ CREATE INDEX IF NOT EXISTS idx_design_assets_user
 
 ALTER TABLE design_assets ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "da_select" ON design_assets;
 CREATE POLICY "da_select" ON design_assets FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "da_insert" ON design_assets;
 CREATE POLICY "da_insert" ON design_assets FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "da_update" ON design_assets;
 CREATE POLICY "da_update" ON design_assets FOR UPDATE USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "da_delete" ON design_assets;
 CREATE POLICY "da_delete" ON design_assets FOR DELETE USING (auth.uid() = user_id);
 
 
@@ -120,9 +136,13 @@ CREATE TABLE IF NOT EXISTS design_brand_kits (
 
 ALTER TABLE design_brand_kits ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dbk_select" ON design_brand_kits;
 CREATE POLICY "dbk_select" ON design_brand_kits FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dbk_insert" ON design_brand_kits;
 CREATE POLICY "dbk_insert" ON design_brand_kits FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dbk_update" ON design_brand_kits;
 CREATE POLICY "dbk_update" ON design_brand_kits FOR UPDATE USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "dbk_delete" ON design_brand_kits;
 CREATE POLICY "dbk_delete" ON design_brand_kits FOR DELETE USING (auth.uid() = user_id);
 
 
@@ -137,24 +157,59 @@ CREATE TABLE IF NOT EXISTS design_collaborators (
 
 ALTER TABLE design_collaborators ENABLE ROW LEVEL SECURITY;
 
--- Collaborators can see their own rows
-CREATE POLICY "dc_select" ON design_collaborators FOR SELECT
-  USING (auth.uid() = user_id OR EXISTS (
-    SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
--- Only project owner can manage collaborators
-CREATE POLICY "dc_insert" ON design_collaborators FOR INSERT
-  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
-CREATE POLICY "dc_update" ON design_collaborators FOR UPDATE
-  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
-CREATE POLICY "dc_delete" ON design_collaborators FOR DELETE
-  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+-- Helper function to check collaborator membership WITHOUT triggering RLS on design_projects
+-- (avoids infinite recursion between design_projects ↔ design_collaborators policies)
+CREATE OR REPLACE FUNCTION is_design_collaborator(p_project_id UUID, p_user_id UUID)
+  RETURNS BOOLEAN
+  LANGUAGE sql
+  SECURITY DEFINER
+  STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM design_collaborators
+    WHERE project_id = p_project_id AND user_id = p_user_id
+  );
+$$;
 
--- Allow collaborators to SELECT the project itself
+-- Helper: check if user is project owner (bypasses RLS)
+CREATE OR REPLACE FUNCTION is_design_project_owner(p_project_id UUID, p_user_id UUID)
+  RETURNS BOOLEAN
+  LANGUAGE sql
+  SECURITY DEFINER
+  STABLE
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM design_projects
+    WHERE id = p_project_id AND user_id = p_user_id
+  );
+$$;
+
+-- Collaborators can see their own rows OR project owner can see all
+DROP POLICY IF EXISTS "dc_select" ON design_collaborators;
+CREATE POLICY "dc_select" ON design_collaborators FOR SELECT
+  USING (auth.uid() = user_id OR is_design_project_owner(project_id, auth.uid()));
+-- Only project owner can manage collaborators
+DROP POLICY IF EXISTS "dc_insert" ON design_collaborators;
+CREATE POLICY "dc_insert" ON design_collaborators FOR INSERT
+  WITH CHECK (is_design_project_owner(project_id, auth.uid()));
+DROP POLICY IF EXISTS "dc_update" ON design_collaborators;
+CREATE POLICY "dc_update" ON design_collaborators FOR UPDATE
+  USING (is_design_project_owner(project_id, auth.uid()));
+DROP POLICY IF EXISTS "dc_delete" ON design_collaborators;
+CREATE POLICY "dc_delete" ON design_collaborators FOR DELETE
+  USING (is_design_project_owner(project_id, auth.uid()));
+
+-- Allow collaborators to SELECT the project itself (uses SECURITY DEFINER function)
+DROP POLICY IF EXISTS "dp_collab_select" ON design_projects;
 CREATE POLICY "dp_collab_select" ON design_projects FOR SELECT
-  USING (EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = id AND dc.user_id = auth.uid()));
+  USING (is_design_collaborator(id, auth.uid()));
 -- Allow editor collaborators to UPDATE
+DROP POLICY IF EXISTS "dp_collab_update" ON design_projects;
 CREATE POLICY "dp_collab_update" ON design_projects FOR UPDATE
-  USING (EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = id AND dc.user_id = auth.uid() AND dc.role = 'editor'));
+  USING (EXISTS (
+    SELECT 1 FROM design_collaborators dc
+    WHERE dc.project_id = id AND dc.user_id = auth.uid() AND dc.role = 'editor'
+  ));
 
 
 -- ===== 7) design_comments =====
@@ -174,16 +229,20 @@ CREATE INDEX IF NOT EXISTS idx_design_comments_project
 
 ALTER TABLE design_comments ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dcm_select" ON design_comments;
 CREATE POLICY "dcm_select" ON design_comments FOR SELECT
-  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
-    OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()));
+  USING (is_design_project_owner(project_id, auth.uid())
+    OR is_design_collaborator(project_id, auth.uid()));
+DROP POLICY IF EXISTS "dcm_insert" ON design_comments;
 CREATE POLICY "dcm_insert" ON design_comments FOR INSERT
   WITH CHECK (auth.uid() = author_id AND (
-    EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
+    is_design_project_owner(project_id, auth.uid())
     OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()
       AND dc.role IN ('owner','editor','commenter'))));
+DROP POLICY IF EXISTS "dcm_update" ON design_comments;
 CREATE POLICY "dcm_update" ON design_comments FOR UPDATE
   USING (auth.uid() = author_id);
+DROP POLICY IF EXISTS "dcm_delete" ON design_comments;
 CREATE POLICY "dcm_delete" ON design_comments FOR DELETE
   USING (auth.uid() = author_id);
 
@@ -204,13 +263,16 @@ CREATE INDEX IF NOT EXISTS idx_design_versions_project
 
 ALTER TABLE design_versions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dv_select" ON design_versions;
 CREATE POLICY "dv_select" ON design_versions FOR SELECT
-  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid())
-    OR EXISTS (SELECT 1 FROM design_collaborators dc WHERE dc.project_id = project_id AND dc.user_id = auth.uid()));
+  USING (is_design_project_owner(project_id, auth.uid())
+    OR is_design_collaborator(project_id, auth.uid()));
+DROP POLICY IF EXISTS "dv_insert" ON design_versions;
 CREATE POLICY "dv_insert" ON design_versions FOR INSERT
-  WITH CHECK (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+  WITH CHECK (is_design_project_owner(project_id, auth.uid()));
+DROP POLICY IF EXISTS "dv_update" ON design_versions;
 CREATE POLICY "dv_update" ON design_versions FOR UPDATE
-  USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+  USING (is_design_project_owner(project_id, auth.uid()));
 
 
 -- ===== 9) design_audit_logs =====
@@ -228,8 +290,10 @@ CREATE INDEX IF NOT EXISTS idx_design_audit_project
 
 ALTER TABLE design_audit_logs ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "dal_select" ON design_audit_logs;
 CREATE POLICY "dal_select" ON design_audit_logs FOR SELECT
   USING (EXISTS (SELECT 1 FROM design_projects dp WHERE dp.id = project_id AND dp.user_id = auth.uid()));
+DROP POLICY IF EXISTS "dal_insert" ON design_audit_logs;
 CREATE POLICY "dal_insert" ON design_audit_logs FOR INSERT
   WITH CHECK (auth.uid() = actor_id);
 
@@ -259,25 +323,33 @@ ON CONFLICT (id) DO NOTHING;
 -- ===========================================================================
 
 -- ----- design-projects: user owns {uid}/... -----
+DROP POLICY IF EXISTS "sp_select" ON storage.objects;
 CREATE POLICY "sp_select" ON storage.objects FOR SELECT
   USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+DROP POLICY IF EXISTS "sp_insert" ON storage.objects;
 CREATE POLICY "sp_insert" ON storage.objects FOR INSERT
   WITH CHECK (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+DROP POLICY IF EXISTS "sp_update" ON storage.objects;
 CREATE POLICY "sp_update" ON storage.objects FOR UPDATE
   USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
+DROP POLICY IF EXISTS "sp_delete" ON storage.objects;
 CREATE POLICY "sp_delete" ON storage.objects FOR DELETE
   USING (bucket_id = 'design-projects' AND (storage.foldername(name))[1] = auth.uid()::text);
 
 -- ----- design-system: everyone reads, no user writes -----
+DROP POLICY IF EXISTS "ss_select" ON storage.objects;
 CREATE POLICY "ss_select" ON storage.objects FOR SELECT
   USING (bucket_id = 'design-system');
 -- NOTE: Only admins/service-role can write to design-system. No INSERT/UPDATE/DELETE policies for regular users.
 
 -- ----- design-exports: user owns {uid}/... -----
+DROP POLICY IF EXISTS "se_select" ON storage.objects;
 CREATE POLICY "se_select" ON storage.objects FOR SELECT
   USING (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+DROP POLICY IF EXISTS "se_insert" ON storage.objects;
 CREATE POLICY "se_insert" ON storage.objects FOR INSERT
   WITH CHECK (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
+DROP POLICY IF EXISTS "se_update" ON storage.objects;
 CREATE POLICY "se_update" ON storage.objects FOR UPDATE
   USING (bucket_id = 'design-exports' AND (storage.foldername(name))[1] = auth.uid()::text);
 -- No delete for exports — admin only. Users can download but not hard-delete.

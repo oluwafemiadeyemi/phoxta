@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ledger &amp; Co — Accounting Firm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#f8fafc;--surface:#f1f5f9;--card:#fff;--accent:#1e40af;--accent-l:#3b82f6;--text:#0f172a;--dim:#64748b;--white:#fff;--border:#e2e8f0}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(248,250,252,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:20px;font-weight:800;color:var(--accent);display:flex;align-items:center;gap:8px}.nav-logo i{font-size:18px}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:8px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,#fff,#f1f5f9);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:46px;line-height:1.15;font-weight:800;margin-bottom:18px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-acc{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:600;transition:all .3s}.btn-acc:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:420px;object-fit:cover;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+    .trust-bar{margin-top:32px;display:flex;gap:28px}.trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);font-weight:500}.trust-item i{color:var(--accent);font-size:16px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:36px;font-weight:800;margin-bottom:12px}.section-desc{font-size:14px;color:var(--dim);max-width:480px}
+    .services{background:var(--bg)}.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .svc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:all .3s}.svc-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.05);border-color:var(--accent-l);transform:translateY(-4px)}
+    .svc-icon{width:44px;height:44px;border-radius:8px;background:rgba(30,64,175,.06);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent);margin-bottom:16px}
+    .svc-card h3{font-size:16px;font-weight:700;margin-bottom:6px}.svc-card p{font-size:13px;color:var(--dim)}
+    .stats{background:var(--surface);text-align:center}.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+    .stat-num{font-size:40px;font-weight:800;color:var(--accent)}.stat-label{font-size:14px;font-weight:600;margin-top:4px}.stat-desc{font-size:12px;color:var(--dim)}
+    .cta-acc{background:var(--accent);text-align:center}
+    .cta-acc h2{font-size:36px;font-weight:800;color:var(--white);margin-bottom:12px}.cta-acc p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:700;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#0f172a;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:18px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo i{color:var(--accent-l)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--accent-l)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.stat-grid{grid-template-columns:repeat(2,1fr)}.svc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:32px}.svc-grid,.stat-grid{grid-template-columns:1fr}.section-title{font-size:26px}.trust-bar{flex-direction:column;gap:10px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-chart-pie"></i> Ledger & Co</div><div class="nav-links"><a href="#services" data-phoxta-link="navSvc">Services</a><a href="#stats" data-phoxta-link="navSt">About</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Get Started</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">Your Finances, <span>Strategically Managed</span></h1><p data-phoxta="heroDesc">Expert accounting, tax planning and advisory services that help businesses grow with confidence and clarity.</p><a href="#services" class="btn-acc" data-phoxta-link="heroCta"><i class="fa-solid fa-arrow-right"></i> Our Services</a><div class="trust-bar"><div class="trust-item"><i class="fa-solid fa-shield-halved"></i> <span data-phoxta="t1">CPA Certified</span></div><div class="trust-item"><i class="fa-solid fa-star"></i> <span data-phoxta="t2">4.9 Rating</span></div><div class="trust-item"><i class="fa-solid fa-users"></i> <span data-phoxta="t3">2,000+ Clients</span></div></div></div><div class="hero-img"><img src="https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Accounting" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="services" id="services"><div class="container"><p class="section-label" data-phoxta="svcLabel">Our Services</p><h2 class="section-title" data-phoxta="svcTitle">How We Help</h2><div class="svc-grid">
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-calculator"></i></div><h3 data-phoxta="s1Title">Tax Planning</h3><p data-phoxta="s1Desc">Strategic tax optimization for individuals and businesses to minimize liabilities.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-book"></i></div><h3 data-phoxta="s2Title">Bookkeeping</h3><p data-phoxta="s2Desc">Accurate monthly bookkeeping with real-time dashboards and financial reporting.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-building-columns"></i></div><h3 data-phoxta="s3Title">Business Advisory</h3><p data-phoxta="s3Desc">CFO-level guidance on growth strategy, cash flow management and profitability.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-file-invoice"></i></div><h3 data-phoxta="s4Title">Payroll Services</h3><p data-phoxta="s4Desc">Full-service payroll processing, compliance reporting and employee management.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div><h3 data-phoxta="s5Title">Audit & Assurance</h3><p data-phoxta="s5Desc">Independent audits and reviews that build trust with stakeholders and investors.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-handshake"></i></div><h3 data-phoxta="s6Title">M&A Support</h3><p data-phoxta="s6Desc">Due diligence, valuations and transaction advisory for mergers and acquisitions.</p></div>
+  </div></div></section>
+  <section class="stats" id="stats"><div class="container"><p class="section-label" data-phoxta="stLabel">Why Us</p><h2 class="section-title" data-phoxta="stTitle">Trusted By Businesses</h2><div class="stat-grid">
+    <div><div class="stat-num" data-phoxta="st1Num">25+</div><div class="stat-label" data-phoxta="st1Label">Years Experience</div></div>
+    <div><div class="stat-num" data-phoxta="st2Num">2,400</div><div class="stat-label" data-phoxta="st2Label">Active Clients</div></div>
+    <div><div class="stat-num" data-phoxta="st3Num">$180M</div><div class="stat-label" data-phoxta="st3Label">Tax Savings</div></div>
+    <div><div class="stat-num" data-phoxta="st4Num">99%</div><div class="stat-label" data-phoxta="st4Label">Client Retention</div></div>
+  </div></div></section>
+  <section class="cta-acc" id="cta"><h2 data-phoxta="ctaTitle">Ready to Get Started?</h2><p data-phoxta="ctaDesc">Book a free 30-minute consultation and discover how we can help your business thrive.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-phone"></i> Free Consultation</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-chart-pie"></i> Ledger & Co</div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#stats" data-phoxta-link="fl2">About</a><a href="#cta" data-phoxta-link="fl3">Contact</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Ledger & Co Accounting. All rights reserved.</p></footer>
+</body>
+</html>

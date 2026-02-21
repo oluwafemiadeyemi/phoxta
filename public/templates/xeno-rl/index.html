@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prestige Realty — Luxury Properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root { --primary: #0c1425; --secondary: #f8f9fa; --accent: #c5a355; --accent-light: #d4b96a; --text: #1e293b; --text-light: #64748b; --white: #ffffff; --border: #e2e8f0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(12,20,37,0.95); backdrop-filter: blur(15px); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--white); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--primary) !important; padding: 10px 28px; border-radius: 4px; font-weight: 600 !important; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(12,20,37,0.9) 40%, rgba(12,20,37,0.3)); pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 140px 60px 80px; position: relative; z-index: 2; width: 100%; }
+    .hero-label { font-size: 11px; text-transform: uppercase; letter-spacing: 5px; color: var(--accent); margin-bottom: 20px; font-weight: 600; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 60px; line-height: 1.1; font-weight: 700; color: var(--white); max-width: 650px; margin-bottom: 24px; }
+    .hero p { font-size: 16px; color: rgba(255,255,255,0.5); max-width: 500px; margin-bottom: 40px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 16px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--primary); padding: 16px 36px; font-size: 13px; font-weight: 600; border-radius: 4px; transition: all 0.3s; }
+    .btn-gold:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-outline-w { display: inline-flex; align-items: center; gap: 10px; border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 15px 36px; font-size: 13px; font-weight: 500; border-radius: 4px; transition: all 0.3s; }
+    .btn-outline-w:hover { border-color: var(--accent); color: var(--accent); }
+
+    section { padding: 100px 60px; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 4px; color: var(--accent); margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .section-desc { font-size: 15px; color: var(--text-light); max-width: 520px; font-weight: 300; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .properties { background: var(--secondary); }
+    .props-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+    .prop-card { background: var(--white); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+    .prop-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .prop-card img { width: 100%; height: 260px; object-fit: cover; }
+    .prop-card-body { padding: 24px; }
+    .prop-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 8px; }
+    .prop-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+    .prop-card .location { font-size: 13px; color: var(--text-light); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+    .prop-meta { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-light); }
+    .prop-meta span { display: flex; align-items: center; gap: 6px; }
+    .prop-price { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--primary); margin-top: 16px; }
+
+    .about-section { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+    .about-img img { width: 100%; height: 500px; object-fit: cover; border-radius: 12px; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+    .about-feat { display: flex; gap: 12px; }
+    .about-feat i { color: var(--accent); font-size: 18px; margin-top: 4px; }
+    .about-feat h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .about-feat p { font-size: 13px; color: var(--text-light); font-weight: 300; }
+
+    .stats-bar { background: var(--primary); padding: 60px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+    .cta-section { background: var(--primary); text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; opacity: 0.12; pointer-events: none; }
+    .cta-section > * { position: relative; z-index: 2; }
+    .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 36px; font-weight: 300; }
+
+    footer { background: #080d18; padding: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--white); }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.3); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.15); margin-top: 32px; text-align: center; }
+
+    @media (max-width: 1024px) { .hero h1 { font-size: 44px; } .props-grid { grid-template-columns: repeat(2, 1fr); } .about-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .nav { padding: 16px 24px; } .nav-links { display: none; } section { padding: 60px 24px; } .hero-inner { padding: 120px 24px 60px; } .hero h1 { font-size: 34px; } .props-grid, .stats-grid { grid-template-columns: 1fr; } .about-features { grid-template-columns: 1fr; } .section-title { font-size: 30px; } .footer-inner { flex-direction: column; gap: 20px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo" data-phoxta="navLogo">Prestige<span>.</span></div>
+    <div class="nav-links">
+      <a href="#properties" data-phoxta-link="navProps">Properties</a>
+      <a href="#about" data-phoxta-link="navAbout">About</a>
+      <a href="#contact" class="nav-cta" data-phoxta-link="navCta">Schedule Viewing</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label" data-phoxta="heroLabel">Luxury Real Estate</p>
+      <h1 data-phoxta="heroTitle">Find Your Dream Home in the Most Exclusive Locations</h1>
+      <p data-phoxta="heroDesc">Discover extraordinary properties curated for discerning buyers. From waterfront estates to penthouse residences.</p>
+      <div class="hero-actions">
+        <a href="#properties" class="btn-gold" data-phoxta-link="heroCta1"><i class="fa-solid fa-search"></i> Browse Properties</a>
+        <a href="#about" class="btn-outline-w" data-phoxta-link="heroCta2">Why Choose Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="properties" id="properties">
+    <div class="container">
+      <p class="section-label" data-phoxta="propsLabel">Featured Listings</p>
+      <h2 class="section-title" data-phoxta="propsTitle">Exceptional Properties</h2>
+      <p class="section-desc" data-phoxta="propsDesc">Hand-selected luxury properties in the world's most desirable locations.</p>
+      <div class="props-grid">
+        <div class="prop-card">
+          <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Property" data-phoxta-image="prop1Img" />
+          <div class="prop-card-body">
+            <p class="prop-tag" data-phoxta="prop1Tag">Featured</p>
+            <h3 data-phoxta="prop1Title">Oceanview Estate</h3>
+            <p class="location"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="prop1Loc">Malibu, California</span></p>
+            <div class="prop-meta">
+              <span><i class="fa-solid fa-bed"></i> <span data-phoxta="prop1Beds">5 Beds</span></span>
+              <span><i class="fa-solid fa-bath"></i> <span data-phoxta="prop1Baths">4 Baths</span></span>
+              <span><i class="fa-solid fa-ruler-combined"></i> <span data-phoxta="prop1Sqft">6,200 sqft</span></span>
+            </div>
+            <p class="prop-price" data-phoxta="prop1Price">$12,500,000</p>
+          </div>
+        </div>
+        <div class="prop-card">
+          <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Property" data-phoxta-image="prop2Img" />
+          <div class="prop-card-body">
+            <p class="prop-tag" data-phoxta="prop2Tag">New Listing</p>
+            <h3 data-phoxta="prop2Title">Modern Penthouse</h3>
+            <p class="location"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="prop2Loc">Manhattan, New York</span></p>
+            <div class="prop-meta">
+              <span><i class="fa-solid fa-bed"></i> <span data-phoxta="prop2Beds">3 Beds</span></span>
+              <span><i class="fa-solid fa-bath"></i> <span data-phoxta="prop2Baths">3 Baths</span></span>
+              <span><i class="fa-solid fa-ruler-combined"></i> <span data-phoxta="prop2Sqft">3,800 sqft</span></span>
+            </div>
+            <p class="prop-price" data-phoxta="prop2Price">$8,900,000</p>
+          </div>
+        </div>
+        <div class="prop-card">
+          <img src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Property" data-phoxta-image="prop3Img" />
+          <div class="prop-card-body">
+            <p class="prop-tag" data-phoxta="prop3Tag">Exclusive</p>
+            <h3 data-phoxta="prop3Title">Vineyard Villa</h3>
+            <p class="location"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="prop3Loc">Napa Valley, California</span></p>
+            <div class="prop-meta">
+              <span><i class="fa-solid fa-bed"></i> <span data-phoxta="prop3Beds">6 Beds</span></span>
+              <span><i class="fa-solid fa-bath"></i> <span data-phoxta="prop3Baths">5 Baths</span></span>
+              <span><i class="fa-solid fa-ruler-combined"></i> <span data-phoxta="prop3Sqft">8,500 sqft</span></span>
+            </div>
+            <p class="prop-price" data-phoxta="prop3Price">$15,200,000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div><div class="stat-num" data-phoxta="stat1Num">$2B+</div><div class="stat-label" data-phoxta="stat1Label">Properties Sold</div></div>
+      <div><div class="stat-num" data-phoxta="stat2Num">500+</div><div class="stat-label" data-phoxta="stat2Label">Luxury Listings</div></div>
+      <div><div class="stat-num" data-phoxta="stat3Num">20+</div><div class="stat-label" data-phoxta="stat3Label">Years Experience</div></div>
+      <div><div class="stat-num" data-phoxta="stat4Num">98%</div><div class="stat-label" data-phoxta="stat4Label">Client Satisfaction</div></div>
+    </div>
+  </div>
+
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img">
+          <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Interior" data-phoxta-image="aboutImg" />
+        </div>
+        <div>
+          <p class="section-label" data-phoxta="aboutLabel">Why Prestige</p>
+          <h2 class="section-title" data-phoxta="aboutTitle">Expertise Meets Exclusivity</h2>
+          <p class="section-desc" data-phoxta="aboutDesc">With two decades of experience in luxury real estate, we offer unparalleled market knowledge and a curated portfolio of the world's finest properties.</p>
+          <div class="about-features">
+            <div class="about-feat"><i class="fa-solid fa-gem"></i><div><h4 data-phoxta="feat1Title">Curated Collection</h4><p data-phoxta="feat1Desc">Every property in our portfolio is personally verified and hand-selected.</p></div></div>
+            <div class="about-feat"><i class="fa-solid fa-handshake"></i><div><h4 data-phoxta="feat2Title">White-Glove Service</h4><p data-phoxta="feat2Desc">Dedicated agents provide personalized attention from search to closing.</p></div></div>
+            <div class="about-feat"><i class="fa-solid fa-globe"></i><div><h4 data-phoxta="feat3Title">Global Network</h4><p data-phoxta="feat3Desc">Access exclusive off-market listings through our worldwide connections.</p></div></div>
+            <div class="about-feat"><i class="fa-solid fa-shield-halved"></i><div><h4 data-phoxta="feat4Title">Trusted Reputation</h4><p data-phoxta="feat4Desc">Preferred by celebrities, executives and families for discretion and results.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <h2 data-phoxta="ctaTitle">Your Dream Property Awaits</h2>
+    <p data-phoxta="ctaDesc">Schedule a private consultation with one of our luxury real estate specialists today.</p>
+    <a href="#" class="btn-gold" data-phoxta-link="ctaBtn"><i class="fa-solid fa-calendar"></i> Schedule Private Viewing</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo" data-phoxta="footerLogo">Prestige<span>.</span></div>
+      <div class="footer-links">
+        <a href="#properties" data-phoxta-link="fLink1">Properties</a>
+        <a href="#about" data-phoxta-link="fLink2">About</a>
+        <a href="#contact" data-phoxta-link="fLink3">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Prestige Realty. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

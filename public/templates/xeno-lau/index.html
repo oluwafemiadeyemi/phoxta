@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshFold — Laundry Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#faf5ff;--surface:#fff;--card:#f3e8ff;--accent:#9333ea;--accent-l:#a855f7;--text:#1e1b4b;--dim:#6b7280;--white:#fff;--border:#e9d5ff}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Nunito',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:24px;font-weight:800;color:var(--accent)}.nav-logo span{color:var(--text)}
+    .nav-links{display:flex;gap:26px;align-items:center}.nav-links a{font-size:14px;font-weight:600;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 22px;border-radius:50px;font-weight:700!important}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:48px;line-height:1.1;font-weight:800;margin-bottom:16px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;transition:all .3s;box-shadow:0 8px 30px rgba(147,51,234,.25)}.btn-pri:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:420px;object-fit:cover;border-radius:20px}
+    section{padding:100px 60px}.container{max-width:1100px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:8px}
+    .section-title{font-size:36px;font-weight:800;color:var(--text);margin-bottom:12px}
+    .services{background:var(--white)}.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+    .srv-card{background:var(--bg);padding:32px 24px;border-radius:20px;text-align:center;transition:transform .3s}.srv-card:hover{transform:translateY(-4px)}
+    .srv-icon{width:56px;height:56px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:var(--accent)}
+    .srv-card h3{font-size:17px;font-weight:700;margin-bottom:8px}.srv-card p{font-size:13px;color:var(--dim)}
+    .how{background:var(--bg)}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+    .how-item{text-align:center;padding:28px;background:var(--white);border-radius:16px}
+    .how-num{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:18px;font-weight:800}
+    .how-item h4{font-size:15px;font-weight:700;margin-bottom:4px}.how-item p{font-size:12px;color:var(--dim)}
+    .cta-lau{background:var(--accent);text-align:center;border-radius:24px;margin:0 60px;padding:80px 40px}
+    .cta-lau h2{font-size:36px;font-weight:800;color:var(--white);margin-bottom:12px}.cta-lau p{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:28px}
+    .btn-w{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;transition:all .3s}.btn-w:hover{transform:translateY(-2px)}
+    footer{background:var(--white);padding:48px 60px;margin-top:80px;border-top:1px solid var(--border)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:20px;font-weight:800;color:var(--accent)}.footer-logo span{color:var(--text)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:var(--dim)}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:11px;color:var(--dim);margin-top:20px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.srv-grid,.how-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.nav{padding:14px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:100px 24px 60px}.hero h1{font-size:32px}.srv-grid,.how-grid{grid-template-columns:1fr}.cta-lau{margin:0 24px;padding:60px 24px}.footer-inner{flex-direction:column;gap:14px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">Fresh<span>Fold</span></div><div class="nav-links"><a href="#services" data-phoxta-link="navSv">Services</a><a href="#how" data-phoxta-link="navHw">How It Works</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Schedule</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">Laundry Day, <span>Made Easy</span></h1><p data-phoxta="heroDesc">Free pickup & delivery laundry and dry cleaning service. Wash, fold, press — done within 24 hours. Because life's too short for laundry.</p><a href="#cta" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-shirt"></i> Schedule Pickup</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/5591581/pexels-photo-5591581.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Laundry" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="services" id="services"><div class="container"><p class="section-label" data-phoxta="svLabel">Services</p><h2 class="section-title" data-phoxta="svTitle">What We Offer</h2>
+  <div class="srv-grid">
+    <div class="srv-card"><div class="srv-icon"><i class="fa-solid fa-basket-shopping"></i></div><h3 data-phoxta="s1Title">Wash & Fold</h3><p data-phoxta="s1Desc">By the pound. Sorted, washed, dried, and neatly folded. From $1.50/lb.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3 data-phoxta="s2Title">Dry Cleaning</h3><p data-phoxta="s2Desc">Expert care for suits, dresses, and delicates. Eco-friendly solvents.</p></div>
+    <div class="srv-card"><div class="srv-icon"><i class="fa-solid fa-bed"></i></div><h3 data-phoxta="s3Title">Linens & Bedding</h3><p data-phoxta="s3Desc">Comforters, duvets, sheets, and towels. Includes pressing.</p></div>
+  </div></div></section>
+  <section class="how" id="how"><div class="container"><p class="section-label" data-phoxta="hwLabel">How It Works</p><h2 class="section-title" data-phoxta="hwTitle">3 Simple Steps</h2>
+  <div class="how-grid">
+    <div class="how-item"><div class="how-num">1</div><h4 data-phoxta="h1Title">Schedule</h4><p data-phoxta="h1Desc">Book a pickup online or by phone. We come to your door.</p></div>
+    <div class="how-item"><div class="how-num">2</div><h4 data-phoxta="h2Title">We Clean</h4><p data-phoxta="h2Desc">Professional cleaning with premium, eco-friendly products.</p></div>
+    <div class="how-item"><div class="how-num">3</div><h4 data-phoxta="h3Title">Delivered</h4><p data-phoxta="h3Desc">Fresh, folded, and delivered back within 24 hours.</p></div>
+  </div></div></section>
+  <section class="cta-lau" id="cta"><h2 data-phoxta="ctaTitle">Reclaim Your Weekends</h2><p data-phoxta="ctaDesc">First order 20% off. Free pickup & delivery on orders over $30.</p><a href="#" class="btn-w" data-phoxta-link="ctaBtn"><i class="fa-solid fa-calendar-check"></i> Schedule Pickup</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">Fresh<span>Fold</span></div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#how" data-phoxta-link="fl2">How</a><a href="#cta" data-phoxta-link="fl3">Schedule</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 FreshFold Laundry Service. All rights reserved.</p></footer>
+</body>
+</html>

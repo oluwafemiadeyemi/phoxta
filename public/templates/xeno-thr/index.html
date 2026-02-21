@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Curtain Call — Theater Company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#12090e;--surface:#1c0f16;--card:#26141e;--accent:#be185d;--accent-l:#db2777;--gold:#d4a855;--text:#d8c8d0;--dim:#8a7080;--white:#fff;--border:#361e2c}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(18,9,14,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:26px;font-weight:600;font-family:'EB Garamond',serif;color:var(--gold);font-style:italic}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:12px;font-weight:400;color:var(--dim);letter-spacing:2px;text-transform:uppercase;transition:color .3s}.nav-links a:hover{color:var(--gold)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 22px;font-weight:500!important}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px;text-align:center}
+    .hero-inner{max-width:800px;margin:0 auto;width:100%}
+    .hero-sub{font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:5px;color:var(--gold);margin-bottom:16px}
+    .hero h1{font-size:56px;line-height:1.1;font-weight:600;font-family:'EB Garamond',serif;margin-bottom:18px;color:var(--white)}.hero h1 em{font-style:italic;color:var(--accent-l)}
+    .hero p{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto 32px;font-weight:300}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:all .3s}.btn-pri:hover{background:var(--accent-l);transform:translateY(-2px)}
+    section{padding:100px 60px}.container{max-width:1100px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:4px;color:var(--gold);margin-bottom:10px;text-align:center}
+    .section-title{font-size:38px;font-weight:600;font-family:'EB Garamond',serif;color:var(--white);margin-bottom:14px;text-align:center}
+    .shows{background:var(--surface)}.show-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+    .show-card{overflow:hidden;border:1px solid var(--border)}.show-card img{width:100%;height:260px;object-fit:cover}
+    .show-info{padding:24px}.show-card h3{font-size:20px;font-weight:600;font-family:'EB Garamond',serif;color:var(--white);margin-bottom:6px}.show-card p{font-size:12px;color:var(--dim);margin-bottom:8px}
+    .show-date{font-size:12px;color:var(--gold);font-weight:500}
+    .about{background:var(--bg)}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px;align-items:center}
+    .about-img img{width:100%;height:360px;object-fit:cover}
+    .about-text h3{font-size:28px;font-weight:600;font-family:'EB Garamond',serif;color:var(--white);margin-bottom:12px}.about-text p{font-size:14px;color:var(--dim);margin-bottom:16px}
+    .cta-thr{background:var(--accent);text-align:center}
+    .cta-thr h2{font-size:38px;font-weight:600;font-family:'EB Garamond',serif;color:var(--white);margin-bottom:12px}.cta-thr p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:28px}
+    .btn-w{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 32px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:all .3s}.btn-w:hover{transform:translateY(-2px)}
+    footer{background:var(--surface);padding:48px 60px;border-top:1px solid var(--border)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:22px;font-weight:600;font-family:'EB Garamond',serif;color:var(--gold);font-style:italic}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:12px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}.footer-links a:hover{color:var(--gold)}
+    .footer-copy{font-size:10px;color:rgba(255,255,255,.15);margin-top:20px;text-align:center}
+    @media(max-width:1024px){.show-grid{grid-template-columns:1fr 1fr}.about-grid{grid-template-columns:1fr}}
+    @media(max-width:768px){.nav{padding:14px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:100px 24px 60px}.hero h1{font-size:34px}.show-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:14px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">The Curtain Call</div><div class="nav-links"><a href="#shows" data-phoxta-link="navSh">Shows</a><a href="#about" data-phoxta-link="navAb">About</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Tickets</a></div></nav>
+  <section class="hero"><div class="hero-inner"><p class="hero-sub" data-phoxta="heroSub">Community Theater</p><h1 data-phoxta="heroTitle">Where Stories Come <em>Alive</em></h1><p data-phoxta="heroDesc">Award-winning productions, intimate venue, unforgettable performances. Bringing drama, comedy, and musical theater to your community since 1998.</p><a href="#cta" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-ticket"></i> Get Tickets</a></div></section>
+  <section class="shows" id="shows"><div class="container"><p class="section-label" data-phoxta="shLabel">Now Showing</p><h2 class="section-title" data-phoxta="shTitle">Current Season</h2>
+  <div class="show-grid">
+    <div class="show-card"><img src="https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Show" data-phoxta-image="sh1Img"/><div class="show-info"><h3 data-phoxta="sh1Title">A Midsummer Night</h3><p data-phoxta="sh1Desc">Shakespeare's beloved comedy — reimagined with a modern twist.</p><span class="show-date" data-phoxta="sh1Date">Mar 15 — Apr 20, 2025</span></div></div>
+    <div class="show-card"><img src="https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Show" data-phoxta-image="sh2Img"/><div class="show-info"><h3 data-phoxta="sh2Title">Into the Light</h3><p data-phoxta="sh2Desc">An original musical about hope, resilience, and the human spirit.</p><span class="show-date" data-phoxta="sh2Date">May 1 — Jun 8, 2025</span></div></div>
+    <div class="show-card"><img src="https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Show" data-phoxta-image="sh3Img"/><div class="show-info"><h3 data-phoxta="sh3Title">The Glass Room</h3><p data-phoxta="sh3Desc">A gripping drama that will keep you on the edge of your seat.</p><span class="show-date" data-phoxta="sh3Date">Jul 10 — Aug 17, 2025</span></div></div>
+  </div></div></section>
+  <section class="about" id="about"><div class="container"><p class="section-label" data-phoxta="abLabel">Our Story</p><h2 class="section-title" data-phoxta="abTitle">A Legacy of Performance</h2>
+  <div class="about-grid">
+    <div class="about-img"><img src="https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Theater" data-phoxta-image="abImg"/></div>
+    <div class="about-text"><h3 data-phoxta="abHead">25 Years of Magic</h3><p data-phoxta="abDesc1">Founded in 1998, The Curtain Call has produced over 200 shows, nurtured hundreds of local actors, and brought world-class drama to our community.</p><p data-phoxta="abDesc2">From Shakespeare to original works, our diverse seasons offer something for everyone. Join us as an audience member, volunteer, or performer.</p></div>
+  </div></div></section>
+  <section class="cta-thr" id="cta"><h2 data-phoxta="ctaTitle">Don't Miss the Show</h2><p data-phoxta="ctaDesc">Reserve your seats today. Student and group discounts available.</p><a href="#" class="btn-w" data-phoxta-link="ctaBtn"><i class="fa-solid fa-ticket"></i> Buy Tickets</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">The Curtain Call</div><div class="footer-links"><a href="#shows" data-phoxta-link="fl1">Shows</a><a href="#about" data-phoxta-link="fl2">About</a><a href="#cta" data-phoxta-link="fl3">Tickets</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 The Curtain Call Theater Company. All rights reserved.</p></footer>
+</body>
+</html>

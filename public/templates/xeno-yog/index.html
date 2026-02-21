@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity — Yoga & Wellness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fdf8f3;--surface:#f5ede3;--card:#fff;--accent:#7c6853;--accent-l:#9a8570;--sage:#8b9e7e;--text:#3d3228;--dim:#8c7e6e;--white:#fff;--border:#e8ddd0}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(253,248,243,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--accent)}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 28px;border-radius:100px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:var(--bg);padding:140px 60px 80px}.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+    .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--sage);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;line-height:1.1;font-weight:600;margin-bottom:20px}.hero h1 span{color:var(--sage)}
+    .hero p{font-size:16px;color:var(--dim);max-width:420px;margin-bottom:28px}
+    .btn-warm{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-warm:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:540px;object-fit:cover;border-radius:200px 200px 20px 20px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--sage);margin-bottom:10px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .classes{background:var(--surface)}.classes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .class-card{background:var(--card);border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:all .3s}.class-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.04);transform:translateY(-4px)}
+    .class-card img{width:100%;height:260px;object-fit:cover}.class-body{padding:24px}
+    .class-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:100px;background:rgba(139,158,126,.1);color:var(--sage);margin-bottom:10px}
+    .class-card h3{font-size:20px;font-weight:600;font-family:'Cormorant Garamond',serif;margin-bottom:6px}.class-card p{font-size:13px;color:var(--dim)}
+    .benefits{background:var(--bg)}.benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:60px;text-align:center}
+    .ben-card{padding:32px 20px}.ben-icon{width:56px;height:56px;border-radius:50%;background:var(--surface);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px}
+    .ben-card h3{font-size:16px;font-weight:600;margin-bottom:6px}.ben-card p{font-size:13px;color:var(--dim)}
+    .schedule{background:var(--surface)}.sched-grid{margin-top:60px}
+    .sched-row{display:flex;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);gap:32px}.sched-row:first-child{border-top:1px solid var(--border)}
+    .sched-time{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;min-width:100px;color:var(--accent)}
+    .sched-info{flex:1}.sched-info h4{font-size:16px;font-weight:600;margin-bottom:2px}.sched-info p{font-size:13px;color:var(--dim)}
+    .sched-badge{font-size:11px;font-weight:600;padding:6px 16px;border-radius:100px;border:1px solid var(--sage);color:var(--sage);white-space:nowrap}
+    .cta-section{background:var(--accent);text-align:center}.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--white);margin-bottom:12px}.cta-section p{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 32px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#2a2018;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--surface)}.footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--surface)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.classes-grid{grid-template-columns:repeat(2,1fr)}.benefits-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:38px}.classes-grid,.benefits-grid{grid-template-columns:1fr}.sched-row{flex-direction:column;align-items:flex-start;gap:8px}.section-title{font-size:30px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">Serenity</div><div class="nav-links"><a href="#classes" data-phoxta-link="navCls">Classes</a><a href="#schedule" data-phoxta-link="navSch">Schedule</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Join Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-tag" data-phoxta="heroTag"><i class="fa-solid fa-spa"></i> Mind · Body · Soul</div><h1 data-phoxta="heroTitle">Find Your Inner <span>Balance</span></h1><p data-phoxta="heroDesc">Transform your life through yoga, meditation and holistic wellness practices in a peaceful, welcoming space.</p><a href="#classes" class="btn-warm" data-phoxta-link="heroCta"><i class="fa-solid fa-om"></i> Explore Classes</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Yoga" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="classes" id="classes"><div class="container"><p class="section-label" data-phoxta="clsLabel">Our Classes</p><h2 class="section-title" data-phoxta="clsTitle">Yoga & Wellness Programs</h2><div class="classes-grid">
+    <div class="class-card"><img src="https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Yoga" data-phoxta-image="c1Img"/><div class="class-body"><span class="class-tag" data-phoxta="c1Tag">Beginner</span><h3 data-phoxta="c1Title">Hatha Yoga</h3><p data-phoxta="c1Desc">Gentle, foundational practice perfect for all levels.</p></div></div>
+    <div class="class-card"><img src="https://images.pexels.com/photos/3822583/pexels-photo-3822583.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Yoga" data-phoxta-image="c2Img"/><div class="class-body"><span class="class-tag" data-phoxta="c2Tag">Popular</span><h3 data-phoxta="c2Title">Vinyasa Flow</h3><p data-phoxta="c2Desc">Dynamic, breath-synchronized movement for strength and flexibility.</p></div></div>
+    <div class="class-card"><img src="https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Meditation" data-phoxta-image="c3Img"/><div class="class-body"><span class="class-tag" data-phoxta="c3Tag">Mindfulness</span><h3 data-phoxta="c3Title">Guided Meditation</h3><p data-phoxta="c3Desc">Cultivate inner peace and mental clarity through guided sessions.</p></div></div>
+  </div></div></section>
+  <section class="benefits"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="benLabel">Why Practice</p><h2 class="section-title" data-phoxta="benTitle">Benefits of Yoga</h2><div class="benefits-grid">
+    <div class="ben-card"><div class="ben-icon"><i class="fa-solid fa-heart-pulse"></i></div><h3 data-phoxta="b1Title">Better Health</h3><p data-phoxta="b1Desc">Improved cardiovascular health and immune function.</p></div>
+    <div class="ben-card"><div class="ben-icon"><i class="fa-solid fa-brain"></i></div><h3 data-phoxta="b2Title">Mental Clarity</h3><p data-phoxta="b2Desc">Reduced stress, anxiety and enhanced focus.</p></div>
+    <div class="ben-card"><div class="ben-icon"><i class="fa-solid fa-person-walking"></i></div><h3 data-phoxta="b3Title">Flexibility</h3><p data-phoxta="b3Desc">Increased range of motion and injury prevention.</p></div>
+    <div class="ben-card"><div class="ben-icon"><i class="fa-solid fa-moon"></i></div><h3 data-phoxta="b4Title">Better Sleep</h3><p data-phoxta="b4Desc">Deeper, more restorative sleep patterns.</p></div>
+  </div></div></section>
+  <section class="schedule" id="schedule"><div class="container"><p class="section-label" data-phoxta="schLabel">Weekly Schedule</p><h2 class="section-title" data-phoxta="schTitle">Class Times</h2><div class="sched-grid">
+    <div class="sched-row"><div class="sched-time" data-phoxta="t1Time">6:00 AM</div><div class="sched-info"><h4 data-phoxta="t1Title">Sunrise Flow</h4><p data-phoxta="t1Desc">Mon, Wed, Fri · Studio A</p></div><span class="sched-badge" data-phoxta="t1Badge">All Levels</span></div>
+    <div class="sched-row"><div class="sched-time" data-phoxta="t2Time">10:00 AM</div><div class="sched-info"><h4 data-phoxta="t2Title">Hatha Basics</h4><p data-phoxta="t2Desc">Daily · Studio B</p></div><span class="sched-badge" data-phoxta="t2Badge">Beginner</span></div>
+    <div class="sched-row"><div class="sched-time" data-phoxta="t3Time">5:30 PM</div><div class="sched-info"><h4 data-phoxta="t3Title">Power Vinyasa</h4><p data-phoxta="t3Desc">Tue, Thu · Studio A</p></div><span class="sched-badge" data-phoxta="t3Badge">Advanced</span></div>
+    <div class="sched-row"><div class="sched-time" data-phoxta="t4Time">7:00 PM</div><div class="sched-info"><h4 data-phoxta="t4Title">Guided Meditation</h4><p data-phoxta="t4Desc">Mon–Sat · Zen Room</p></div><span class="sched-badge" data-phoxta="t4Badge">All Levels</span></div>
+  </div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Begin Your Journey</h2><p data-phoxta="ctaDesc">First class is free. No experience needed — just bring an open mind.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-spa"></i> Start Free Trial</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">Serenity</div><div class="footer-links"><a href="#classes" data-phoxta-link="fl1">Classes</a><a href="#schedule" data-phoxta-link="fl2">Schedule</a><a href="#cta" data-phoxta-link="fl3">Join</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Serenity Yoga. All rights reserved.</p></footer>
+</body>
+</html>

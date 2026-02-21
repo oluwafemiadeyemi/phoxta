@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HarvestRoots — Organic Farm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#faf7f0;--surface:#f0ebe0;--card:#fff;--accent:#65712b;--accent-l:#7c8a34;--brown:#8b6f47;--text:#2d3a1a;--dim:#6b7455;--white:#fff;--border:#d4cbb7}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,240,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:22px;font-weight:400;font-family:'DM Serif Display',serif;color:var(--accent);display:flex;align-items:center;gap:8px}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,#faf7f0,#f0ebe0);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:48px;line-height:1.12;font-weight:400;font-family:'DM Serif Display',serif;margin-bottom:18px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-pri:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:440px;object-fit:cover;border-radius:20px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:38px;font-weight:400;font-family:'DM Serif Display',serif;margin-bottom:12px}
+    .produce{background:var(--bg)}.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px}
+    .prod-card{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .3s}.prod-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.04)}
+    .prod-emoji{font-size:40px;margin-bottom:10px}.prod-card h3{font-size:15px;font-weight:600;margin-bottom:4px}.prod-card p{font-size:12px;color:var(--dim)}
+    .about-farm{background:var(--surface)}.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .about-inner img{width:100%;height:400px;object-fit:cover;border-radius:16px}
+    .about-inner h3{font-size:32px;font-family:'DM Serif Display',serif;margin-bottom:12px}.about-inner p{font-size:14px;color:var(--dim);margin-bottom:20px}
+    .cta-agr{background:var(--accent);text-align:center}
+    .cta-agr h2{font-size:38px;font-weight:400;font-family:'DM Serif Display',serif;color:var(--white);margin-bottom:12px}.cta-agr p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#2d3a1a;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:18px;font-weight:400;font-family:'DM Serif Display',serif;color:var(--white)}.footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--accent-l)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner,.about-inner{grid-template-columns:1fr}.hero-img{display:none}.about-inner img{display:none}.prod-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:34px}.prod-grid{grid-template-columns:repeat(2,1fr)}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-seedling"></i> HarvestRoots</div><div class="nav-links"><a href="#produce" data-phoxta-link="navPr">Produce</a><a href="#about" data-phoxta-link="navAb">Our Farm</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Shop Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">From Our Farm to <span>Your Table</span></h1><p data-phoxta="heroDesc">Certified organic produce grown with love. Supporting sustainable agriculture and local communities since 1998.</p><a href="#produce" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-basket-shopping"></i> Shop Produce</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/2132250/pexels-photo-2132250.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Farm" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="produce" id="produce"><div class="container"><p class="section-label" data-phoxta="prLabel">Seasonal Picks</p><h2 class="section-title" data-phoxta="prTitle">Fresh This Week</h2><div class="prod-grid">
+    <div class="prod-card"><div class="prod-emoji" data-phoxta="pr1E">🥬</div><h3 data-phoxta="pr1Title">Organic Kale</h3><p data-phoxta="pr1Desc">Crisp, nutrient-dense bunches</p></div>
+    <div class="prod-card"><div class="prod-emoji" data-phoxta="pr2E">🍅</div><h3 data-phoxta="pr2Title">Heirloom Tomatoes</h3><p data-phoxta="pr2Desc">Vine-ripened, bursting with flavor</p></div>
+    <div class="prod-card"><div class="prod-emoji" data-phoxta="pr3E">🫐</div><h3 data-phoxta="pr3Title">Wild Blueberries</h3><p data-phoxta="pr3Desc">Hand-picked, perfectly sweet</p></div>
+    <div class="prod-card"><div class="prod-emoji" data-phoxta="pr4E">🥕</div><h3 data-phoxta="pr4Title">Rainbow Carrots</h3><p data-phoxta="pr4Desc">Multi-colored, farm fresh</p></div>
+  </div></div></section>
+  <section class="about-farm" id="about"><div class="container"><div class="about-inner"><img src="https://images.pexels.com/photos/2132250/pexels-photo-2132250.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Farm" data-phoxta-image="abImg"/><div><p class="section-label" data-phoxta="abLabel">Our Story</p><h3 data-phoxta="abTitle">Three Generations of Farming</h3><p data-phoxta="abDesc">What started as a small family plot has grown into 200 acres of certified organic farmland. We believe in regenerative agriculture, biodiversity and putting nutrition back into the soil.</p><a href="#cta" class="btn-pri" data-phoxta-link="abCta">Learn More</a></div></div></div></section>
+  <section class="cta-agr" id="cta"><h2 data-phoxta="ctaTitle">Join Our Farm Box Program</h2><p data-phoxta="ctaDesc">Get a curated box of seasonal produce delivered weekly. Cancel anytime.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-box-open"></i> Subscribe Today</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">🌾 HarvestRoots</div><div class="footer-links"><a href="#produce" data-phoxta-link="fl1">Produce</a><a href="#about" data-phoxta-link="fl2">Farm</a><a href="#cta" data-phoxta-link="fl3">Subscribe</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 HarvestRoots Organic Farm. All rights reserved.</p></footer>
+</body>
+</html>

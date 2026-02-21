@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EverAfter — Wedding Venue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fdf8f4;--surface:#fff;--card:#faf3ed;--accent:#b45309;--accent-l:#d97706;--blush:#f5e1d0;--text:#3b2615;--dim:#8d7b6a;--white:#fff;--border:#e8d5c4}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Montserrat',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(253,248,244,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:28px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--accent);font-style:italic}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:12px;font-weight:500;color:var(--dim);transition:color .3s;letter-spacing:2px;text-transform:uppercase}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;letter-spacing:2px!important}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;text-align:center;width:100%}
+    .hero-sub{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:4px;color:var(--accent);margin-bottom:16px}
+    .hero h1{font-size:60px;line-height:1.1;font-weight:600;font-family:'Cormorant Garamond',serif;margin-bottom:16px;color:var(--text)}.hero h1 em{font-style:italic;color:var(--accent)}
+    .hero p{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto 32px}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;transition:all .3s}.btn-pri:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto}
+    .hero-gallery img{width:100%;height:300px;object-fit:cover}
+    section{padding:100px 60px}.container{max-width:1000px;margin:0 auto;text-align:center}
+    .section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:4px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:40px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--text);margin-bottom:14px}
+    .section-sub{font-size:14px;color:var(--dim);max-width:480px;margin:0 auto}
+    .venues{background:var(--surface)}.ven-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+    .ven-card{text-align:center}.ven-card img{width:100%;height:240px;object-fit:cover;margin-bottom:14px}
+    .ven-card h3{font-size:18px;font-weight:600;font-family:'Cormorant Garamond',serif;margin-bottom:4px}.ven-card p{font-size:12px;color:var(--dim)}
+    .features{background:var(--bg)}.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
+    .feat-item{text-align:center;padding:24px}.feat-icon{font-size:28px;color:var(--accent);margin-bottom:10px}
+    .feat-item h4{font-size:14px;font-weight:600;margin-bottom:4px}.feat-item p{font-size:11px;color:var(--dim)}
+    .cta-wd{background:var(--blush);text-align:center;padding:80px 40px}
+    .cta-wd h2{font-size:40px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--text);margin-bottom:12px}.cta-wd p{font-size:13px;color:var(--dim);margin-bottom:28px}
+    footer{background:var(--surface);padding:48px 60px;border-top:1px solid var(--border)}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:24px;font-weight:600;font-family:'Cormorant Garamond',serif;color:var(--accent);font-style:italic}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:10px;color:var(--dim);margin-top:20px;text-align:center}
+    @media(max-width:1024px){.hero-gallery{grid-template-columns:1fr 1fr}.ven-grid{grid-template-columns:1fr 1fr}.feat-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:14px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:100px 24px 60px}.hero h1{font-size:36px}.hero-gallery,.ven-grid,.feat-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:14px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">EverAfter</div><div class="nav-links"><a href="#venues" data-phoxta-link="navVn">Venues</a><a href="#features" data-phoxta-link="navFt">Details</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Inquire</a></div></nav>
+  <section class="hero"><div class="hero-inner"><p class="hero-sub" data-phoxta="heroSub">Wedding & Events Venue</p><h1 data-phoxta="heroTitle">Where Love Stories <em>Begin</em></h1><p data-phoxta="heroDesc">An enchanting estate with breathtaking gardens, elegant ballrooms, and bespoke wedding packages for your perfect day.</p><a href="#cta" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-heart"></i> Schedule a Tour</a>
+  <div class="hero-gallery">
+    <img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wedding" data-phoxta-image="hg1"/>
+    <img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wedding" data-phoxta-image="hg2"/>
+    <img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wedding" data-phoxta-image="hg3"/>
+  </div></div></section>
+  <section class="venues" id="venues"><div class="container"><p class="section-label" data-phoxta="vnLabel">Our Spaces</p><h2 class="section-title" data-phoxta="vnTitle">Stunning Venues</h2><p class="section-sub" data-phoxta="vnSub">Three unique settings for ceremonies and receptions of every size.</p>
+  <div class="ven-grid">
+    <div class="ven-card"><img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Venue" data-phoxta-image="v1Img"/><h3 data-phoxta="v1Name">The Grand Ballroom</h3><p data-phoxta="v1Desc">Seats up to 300. Crystal chandeliers & marble floors.</p></div>
+    <div class="ven-card"><img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Venue" data-phoxta-image="v2Img"/><h3 data-phoxta="v2Name">The Garden Terrace</h3><p data-phoxta="v2Desc">Open-air venue with a rose garden backdrop. 150 guests.</p></div>
+    <div class="ven-card"><img src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Venue" data-phoxta-image="v3Img"/><h3 data-phoxta="v3Name">The Chapel</h3><p data-phoxta="v3Desc">Intimate stone chapel with stained glass. Up to 80 guests.</p></div>
+  </div></div></section>
+  <section class="features" id="features"><div class="container"><p class="section-label" data-phoxta="ftLabel">Included</p><h2 class="section-title" data-phoxta="ftTitle">Every Detail Covered</h2>
+  <div class="feat-grid">
+    <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-utensils"></i></div><h4 data-phoxta="f1Title">Gourmet Catering</h4><p data-phoxta="f1Desc">In-house chef with custom menus</p></div>
+    <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-camera"></i></div><h4 data-phoxta="f2Title">Photo Packages</h4><p data-phoxta="f2Desc">Partnered with top photographers</p></div>
+    <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-music"></i></div><h4 data-phoxta="f3Title">Live Music</h4><p data-phoxta="f3Desc">DJ or live band options available</p></div>
+    <div class="feat-item"><div class="feat-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h4 data-phoxta="f4Title">Event Planner</h4><p data-phoxta="f4Desc">Dedicated coordinator included</p></div>
+  </div></div></section>
+  <section class="cta-wd" id="cta"><h2 data-phoxta="ctaTitle">Begin Your Forever</h2><p data-phoxta="ctaDesc">Schedule a private tour and let us bring your wedding vision to life. Limited dates available for 2025.</p><a href="#" class="btn-pri" data-phoxta-link="ctaBtn"><i class="fa-solid fa-envelope"></i> Inquire Now</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">EverAfter</div><div class="footer-links"><a href="#venues" data-phoxta-link="fl1">Venues</a><a href="#features" data-phoxta-link="fl2">Details</a><a href="#cta" data-phoxta-link="fl3">Inquire</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 EverAfter Estate. All rights reserved.</p></footer>
+</body>
+</html>

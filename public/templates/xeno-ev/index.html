@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enchanted Events — Weddings & Celebrations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #2d2620;
+      --secondary: #faf8f5;
+      --accent: #c9956b;
+      --accent-light: #ddb892;
+      --rose: #be7e6e;
+      --text: #3d3530;
+      --text-light: #8a7e76;
+      --white: #ffffff;
+      --border: #e8e2dc;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--text); background: var(--white); line-height: 1.8; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--primary); }
+    .nav-logo span { color: var(--accent); font-style: italic; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: 10px 28px; border-radius: 100px; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: rgba(45,38,32,0.5); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 2; padding: 60px; }
+    .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 6px; color: var(--accent-light); margin-bottom: 20px; font-weight: 500; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1.1; font-weight: 300; color: var(--white); margin-bottom: 24px; }
+    .hero h1 em { font-style: italic; color: var(--accent-light); }
+    .hero p { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 40px; font-weight: 300; }
+    .btn-warm { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--white); padding: 16px 40px; border-radius: 100px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; }
+    .btn-warm:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-outline-w { display: inline-flex; align-items: center; gap: 10px; border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); padding: 15px 40px; border-radius: 100px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; }
+    .btn-outline-w:hover { border-color: var(--accent); color: var(--accent); }
+
+    section { padding: 100px 60px; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 5px; color: var(--accent); margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 400; color: var(--primary); margin-bottom: 16px; line-height: 1.2; }
+    .section-desc { font-size: 15px; color: var(--text-light); max-width: 520px; font-weight: 300; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .services { background: var(--secondary); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
+    .svc-card { background: var(--white); border-radius: 20px; overflow: hidden; text-align: center; transition: all 0.3s; }
+    .svc-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.06); transform: translateY(-4px); }
+    .svc-card img { width: 100%; height: 260px; object-fit: cover; }
+    .svc-card-body { padding: 32px 24px; }
+    .svc-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; margin-bottom: 12px; }
+    .svc-card p { font-size: 14px; color: var(--text-light); font-weight: 300; }
+
+    .gallery { background: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 60px; }
+    .gallery-grid img { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; transition: all 0.3s; }
+    .gallery-grid img:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+
+    .testimonials { background: var(--secondary); }
+    .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 60px; }
+    .test-card { background: var(--white); border-radius: 20px; padding: 40px; position: relative; }
+    .test-card::before { content: '\201C'; position: absolute; top: 20px; left: 24px; font-family: 'Cormorant Garamond', serif; font-size: 80px; color: var(--accent); opacity: 0.2; line-height: 1; }
+    .test-card .quote { font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+    .test-card .author { font-weight: 600; color: var(--primary); font-size: 14px; }
+    .test-card .role { font-size: 12px; color: var(--accent); }
+
+    .cta-section { background: var(--primary); text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; opacity: 0.15; pointer-events: none; }
+    .cta-section > * { position: relative; z-index: 2; }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 400; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 36px; font-weight: 300; }
+
+    footer { background: #1e1a16; padding: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); }
+    .footer-logo span { color: var(--accent-light); font-style: italic; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent-light); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.15); margin-top: 32px; text-align: center; }
+
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 52px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 60px 24px; }
+      .hero h1 { font-size: 36px; }
+      .services-grid, .test-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 32px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo" data-phoxta="navLogo">Enchanted <span>Events</span></div>
+    <div class="nav-links">
+      <a href="#services" data-phoxta-link="navServices">Services</a>
+      <a href="#gallery" data-phoxta-link="navGallery">Gallery</a>
+      <a href="#testimonials" data-phoxta-link="navTest">Testimonials</a>
+      <a href="#contact" class="nav-cta" data-phoxta-link="navCta">Plan Your Event</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label" data-phoxta="heroLabel">Weddings & Celebrations</p>
+      <h1 data-phoxta="heroTitle">Creating <em>Unforgettable</em> Moments</h1>
+      <p data-phoxta="heroDesc">We design and plan extraordinary events that reflect your unique story. Every detail, perfectly curated.</p>
+      <div style="display:flex;gap:16px;justify-content:center;">
+        <a href="#contact" class="btn-warm" data-phoxta-link="heroCta1">Start Planning</a>
+        <a href="#gallery" class="btn-outline-w" data-phoxta-link="heroCta2">View Gallery</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container" style="text-align:center;">
+      <p class="section-label" data-phoxta="svcLabel">Our Services</p>
+      <h2 class="section-title" data-phoxta="svcTitle">Every Detail, Thoughtfully Designed</h2>
+      <p class="section-desc" style="margin:0 auto;" data-phoxta="svcDesc">From intimate ceremonies to grand celebrations, we create bespoke experiences tailored to you.</p>
+      <div class="services-grid">
+        <div class="svc-card">
+          <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Weddings" data-phoxta-image="svc1Img" />
+          <div class="svc-card-body">
+            <h3 data-phoxta="svc1Title">Weddings</h3>
+            <p data-phoxta="svc1Desc">Full-service wedding planning from venue selection to the last dance. We handle every element of your perfect day.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img src="https://images.pexels.com/photos/587741/pexels-photo-587741.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corporate" data-phoxta-image="svc2Img" />
+          <div class="svc-card-body">
+            <h3 data-phoxta="svc2Title">Corporate Events</h3>
+            <p data-phoxta="svc2Desc">Sophisticated corporate events, product launches and galas that leave lasting impressions on your guests.</p>
+          </div>
+        </div>
+        <div class="svc-card">
+          <img src="https://images.pexels.com/photos/1114425/pexels-photo-1114425.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Private" data-phoxta-image="svc3Img" />
+          <div class="svc-card-body">
+            <h3 data-phoxta="svc3Title">Private Celebrations</h3>
+            <p data-phoxta="svc3Desc">Birthdays, anniversaries and milestones celebrated with intimacy, elegance and joy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="container" style="text-align:center;">
+      <p class="section-label" data-phoxta="galleryLabel">Portfolio</p>
+      <h2 class="section-title" data-phoxta="galleryTitle">Moments We've Created</h2>
+      <div class="gallery-grid">
+        <img src="https://images.pexels.com/photos/1045541/pexels-photo-1045541.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event" data-phoxta-image="gal1" />
+        <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event" data-phoxta-image="gal2" />
+        <img src="https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event" data-phoxta-image="gal3" />
+        <img src="https://images.pexels.com/photos/2291462/pexels-photo-2291462.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event" data-phoxta-image="gal4" />
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div style="text-align:center;">
+        <p class="section-label" data-phoxta="testLabel">Kind Words</p>
+        <h2 class="section-title" data-phoxta="testTitle">From Our Happy Couples</h2>
+      </div>
+      <div class="test-grid">
+        <div class="test-card">
+          <p class="quote" data-phoxta="test1Quote">"Our wedding was beyond anything we could have imagined. Every flower, every candle, every detail was absolute perfection. Thank you for making our dream come true."</p>
+          <p class="author" data-phoxta="test1Author">Sarah & James Thompson</p>
+          <p class="role" data-phoxta="test1Role">Summer Wedding 2024</p>
+        </div>
+        <div class="test-card">
+          <p class="quote" data-phoxta="test2Quote">"They turned our corporate gala into an unforgettable evening. The attention to detail was remarkable — our clients are still talking about it months later."</p>
+          <p class="author" data-phoxta="test2Author">Michael Collins</p>
+          <p class="role" data-phoxta="test2Role">CEO, Luxe Holdings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <h2 data-phoxta="ctaTitle">Let's Create Something Beautiful</h2>
+    <p data-phoxta="ctaDesc">Ready to start planning your dream event? We'd love to hear your story.</p>
+    <a href="#" class="btn-warm" data-phoxta-link="ctaBtn"><i class="fa-solid fa-heart"></i> Get In Touch</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo" data-phoxta="footerLogo">Enchanted <span>Events</span></div>
+      <div class="footer-links">
+        <a href="#services" data-phoxta-link="fLink1">Services</a>
+        <a href="#gallery" data-phoxta-link="fLink2">Gallery</a>
+        <a href="#testimonials" data-phoxta-link="fLink3">Reviews</a>
+        <a href="#contact" data-phoxta-link="fLink4">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Enchanted Events. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

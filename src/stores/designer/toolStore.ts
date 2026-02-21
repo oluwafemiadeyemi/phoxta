@@ -1,85 +1,120 @@
-// ===========================================================================
-// Designer – Tool store (global active-tool state)
-// ===========================================================================
-import { create } from 'zustand'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Tool Store  (active tool, shape kind, draw options)
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-export type ToolId =
-  | 'move'
-  | 'text'
-  | 'rectangle'
-  | 'circle'
-  | 'line'
-  | 'frame'
-  | 'crop'
-  | 'eyedropper'
-  | 'hand'
-  | 'zoom'
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import type { ToolMode, ShapeKind } from "@/types/designer";
 
 export interface ToolState {
-  activeTool: ToolId
-  previousTool: ToolId
-  setActiveTool: (tool: ToolId) => void
-  temporarilyActivateTool: (tool: ToolId) => void
-  restorePreviousTool: () => void
+  activeTool: ToolMode;
+  shapeKind: ShapeKind;
+
+  // Draw / brush options
+  brushColor: string;
+  brushWidth: number;
+
+  // Fill & stroke for new objects
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+
+  // Font defaults for text tool
+  fontFamily: string;
+  fontSize: number;
+  fontWeight: string;
+  fontColor: string;
 }
 
-// ---------------------------------------------------------------------------
-// Keyboard shortcut map (letter → tool)
-// ---------------------------------------------------------------------------
-export const TOOL_SHORTCUTS: Record<string, ToolId> = {
-  v: 'move',
-  t: 'text',
-  r: 'rectangle',
-  o: 'circle',
-  l: 'line',
-  f: 'frame',
-  c: 'crop',
-  i: 'eyedropper',
-  h: 'hand',
-  z: 'zoom',
+export interface ToolActions {
+  setTool: (tool: ToolMode) => void;
+  setShapeKind: (kind: ShapeKind) => void;
+  setBrushColor: (color: string) => void;
+  setBrushWidth: (width: number) => void;
+  setFillColor: (color: string) => void;
+  setStrokeColor: (color: string) => void;
+  setStrokeWidth: (width: number) => void;
+  setFontFamily: (family: string) => void;
+  setFontSize: (size: number) => void;
+  setFontWeight: (weight: string) => void;
+  setFontColor: (color: string) => void;
+  resetTool: () => void;
 }
 
-// ---------------------------------------------------------------------------
-// Cursor per tool
-// ---------------------------------------------------------------------------
-export const TOOL_CURSORS: Record<ToolId, string> = {
-  move: 'default',
-  text: 'text',
-  rectangle: 'crosshair',
-  circle: 'crosshair',
-  line: 'crosshair',
-  frame: 'crosshair',
-  crop: 'crosshair',
-  eyedropper: 'crosshair',
-  hand: 'grab',
-  zoom: 'zoom-in',
-}
+const initialState: ToolState = {
+  activeTool: "select",
+  shapeKind: "rectangle",
+  brushColor: "#000000",
+  brushWidth: 4,
+  fillColor: "#4f46e5",
+  strokeColor: "#000000",
+  strokeWidth: 0,
+  fontFamily: "Inter",
+  fontSize: 24,
+  fontWeight: "400",
+  fontColor: "#000000",
+};
 
-// ---------------------------------------------------------------------------
-// Store
-// ---------------------------------------------------------------------------
-export const useToolStore = create<ToolState>((set) => ({
-  activeTool: 'move',
-  previousTool: 'move',
+export const useToolStore = create<ToolState & ToolActions>()(
+  immer((set) => ({
+    ...initialState,
 
-  setActiveTool: (tool) =>
-    set((s) => ({
-      previousTool: s.activeTool,
-      activeTool: tool,
-    })),
+    setTool: (tool) =>
+      set((s) => {
+        s.activeTool = tool;
+      }),
 
-  temporarilyActivateTool: (tool) =>
-    set((s) => ({
-      previousTool: s.activeTool,
-      activeTool: tool,
-    })),
+    setShapeKind: (kind) =>
+      set((s) => {
+        s.shapeKind = kind;
+      }),
 
-  restorePreviousTool: () =>
-    set((s) => ({
-      activeTool: s.previousTool,
-      previousTool: s.previousTool,
-    })),
-}))
+    setBrushColor: (color) =>
+      set((s) => {
+        s.brushColor = color;
+      }),
+
+    setBrushWidth: (width) =>
+      set((s) => {
+        s.brushWidth = width;
+      }),
+
+    setFillColor: (color) =>
+      set((s) => {
+        s.fillColor = color;
+      }),
+
+    setStrokeColor: (color) =>
+      set((s) => {
+        s.strokeColor = color;
+      }),
+
+    setStrokeWidth: (width) =>
+      set((s) => {
+        s.strokeWidth = width;
+      }),
+
+    setFontFamily: (family) =>
+      set((s) => {
+        s.fontFamily = family;
+      }),
+
+    setFontSize: (size) =>
+      set((s) => {
+        s.fontSize = size;
+      }),
+
+    setFontWeight: (weight) =>
+      set((s) => {
+        s.fontWeight = weight;
+      }),
+
+    setFontColor: (color) =>
+      set((s) => {
+        s.fontColor = color;
+      }),
+
+    resetTool: () => set(() => ({ ...initialState })),
+  })),
+);

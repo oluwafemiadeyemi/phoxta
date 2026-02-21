@@ -1,348 +1,198 @@
-'use client'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Top Bar
+   Provides: project name, undo/redo, zoom, save, export, preview
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ===========================================================================
-// TopBar — file menu, undo/redo, project name, save status, export, share
-// Uses: shadcn Button, Input, DropdownMenu, Tooltip, Badge
-// ===========================================================================
-import { useState } from 'react'
-import { useDocumentStore } from '@/stores/designer/documentStore'
-import { useUIStore } from '@/stores/designer/uiStore'
-import type { ExportFormat } from '@/types/designer'
+import { useCallback } from "react";
 import {
-  exportPageToDataURL,
-  exportPageToSVG,
-  downloadDataUrl as downloadDataUrlUtil,
-  downloadBlob as downloadBlobUtil,
-} from '@/lib/designer/exportPage'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+  Undo2,
+  Redo2,
+  ZoomIn,
+  ZoomOut,
+  Download,
+  Save,
+  Eye,
+  Maximize2,
+  Loader2,
+  Check,
+  ArrowLeft,
+} from "lucide-react";
+import { Button } from "@crm/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import {
-  ArrowLeft,
-  Undo2,
-  Redo2,
-  Save,
-  Download,
-  Share2,
-  FileText,
-  FileImage,
-  Copy,
-  Table,
-  History,
-  ChevronDown,
-  PanelRight,
-  Sparkles,
-  Menu,
-} from 'lucide-react'
-import { useIsMobile } from './useIsMobile'
+  TooltipProvider,
+} from "@crm/components/ui/tooltip";
+import { useDocumentStore } from "@/stores/designer/documentStore";
+import { useUIStore } from "@/stores/designer/uiStore";
+import { FABRIC_CUSTOM_PROPS } from "@/types/designer";
 
 interface TopBarProps {
-  projectId: string
+  onSave?: () => void;
+  onBack?: () => void;
 }
 
-export default function TopBar({ projectId }: TopBarProps) {
-  const {
-    project, setProject, undoStack, redoStack, undo, redo,
-    isDirty, isSaving, lastSavedAt, canvas, pages, currentPageId,
-  } = useDocumentStore()
-  const { setExportModalOpen, setShareModalOpen, setCsvModalOpen, setAiDesignModalOpen, setLeftRailTab, rightPanelOpen, setRightPanelOpen } = useUIStore()
-  const isMobile = useIsMobile()
+export default function TopBar({ onSave, onBack }: TopBarProps) {
+  const project = useDocumentStore((s) => s.project);
+  const canvas = useDocumentStore((s) => s.canvas);
+  const isDirty = useDocumentStore((s) => s.isDirty);
+  const isSaving = useDocumentStore((s) => s.isSaving);
+  const undoStack = useDocumentStore((s) => s.undoStack);
+  const redoStack = useDocumentStore((s) => s.redoStack);
+  const undo = useDocumentStore((s) => s.undo);
+  const redo = useDocumentStore((s) => s.redo);
 
-  const handleNameBlur = async (newName: string) => {
-    const trimmed = newName.trim()
-    if (!trimmed || !project || trimmed === project.name) return
-    setProject({ ...project, name: trimmed })
-    await fetch(`/api/designer/${projectId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: trimmed }),
-    })
-  }
+  const zoom = useUIStore((s) => s.zoom);
+  const zoomIn = useUIStore((s) => s.zoomIn);
+  const zoomOut = useUIStore((s) => s.zoomOut);
+  const zoomToFit = useUIStore((s) => s.zoomToFit);
+  const togglePreview = useUIStore((s) => s.togglePreview);
+  const setExportModalOpen = useUIStore((s) => s.setExportModalOpen);
 
-  const handleSave = async () => {
-    const save = (window as any).__designerSave
-    if (typeof save === 'function') await save()
-  }
-
-  const handleDuplicate = async () => {
-    if (!project) return
-    try {
-      const res = await fetch('/api/designer/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `${project.name} (Copy)`,
-          width: project.width,
-          height: project.height,
-          template_source_id: project.id,
-        }),
-      })
-      if (res.ok) {
-        const data = await res.json()
-        window.open(`/app/designer/${data.id}`, '_blank')
-      }
-    } catch { /* silent */ }
-  }
-
-  const handleExport = async (format: ExportFormat) => {
-    if (!canvas) return
-
-    const dw = project?.width ?? 1080
-    const dh = project?.height ?? 1080
-    const name = project?.name || 'design'
-
-    if (format === 'pdf') {
-      const { default: jsPDF } = await import('jspdf')
-      const pngData = exportPageToDataURL(canvas, {
-        designWidth: dw, designHeight: dh, format: 'png', multiplier: 2,
-      })
-      const orientation = dw > dh ? 'landscape' : 'portrait'
-      const pdf = new jsPDF({ orientation, unit: 'px', format: [dw, dh] })
-      pdf.addImage(pngData, 'PNG', 0, 0, dw, dh)
-      const dataUrl = pdf.output('datauristring')
-      downloadDataUrlUtil(dataUrl, `${name}.pdf`)
-      return
+  const handleUndo = useCallback(() => {
+    const json = undo();
+    if (json && canvas) {
+      canvas.loadFromJSON(json).then(() => {
+        canvas.requestRenderAll();
+      }).catch((err: unknown) => console.warn("Undo load failed:", err));
     }
+  }, [undo, canvas]);
 
-    if (format === 'svg') {
-      const svgStr = exportPageToSVG(canvas, dw, dh)
-      const blob = new Blob([svgStr], { type: 'image/svg+xml' })
-      downloadBlobUtil(blob, `${name}.svg`)
-      return
+  const handleRedo = useCallback(() => {
+    const json = redo();
+    if (json && canvas) {
+      canvas.loadFromJSON(json).then(() => {
+        canvas.requestRenderAll();
+      }).catch((err: unknown) => console.warn("Redo load failed:", err));
     }
-
-    const imgFormat = format === 'jpg' ? 'jpeg' : 'png'
-    const dataUrl = exportPageToDataURL(canvas, {
-      designWidth: dw,
-      designHeight: dh,
-      format: imgFormat as 'png' | 'jpeg',
-      quality: format === 'jpg' ? 0.92 : undefined,
-      multiplier: 2,
-    })
-
-    try {
-      await fetch(`/api/designer/${projectId}/export`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dataUrl, format, fileName: name }),
-      })
-    } catch { /* silent */ }
-
-    downloadDataUrlUtil(dataUrl, `${name}.${format === 'jpg' ? 'jpeg' : format}`)
-  }
-
-  const savedLabel = isSaving
-    ? 'Saving…'
-    : isDirty
-      ? 'Unsaved'
-      : lastSavedAt
-        ? `Saved ${formatTime(new Date(lastSavedAt))}`
-        : '—'
+  }, [redo, canvas]);
 
   return (
-    <div className="h-12 bg-white border-b border-gray-200 flex items-center px-2 md:px-3 gap-1 md:gap-2 shrink-0 z-30">
-      {/* Back */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon-xs" asChild>
-            <Link href="/app/designer">
-              <ArrowLeft className="h-4 w-4" />
-            </Link>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom"><p>Back to projects</p></TooltipContent>
-      </Tooltip>
+    <TooltipProvider delayDuration={300}>
+      <header className="h-14 border-b bg-white dark:bg-neutral-950 flex items-center justify-between px-4 shrink-0 z-20">
+        {/* Left section */}
+        <div className="flex items-center gap-2">
+          {onBack && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" onClick={onBack}>
+                  <ArrowLeft className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Back to projects</TooltipContent>
+            </Tooltip>
+          )}
 
-      {/* File menu — hidden on mobile, merged into overflow */}
-      {!isMobile && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-xs font-medium text-gray-500 hover:text-gray-800">
-              File
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-48">
-            <DropdownMenuItem onClick={handleSave} className="text-xs">
-              <Save className="mr-2 h-3.5 w-3.5" /> Save
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleDuplicate} className="text-xs">
-              <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate project
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setLeftRailTab('psd')} className="text-xs">
-              <FileImage className="mr-2 h-3.5 w-3.5" /> Import PSD
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setCsvModalOpen(true)} className="text-xs">
-              <Table className="mr-2 h-3.5 w-3.5" /> Bulk Create (CSV)
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="text-xs">
-              <Link href={`/app/designer/${projectId}/versions`}>
-                <History className="mr-2 h-3.5 w-3.5" /> Version history
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+          <span className="text-sm font-semibold truncate max-w-[200px]">
+            {project?.name || "Untitled Design"}
+          </span>
 
-      {/* Project name */}
-      <Input
-        type="text"
-        defaultValue={project?.name ?? 'Untitled'}
-        key={project?.id}
-        onBlur={(e) => handleNameBlur(e.target.value)}
-        onKeyDown={(e) => { if (e.key === 'Enter') (e.target as HTMLInputElement).blur() }}
-        className={`text-sm font-medium text-gray-800 bg-transparent border-transparent hover:border-gray-200 focus:border-gray-300 h-8 ${isMobile ? 'max-w-[100px]' : 'max-w-[200px]'}`}
-      />
+          {isDirty && (
+            <span className="text-xs text-muted-foreground">(unsaved)</span>
+          )}
+        </div>
 
-      {/* Save status */}
-      <Badge variant={isDirty ? 'secondary' : 'outline'} className={`text-[10px] font-normal shrink-0 ${isDirty ? 'text-amber-600 bg-amber-50' : 'text-gray-500'}`}>
-        {isMobile ? (isDirty ? '●' : '✓') : savedLabel}
-      </Badge>
-
-      <div className="flex-1" />
-
-      {/* Undo / Redo — always visible */}
-      <div className="flex items-center gap-0.5">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon-xs" onClick={undo} disabled={undoStack.length === 0}>
-              <Undo2 className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="bottom"><p>Undo</p></TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon-xs" onClick={redo} disabled={redoStack.length === 0}>
-              <Redo2 className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="bottom"><p>Redo</p></TooltipContent>
-        </Tooltip>
-      </div>
-
-      {/* Desktop: full toolbar */}
-      {!isMobile && (
-        <>
-          {/* AI Design */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline" size="sm" onClick={() => setAiDesignModalOpen(true)} className="text-xs">
-                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                AI Design
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom"><p>Generate a design with AI</p></TooltipContent>
-          </Tooltip>
-
-          {/* Save */}
-          <Button variant="outline" size="sm" onClick={handleSave} disabled={!isDirty || isSaving} className="text-xs">
-            <Save className="mr-1.5 h-3.5 w-3.5" />
-            {isSaving ? 'Saving…' : 'Save'}
-          </Button>
-
-          {/* Export Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" className="text-xs">
-                <Download className="mr-1.5 h-3.5 w-3.5" />
-                Export
-                <ChevronDown className="ml-1 h-3 w-3" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem onClick={() => handleExport('png')} className="text-xs">PNG</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport('jpg')} className="text-xs">JPG</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport('svg')} className="text-xs">SVG</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleExport('pdf')} className="text-xs">PDF</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setExportModalOpen(true)} className="text-xs">
-                Advanced export…
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Share */}
-          <Button variant="outline" size="sm" onClick={() => setShareModalOpen(true)} className="text-xs">
-            <Share2 className="mr-1.5 h-3.5 w-3.5" />
-            Share
-          </Button>
-
-          {/* Properties toggle */}
+        {/* Center – undo/redo + zoom */}
+        <div className="flex items-center gap-1">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                variant={rightPanelOpen ? 'secondary' : 'ghost'}
-                size="icon-xs"
-                onClick={() => setRightPanelOpen(!rightPanelOpen)}
+                variant="ghost"
+                size="icon"
+                onClick={handleUndo}
+                disabled={undoStack.length === 0}
               >
-                <PanelRight className="h-4 w-4" />
+                <Undo2 className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="bottom"><p>{rightPanelOpen ? 'Hide' : 'Show'} properties</p></TooltipContent>
+            <TooltipContent>Undo (Ctrl+Z)</TooltipContent>
           </Tooltip>
-        </>
-      )}
 
-      {/* Mobile: overflow menu with all secondary actions */}
-      {isMobile && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon-xs">
-              <Menu className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-52">
-            <DropdownMenuItem onClick={handleSave} disabled={!isDirty || isSaving} className="text-xs">
-              <Save className="mr-2 h-3.5 w-3.5" /> {isSaving ? 'Saving…' : 'Save'}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setAiDesignModalOpen(true)} className="text-xs">
-              <Sparkles className="mr-2 h-3.5 w-3.5" /> AI Design
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => handleExport('png')} className="text-xs">
-              <Download className="mr-2 h-3.5 w-3.5" /> Export PNG
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleExport('jpg')} className="text-xs">
-              <Download className="mr-2 h-3.5 w-3.5" /> Export JPG
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setExportModalOpen(true)} className="text-xs">
-              <Download className="mr-2 h-3.5 w-3.5" /> Advanced Export…
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setShareModalOpen(true)} className="text-xs">
-              <Share2 className="mr-2 h-3.5 w-3.5" /> Share
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleDuplicate} className="text-xs">
-              <Copy className="mr-2 h-3.5 w-3.5" /> Duplicate project
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
-    </div>
-  )
-}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleRedo}
+                disabled={redoStack.length === 0}
+              >
+                <Redo2 className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Redo (Ctrl+Y)</TooltipContent>
+          </Tooltip>
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function formatTime(d: Date) {
-  const diff = Date.now() - d.getTime()
-  if (diff < 60000) return 'just now'
-  if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`
-  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          <div className="w-px h-6 bg-border mx-1" />
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={zoomOut}>
+                <ZoomOut className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Zoom out</TooltipContent>
+          </Tooltip>
+
+          <button
+            onClick={zoomToFit}
+            className="text-xs font-mono w-14 text-center hover:bg-accent rounded py-1"
+          >
+            {Math.round(zoom * 100)}%
+          </button>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={zoomIn}>
+                <ZoomIn className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Zoom in</TooltipContent>
+          </Tooltip>
+        </div>
+
+        {/* Right – save / export / preview */}
+        <div className="flex items-center gap-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={togglePreview}>
+                <Eye className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Preview (Ctrl+Shift+P)</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setExportModalOpen(true)}
+              >
+                <Download className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Export</TooltipContent>
+          </Tooltip>
+
+          <Button
+            size="sm"
+            onClick={onSave}
+            disabled={isSaving}
+            className="gap-1.5"
+          >
+            {isSaving ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : isDirty ? (
+              <Save className="h-3.5 w-3.5" />
+            ) : (
+              <Check className="h-3.5 w-3.5" />
+            )}
+            {isSaving ? "Saving…" : "Save"}
+          </Button>
+        </div>
+      </header>
+    </TooltipProvider>
+  );
 }

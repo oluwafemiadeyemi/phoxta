@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexLevel — Gaming & Esports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131d;--card:#1a1a2e;--accent:#a855f7;--accent-l:#c084fc;--neon:#06ffa5;--text:#e4e4e7;--dim:#71717a;--white:#fff;--border:rgba(168,85,247,.15)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Rajdhani',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;color:var(--accent)}.nav-logo span{color:var(--neon)}
+    .nav-links{display:flex;gap:26px;align-items:center}.nav-links a{font-size:14px;font-weight:600;color:var(--dim);transition:color .3s;text-transform:uppercase;letter-spacing:1px}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:linear-gradient(135deg,var(--accent),var(--neon))!important;color:var(--bg)!important;padding:10px 22px;border-radius:50px;font-weight:700!important}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px;background:radial-gradient(circle at 70% 50%,rgba(168,85,247,.12) 0%,transparent 50%),var(--bg)}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-family:'Orbitron',sans-serif;font-size:42px;line-height:1.15;font-weight:800;margin-bottom:16px;text-transform:uppercase}.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--neon));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);color:var(--white);padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;transition:all .3s;text-transform:uppercase;letter-spacing:1px}.btn-pri:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,85,247,.4)}
+    .hero-img img{width:100%;height:420px;object-fit:cover;border-radius:20px;border:1px solid var(--border)}
+    section{padding:100px 60px}.container{max-width:1100px;margin:0 auto}
+    .section-label{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:8px}
+    .section-title{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:800;color:var(--text);margin-bottom:12px;text-transform:uppercase}
+    .arenas{background:var(--surface)}.arena-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+    .arena-card{background:var(--card);padding:30px 24px;border-radius:16px;text-align:center;border:1px solid var(--border);transition:all .3s}.arena-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 0 30px rgba(168,85,247,.15)}
+    .arena-icon{font-size:32px;margin-bottom:12px;color:var(--neon)}
+    .arena-card h3{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;text-transform:uppercase}.arena-card p{font-size:13px;color:var(--dim)}
+    .stats-gam{background:var(--bg)}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;text-align:center}
+    .stat-box{padding:30px;background:var(--surface);border-radius:16px;border:1px solid var(--border)}
+    .stat-box h3{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--neon));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+    .stat-box p{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+    .cta-gam{background:linear-gradient(135deg,#7c3aed,var(--accent));text-align:center;border-radius:24px;margin:0 60px;padding:80px 40px}
+    .cta-gam h2{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:800;color:var(--white);margin-bottom:12px;text-transform:uppercase}.cta-gam p{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:28px}
+    .btn-w{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:all .3s}.btn-w:hover{transform:translateY(-2px)}
+    footer{background:var(--surface);padding:48px 60px;margin-top:80px;border-top:1px solid var(--border)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;color:var(--accent)}.footer-logo span{color:var(--neon)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:11px;color:var(--dim);margin-top:20px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.arena-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:14px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:100px 24px 60px}.hero h1{font-size:28px}.arena-grid,.stats-grid{grid-template-columns:1fr}.cta-gam{margin:0 24px;padding:60px 24px}.footer-inner{flex-direction:column;gap:14px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">NEX<span>LEVEL</span></div><div class="nav-links"><a href="#arenas" data-phoxta-link="navAr">Arenas</a><a href="#stats" data-phoxta-link="navSt">Stats</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Join Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">Level Up Your <span>Game</span></h1><p data-phoxta="heroDesc">Premier gaming lounge and esports arena. 120+ gaming stations, tournaments every weekend, and a pro-level streaming setup. Your next win starts here.</p><a href="#arenas" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-gamepad"></i> Explore Arenas</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Gaming" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="arenas" id="arenas"><div class="container"><p class="section-label" data-phoxta="arLabel">Our Zones</p><h2 class="section-title" data-phoxta="arTitle">Gaming Arenas</h2>
+  <div class="arena-grid">
+    <div class="arena-card"><div class="arena-icon"><i class="fa-solid fa-desktop"></i></div><h3 data-phoxta="a1Title">PC Arena</h3><p data-phoxta="a1Desc">RTX 4090 rigs with 240Hz monitors. 60 stations for competitive play.</p></div>
+    <div class="arena-card"><div class="arena-icon"><i class="fa-solid fa-tv"></i></div><h3 data-phoxta="a2Title">Console Lounge</h3><p data-phoxta="a2Desc">PS5, Xbox Series X on 4K screens. Cozy sofas and party mode.</p></div>
+    <div class="arena-card"><div class="arena-icon"><i class="fa-solid fa-vr-cardboard"></i></div><h3 data-phoxta="a3Title">VR Experience</h3><p data-phoxta="a3Desc">Full-body VR booths with the latest titles and haptic feedback.</p></div>
+  </div></div></section>
+  <section class="stats-gam" id="stats"><div class="container"><p class="section-label" data-phoxta="stLabel">The Numbers</p><h2 class="section-title" data-phoxta="stTitle">Our Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-box"><h3 data-phoxta="s1Num">120+</h3><p data-phoxta="s1Label">Stations</p></div>
+    <div class="stat-box"><h3 data-phoxta="s2Num">5K+</h3><p data-phoxta="s2Label">Members</p></div>
+    <div class="stat-box"><h3 data-phoxta="s3Num">200+</h3><p data-phoxta="s3Label">Tournaments</p></div>
+    <div class="stat-box"><h3 data-phoxta="s4Num">$50K</h3><p data-phoxta="s4Label">Prize Pool</p></div>
+  </div></div></section>
+  <section class="cta-gam" id="cta"><h2 data-phoxta="ctaTitle">Ready to Play?</h2><p data-phoxta="ctaDesc">Walk in or book a station. First-timers get 1 hour free. Tournament registration now open.</p><a href="#" class="btn-w" data-phoxta-link="ctaBtn"><i class="fa-solid fa-trophy"></i> Book Station</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">NEX<span>LEVEL</span></div><div class="footer-links"><a href="#arenas" data-phoxta-link="fl1">Arenas</a><a href="#stats" data-phoxta-link="fl2">Stats</a><a href="#cta" data-phoxta-link="fl3">Book</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 NexLevel Gaming. GG WP.</p></footer>
+</body>
+</html>

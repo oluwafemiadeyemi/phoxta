@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawCare — Veterinary & Pet Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fff;--surface:#f0f7ff;--card:#fff;--accent:#2563eb;--accent-l:#3b82f6;--orange:#f59e0b;--text:#1e293b;--dim:#64748b;--white:#fff;--border:#e2e8f0}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Nunito',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:24px;font-weight:800;color:var(--accent);display:flex;align-items:center;gap:8px}.nav-logo i{color:var(--orange)}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:600;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:700!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,#f0f7ff 0%,#e0edff 50%,#dbeafe 100%);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);padding:8px 16px;border-radius:100px;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:20px}
+    .hero h1{font-size:50px;line-height:1.15;font-weight:800;color:var(--text);margin-bottom:18px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:16px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-blue{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;transition:all .3s;box-shadow:0 4px 20px rgba(37,99,235,.2)}.btn-blue:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:480px;object-fit:cover;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:40px;font-weight:800;color:var(--text);margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .services{background:var(--surface)}.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+    .svc-card{background:var(--card);border-radius:20px;padding:32px 24px;text-align:center;border:1px solid var(--border);transition:all .3s}.svc-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06);transform:translateY(-4px)}
+    .svc-icon{width:60px;height:60px;border-radius:16px;background:var(--surface);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px}
+    .svc-card h3{font-size:17px;font-weight:700;margin-bottom:6px}.svc-card p{font-size:13px;color:var(--dim)}
+    .team{background:var(--bg)}.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:60px}
+    .team-card{background:var(--card);border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:all .3s}.team-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06)}
+    .team-card img{width:100%;height:280px;object-fit:cover}.team-body{padding:24px;text-align:center}
+    .team-card h3{font-size:18px;font-weight:700;margin-bottom:4px}.team-card p{font-size:13px;color:var(--dim)}
+    .stats{background:var(--accent)}.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+    .stat-num{font-size:44px;font-weight:800;color:var(--white)}.stat-label{font-size:14px;color:rgba(255,255,255,.6);font-weight:600}
+    .cta-section{background:var(--surface);text-align:center}.cta-section h2{font-size:40px;font-weight:800;color:var(--text);margin-bottom:12px}.cta-section p{font-size:15px;color:var(--dim);margin-bottom:32px}
+    footer{background:#0f172a;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:20px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo i{color:var(--orange)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.35);transition:color .3s}.footer-links a:hover{color:var(--accent-l)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.15);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.svc-grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:34px}.svc-grid,.team-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr;gap:20px}.section-title{font-size:28px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-paw"></i> PawCare</div><div class="nav-links"><a href="#services" data-phoxta-link="navSvc">Services</a><a href="#team" data-phoxta-link="navTeam">Vets</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Book Visit</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-badge" data-phoxta="heroBadge"><i class="fa-solid fa-heart"></i> Trusted Since 2010</div><h1 data-phoxta="heroTitle">Your Pet Deserves the <span>Best Care</span></h1><p data-phoxta="heroDesc">Compassionate veterinary care, grooming, boarding and nutrition services for your furry family members.</p><a href="#services" class="btn-blue" data-phoxta-link="heroCta"><i class="fa-solid fa-paw"></i> Our Services</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dog" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="services" id="services"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="svcLabel">Services</p><h2 class="section-title" data-phoxta="svcTitle">Complete Pet Care</h2><p class="section-desc" style="margin:0 auto" data-phoxta="svcDesc">Everything your pet needs, under one roof.</p><div class="svc-grid">
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-stethoscope"></i></div><h3 data-phoxta="s1Title">Wellness Exams</h3><p data-phoxta="s1Desc">Comprehensive health check-ups and vaccinations.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-scissors"></i></div><h3 data-phoxta="s2Title">Grooming</h3><p data-phoxta="s2Desc">Bath, trim, nail care and de-shedding services.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-house"></i></div><h3 data-phoxta="s3Title">Boarding</h3><p data-phoxta="s3Desc">Safe and comfortable overnight stays for your pet.</p></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-bone"></i></div><h3 data-phoxta="s4Title">Nutrition</h3><p data-phoxta="s4Desc">Custom diet plans and premium pet food.</p></div>
+  </div></div></section>
+  <section class="stats"><div class="container"><div class="stats-grid">
+    <div><div class="stat-num" data-phoxta="st1Num">15K+</div><div class="stat-label" data-phoxta="st1Label">Happy Pets</div></div>
+    <div><div class="stat-num" data-phoxta="st2Num">12</div><div class="stat-label" data-phoxta="st2Label">Expert Vets</div></div>
+    <div><div class="stat-num" data-phoxta="st3Num">24/7</div><div class="stat-label" data-phoxta="st3Label">Emergency Care</div></div>
+    <div><div class="stat-num" data-phoxta="st4Num">14</div><div class="stat-label" data-phoxta="st4Label">Years of Service</div></div>
+  </div></div></section>
+  <section class="team" id="team"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="teamLabel">Our Team</p><h2 class="section-title" data-phoxta="teamTitle">Meet Our Veterinarians</h2><div class="team-grid">
+    <div class="team-card"><img src="https://images.pexels.com/photos/5731861/pexels-photo-5731861.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vet" data-phoxta-image="v1Img"/><div class="team-body"><h3 data-phoxta="v1Name">Dr. Sarah Mitchell</h3><p data-phoxta="v1Role">Chief Veterinarian</p></div></div>
+    <div class="team-card"><img src="https://images.pexels.com/photos/5731861/pexels-photo-5731861.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vet" data-phoxta-image="v2Img"/><div class="team-body"><h3 data-phoxta="v2Name">Dr. James Park</h3><p data-phoxta="v2Role">Surgery Specialist</p></div></div>
+    <div class="team-card"><img src="https://images.pexels.com/photos/5731861/pexels-photo-5731861.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vet" data-phoxta-image="v3Img"/><div class="team-body"><h3 data-phoxta="v3Name">Dr. Lisa Wang</h3><p data-phoxta="v3Role">Dental & Nutrition</p></div></div>
+  </div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Schedule a Visit Today</h2><p data-phoxta="ctaDesc">New patients receive a complimentary wellness exam. Walk-ins welcome for emergencies.</p><a href="#" class="btn-blue" data-phoxta-link="ctaBtn"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-paw"></i> PawCare</div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#team" data-phoxta-link="fl2">Team</a><a href="#cta" data-phoxta-link="fl3">Book</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 PawCare Veterinary. All rights reserved.</p></footer>
+</body>
+</html>

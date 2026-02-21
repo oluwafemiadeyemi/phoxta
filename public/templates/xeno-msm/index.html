@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artform — Modern Museum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fafafa;--surface:#fff;--card:#f5f5f5;--accent:#18181b;--text:#27272a;--dim:#a1a1aa;--white:#fff;--border:#e4e4e7}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);line-height:1.8}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:22px;font-weight:700;color:var(--accent);letter-spacing:4px;text-transform:uppercase}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:12px;font-weight:500;color:var(--dim);letter-spacing:2px;text-transform:uppercase;transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+    .hero h1{font-size:52px;line-height:1.1;font-weight:700;margin-bottom:16px;color:var(--accent)}.hero h1 span{font-weight:300;font-style:italic}
+    .hero p{font-size:16px;color:var(--dim);max-width:420px;margin-bottom:28px;font-weight:300}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 28px;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:all .3s}.btn-pri:hover{opacity:.85;transform:translateY(-2px)}
+    .hero-img img{width:100%;height:500px;object-fit:cover}
+    section{padding:100px 60px}.container{max-width:1100px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:4px;color:var(--dim);margin-bottom:10px}
+    .section-title{font-size:36px;font-weight:700;color:var(--accent);margin-bottom:14px}
+    .exhibitions{background:var(--white)}.exh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+    .exh-card img{width:100%;height:280px;object-fit:cover;margin-bottom:16px}
+    .exh-card h3{font-size:18px;font-weight:700;margin-bottom:4px}.exh-card p{font-size:13px;color:var(--dim);margin-bottom:6px}
+    .exh-date{font-size:11px;color:var(--accent);font-weight:500;letter-spacing:1px;text-transform:uppercase}
+    .info{background:var(--card)}.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:50px}
+    .info-item{text-align:center;padding:24px}.info-icon{font-size:28px;color:var(--accent);margin-bottom:12px}
+    .info-item h4{font-size:14px;font-weight:700;margin-bottom:4px}.info-item p{font-size:12px;color:var(--dim)}
+    .cta-msm{background:var(--accent);text-align:center}
+    .cta-msm h2{font-size:36px;font-weight:700;color:var(--white);margin-bottom:12px}.cta-msm p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px}
+    .btn-w{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:all .3s}.btn-w:hover{transform:translateY(-2px)}
+    footer{background:var(--white);padding:48px 60px;border-top:1px solid var(--border)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:18px;font-weight:700;color:var(--accent);letter-spacing:4px;text-transform:uppercase}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:12px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:10px;color:var(--dim);margin-top:20px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.exh-grid{grid-template-columns:1fr 1fr}.info-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:14px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:100px 24px 60px}.hero h1{font-size:34px}.exh-grid,.info-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:14px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">ARTFORM</div><div class="nav-links"><a href="#exhibitions" data-phoxta-link="navEx">Exhibitions</a><a href="#info" data-phoxta-link="navIn">Visit</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Tickets</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">See the World <span>Differently</span></h1><p data-phoxta="heroDesc">A modern art museum celebrating contemporary voices. Rotating exhibitions, interactive installations, and community workshops.</p><a href="#cta" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-ticket"></i> Plan Your Visit</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/1839919/pexels-photo-1839919.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Museum" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="exhibitions" id="exhibitions"><div class="container"><p class="section-label" data-phoxta="exLabel">On View</p><h2 class="section-title" data-phoxta="exTitle">Current Exhibitions</h2>
+  <div class="exh-grid">
+    <div class="exh-card"><img src="https://images.pexels.com/photos/1839919/pexels-photo-1839919.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Exhibition" data-phoxta-image="e1Img"/><h3 data-phoxta="e1Title">Echoes in Color</h3><p data-phoxta="e1Desc">A bold exploration of identity through abstract expressionism.</p><span class="exh-date" data-phoxta="e1Date">Through Aug 2025</span></div>
+    <div class="exh-card"><img src="https://images.pexels.com/photos/1839919/pexels-photo-1839919.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Exhibition" data-phoxta-image="e2Img"/><h3 data-phoxta="e2Title">Digital Horizons</h3><p data-phoxta="e2Desc">Interactive new-media installations pushing the boundaries of art.</p><span class="exh-date" data-phoxta="e2Date">Through Oct 2025</span></div>
+    <div class="exh-card"><img src="https://images.pexels.com/photos/1839919/pexels-photo-1839919.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Exhibition" data-phoxta-image="e3Img"/><h3 data-phoxta="e3Title">The Human Form</h3><p data-phoxta="e3Desc">Sculpture and photography celebrating the beauty of movement.</p><span class="exh-date" data-phoxta="e3Date">Through Dec 2025</span></div>
+  </div></div></section>
+  <section class="info" id="info"><div class="container"><p class="section-label" data-phoxta="inLabel">Visitor Info</p><h2 class="section-title" data-phoxta="inTitle">Plan Your Visit</h2>
+  <div class="info-grid">
+    <div class="info-item"><div class="info-icon"><i class="fa-solid fa-clock"></i></div><h4 data-phoxta="i1Title">Hours</h4><p data-phoxta="i1Desc">Tue-Sun, 10am-6pm. Late night Fri til 9pm.</p></div>
+    <div class="info-item"><div class="info-icon"><i class="fa-solid fa-ticket"></i></div><h4 data-phoxta="i2Title">Admission</h4><p data-phoxta="i2Desc">Adults $18, Students $10, Under 12 free.</p></div>
+    <div class="info-item"><div class="info-icon"><i class="fa-solid fa-location-dot"></i></div><h4 data-phoxta="i3Title">Location</h4><p data-phoxta="i3Desc">245 Gallery Ave, Downtown Arts District.</p></div>
+    <div class="info-item"><div class="info-icon"><i class="fa-solid fa-users"></i></div><h4 data-phoxta="i4Title">Group Tours</h4><p data-phoxta="i4Desc">Guided tours for 10+ available by appointment.</p></div>
+  </div></div></section>
+  <section class="cta-msm" id="cta"><h2 data-phoxta="ctaTitle">Experience Art in Person</h2><p data-phoxta="ctaDesc">Buy tickets online and skip the line. Free admission every first Sunday.</p><a href="#" class="btn-w" data-phoxta-link="ctaBtn"><i class="fa-solid fa-arrow-right"></i> Buy Tickets</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">ARTFORM</div><div class="footer-links"><a href="#exhibitions" data-phoxta-link="fl1">Exhibitions</a><a href="#info" data-phoxta-link="fl2">Visit</a><a href="#cta" data-phoxta-link="fl3">Tickets</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Artform Museum of Contemporary Art. All rights reserved.</p></footer>
+</body>
+</html>

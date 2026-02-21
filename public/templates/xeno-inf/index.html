@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Influencer — Personal Brand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #0A0A0F;
+      --bg-card: #12121A;
+      --bg-card-hover: #1A1A26;
+      --accent: #FF3CAC;
+      --accent2: #784BA0;
+      --accent3: #2B86C5;
+      --gradient: linear-gradient(135deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+      --gradient-soft: linear-gradient(135deg, rgba(255,60,172,0.12), rgba(120,75,160,0.12), rgba(43,134,197,0.12));
+      --text: #E8E8F0;
+      --text-muted: #8888A0;
+      --white: #ffffff;
+      --border: rgba(255,255,255,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0; background: rgba(10,10,15,0.85); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: var(--gradient) !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: unset !important; color: var(--white) !important; padding: 10px 24px; border-radius: 100px; font-weight: 600 !important; font-size: 13px !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 140px 0 100px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,60,172,0.1) 0%, transparent 70%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: -200px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(43,134,197,0.08) 0%, transparent 70%); pointer-events: none; }
+    .hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gradient-soft); border: 1px solid rgba(255,60,172,0.15); padding: 8px 20px; border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 28px; }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+    .hero h1 .gradient { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 460px; margin-bottom: 36px; line-height: 1.8; font-weight: 300; }
+    .hero-socials { display: flex; gap: 12px; margin-bottom: 36px; }
+    .hero-socials a { width: 48px; height: 48px; border-radius: 14px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-muted); transition: all 0.3s; }
+    .hero-socials a:hover { background: var(--gradient-soft); border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+    .hero-btns { display: flex; gap: 14px; }
+    .btn-gradient { display: inline-flex; align-items: center; gap: 8px; background: var(--gradient); color: var(--white); padding: 14px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; }
+    .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,60,172,0.25); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.12); color: var(--text); padding: 13px 32px; border-radius: 100px; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-photo { position: relative; z-index: 1; }
+    .hero-photo-frame { width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden; border: 2px solid rgba(255,255,255,0.06); position: relative; }
+    .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo-frame::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(10,10,15,0.6)); z-index: 1; pointer-events: none; }
+    .hero-follower-badge { position: absolute; bottom: 24px; left: 24px; z-index: 2; background: rgba(10,10,15,0.8); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 16px; padding: 16px 20px; display: flex; gap: 20px; }
+    .follower-stat-num { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .follower-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* METRICS BAR */
+    .metrics { padding: 80px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .metrics-row { display: flex; justify-content: center; gap: 80px; }
+    .metric { text-align: center; }
+    .metric-value { font-family: 'Sora', sans-serif; font-size: 40px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+    .metric-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+
+    /* SECTION COMMON */
+    .section-badge { display: inline-block; background: var(--gradient-soft); border: 1px solid rgba(255,60,172,0.12); color: var(--accent); padding: 6px 18px; border-radius: 100px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: 40px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+    .section-desc { font-size: 17px; color: var(--text-muted); max-width: 500px; font-weight: 300; }
+
+    /* ABOUT */
+    .about { padding: 120px 0; }
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-image { aspect-ratio: 1; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-text p { font-size: 17px; color: var(--text-muted); line-height: 1.9; margin-bottom: 20px; font-weight: 300; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .about-tag { background: var(--bg-card); border: 1px solid var(--border); padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--text); }
+
+    /* COLLAB / BRANDS */
+    .collabs { padding: 120px 0; }
+    .collabs-header { text-align: center; margin-bottom: 64px; }
+    .collabs-header .section-desc { margin: 0 auto; }
+    .collabs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .collab-logo { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .collab-logo:hover { border-color: rgba(255,60,172,0.2); background: var(--bg-card-hover); }
+    .collab-logo span { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* CONTENT GRID */
+    .content { padding: 120px 0; }
+    .content-header { text-align: center; margin-bottom: 64px; }
+    .content-header .section-desc { margin: 0 auto; }
+    .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .content-card { border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 4/5; background: var(--bg-card); border: 1px solid var(--border); cursor: pointer; }
+    .content-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .content-card:hover img { transform: scale(1.05); }
+    .content-card-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(10,10,15,0.85)); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+    .content-card-type { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+    .content-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .content-card p { font-size: 13px; color: var(--text-muted); }
+    .content-card-stats { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: var(--text-muted); }
+    .content-card-stats span { display: flex; align-items: center; gap: 4px; }
+
+    /* SERVICES / WORK WITH ME */
+    .services { padding: 120px 0; }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .section-desc { margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); opacity: 0; transition: opacity 0.3s; }
+    .service-card:hover { border-color: rgba(255,60,172,0.2); transform: translateY(-4px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon { width: 64px; height: 64px; border-radius: 18px; background: var(--gradient-soft); display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--accent); margin: 0 auto 24px; }
+    .service-card h3 { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+    .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+    .service-price { font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 120px 0; }
+    .testimonials-header { text-align: center; margin-bottom: 64px; }
+    .testimonials-header .section-desc { margin: 0 auto; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .testimonial { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+    .testimonial-top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-soft); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: var(--accent); }
+    .testimonial-info .t-name { font-weight: 700; font-size: 15px; color: var(--white); }
+    .testimonial-info .t-role { font-size: 13px; color: var(--text-muted); }
+    .testimonial blockquote { font-size: 15px; color: var(--text-muted); line-height: 1.7; font-style: italic; }
+
+    /* CTA */
+    .cta { padding: 120px 0; }
+    .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 28px; padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
+    .cta-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); }
+    .cta-box::after { content: ''; position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,60,172,0.06) 0%, transparent 70%); pointer-events: none; }
+    .cta h2 { font-family: 'Sora', sans-serif; font-size: 44px; font-weight: 800; color: var(--white); margin-bottom: 16px; letter-spacing: -1px; position: relative; z-index: 1; }
+    .cta p { font-size: 17px; color: var(--text-muted); max-width: 480px; margin: 0 auto 40px; font-weight: 300; position: relative; z-index: 1; }
+    .cta .btn-gradient { position: relative; z-index: 1; }
+    .cta-socials { display: flex; justify-content: center; gap: 12px; margin-top: 32px; position: relative; z-index: 1; }
+    .cta-socials a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--text-muted); transition: all 0.3s; }
+    .cta-socials a:hover { background: var(--gradient-soft); border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    .footer { padding: 48px 0; border-top: 1px solid var(--border); }
+    .footer .container { display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 120px 0 80px; }
+      .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+      .hero h1 { font-size: 36px; }
+      .hero-photo-frame { max-width: 300px; }
+      .metrics-row { flex-wrap: wrap; gap: 32px; }
+      .about-layout { grid-template-columns: 1fr; gap: 40px; }
+      .collabs-grid { grid-template-columns: repeat(2, 1fr); }
+      .content-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 32px; }
+      .cta h2 { font-size: 32px; }
+      .cta-box { padding: 48px 24px; }
+      .footer .container { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo" data-phoxta="brand">@LUNA</a>
+      <div class="nav-links">
+        <a href="#about" data-phoxta-link="nav1">About</a>
+        <a href="#content" data-phoxta-link="nav2">Content</a>
+        <a href="#collabs" data-phoxta-link="nav3">Brands</a>
+        <a href="#services" data-phoxta-link="nav4">Work With Me</a>
+        <a href="#cta" class="nav-cta" data-phoxta-link="cta">Let's Collab</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-badge" data-phoxta="heroBadge"><i class="fas fa-sparkles"></i> Creator · Storyteller · Trendsetter</div>
+          <h1 data-phoxta="heroTitle">Hey, I'm <span class="gradient">Luna</span> — I create content that connects.</h1>
+          <p data-phoxta="heroSubtitle">Lifestyle & fashion influencer sharing authentic stories, curated style, and partnerships with brands I truly love. Let's create something amazing together.</p>
+          <div class="hero-socials">
+            <a href="#" data-phoxta-link="heroIG"><i class="fab fa-instagram"></i></a>
+            <a href="#" data-phoxta-link="heroTT"><i class="fab fa-tiktok"></i></a>
+            <a href="#" data-phoxta-link="heroYT"><i class="fab fa-youtube"></i></a>
+            <a href="#" data-phoxta-link="heroTW"><i class="fab fa-twitter"></i></a>
+            <a href="#" data-phoxta-link="heroPN"><i class="fab fa-pinterest"></i></a>
+          </div>
+          <div class="hero-btns">
+            <a href="#services" class="btn-gradient" data-phoxta-link="heroCta1">Work With Me <i class="fas fa-arrow-right"></i></a>
+            <a href="#content" class="btn-ghost" data-phoxta-link="heroCta2">See My Content</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <div class="hero-photo-frame">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop" alt="Luna" data-phoxta-image="heroImg" />
+            <div class="hero-follower-badge">
+              <div>
+                <div class="follower-stat-num" data-phoxta="followers1">1.2M</div>
+                <div class="follower-stat-label" data-phoxta="followers1Label">Followers</div>
+              </div>
+              <div>
+                <div class="follower-stat-num" data-phoxta="followers2">4.8%</div>
+                <div class="follower-stat-label" data-phoxta="followers2Label">Eng. Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS BAR -->
+  <section class="metrics">
+    <div class="container">
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-value" data-phoxta="metric1">1.2M</div>
+          <div class="metric-label" data-phoxta="metric1Label">Instagram</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value" data-phoxta="metric2">850K</div>
+          <div class="metric-label" data-phoxta="metric2Label">TikTok</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value" data-phoxta="metric3">320K</div>
+          <div class="metric-label" data-phoxta="metric3Label">YouTube</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value" data-phoxta="metric4">200+</div>
+          <div class="metric-label" data-phoxta="metric4Label">Brand Collabs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=600&fit=crop" alt="About" data-phoxta-image="aboutImg" />
+        </div>
+        <div>
+          <div class="section-badge" data-phoxta="aboutLabel">About Me</div>
+          <h2 class="section-title" data-phoxta="aboutTitle">More than just a feed</h2>
+          <div style="height: 12px;"></div>
+          <div class="about-text">
+            <p data-phoxta="aboutP1">I'm a content creator based in Los Angeles, passionate about fashion, lifestyle, and empowering my community. What started as a hobby sharing outfits has grown into a platform reaching millions of people worldwide.</p>
+            <p data-phoxta="aboutP2">I believe in authenticity above all — every brand I partner with, every product I recommend, and every story I tell reflects who I genuinely am. My audience trusts me because I never compromise on that.</p>
+          </div>
+          <div class="about-tags">
+            <span class="about-tag" data-phoxta="tag1">🌸 Fashion</span>
+            <span class="about-tag" data-phoxta="tag2">✨ Lifestyle</span>
+            <span class="about-tag" data-phoxta="tag3">🧴 Beauty</span>
+            <span class="about-tag" data-phoxta="tag4">✈️ Travel</span>
+            <span class="about-tag" data-phoxta="tag5">💪 Wellness</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS / COLLABS -->
+  <section class="collabs" id="collabs">
+    <div class="container">
+      <div class="collabs-header">
+        <div class="section-badge" data-phoxta="collabsLabel">Collaborations</div>
+        <h2 class="section-title" data-phoxta="collabsTitle">Brands I've worked with</h2>
+        <p class="section-desc" data-phoxta="collabsDesc">Proud to partner with brands that align with my values and resonate with my community.</p>
+      </div>
+      <div class="collabs-grid">
+        <div class="collab-logo"><span data-phoxta="brand1">NIKE</span></div>
+        <div class="collab-logo"><span data-phoxta="brand2">SEPHORA</span></div>
+        <div class="collab-logo"><span data-phoxta="brand3">REVOLVE</span></div>
+        <div class="collab-logo"><span data-phoxta="brand4">ZARA</span></div>
+        <div class="collab-logo"><span data-phoxta="brand5">DIOR</span></div>
+        <div class="collab-logo"><span data-phoxta="brand6">FENTY</span></div>
+        <div class="collab-logo"><span data-phoxta="brand7">GLOSSIER</span></div>
+        <div class="collab-logo"><span data-phoxta="brand8">ASOS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GRID -->
+  <section class="content" id="content">
+    <div class="container">
+      <div class="content-header">
+        <div class="section-badge" data-phoxta="contentLabel">Featured Content</div>
+        <h2 class="section-title" data-phoxta="contentTitle">Latest creations</h2>
+        <p class="section-desc" data-phoxta="contentDesc">A peek into my recent work across platforms — from reels to campaigns to everyday storytelling.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&h=625&fit=crop" alt="Content" data-phoxta-image="content1Img" />
+          <div class="content-card-overlay">
+            <div class="content-card-type" data-phoxta="content1Type">Instagram Reel</div>
+            <h3 data-phoxta="content1Title">Summer Style Essentials</h3>
+            <p data-phoxta="content1Desc">My go-to outfits for the perfect summer wardrobe</p>
+            <div class="content-card-stats">
+              <span><i class="fas fa-heart"></i> <span data-phoxta="content1Likes">48.2K</span></span>
+              <span><i class="fas fa-comment"></i> <span data-phoxta="content1Comments">1.2K</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="content-card">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&h=625&fit=crop" alt="Content" data-phoxta-image="content2Img" />
+          <div class="content-card-overlay">
+            <div class="content-card-type" data-phoxta="content2Type">Brand Campaign</div>
+            <h3 data-phoxta="content2Title">Glow Collection Launch</h3>
+            <p data-phoxta="content2Desc">Exclusive partnership with a leading beauty brand</p>
+            <div class="content-card-stats">
+              <span><i class="fas fa-heart"></i> <span data-phoxta="content2Likes">92.5K</span></span>
+              <span><i class="fas fa-comment"></i> <span data-phoxta="content2Comments">3.8K</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="content-card">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&h=625&fit=crop" alt="Content" data-phoxta-image="content3Img" />
+          <div class="content-card-overlay">
+            <div class="content-card-type" data-phoxta="content3Type">YouTube Vlog</div>
+            <h3 data-phoxta="content3Title">Day in My Life: LA Edition</h3>
+            <p data-phoxta="content3Desc">Behind the scenes of content creation in LA</p>
+            <div class="content-card-stats">
+              <span><i class="fas fa-heart"></i> <span data-phoxta="content3Likes">67.1K</span></span>
+              <span><i class="fas fa-comment"></i> <span data-phoxta="content3Comments">2.4K</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / WORK WITH ME -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-badge" data-phoxta="servicesLabel">Work With Me</div>
+        <h2 class="section-title" data-phoxta="servicesTitle">Partnership opportunities</h2>
+        <p class="section-desc" data-phoxta="servicesDesc">Whether you're a brand looking for authentic promotion or a creative seeking collaboration — let's make magic.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-camera"></i></div>
+          <h3 data-phoxta="svc1Title">Sponsored Posts</h3>
+          <p data-phoxta="svc1Desc">Authentic, high-quality sponsored content tailored to your brand voice and integrated naturally into my feed.</p>
+          <div class="service-price" data-phoxta="svc1Price">From $2,500</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-video"></i></div>
+          <h3 data-phoxta="svc2Title">Video Content</h3>
+          <p data-phoxta="svc2Desc">Engaging Reels, TikToks, and YouTube integrations that showcase your product with creativity and style.</p>
+          <div class="service-price" data-phoxta="svc2Price">From $5,000</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-handshake"></i></div>
+          <h3 data-phoxta="svc3Title">Brand Ambassador</h3>
+          <p data-phoxta="svc3Desc">Long-term partnerships with ongoing content creation, event appearances, and exclusive product launches.</p>
+          <div class="service-price" data-phoxta="svc3Price">Custom</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-badge" data-phoxta="testLabel">Testimonials</div>
+        <h2 class="section-title" data-phoxta="testTitle">What brands say</h2>
+        <p class="section-desc" data-phoxta="testDesc">Feedback from partners who've experienced the impact of authentic influencer marketing.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="testimonial-top">
+            <div class="testimonial-avatar">S</div>
+            <div class="testimonial-info">
+              <div class="t-name" data-phoxta="test1Name">Sarah Mitchell</div>
+              <div class="t-role" data-phoxta="test1Role">Marketing Director, Glow Beauty</div>
+            </div>
+          </div>
+          <blockquote data-phoxta="test1Quote">"Luna's campaign for our product launch exceeded every KPI. Her audience engagement is genuinely remarkable — we saw a 320% ROI within the first week."</blockquote>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-top">
+            <div class="testimonial-avatar">J</div>
+            <div class="testimonial-info">
+              <div class="t-name" data-phoxta="test2Name">James Park</div>
+              <div class="t-role" data-phoxta="test2Role">Brand Manager, NovaTech</div>
+            </div>
+          </div>
+          <blockquote data-phoxta="test2Quote">"What sets Luna apart is her authenticity. She doesn't just promote — she tells stories that make her audience genuinely excited about the product."</blockquote>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-top">
+            <div class="testimonial-avatar">R</div>
+            <div class="testimonial-info">
+              <div class="t-name" data-phoxta="test3Name">Rachel Torres</div>
+              <div class="t-role" data-phoxta="test3Role">CEO, Bloom Wellness</div>
+            </div>
+          </div>
+          <blockquote data-phoxta="test3Quote">"Our partnership with Luna drove more direct sales than any other influencer campaign we've run. She truly understands her community."</blockquote>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-top">
+            <div class="testimonial-avatar">M</div>
+            <div class="testimonial-info">
+              <div class="t-name" data-phoxta="test4Name">Michael Chen</div>
+              <div class="t-role" data-phoxta="test4Role">Head of Partnerships, StyleCo</div>
+            </div>
+          </div>
+          <blockquote data-phoxta="test4Quote">"Professional, creative, and incredibly easy to work with. Luna delivered content that was even better than the brief — a dream collaborator."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 data-phoxta="ctaTitle">Let's create something unforgettable</h2>
+        <p data-phoxta="ctaDesc">Ready to reach an engaged audience of 2M+ across platforms? Let's chat about how we can tell your brand's story.</p>
+        <a href="#" class="btn-gradient" data-phoxta-link="ctaBtn"><span data-phoxta="ctaBtnText">Send Me a Message</span> <i class="fas fa-paper-plane"></i></a>
+        <div class="cta-socials">
+          <a href="#" data-phoxta-link="ctaIG"><i class="fab fa-instagram"></i></a>
+          <a href="#" data-phoxta-link="ctaTT"><i class="fab fa-tiktok"></i></a>
+          <a href="#" data-phoxta-link="ctaYT"><i class="fab fa-youtube"></i></a>
+          <a href="#" data-phoxta-link="ctaEmail"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo" data-phoxta="footerBrand">@LUNA</div>
+      <div class="footer-copy" data-phoxta="footerCopy">&copy; 2026 Luna. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#" data-phoxta-link="fLink1">Media Kit</a>
+        <a href="#" data-phoxta-link="fLink2">Privacy</a>
+        <a href="#" data-phoxta-link="fLink3">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav')?.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

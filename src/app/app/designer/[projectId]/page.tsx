@@ -1,341 +1,133 @@
-'use client'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Editor page  /app/designer/[projectId]
+   Loads project data from API and renders the DesignerEditor
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ===========================================================================
-// Designer Editor — assembles all components into the full editor view
-// Uses: shadcn + Lucide icons for loading/error states
-// ===========================================================================
-import { useEffect, useState, use, useRef } from 'react'
-import { useDocumentStore } from '@/stores/designer/documentStore'
-import TopBar from '@/components/designer/TopBar'
-import LeftRail from '@/components/designer/LeftRail'
-import LeftPanel from '@/components/designer/LeftPanel'
-import RightPanel from '@/components/designer/RightPanel'
-import CharacterPanel from '@/components/designer/CharacterPanel'
-import AdjustmentsPanel from '@/components/designer/AdjustmentsPanel'
-import LayersTree from '@/components/designer/LayersTree'
-import PagesStrip from '@/components/designer/PagesStrip'
-import CanvasStage from '@/components/designer/CanvasStage'
-import LeftToolbar from '@/components/designer/LeftToolbar'
-import MobileRightPanelTiles from '@/components/designer/MobileRightPanelTiles'
-import ExportModal from '@/components/designer/modals/ExportModal'
-import ShareModal from '@/components/designer/modals/ShareModal'
-import CsvBulkModal from '@/components/designer/modals/CsvBulkModal'
-import AiDesignModal from '@/components/designer/modals/AiDesignModal'
-import { Button } from '@/components/ui/button'
-import { Loader2, Sparkles } from 'lucide-react'
-import Link from 'next/link'
-import type { DesignProject, DesignPage } from '@/types/designer'
-import { retrievePendingPsd } from '@/lib/designer/psdTransfer'
-import { importPsdToCanvas } from '@/lib/designer/psdImporter'
-import { assemblePageOnCanvas } from '@/lib/designer/aiCanvasAssembler'
-import type { AIDesignResponse } from '@/types/aiDesign'
+import { useState, useEffect, useCallback } from "react";
+import { useParams, useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import { Loader2 } from "lucide-react";
+import type { DesignProject, DesignPage } from "@/types/designer";
 
-interface PageProps {
-  params: Promise<{ projectId: string }>
-}
+// Dynamic import to avoid SSR issues with Fabric.js
+const DesignerEditor = dynamic(
+  () => import("@/components/designer/DesignerEditor"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    ),
+  },
+);
 
-export default function DesignerEditorPage({ params }: PageProps) {
-  const { projectId } = use(params)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const psdImportedRef = useRef(false)
-  const aiDesignTriggeredRef = useRef(false)
-  const [aiProgress, setAiProgress] = useState('')
+export default function DesignerEditorPage() {
+  const params = useParams<{ projectId: string }>();
+  const router = useRouter();
+  const projectId = params.projectId;
 
-  const {
-    setProject, setPages, setCurrentPageId,
-    pages, currentPageId, project,
-    canvas, pushUndo, markDirty, refreshLayers,
-  } = useDocumentStore()
+  const [project, setProject] = useState<DesignProject | null>(null);
+  const [pages, setPages] = useState<DesignPage[]>([]);
+  const [initialJson, setInitialJson] = useState<object | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load project
+  // Fetch project data
   useEffect(() => {
-    async function load() {
+    if (!projectId) return;
+
+    (async () => {
+      setLoading(true);
       try {
-        const res = await fetch(`/api/designer/${projectId}`)
+        const res = await fetch(`/api/designer/projects/${projectId}`);
         if (!res.ok) {
-          setError('Project not found')
-          return
+          setError("Project not found");
+          return;
         }
-        const data = await res.json()
-        const proj = data.project ?? data // support both wrapped and flat shapes
+        const data = await res.json();
+        setProject(data.project);
+        setPages(data.pages || []);
 
-        const project: DesignProject = {
-          id: proj.id,
-          user_id: proj.user_id,
-          name: proj.name,
-          width: proj.width,
-          height: proj.height,
-          preview_url: proj.preview_url,
-          is_template: proj.is_template,
-          template_source_id: proj.template_source_id,
-          folder_id: proj.folder_id,
-          deleted_at: proj.deleted_at,
-          created_at: proj.created_at,
-          updated_at: proj.updated_at,
-        }
-
-        setProject(project)
-
-        const loadedPages: DesignPage[] = (data.pages || []).map((p: any) => ({
-          id: p.id,
-          project_id: p.project_id,
-          page_index: p.page_index,
-          width: p.width,
-          height: p.height,
-          background: p.background,
-          fabric_json_path: p.fabric_json_path,
-          preview_path: p.preview_path,
-          created_at: p.created_at,
-          fabricUrl: p.fabricUrl,
-          previewUrl: p.previewUrl,
-        }))
-
-        setPages(loadedPages)
-        if (loadedPages.length > 0) {
-          setCurrentPageId(loadedPages[0].id)
+        // Load first page's fabric JSON if available
+        const firstPage = data.pages?.[0];
+        if (firstPage?.fabric_json_path) {
+          try {
+            const jsonRes = await fetch(
+              `/api/designer/projects/${projectId}/save?pageId=${firstPage.id}`,
+            );
+            if (jsonRes.ok) {
+              const jsonData = await jsonRes.json();
+              setInitialJson(jsonData.fabricJson || null);
+            }
+          } catch {
+            // No saved JSON yet — blank canvas
+          }
         }
       } catch {
-        setError('Failed to load project')
+        setError("Failed to load project");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    })();
+  }, [projectId]);
 
-    load()
-  }, [projectId, setProject, setPages, setCurrentPageId])
+  // Save handler
+  const handleSave = useCallback(
+    async (json: object) => {
+      if (!project || pages.length === 0) return;
+      const page = pages[0];
+      await fetch(`/api/designer/projects/${project.id}/save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pageId: page.id,
+          fabricJson: json,
+        }),
+      });
+    },
+    [project, pages],
+  );
 
-  // Auto-import PSD when arriving from dashboard with ?importPsd= param
-  useEffect(() => {
-    if (!canvas || psdImportedRef.current) return
-
-    const params = new URLSearchParams(window.location.search)
-    const psdKey = params.get('importPsd')
-    if (!psdKey) return
-
-    psdImportedRef.current = true
-
-    // Clean URL without reloading
-    const cleanUrl = window.location.pathname
-    window.history.replaceState({}, '', cleanUrl)
-
-    // Retrieve PSD from IndexedDB and import
-    retrievePendingPsd(psdKey).then(async (file) => {
-      if (!file) {
-        console.warn('PSD file not found in transfer store')
-        return
-      }
-      try {
-        const state = useDocumentStore.getState()
-        const p = state.project
-        const result = await importPsdToCanvas(file, canvas, {
-          pushUndo,
-          markDirty,
-          refreshLayers,
-          designWidth: p?.width,
-          designHeight: p?.height,
-          onResize: async (w, h) => {
-            // Resize artboard on the canvas instance
-            const resize = (canvas as any).__resizeArtboard
-            if (typeof resize === 'function') resize(w, h)
-
-            // Update project dimensions in DB
-            try {
-              await fetch(`/api/designer/${projectId}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ width: w, height: h }),
-              })
-            } catch (e) {
-              console.warn('[PSD Import] Failed to update project dimensions', e)
-            }
-
-            // Update store
-            if (p) {
-              useDocumentStore.getState().setProject({ ...p, width: w, height: h })
-            }
-            const pgId = state.currentPageId
-            if (pgId) {
-              useDocumentStore.getState().updatePage(pgId, { width: w, height: h })
-            }
-          },
-        })
-        console.log(`PSD imported: ${result.layerCount} layers`, result.errors)
-
-        // Trigger an immediate save so the import persists
-        setTimeout(() => {
-          const saveFn = (window as any).__designerSave
-          if (typeof saveFn === 'function') saveFn()
-        }, 500)
-      } catch (err) {
-        console.error('PSD auto-import failed:', err)
-      }
-    })
-  }, [canvas, pushUndo, markDirty, refreshLayers])
-
-  // Auto-run AI design when arriving from home page with ?aiDesign= param
-  useEffect(() => {
-    if (!canvas || aiDesignTriggeredRef.current) return
-
-    const params = new URLSearchParams(window.location.search)
-    const aiParam = params.get('aiDesign')
-    if (!aiParam) return
-
-    aiDesignTriggeredRef.current = true
-
-    // Clean URL without reloading
-    window.history.replaceState({}, '', window.location.pathname)
-
-    let request: { prompt: string; format: string; pageCount: number }
-    try {
-      request = JSON.parse(atob(aiParam))
-    } catch {
-      console.error('Invalid aiDesign query param')
-      return
-    }
-
-    const state = useDocumentStore.getState()
-    const p = state.project
-    const dw = p?.width ?? 1080
-    const dh = p?.height ?? 1080
-
-    ;(async () => {
-      try {
-        setAiProgress('Planning content with AI…')
-
-        const res = await fetch('/api/designer/ai-design', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            prompt: request.prompt,
-            format: request.format,
-            pageCount: request.pageCount,
-            designWidth: dw,
-            designHeight: dh,
-          }),
-        })
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}))
-          throw new Error(data.error || `Server error (${res.status})`)
-        }
-
-        setAiProgress('Assembling design…')
-        const data = (await res.json()) as AIDesignResponse
-
-        if (data.pageSpecs.length > 0) {
-          await assemblePageOnCanvas(canvas, data.pageSpecs[0], {
-            clearFirst: true,
-            designWidth: dw,
-            designHeight: dh,
-            pushUndo: () => pushUndo('AI Design'),
-            markDirty,
-            refreshLayers,
-          })
-        }
-
-        setAiProgress('')
-
-        // Trigger an immediate save
-        setTimeout(() => {
-          const saveFn = (window as any).__designerSave
-          if (typeof saveFn === 'function') saveFn()
-        }, 500)
-      } catch (err) {
-        console.error('AI design auto-generation failed:', err)
-        setAiProgress('')
-      }
-    })()
-  }, [canvas, pushUndo, markDirty, refreshLayers])
-
-  if (!projectId || loading) {
+  if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-50">
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-gray-500 mx-auto mb-3" />
-          <p className="text-xs text-gray-500">Loading editor…</p>
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground mx-auto mb-3" />
+          <p className="text-sm text-muted-foreground">Loading designer…</p>
         </div>
       </div>
-    )
+    );
   }
 
-  if (error) {
+  if (error || !project) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-50">
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <p className="text-sm text-red-400 mb-2">{error}</p>
-          <Button variant="link" size="sm" asChild>
-            <Link href="/app/designer">Back to projects</Link>
-          </Button>
+          <p className="text-lg font-medium text-destructive">
+            {error || "Project not found"}
+          </p>
+          <button
+            onClick={() => router.push("/app/designer")}
+            className="text-sm text-primary underline mt-2"
+          >
+            Back to dashboard
+          </button>
         </div>
       </div>
-    )
+    );
   }
-
-  const currentPage = pages.find(p => p.id === currentPageId)
-  const initialFabricUrl = (currentPage as any)?.fabricUrl ?? undefined
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-gray-100 overflow-hidden">
-      <TopBar projectId={projectId} />
-
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
-        {/* Mobile: right panel tiles (top strip) */}
-        <div className="order-first md:hidden shrink-0">
-          <MobileRightPanelTiles />
-        </div>
-
-        {/* Desktop: right panels (right column) */}
-        <div className="hidden md:flex md:order-last shrink-0 overflow-y-auto flex-col border-l border-gray-200">
-          <LayersTree />
-          <CharacterPanel />
-          <AdjustmentsPanel />
-          <RightPanel />
-        </div>
-
-        {/* Main workspace — left panels + canvas */}
-        <div className="flex-1 flex overflow-hidden order-last md:order-first min-h-0">
-          {/* Left panels — always visible */}
-          <LeftRail />
-          <LeftPanel />
-
-          {/* Canvas + floating toolbar wrapper */}
-          <div className="flex-1 flex overflow-hidden min-w-0 relative">
-            {/* LeftToolbar: floats over canvas on mobile, inline on desktop */}
-            <div className="absolute left-0 top-0 bottom-0 z-20 md:relative md:inset-auto">
-              <LeftToolbar />
-            </div>
-
-            {/* Canvas area */}
-            <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-              <div className="flex-1 relative overflow-hidden">
-                {aiProgress && (
-                  <div className="absolute top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-violet-600 text-white px-4 py-2 rounded-full shadow-lg">
-                    <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-                    <span className="text-xs font-medium">{aiProgress}</span>
-                  </div>
-                )}
-                <CanvasStage
-                  key={currentPageId ?? 'default'}
-                  pageId={currentPageId ?? ''}
-                  projectId={projectId}
-                  initialFabricUrl={initialFabricUrl}
-                  width={currentPage?.width ?? project?.width ?? 1080}
-                  height={currentPage?.height ?? project?.height ?? 1080}
-                />
-              </div>
-
-              <PagesStrip projectId={projectId} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Modals */}
-      <ExportModal />
-      <ShareModal projectId={projectId} />
-      <CsvBulkModal />
-      <AiDesignModal />
-    </div>
-  )
+    <DesignerEditor
+      projectId={project.id}
+      projectName={project.name}
+      width={project.width}
+      height={project.height}
+      initialJson={initialJson}
+      onSave={handleSave}
+      onBack={() => router.push("/app/designer")}
+    />
+  );
 }

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evergreen — Sustainable Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root { --primary: #1a2e1a; --secondary: #f0f7ed; --accent: #3d8b37; --accent-light: #55a64e; --earth: #8b6914; --text: #2d3b2d; --text-light: #5a6b5a; --white: #ffffff; --border: #d5e3d0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.8; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 22px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .nav-logo i { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: 10px 28px; border-radius: 100px; font-weight: 600 !important; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(160deg, #f0f7ed 0%, #e7f0e3 40%, #dae8d3 100%); padding: 140px 60px 80px; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--white); padding: 8px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 20px; border: 1px solid var(--border); }
+    .hero h1 { font-size: 52px; line-height: 1.15; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 17px; color: var(--text-light); max-width: 480px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; }
+    .btn-green { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--white); padding: 14px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(61,139,55,0.2); }
+    .btn-green:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 10px; border: 2px solid var(--border); color: var(--text); padding: 12px 32px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 24px; box-shadow: 0 20px 60px rgba(26,46,26,0.12); }
+
+    section { padding: 100px 60px; }
+    .section-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: 40px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+    .section-desc { font-size: 16px; color: var(--text-light); max-width: 520px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .impact { background: var(--white); }
+    .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 60px; text-align: center; }
+    .impact-card { background: var(--secondary); border-radius: 20px; padding: 40px 24px; transition: all 0.3s; }
+    .impact-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .impact-num { font-size: 44px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .impact-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .impact-card p { font-size: 13px; color: var(--text-light); }
+
+    .products { background: var(--secondary); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+    .product-card { background: var(--white); border-radius: 20px; overflow: hidden; transition: all 0.3s; }
+    .product-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.06); transform: translateY(-4px); }
+    .product-card img { width: 100%; height: 280px; object-fit: cover; }
+    .product-body { padding: 28px; }
+    .product-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 100px; background: #dcfce7; color: var(--accent); margin-bottom: 12px; }
+    .product-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .product-card p { font-size: 14px; color: var(--text-light); margin-bottom: 16px; }
+    .product-price { font-size: 22px; font-weight: 700; color: var(--accent); }
+
+    .mission { background: var(--white); }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+    .mission-img img { width: 100%; height: 480px; object-fit: cover; border-radius: 20px; }
+    .mission-features { margin-top: 32px; }
+    .mission-feat { display: flex; gap: 16px; margin-bottom: 24px; }
+    .mission-feat i { width: 44px; height: 44px; border-radius: 12px; background: var(--secondary); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .mission-feat h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .mission-feat p { font-size: 14px; color: var(--text-light); }
+
+    .cta-section { background: var(--primary); text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; opacity: 0.15; pointer-events: none; }
+    .cta-section > * { position: relative; z-index: 2; }
+    .cta-section h2 { font-size: 42px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 36px; }
+
+    footer { background: #111e11; padding: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 20px; font-weight: 700; color: var(--white); display: flex; align-items: center; gap: 8px; }
+    .footer-logo i { color: var(--accent-light); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.35); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent-light); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.15); margin-top: 32px; text-align: center; }
+
+    @media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; } .hero-img { display: none; } .impact-grid { grid-template-columns: repeat(2, 1fr); } .products-grid { grid-template-columns: repeat(2, 1fr); } .mission-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .nav { padding: 16px 24px; } .nav-links { display: none; } section { padding: 60px 24px; } .hero { padding: 120px 24px 60px; } .hero h1 { font-size: 36px; } .impact-grid, .products-grid { grid-template-columns: 1fr; } .section-title { font-size: 30px; } .footer-inner { flex-direction: column; gap: 20px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-leaf"></i> Evergreen</div>
+    <div class="nav-links">
+      <a href="#impact" data-phoxta-link="navImpact">Impact</a>
+      <a href="#products" data-phoxta-link="navProducts">Products</a>
+      <a href="#mission" data-phoxta-link="navMission">Our Mission</a>
+      <a href="#cta" class="nav-cta" data-phoxta-link="navCta">Shop Sustainable</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge" data-phoxta="heroBadge"><i class="fa-solid fa-seedling"></i> B Corp Certified</div>
+        <h1 data-phoxta="heroTitle">Living <span>Sustainably</span> Has Never Looked So Good</h1>
+        <p data-phoxta="heroDesc">Beautiful, eco-friendly products that don't compromise on quality or style. Join the green revolution.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn-green" data-phoxta-link="heroCta1"><i class="fa-solid fa-shopping-bag"></i> Shop Now</a>
+          <a href="#mission" class="btn-outline" data-phoxta-link="heroCta2">Our Mission</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.pexels.com/photos/5561913/pexels-photo-5561913.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Eco products" data-phoxta-image="heroImg" />
+      </div>
+    </div>
+  </section>
+
+  <section class="impact" id="impact">
+    <div class="container" style="text-align:center;">
+      <p class="section-label" data-phoxta="impactLabel">Our Impact</p>
+      <h2 class="section-title" data-phoxta="impactTitle">Making a Real Difference</h2>
+      <p class="section-desc" style="margin:0 auto;" data-phoxta="impactDesc">Every purchase supports environmental conservation and sustainable communities.</p>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-num" data-phoxta="imp1Num">2M+</div>
+          <h3 data-phoxta="imp1Title">Trees Planted</h3>
+          <p data-phoxta="imp1Desc">Through our reforestation partnerships across 15 countries.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num" data-phoxta="imp2Num">500T</div>
+          <h3 data-phoxta="imp2Title">Plastic Diverted</h3>
+          <p data-phoxta="imp2Desc">Tons of plastic waste prevented from reaching our oceans.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num" data-phoxta="imp3Num">100%</div>
+          <h3 data-phoxta="imp3Title">Carbon Neutral</h3>
+          <p data-phoxta="imp3Desc">All operations offset through verified carbon credits.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-num" data-phoxta="imp4Num">50K+</div>
+          <h3 data-phoxta="imp4Title">Happy Customers</h3>
+          <p data-phoxta="imp4Desc">A growing community committed to sustainable living.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="container">
+      <p class="section-label" data-phoxta="prodLabel">Our Products</p>
+      <h2 class="section-title" data-phoxta="prodTitle">Eco-Friendly Essentials</h2>
+      <p class="section-desc" data-phoxta="prodDesc">Thoughtfully designed products made from sustainable, biodegradable and recycled materials.</p>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="https://images.pexels.com/photos/5561913/pexels-photo-5561913.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product" data-phoxta-image="prod1Img" />
+          <div class="product-body">
+            <span class="product-tag" data-phoxta="prod1Tag">Bestseller</span>
+            <h3 data-phoxta="prod1Title">Bamboo Essentials Kit</h3>
+            <p data-phoxta="prod1Desc">Complete set of bamboo toothbrush, utensils, straw and carrying case.</p>
+            <div class="product-price" data-phoxta="prod1Price">$34.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.pexels.com/photos/6044227/pexels-photo-6044227.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product" data-phoxta-image="prod2Img" />
+          <div class="product-body">
+            <span class="product-tag" data-phoxta="prod2Tag">New Arrival</span>
+            <h3 data-phoxta="prod2Title">Organic Cotton Tote</h3>
+            <p data-phoxta="prod2Desc">Durable, washable tote bag made from 100% GOTS certified organic cotton.</p>
+            <div class="product-price" data-phoxta="prod2Price">$24.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="https://images.pexels.com/photos/6621472/pexels-photo-6621472.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product" data-phoxta-image="prod3Img" />
+          <div class="product-body">
+            <span class="product-tag" data-phoxta="prod3Tag">Popular</span>
+            <h3 data-phoxta="prod3Title">Beeswax Wrap Set</h3>
+            <p data-phoxta="prod3Desc">Reusable food wraps in three sizes. Replace single-use plastic wrap forever.</p>
+            <div class="product-price" data-phoxta="prod3Price">$19.99</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission" id="mission">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-img">
+          <img src="https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Forest" data-phoxta-image="missionImg" />
+        </div>
+        <div>
+          <p class="section-label" data-phoxta="missionLabel">Our Mission</p>
+          <h2 class="section-title" data-phoxta="missionTitle">A Better World, One Product at a Time</h2>
+          <p class="section-desc" data-phoxta="missionDesc">We believe that small changes in everyday habits can create massive positive impact for our planet and future generations.</p>
+          <div class="mission-features">
+            <div class="mission-feat"><i class="fa-solid fa-recycle"></i><div><h4 data-phoxta="mf1Title">Zero Waste Packaging</h4><p data-phoxta="mf1Desc">All packaging is compostable, recyclable or reusable — never landfill bound.</p></div></div>
+            <div class="mission-feat"><i class="fa-solid fa-handshake"></i><div><h4 data-phoxta="mf2Title">Fair Trade Sourcing</h4><p data-phoxta="mf2Desc">We partner with artisans and suppliers who pay living wages and respect workers' rights.</p></div></div>
+            <div class="mission-feat"><i class="fa-solid fa-tree"></i><div><h4 data-phoxta="mf3Title">1% for the Planet</h4><p data-phoxta="mf3Desc">One percent of every sale goes directly to environmental nonprofits worldwide.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="cta">
+    <h2 data-phoxta="ctaTitle">Join the Green Movement</h2>
+    <p data-phoxta="ctaDesc">Subscribe to our newsletter for sustainable living tips, new products and exclusive offers.</p>
+    <a href="#" class="btn-green" data-phoxta-link="ctaBtn"><i class="fa-solid fa-leaf"></i> Get Started</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-leaf"></i> Evergreen</div>
+      <div class="footer-links">
+        <a href="#impact" data-phoxta-link="fLink1">Impact</a>
+        <a href="#products" data-phoxta-link="fLink2">Shop</a>
+        <a href="#mission" data-phoxta-link="fLink3">Mission</a>
+        <a href="#cta" data-phoxta-link="fLink4">Subscribe</a>
+      </div>
+    </div>
+    <p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Evergreen Co. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

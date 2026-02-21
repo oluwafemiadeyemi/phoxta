@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WaveForm — Podcast Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#0f0f1a;--surface:#181828;--card:#1e1e30;--accent:#8b5cf6;--accent-l:#a78bfa;--mint:#34d399;--text:#e2e8f0;--dim:#94a3b8;--white:#fff;--border:#2a2a44}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Space Grotesk',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(15,15,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:22px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:8px}.nav-logo i{color:var(--accent)}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:radial-gradient(ellipse at 30% 40%,rgba(139,92,246,.12),transparent 60%),var(--bg);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:50px;line-height:1.12;font-weight:700;margin-bottom:18px}.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{font-size:16px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-pod{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;transition:all .3s;box-shadow:0 4px 20px rgba(139,92,246,.3)}.btn-pod:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .btn-pod-outline{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);color:var(--text);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;transition:all .3s;margin-left:12px}.btn-pod-outline:hover{border-color:var(--accent);color:var(--accent)}
+    .hero-img img{width:100%;height:440px;object-fit:cover;border-radius:20px;border:1px solid var(--border)}
+    .wave-bar{display:flex;gap:3px;align-items:end;height:40px;margin-bottom:20px}
+    .wave-bar span{width:4px;border-radius:100px;background:var(--accent);animation:wave 1.2s ease-in-out infinite}
+    .wave-bar span:nth-child(1){height:60%;animation-delay:0s}.wave-bar span:nth-child(2){height:100%;animation-delay:.1s}.wave-bar span:nth-child(3){height:40%;animation-delay:.2s}
+    .wave-bar span:nth-child(4){height:80%;animation-delay:.3s}.wave-bar span:nth-child(5){height:50%;animation-delay:.4s}.wave-bar span:nth-child(6){height:90%;animation-delay:.5s}
+    @keyframes wave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.5)}}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:40px;font-weight:700;color:var(--white);margin-bottom:12px}.section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .episodes{background:var(--surface)}.ep-grid{display:flex;flex-direction:column;gap:16px;margin-top:60px}
+    .ep-card{background:var(--card);border-radius:16px;padding:24px;display:flex;gap:20px;align-items:center;border:1px solid var(--border);transition:all .3s}.ep-card:hover{border-color:var(--accent);transform:translateX(4px)}
+    .ep-num{font-size:32px;font-weight:700;color:var(--accent);min-width:50px}.ep-info{flex:1}
+    .ep-card h3{font-size:17px;font-weight:600;color:var(--white);margin-bottom:4px}.ep-card p{font-size:13px;color:var(--dim)}
+    .ep-meta{display:flex;gap:16px;font-size:12px;color:var(--dim);margin-top:6px}.ep-meta i{margin-right:4px;color:var(--accent)}
+    .ep-play{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:16px;cursor:pointer;transition:all .3s;flex-shrink:0}.ep-play:hover{background:var(--accent-l);transform:scale(1.1)}
+    .platforms{background:var(--bg);text-align:center}.plat-grid{display:flex;justify-content:center;gap:24px;margin-top:48px;flex-wrap:wrap}
+    .plat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:14px;transition:all .3s}.plat-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .plat-card i{font-size:28px;color:var(--accent)}.plat-card span{font-size:14px;font-weight:600;color:var(--white)}
+    .cta-pod{background:linear-gradient(135deg,var(--accent),#6d28d9);text-align:center;border-radius:0}
+    .cta-pod h2{font-size:42px;font-weight:700;color:var(--white);margin-bottom:12px}.cta-pod p{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:var(--surface);padding:48px 60px;border-top:1px solid var(--border)}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:20px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo i{color:var(--accent)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:var(--dim);transition:color .3s}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.15);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:32px}.section-title{font-size:28px}.plat-grid{flex-direction:column;align-items:center}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-podcast"></i> WaveForm</div><div class="nav-links"><a href="#episodes" data-phoxta-link="navEp">Episodes</a><a href="#platforms" data-phoxta-link="navPl">Listen</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Subscribe</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="wave-bar"><span></span><span></span><span></span><span></span><span></span><span></span></div><h1 data-phoxta="heroTitle">Where Ideas Sound <span>Different</span></h1><p data-phoxta="heroDesc">Deep conversations with founders, creators and thinkers who are shaping the future. New episodes every Tuesday.</p><a href="#episodes" class="btn-pod" data-phoxta-link="heroCta"><i class="fa-solid fa-headphones"></i> Latest Episode</a><a href="#platforms" class="btn-pod-outline" data-phoxta-link="heroCta2"><i class="fa-solid fa-play"></i> All Platforms</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/3783471/pexels-photo-3783471.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Podcast" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="episodes" id="episodes"><div class="container"><p class="section-label" data-phoxta="epLabel">Latest Episodes</p><h2 class="section-title" data-phoxta="epTitle">Tune In</h2><div class="ep-grid">
+    <div class="ep-card"><div class="ep-num" data-phoxta="ep1Num">#42</div><div class="ep-info"><h3 data-phoxta="ep1Title">The Art of Scaling Without Burning Out</h3><p data-phoxta="ep1Desc">Sarah Chen shares how she grew her startup to $10M ARR while maintaining a 4-day workweek.</p><div class="ep-meta"><span><i class="fa-solid fa-clock"></i> <span data-phoxta="ep1Dur">52 min</span></span><span><i class="fa-solid fa-calendar"></i> <span data-phoxta="ep1Date">Jan 14</span></span></div></div><div class="ep-play"><i class="fa-solid fa-play"></i></div></div>
+    <div class="ep-card"><div class="ep-num" data-phoxta="ep2Num">#41</div><div class="ep-info"><h3 data-phoxta="ep2Title">Designing for the Next Billion Users</h3><p data-phoxta="ep2Desc">Raj Patel on inclusive design, accessibility and building apps for emerging markets.</p><div class="ep-meta"><span><i class="fa-solid fa-clock"></i> <span data-phoxta="ep2Dur">47 min</span></span><span><i class="fa-solid fa-calendar"></i> <span data-phoxta="ep2Date">Jan 7</span></span></div></div><div class="ep-play"><i class="fa-solid fa-play"></i></div></div>
+    <div class="ep-card"><div class="ep-num" data-phoxta="ep3Num">#40</div><div class="ep-info"><h3 data-phoxta="ep3Title">Why Most AI Products Fail</h3><p data-phoxta="ep3Desc">Dr. Lisa Montgomery on the gap between AI research and real-world product-market fit.</p><div class="ep-meta"><span><i class="fa-solid fa-clock"></i> <span data-phoxta="ep3Dur">61 min</span></span><span><i class="fa-solid fa-calendar"></i> <span data-phoxta="ep3Date">Dec 31</span></span></div></div><div class="ep-play"><i class="fa-solid fa-play"></i></div></div>
+  </div></div></section>
+  <section class="platforms" id="platforms"><div class="container"><p class="section-label" data-phoxta="plLabel">Listen Everywhere</p><h2 class="section-title" data-phoxta="plTitle">Available On</h2><div class="plat-grid">
+    <div class="plat-card"><i class="fa-brands fa-spotify"></i><span data-phoxta="pl1">Spotify</span></div>
+    <div class="plat-card"><i class="fa-brands fa-apple"></i><span data-phoxta="pl2">Apple Podcasts</span></div>
+    <div class="plat-card"><i class="fa-brands fa-youtube"></i><span data-phoxta="pl3">YouTube</span></div>
+    <div class="plat-card"><i class="fa-brands fa-google"></i><span data-phoxta="pl4">Google Podcasts</span></div>
+  </div></div></section>
+  <section class="cta-pod" id="cta"><h2 data-phoxta="ctaTitle">Never Miss an Episode</h2><p data-phoxta="ctaDesc">Subscribe to the newsletter and get episode summaries, bonus content and behind-the-scenes stories.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-envelope"></i> Subscribe Free</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-podcast"></i> WaveForm</div><div class="footer-links"><a href="#episodes" data-phoxta-link="fl1">Episodes</a><a href="#platforms" data-phoxta-link="fl2">Platforms</a><a href="#cta" data-phoxta-link="fl3">Subscribe</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 WaveForm Podcast. All rights reserved.</p></footer>
+</body>
+</html>

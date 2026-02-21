@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PawsCare — Veterinary Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#fefdfb;--surface:#f0fdf4;--card:#fff;--accent:#16a34a;--accent-l:#22c55e;--warm:#f59e0b;--text:#14532d;--dim:#6b7280;--white:#fff;--border:#bbf7d0}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Nunito',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(254,253,251,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:22px;font-weight:800;color:var(--accent);display:flex;align-items:center;gap:8px}.nav-logo i{color:var(--warm)}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:14px;font-weight:600;color:var(--dim);transition:color .3s}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:10px 24px;border-radius:100px;font-weight:700!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(160deg,#fefdfb,#f0fdf4);padding:140px 60px 80px}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
+    .hero h1{font-size:46px;line-height:1.15;font-weight:800;margin-bottom:18px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:15px;color:var(--dim);max-width:440px;margin-bottom:28px}
+    .btn-pri{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--white);padding:14px 28px;border-radius:100px;font-size:14px;font-weight:700;transition:all .3s}.btn-pri:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .hero-img img{width:100%;height:420px;object-fit:cover;border-radius:24px}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-size:36px;font-weight:800;margin-bottom:12px}
+    .svc{background:var(--bg)}.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .svc-card{background:var(--card);border:2px solid var(--border);border-radius:20px;padding:28px;text-align:center;transition:all .3s}.svc-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.04)}
+    .svc-emoji{font-size:36px;margin-bottom:12px}.svc-card h3{font-size:17px;font-weight:700;margin-bottom:6px}.svc-card p{font-size:13px;color:var(--dim)}
+    .team{background:var(--surface)}.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .team-card{text-align:center}.team-card img{width:100%;height:280px;object-fit:cover;border-radius:20px;margin-bottom:14px}
+    .team-card h3{font-size:16px;font-weight:700}.team-card p{font-size:13px;color:var(--dim)}
+    .cta-vet{background:var(--accent);text-align:center}
+    .cta-vet h2{font-size:36px;font-weight:800;color:var(--white);margin-bottom:12px}.cta-vet p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px}
+    .btn-white{display:inline-flex;align-items:center;gap:10px;background:var(--white);color:var(--accent);padding:14px 28px;border-radius:100px;font-size:14px;font-weight:700;transition:all .3s}.btn-white:hover{transform:translateY(-2px)}
+    footer{background:#14532d;padding:48px 60px}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-size:18px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo i{color:var(--accent-l)}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .3s}.footer-links a:hover{color:var(--accent-l)}
+    .footer-copy{font-size:11px;color:rgba(255,255,255,.12);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.svc-grid,.team-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:32px}.svc-grid,.team-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo"><i class="fa-solid fa-paw"></i> PawsCare</div><div class="nav-links"><a href="#services" data-phoxta-link="navSvc">Services</a><a href="#team" data-phoxta-link="navTm">Team</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Book Visit</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><h1 data-phoxta="heroTitle">Compassionate Care for <span>Every Pet</span></h1><p data-phoxta="heroDesc">Full-service veterinary clinic providing exceptional medical care for dogs, cats and exotic animals since 2005.</p><a href="#cta" class="btn-pri" data-phoxta-link="heroCta"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a></div><div class="hero-img"><img src="https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vet" data-phoxta-image="heroImg"/></div></div></section>
+  <section class="svc" id="services"><div class="container"><p class="section-label" data-phoxta="svcLabel">Services</p><h2 class="section-title" data-phoxta="svcTitle">How We Help Your Pet</h2><div class="svc-grid">
+    <div class="svc-card"><div class="svc-emoji">🩺</div><h3 data-phoxta="s1Title">Wellness Exams</h3><p data-phoxta="s1Desc">Comprehensive checkups, vaccinations and preventive care for a healthy life.</p></div>
+    <div class="svc-card"><div class="svc-emoji">🦷</div><h3 data-phoxta="s2Title">Dental Care</h3><p data-phoxta="s2Desc">Professional dental cleanings, extractions and oral health assessments.</p></div>
+    <div class="svc-card"><div class="svc-emoji">🏥</div><h3 data-phoxta="s3Title">Surgery</h3><p data-phoxta="s3Desc">State-of-the-art surgical suites for routine and emergency procedures.</p></div>
+    <div class="svc-card"><div class="svc-emoji">💉</div><h3 data-phoxta="s4Title">Vaccinations</h3><p data-phoxta="s4Desc">Up-to-date vaccination protocols to protect your pet from disease.</p></div>
+    <div class="svc-card"><div class="svc-emoji">🔬</div><h3 data-phoxta="s5Title">Diagnostics</h3><p data-phoxta="s5Desc">In-house lab, digital X-ray and ultrasound for fast accurate results.</p></div>
+    <div class="svc-card"><div class="svc-emoji">🚨</div><h3 data-phoxta="s6Title">Emergency</h3><p data-phoxta="s6Desc">24/7 emergency services for when your pet needs immediate attention.</p></div>
+  </div></div></section>
+  <section class="team" id="team"><div class="container"><p class="section-label" data-phoxta="tmLabel">Our Veterinarians</p><h2 class="section-title" data-phoxta="tmTitle">Meet the Team</h2><div class="team-grid">
+    <div class="team-card"><img src="https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Vet" data-phoxta-image="tm1Img"/><h3 data-phoxta="tm1Name">Dr. Sarah Mitchell</h3><p data-phoxta="tm1Role">Chief Veterinarian</p></div>
+    <div class="team-card"><img src="https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Vet" data-phoxta-image="tm2Img"/><h3 data-phoxta="tm2Name">Dr. James Nguyen</h3><p data-phoxta="tm2Role">Surgeon & Diagnostics</p></div>
+    <div class="team-card"><img src="https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Vet" data-phoxta-image="tm3Img"/><h3 data-phoxta="tm3Name">Dr. Emily Torres</h3><p data-phoxta="tm3Role">Exotic Animal Specialist</p></div>
+  </div></div></section>
+  <section class="cta-vet" id="cta"><h2 data-phoxta="ctaTitle">Your Pet Deserves the Best</h2><p data-phoxta="ctaDesc">New patients welcome. Book your first visit and get a free wellness check.</p><a href="#" class="btn-white" data-phoxta-link="ctaBtn"><i class="fa-solid fa-phone"></i> Call (555) 789-0123</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo"><i class="fa-solid fa-paw"></i> PawsCare</div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#team" data-phoxta-link="fl2">Team</a><a href="#cta" data-phoxta-link="fl3">Contact</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 PawsCare Veterinary Clinic. All rights reserved.</p></footer>
+</body>
+</html>

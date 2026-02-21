@@ -27,6 +27,7 @@ import {
   MessageCircle,
   Newspaper,
   Paintbrush,
+  Globe,
 } from "lucide-react";
 
 import { RefineAiErrorComponent } from "@crm/components/catch-all";
@@ -84,6 +85,9 @@ import ContentHubPage from "@crm/pages/content/list";
 import ContentCreate from "@crm/pages/content/create";
 import ContentEdit from "@crm/pages/content/edit";
 import ContentDesignerPage from "@crm/pages/content/designer";
+
+// Website Builder
+import WebsiteBuilderPage from "@crm/pages/website/builder";
 
 const DEFAULT_LOGO = "/phoxta-logo.png";
 
@@ -308,6 +312,15 @@ const CrmApp = () => {
               parent: "content-group",
             },
           },
+          // Website Builder
+          {
+            name: "websiteSites",
+            list: "/website",
+            meta: {
+              label: "Website",
+              icon: <Globe />,
+            },
+          },
           {
             name: "finance",
             list: "/finance",
@@ -421,6 +434,10 @@ const CrmApp = () => {
             <Route path="/content/edit/:id" element={<ContentEdit />} />
             <Route path="/content/designer" element={<ContentDesignerPage />} />
             <Route path="/content/designer/*" element={<ContentDesignerPage />} />
+
+            {/* Website Builder routes */}
+            <Route path="/website" element={<WebsiteBuilderPage />} />
+            <Route path="/website/*" element={<WebsiteBuilderPage />} />
 
             <Route path="/finance" element={<FinancePage />} />
 

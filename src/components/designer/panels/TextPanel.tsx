@@ -1,98 +1,186 @@
-'use client'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Text Panel
+   Add heading, subheading, body text, or custom text to the canvas
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ===========================================================================
-// TextPanel — text style presets + add custom text
-// Uses: shadcn Button, Separator, ScrollArea
-// ===========================================================================
-import { useDocumentStore } from '@/stores/designer/documentStore'
-import { TEXT_STYLE_PRESETS } from '@/types/designer'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Plus, Heading1, Heading2, Type } from 'lucide-react'
+import { useCallback } from "react";
+import {
+  Heading1,
+  Heading2,
+  Type,
+  AlignLeft,
+  ListOrdered,
+} from "lucide-react";
+import { ScrollArea } from "@crm/components/ui/scroll-area";
+import { Button } from "@crm/components/ui/button";
+import { useDocumentStore } from "@/stores/designer/documentStore";
+import { useToolStore } from "@/stores/designer/toolStore";
+import { nanoid } from "nanoid";
+
+interface TextPreset {
+  label: string;
+  icon: React.ElementType;
+  text: string;
+  fontSize: number;
+  fontWeight: string;
+}
+
+const TEXT_PRESETS: TextPreset[] = [
+  {
+    label: "Add a heading",
+    icon: Heading1,
+    text: "Add a heading",
+    fontSize: 64,
+    fontWeight: "800",
+  },
+  {
+    label: "Add a subheading",
+    icon: Heading2,
+    text: "Add a subheading",
+    fontSize: 36,
+    fontWeight: "600",
+  },
+  {
+    label: "Add body text",
+    icon: Type,
+    text: "Add body text",
+    fontSize: 20,
+    fontWeight: "400",
+  },
+  {
+    label: "Add a long paragraph",
+    icon: AlignLeft,
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    fontSize: 18,
+    fontWeight: "400",
+  },
+  {
+    label: "Numbered list",
+    icon: ListOrdered,
+    text: "1. First item\n2. Second item\n3. Third item",
+    fontSize: 20,
+    fontWeight: "400",
+  },
+];
 
 export default function TextPanel() {
-  const canvas = useDocumentStore(s => s.canvas)
-  const pushUndo = useDocumentStore(s => s.pushUndo)
-  const markDirty = useDocumentStore(s => s.markDirty)
+  const canvas = useDocumentStore((s) => s.canvas);
+  const fontFamily = useToolStore((s) => s.fontFamily);
+  const fontColor = useToolStore((s) => s.fontColor);
 
-  const addText = async (
-    text: string,
-    fontSize: number,
-    fontWeight: string | number = 'normal',
-    fontFamily = 'Inter',
-  ) => {
-    if (!canvas) return
-    const fabricModule = await import('fabric')
-    pushUndo('Add text')
-    const obj = new fabricModule.Textbox(text, {
-      left: 100,
-      top: 100,
-      fontSize,
-      fontWeight: fontWeight as any,
-      fontFamily,
-      fill: '#000000',
-      width: 300,
-      editable: true,
-    })
-    canvas.add(obj)
-    canvas.setActiveObject(obj)
-    canvas.requestRenderAll()
-    markDirty()
-  }
+  const addText = useCallback(
+    async (preset: TextPreset) => {
+      if (!canvas) return;
+      const fabric = await import("fabric");
+
+      const text = new fabric.IText(preset.text, {
+        left: 100,
+        top: 100,
+        fontFamily,
+        fontSize: preset.fontSize,
+        fontWeight: preset.fontWeight,
+        fill: fontColor,
+        id: nanoid(8),
+        customName: preset.label,
+      } as any);
+
+      canvas.add(text);
+      canvas.setActiveObject(text);
+      canvas.requestRenderAll();
+    },
+    [canvas, fontFamily, fontColor],
+  );
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-gray-200">
-        <h3 className="text-xs font-semibold text-gray-800 mb-2">Text</h3>
-        <Button className="w-full text-xs" size="sm" onClick={() => addText('Type something', 18)}>
-          <Plus className="mr-1.5 h-3.5 w-3.5" />
-          Add a text box
-        </Button>
-      </div>
+    <ScrollArea className="h-full">
+      <div className="p-3 space-y-2">
+        <h3 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
+          Text Styles
+        </h3>
 
-      <ScrollArea className="flex-1 p-3">
-        <p className="text-[11px] text-muted-foreground mb-2 uppercase tracking-wide">Default styles</p>
-        <div className="space-y-1">
-          {TEXT_STYLE_PRESETS.map(preset => (
-            <Button
+        {TEXT_PRESETS.map((preset) => {
+          const Icon = preset.icon;
+          return (
+            <button
               key={preset.label}
-              variant="ghost"
-              className="w-full justify-start h-auto py-2.5 px-3"
-              onClick={() => addText(preset.label, preset.fontSize, preset.fontWeight, preset.fontFamily)}
+              onClick={() => addText(preset)}
+              className="w-full flex items-center gap-3 p-3 rounded-lg border bg-card hover:border-primary hover:bg-accent transition-colors text-left"
             >
-              <span style={{
-                fontFamily: preset.fontFamily,
-                fontSize: Math.min(preset.fontSize * 0.5, 24),
-                fontWeight: preset.fontWeight as any,
-              }} className="text-gray-700">
-                {preset.label}
+              <Icon className="h-5 w-5 text-muted-foreground shrink-0" />
+              <div className="min-w-0">
+                <p
+                  className="truncate"
+                  style={{
+                    fontSize: Math.min(preset.fontSize * 0.5, 24),
+                    fontWeight: Number(preset.fontWeight),
+                  }}
+                >
+                  {preset.label}
+                </p>
+                <p className="text-[10px] text-muted-foreground">
+                  {preset.fontSize}px · {preset.fontWeight}
+                </p>
+              </div>
+            </button>
+          );
+        })}
+
+        <div className="pt-4">
+          <h3 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
+            Font Combinations
+          </h3>
+          {[
+            { heading: "Inter", body: "Georgia" },
+            { heading: "Georgia", body: "Inter" },
+            { heading: "Courier New", body: "Arial" },
+          ].map((combo) => (
+            <button
+              key={`${combo.heading}-${combo.body}`}
+              onClick={async () => {
+                if (!canvas) return;
+                const fabric = await import("fabric");
+                const heading = new fabric.IText("Heading Text", {
+                  left: 100,
+                  top: 100,
+                  fontFamily: combo.heading,
+                  fontSize: 48,
+                  fontWeight: "700",
+                  fill: fontColor,
+                  id: nanoid(8),
+                  customName: "Heading",
+                } as any);
+                const body = new fabric.IText("Body text goes here", {
+                  left: 100,
+                  top: 170,
+                  fontFamily: combo.body,
+                  fontSize: 20,
+                  fontWeight: "400",
+                  fill: fontColor,
+                  id: nanoid(8),
+                  customName: "Body",
+                } as any);
+                canvas.add(heading, body);
+                canvas.requestRenderAll();
+              }}
+              className="w-full flex flex-col gap-1 p-3 rounded-lg border bg-card hover:border-primary hover:bg-accent transition-colors text-left mb-2"
+            >
+              <span
+                style={{ fontFamily: combo.heading }}
+                className="text-base font-bold"
+              >
+                {combo.heading}
               </span>
-              <span className="text-[10px] text-muted-foreground ml-2" style={{ fontSize: 10, fontWeight: 'normal', fontFamily: 'Inter' }}>
-                {preset.fontFamily} · {preset.fontSize}px
+              <span
+                style={{ fontFamily: combo.body }}
+                className="text-xs text-muted-foreground"
+              >
+                {combo.body} body text
               </span>
-            </Button>
+            </button>
           ))}
         </div>
-
-        <Separator className="my-3" />
-
-        <p className="text-[11px] text-muted-foreground mb-2 uppercase tracking-wide">Quick add</p>
-        <div className="space-y-1">
-          <Button variant="ghost" className="w-full justify-start text-sm font-bold" size="sm"
-            onClick={() => addText('Add a heading', 32, 700)}>
-            <Heading1 className="mr-2 h-4 w-4" /> Add a heading
-          </Button>
-          <Button variant="ghost" className="w-full justify-start text-sm font-medium" size="sm"
-            onClick={() => addText('Add a subheading', 22, 500)}>
-            <Heading2 className="mr-2 h-4 w-4" /> Add a subheading
-          </Button>
-          <Button variant="ghost" className="w-full justify-start text-sm" size="sm"
-            onClick={() => addText('Add body text', 14)}>
-            <Type className="mr-2 h-4 w-4" /> Add body text
-          </Button>
-        </div>
-      </ScrollArea>
-    </div>
-  )
+      </div>
+    </ScrollArea>
+  );
 }

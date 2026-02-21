@@ -1,102 +1,253 @@
-'use client'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Templates Panel
+   Shows built-in templates grouped by category; clicking applies to canvas.
+   Renders actual Fabric.js thumbnails for each template.
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ===========================================================================
-// TemplatesPanel — template library with categories, search, create from
-// Uses: shadcn Input, Button, Card, ScrollArea + Refine useList
-// ===========================================================================
-import { useState } from 'react'
-import { useList } from '@refinedev/core'
-import type { DesignProject } from '@/types/designer'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Card, CardContent } from '@/components/ui/card'
-import { Search, FileText } from 'lucide-react'
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Search } from "lucide-react";
+import { Input } from "@crm/components/ui/input";
+import { Badge } from "@crm/components/ui/badge";
+import { useDocumentStore } from "@/stores/designer/documentStore";
+import {
+  BUILTIN_TEMPLATES,
+  TEMPLATE_CATEGORIES,
+} from "@/lib/designer/templates";
+import { CANVAS_PRESETS } from "@/types/designer";
+import type { BuiltinTemplate, TemplateCategory } from "@/types/designer";
 
-export default function TemplatesPanel() {
-  const [search, setSearch] = useState('')
+/* ── Thumbnail renderer component ───────────────────────────────────────── */
+function TemplateThumbnail({ template }: { template: BuiltinTemplate }) {
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
 
-  const { query, result } = useList<DesignProject>({
-    resource: 'design_projects',
-    filters: [
-      { field: 'is_template', operator: 'eq', value: true },
-      { field: 'deleted_at', operator: 'null', value: true },
-    ],
-    sorters: [{ field: 'updated_at', order: 'desc' }],
-    pagination: { currentPage: 1, pageSize: 50 },
-  })
+  useEffect(() => {
+    let cancelled = false;
 
-  const templates = result.data ?? []
-  const isLoading = query.isLoading
-  const filtered = templates.filter((t: DesignProject) =>
-    t.name.toLowerCase().includes(search.toLowerCase())
-  )
+    (async () => {
+      try {
+        const fabric = await import("fabric");
+        const preset = CANVAS_PRESETS[template.presetKey];
+        if (!preset) return;
 
-  const handleUseTemplate = async (t: DesignProject) => {
-    try {
-      const res = await fetch('/api/designer/projects', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `${t.name} (Copy)`,
-          width: t.width,
-          height: t.height,
-          template_source_id: t.id,
-        }),
-      })
-      if (res.ok) {
-        const data = await res.json()
-        window.location.href = `/app/designer/${data.id}`
+        // Render at a small size for the thumbnail
+        const thumbWidth = 280;
+        const scale = thumbWidth / preset.width;
+        const thumbHeight = Math.round(preset.height * scale);
+
+        // Create an offscreen canvas element (not attached to DOM)
+        const offscreenEl = document.createElement("canvas");
+        offscreenEl.width = thumbWidth;
+        offscreenEl.height = thumbHeight;
+
+        const staticCanvas = new fabric.StaticCanvas(offscreenEl, {
+          width: thumbWidth,
+          height: thumbHeight,
+        });
+
+        // Apply the scale so all objects fit the thumbnail
+        staticCanvas.setZoom(scale);
+
+        await staticCanvas.loadFromJSON(template.fabricJson);
+        if (cancelled) {
+          staticCanvas.dispose();
+          return;
+        }
+        staticCanvas.requestRenderAll();
+
+        // Small delay to let rendering complete
+        await new Promise((r) => requestAnimationFrame(r));
+        if (cancelled) {
+          staticCanvas.dispose();
+          return;
+        }
+
+        try {
+          const url = staticCanvas.toDataURL({
+            format: "png",
+            quality: 0.85,
+            multiplier: 1,
+          });
+          setDataUrl(url);
+        } catch {
+          // ignore — canvas may have been disposed
+        }
+        staticCanvas.dispose();
+      } catch {
+        // Fabric failed to load — ignore
       }
-    } catch { /* silent */ }
-  }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [template]);
+
+  const preset = CANVAS_PRESETS[template.presetKey];
+  const aspect = preset ? preset.width / preset.height : 1;
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-3 border-b border-gray-200">
-        <h3 className="text-xs font-semibold text-gray-800 mb-2">Templates</h3>
+    <>
+      {dataUrl ? (
+        <img
+          src={dataUrl}
+          alt={template.name}
+          className="w-full object-cover"
+          style={{ aspectRatio: aspect }}
+          draggable={false}
+        />
+      ) : (
+        <div
+          className="w-full animate-pulse"
+          style={{
+            aspectRatio: aspect,
+            backgroundColor:
+              (template.fabricJson as any)?.background || "#f1f5f9",
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+/* ── Main panel ─────────────────────────────────────────────────────────── */
+export default function TemplatesPanel() {
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] =
+    useState<TemplateCategory | null>(null);
+
+  const canvas = useDocumentStore((s) => s.canvas);
+  const project = useDocumentStore((s) => s.project);
+  const setProject = useDocumentStore((s) => s.setProject);
+  const pushSnapshot = useDocumentStore((s) => s.pushSnapshot);
+  const markDirty = useDocumentStore((s) => s.markDirty);
+
+  const filtered = useMemo(() => {
+    let list = BUILTIN_TEMPLATES;
+    if (selectedCategory) {
+      list = list.filter((t) => t.category === selectedCategory);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(
+        (t) =>
+          t.name.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q),
+      );
+    }
+    return list;
+  }, [search, selectedCategory]);
+
+  const handleApply = useCallback(
+    (template: BuiltinTemplate) => {
+      if (!canvas) {
+        console.warn("[TemplatesPanel] canvas is null — cannot apply template");
+        return;
+      }
+
+      const preset = CANVAS_PRESETS[template.presetKey];
+      if (!preset) {
+        console.warn("[TemplatesPanel] preset not found:", template.presetKey);
+        return;
+      }
+
+      // 1) Update project dimensions in store FIRST — this triggers the
+      //    CanvasStage effect that re-centres the viewport for the new size.
+      if (project) {
+        setProject({ ...project, width: preset.width, height: preset.height });
+      }
+
+      // Deep clone the template JSON so loadFromJSON gets a fresh copy
+      const jsonClone = JSON.parse(JSON.stringify(template.fabricJson));
+
+      // 2) Load the template JSON onto the canvas
+      canvas
+        .loadFromJSON(jsonClone)
+        .then(() => {
+          canvas.requestRenderAll();
+          pushSnapshot(
+            canvas.toJSON([
+              "id",
+              "customName",
+              "selectable",
+              "visible",
+              "groupId",
+              "locked",
+            ]),
+          );
+          markDirty();
+        })
+        .catch((err: unknown) =>
+          console.error("[TemplatesPanel] loadFromJSON failed:", err),
+        );
+    },
+    [canvas, project, setProject, pushSnapshot, markDirty],
+  );
+
+  return (
+    <div className="flex flex-col h-full min-h-0">
+      {/* Search */}
+      <div className="p-3 border-b shrink-0">
         <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
-            type="text"
-            placeholder="Search templates..."
+            placeholder="Search templates…"
             value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="pl-8 text-xs h-8"
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-8 h-9"
           />
         </div>
       </div>
 
-      <ScrollArea className="flex-1 p-3">
-        {isLoading ? (
-          <p className="text-xs text-muted-foreground text-center mt-8">Loading...</p>
-        ) : filtered.length === 0 ? (
-          <div className="text-center mt-8">
-            <FileText className="h-8 w-8 text-muted-foreground/30 mx-auto mb-2" />
-            <p className="text-xs text-muted-foreground">No templates yet</p>
-            <p className="text-[11px] text-muted-foreground/70 mt-1">Create a project and mark it as template</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-2">
-            {filtered.map((t: DesignProject) => (
-              <Card key={t.id} className="overflow-hidden cursor-pointer hover:shadow-sm transition group"
-                onClick={() => handleUseTemplate(t)}>
-                <div className="aspect-square bg-muted flex items-center justify-center">
-                  {t.preview_url ? (
-                    <img src={t.preview_url} alt={t.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <FileText className="h-8 w-8 text-muted-foreground/30" />
-                  )}
-                </div>
-                <CardContent className="px-2 py-1.5">
-                  <p className="text-[11px] font-medium text-gray-500 truncate group-hover:text-gray-800">{t.name}</p>
-                  <p className="text-[10px] text-muted-foreground">{t.width}×{t.height}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
-      </ScrollArea>
+      {/* Categories */}
+      <div className="flex flex-wrap gap-1.5 p-3 border-b shrink-0">
+        <Badge
+          variant={selectedCategory === null ? "default" : "outline"}
+          className="cursor-pointer text-xs"
+          onClick={() => setSelectedCategory(null)}
+        >
+          All
+        </Badge>
+        {TEMPLATE_CATEGORIES.map((cat) => (
+          <Badge
+            key={cat}
+            variant={selectedCategory === cat ? "default" : "outline"}
+            className="cursor-pointer text-xs"
+            onClick={() =>
+              setSelectedCategory(selectedCategory === cat ? null : cat)
+            }
+          >
+            {cat}
+          </Badge>
+        ))}
+      </div>
+
+      {/* Template grid — scrollable */}
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-2 p-3">
+          {filtered.map((tpl) => (
+            <button
+              key={tpl.id}
+              onClick={() => handleApply(tpl)}
+              className="group relative rounded-lg border bg-card hover:border-primary hover:shadow-md transition-all overflow-hidden text-left"
+            >
+              <TemplateThumbnail template={tpl} />
+              <div className="p-2">
+                <p className="text-xs font-medium truncate">{tpl.name}</p>
+                <p className="text-[10px] text-muted-foreground">
+                  {tpl.category}
+                </p>
+              </div>
+            </button>
+          ))}
+
+          {filtered.length === 0 && (
+            <p className="col-span-2 text-center text-sm text-muted-foreground py-8">
+              No templates found
+            </p>
+          )}
+        </div>
+      </div>
     </div>
-  )
+  );
 }

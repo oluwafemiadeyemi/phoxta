@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust — Travel & Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root { --primary: #0f172a; --secondary: #f0f9ff; --accent: #f97316; --accent-light: #fb923c; --sky: #0ea5e9; --text: #1e293b; --text-light: #64748b; --white: #ffffff; --border: #e2e8f0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 24px; font-weight: 800; color: var(--primary); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: 10px 28px; border-radius: 100px; font-weight: 600 !important; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.8) 30%, rgba(15,23,42,0.3)); pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 140px 60px 80px; position: relative; z-index: 2; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
+    .hero h1 { font-size: 64px; line-height: 1.1; font-weight: 800; color: var(--white); max-width: 700px; margin-bottom: 24px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 520px; margin-bottom: 36px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 16px; }
+    .btn-orange { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--white); padding: 16px 36px; border-radius: 100px; font-size: 15px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 20px rgba(249,115,22,0.3); }
+    .btn-orange:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .btn-glass { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); color: var(--white); padding: 15px 36px; border-radius: 100px; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+    .btn-glass:hover { background: rgba(255,255,255,0.2); }
+
+    section { padding: 100px 60px; }
+    .section-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: 42px; font-weight: 800; color: var(--primary); margin-bottom: 16px; }
+    .section-desc { font-size: 16px; color: var(--text-light); max-width: 520px; font-weight: 400; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .destinations { background: var(--white); }
+    .dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+    .dest-card { border-radius: 20px; overflow: hidden; position: relative; height: 420px; transition: all 0.3s; }
+    .dest-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
+    .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .dest-card:hover img { transform: scale(1.05); }
+    .dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%); display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; }
+    .dest-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: var(--white); padding: 4px 14px; border-radius: 100px; font-size: 11px; font-weight: 600; margin-bottom: 12px; width: fit-content; }
+    .dest-card h3 { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .dest-card .loc { font-size: 13px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .dest-price { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .dest-price span { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); }
+
+    .features { background: var(--secondary); }
+    .feat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 60px; }
+    .feat-card { background: var(--white); border-radius: 20px; padding: 36px 28px; text-align: center; transition: all 0.3s; }
+    .feat-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .feat-icon { width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--white); }
+    .fi-orange { background: linear-gradient(135deg, var(--accent), #ef4444); }
+    .fi-sky { background: linear-gradient(135deg, var(--sky), #6366f1); }
+    .fi-green { background: linear-gradient(135deg, #10b981, #06b6d4); }
+    .fi-purple { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+    .feat-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feat-card p { font-size: 13px; color: var(--text-light); }
+
+    .testimonials { background: var(--white); }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
+    .test-card { background: var(--secondary); border-radius: 20px; padding: 32px; }
+    .test-stars { color: var(--accent); font-size: 14px; margin-bottom: 16px; }
+    .test-card .quote { font-size: 14px; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
+    .test-author { font-weight: 700; font-size: 14px; }
+    .test-role { font-size: 12px; color: var(--text-light); }
+
+    .cta-section { text-align: center; position: relative; overflow: hidden; background: var(--primary); }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: url('https://images.pexels.com/photos/2174656/pexels-photo-2174656.jpeg?auto=compress&cs=tinysrgb&w=1260') center/cover; opacity: 0.2; pointer-events: none; }
+    .cta-section > * { position: relative; z-index: 2; }
+    .cta-section h2 { font-size: 44px; font-weight: 800; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.45); margin-bottom: 36px; }
+
+    footer { background: #080c16; padding: 60px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 22px; font-weight: 800; color: var(--white); }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.3); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.15); margin-top: 32px; text-align: center; }
+
+    @media (max-width: 1024px) { .hero h1 { font-size: 48px; } .dest-grid, .test-grid { grid-template-columns: repeat(2, 1fr); } .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .nav { padding: 16px 24px; } .nav-links { display: none; } section { padding: 60px 24px; } .hero-inner { padding: 120px 24px 60px; } .hero h1 { font-size: 36px; } .dest-grid, .feat-grid, .test-grid { grid-template-columns: 1fr; } .section-title { font-size: 30px; } .footer-inner { flex-direction: column; gap: 20px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo" data-phoxta="navLogo">Wander<span>lust</span></div>
+    <div class="nav-links">
+      <a href="#destinations" data-phoxta-link="navDest">Destinations</a>
+      <a href="#features" data-phoxta-link="navFeat">Why Us</a>
+      <a href="#reviews" data-phoxta-link="navReviews">Reviews</a>
+      <a href="#cta" class="nav-cta" data-phoxta-link="navCta">Plan Your Trip</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge" data-phoxta="heroBadge"><i class="fa-solid fa-plane"></i> Award-Winning Travel Agency</div>
+      <h1 data-phoxta="heroTitle">Explore the World's Most <span>Breathtaking</span> Destinations</h1>
+      <p data-phoxta="heroDesc">Curated travel experiences, expertly planned itineraries, and unforgettable adventures in every corner of the globe.</p>
+      <div class="hero-actions">
+        <a href="#destinations" class="btn-orange" data-phoxta-link="heroCta1"><i class="fa-solid fa-compass"></i> Explore Trips</a>
+        <a href="#features" class="btn-glass" data-phoxta-link="heroCta2"><i class="fa-solid fa-play"></i> How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="destinations" id="destinations">
+    <div class="container">
+      <p class="section-label" data-phoxta="destLabel">Top Destinations</p>
+      <h2 class="section-title" data-phoxta="destTitle">Where Will You Go Next?</h2>
+      <p class="section-desc" data-phoxta="destDesc">Handpicked destinations with curated itineraries for every type of traveler.</p>
+      <div class="dest-grid">
+        <div class="dest-card">
+          <img src="https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bali" data-phoxta-image="dest1Img" />
+          <div class="dest-overlay">
+            <span class="dest-tag" data-phoxta="dest1Tag"><i class="fa-solid fa-fire"></i> Trending</span>
+            <h3 data-phoxta="dest1Title">Bali Paradise</h3>
+            <p class="loc"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="dest1Loc">Indonesia</span></p>
+            <p class="dest-price" data-phoxta="dest1Price">$1,299 <span>/person</span></p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.pexels.com/photos/2174656/pexels-photo-2174656.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Santorini" data-phoxta-image="dest2Img" />
+          <div class="dest-overlay">
+            <span class="dest-tag" data-phoxta="dest2Tag"><i class="fa-solid fa-heart"></i> Popular</span>
+            <h3 data-phoxta="dest2Title">Santorini Escape</h3>
+            <p class="loc"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="dest2Loc">Greece</span></p>
+            <p class="dest-price" data-phoxta="dest2Price">$1,899 <span>/person</span></p>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Japan" data-phoxta-image="dest3Img" />
+          <div class="dest-overlay">
+            <span class="dest-tag" data-phoxta="dest3Tag"><i class="fa-solid fa-star"></i> New</span>
+            <h3 data-phoxta="dest3Title">Tokyo & Kyoto</h3>
+            <p class="loc"><i class="fa-solid fa-location-dot"></i> <span data-phoxta="dest3Loc">Japan</span></p>
+            <p class="dest-price" data-phoxta="dest3Price">$2,499 <span>/person</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container" style="text-align:center;">
+      <p class="section-label" data-phoxta="featLabel">Why Wanderlust</p>
+      <h2 class="section-title" data-phoxta="featTitle">Travel Made Effortless</h2>
+      <p class="section-desc" style="margin:0 auto;" data-phoxta="featDesc">We handle every detail so you can focus on creating unforgettable memories.</p>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon fi-orange"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3 data-phoxta="feat1Title">Custom Itineraries</h3>
+          <p data-phoxta="feat1Desc">Every trip is uniquely tailored to your interests, pace and budget.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon fi-sky"><i class="fa-solid fa-headset"></i></div>
+          <h3 data-phoxta="feat2Title">24/7 Support</h3>
+          <p data-phoxta="feat2Desc">Our travel experts are always available before, during and after your trip.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon fi-green"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 data-phoxta="feat3Title">Best Price Guarantee</h3>
+          <p data-phoxta="feat3Desc">We promise competitive pricing — find it cheaper and we'll match it.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon fi-purple"><i class="fa-solid fa-leaf"></i></div>
+          <h3 data-phoxta="feat4Title">Eco-Conscious</h3>
+          <p data-phoxta="feat4Desc">Sustainable travel options that respect local communities and environments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="reviews">
+    <div class="container">
+      <p class="section-label" data-phoxta="testLabel">Traveler Reviews</p>
+      <h2 class="section-title" data-phoxta="testTitle">Stories From Our Travelers</h2>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="quote" data-phoxta="test1Quote">"Our Bali trip was flawlessly organized. Every hotel, every tour, every restaurant — it was all perfect. Can't wait to book again!"</p>
+          <p class="test-author" data-phoxta="test1Author">Jessica & David</p>
+          <p class="test-role" data-phoxta="test1Role">Bali Trip 2024</p>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="quote" data-phoxta="test2Quote">"The Japan itinerary was incredible — the perfect balance of culture, adventure and relaxation. Truly once-in-a-lifetime."</p>
+          <p class="test-author" data-phoxta="test2Author">Michael Torres</p>
+          <p class="test-role" data-phoxta="test2Role">Japan Tour 2024</p>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="quote" data-phoxta="test3Quote">"I've used other agencies before, but Wanderlust is in a completely different league. The attention to detail is remarkable."</p>
+          <p class="test-author" data-phoxta="test3Author">Sarah Lee</p>
+          <p class="test-role" data-phoxta="test3Role">European Explorer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="cta">
+    <h2 data-phoxta="ctaTitle">Your Next Adventure Awaits</h2>
+    <p data-phoxta="ctaDesc">Let us plan the perfect trip for you. Free consultation, zero obligation.</p>
+    <a href="#" class="btn-orange" data-phoxta-link="ctaBtn"><i class="fa-solid fa-paper-plane"></i> Start Planning</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo" data-phoxta="footerLogo">Wander<span>lust</span></div>
+      <div class="footer-links">
+        <a href="#destinations" data-phoxta-link="fLink1">Destinations</a>
+        <a href="#features" data-phoxta-link="fLink2">Why Us</a>
+        <a href="#reviews" data-phoxta-link="fLink3">Reviews</a>
+        <a href="#cta" data-phoxta-link="fLink4">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 Wanderlust Travel Co. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,283 +1,228 @@
-// ===========================================================================
-// Graphics Designer – shared TypeScript types
-// ===========================================================================
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – shared type definitions
+   ───────────────────────────────────────────────────────────────────────────── */
 
-// ---------------------------------------------------------------------------
-// Project & document
-// ---------------------------------------------------------------------------
+// ── Canvas presets ──────────────────────────────────────────────────────────
+export interface CanvasPreset {
+  label: string;
+  width: number;
+  height: number;
+  category: "social" | "video" | "print" | "presentation" | "logo";
+  icon: string; // lucide icon name
+}
+
+export const CANVAS_PRESETS: Record<string, CanvasPreset> = {
+  instagramPost: {
+    label: "Instagram Post",
+    width: 1080,
+    height: 1080,
+    category: "social",
+    icon: "Instagram",
+  },
+  instagramStory: {
+    label: "Instagram Story",
+    width: 1080,
+    height: 1920,
+    category: "social",
+    icon: "Smartphone",
+  },
+  facebookPost: {
+    label: "Facebook Post",
+    width: 1200,
+    height: 630,
+    category: "social",
+    icon: "Facebook",
+  },
+  twitterPost: {
+    label: "Twitter / X Post",
+    width: 1600,
+    height: 900,
+    category: "social",
+    icon: "Twitter",
+  },
+  youtubeThumbnail: {
+    label: "YouTube Thumbnail",
+    width: 1280,
+    height: 720,
+    category: "video",
+    icon: "Youtube",
+  },
+  linkedinBanner: {
+    label: "LinkedIn Banner",
+    width: 1584,
+    height: 396,
+    category: "social",
+    icon: "Linkedin",
+  },
+  logo: {
+    label: "Logo",
+    width: 500,
+    height: 500,
+    category: "logo",
+    icon: "Hexagon",
+  },
+  presentation: {
+    label: "Presentation",
+    width: 1920,
+    height: 1080,
+    category: "presentation",
+    icon: "Presentation",
+  },
+  a4: {
+    label: "A4 Document",
+    width: 2480,
+    height: 3508,
+    category: "print",
+    icon: "FileText",
+  },
+  businessCard: {
+    label: "Business Card",
+    width: 1050,
+    height: 600,
+    category: "print",
+    icon: "CreditCard",
+  },
+  poster: {
+    label: "Poster",
+    width: 5400,
+    height: 7200,
+    category: "print",
+    icon: "Image",
+  },
+} as const;
+
+// ── Database row types (mirror Supabase tables) ─────────────────────────────
 export interface DesignProject {
-  id: string
-  user_id: string
-  name: string
-  width: number
-  height: number
-  created_at: string
-  updated_at: string
-  deleted_at: string | null
-  folder_id: string | null
-  is_template: boolean
-  template_source_id: string | null
-  preview_url?: string | null
+  id: string;
+  user_id: string;
+  name: string;
+  width: number;
+  height: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  folder_id: string | null;
+  is_template: boolean;
+  template_source_id: string | null;
 }
 
 export interface DesignDocument {
-  project_id: string
-  current_version_id: string | null
-  pages_count: number
-  meta: Record<string, unknown>
-}
-
-export interface DesignPage {
-  id: string
-  project_id: string
-  page_index: number
-  width: number
-  height: number
-  background: PageBackground
-  fabric_json_path: string | null
-  preview_path: string | null
-  // Client-only
-  fabricJson?: Record<string, unknown> | null
-  previewUrl?: string | null
+  project_id: string;
+  current_version_id: string | null;
+  pages_count: number;
+  meta: Record<string, unknown>;
 }
 
 export interface PageBackground {
-  type: 'color' | 'image'
-  value: string // hex color or image URL
+  type: "color" | "gradient" | "image";
+  value: string;
 }
 
-// ---------------------------------------------------------------------------
-// Layers & objects
-// ---------------------------------------------------------------------------
-export interface LayerInfo {
-  id: string
-  name: string
-  type: string
-  visible: boolean
-  locked: boolean
-  index: number
-  groupId?: string | null
-  children?: LayerInfo[]
+export interface DesignPage {
+  id: string;
+  project_id: string;
+  page_index: number;
+  width: number;
+  height: number;
+  background: PageBackground;
+  fabric_json_path: string | null;
+  preview_path: string | null;
 }
 
-// ---------------------------------------------------------------------------
-// Assets
-// ---------------------------------------------------------------------------
 export interface DesignAsset {
-  id: string
-  user_id: string
-  project_id: string | null
-  type: AssetType
-  name: string
-  path: string
-  meta: Record<string, unknown>
-  created_at: string
-  url?: string
+  id: string;
+  user_id: string;
+  project_id: string | null;
+  type: string;
+  name: string;
+  path: string;
+  meta: Record<string, unknown>;
+  created_at: string;
 }
 
-export type AssetType = 'image' | 'svg' | 'font' | 'logo' | 'video'
-
-// ---------------------------------------------------------------------------
-// Brand kit
-// ---------------------------------------------------------------------------
-export interface DesignBrandKit {
-  id: string
-  user_id: string
-  name: string
-  colors: BrandColor[]
-  fonts: BrandFont[]
-  logos: BrandLogo[]
-  created_at: string
-  updated_at: string
-}
-
-export interface BrandColor {
-  label: string
-  hex: string
-}
-
-export interface BrandFont {
-  family: string
-  source: 'system' | 'google' | 'upload'
-  url?: string
-}
-
-export interface BrandLogo {
-  name: string
-  path: string
-  url?: string
-}
-
-// ---------------------------------------------------------------------------
-// Collaboration
-// ---------------------------------------------------------------------------
-export type CollabRole = 'owner' | 'editor' | 'commenter' | 'viewer'
-
-export interface DesignCollaborator {
-  project_id: string
-  user_id: string
-  role: CollabRole
-  created_at: string
-  email?: string
-}
-
-export interface DesignComment {
-  id: string
-  project_id: string
-  page_id: string | null
-  object_id: string | null
-  author_id: string
-  body: string
-  created_at: string
-  resolved_at: string | null
-  author_email?: string
-}
-
-// ---------------------------------------------------------------------------
-// Versions
-// ---------------------------------------------------------------------------
 export interface DesignVersion {
-  id: string
-  project_id: string
-  created_at: string
-  created_by: string
-  label: string | null
-  document_json_path: string
-  preview_paths: string[]
-  previewUrls?: string[]
+  id: string;
+  project_id: string;
+  created_at: string;
+  created_by: string;
+  label: string | null;
+  document_json_path: string;
+  preview_paths: string[];
 }
 
-// ---------------------------------------------------------------------------
-// Audit log
-// ---------------------------------------------------------------------------
-export type AuditAction =
-  | 'project.create'
-  | 'project.rename'
-  | 'project.delete'
-  | 'project.restore'
-  | 'project.share'
-  | 'project.export'
-  | 'version.create'
-  | 'version.restore'
-  | 'comment.add'
+// ── Editor-side types ───────────────────────────────────────────────────────
 
-export interface DesignAuditLog {
-  id: string
-  project_id: string
-  actor_id: string
-  action: AuditAction
-  meta: Record<string, unknown>
-  created_at: string
+export type ToolMode =
+  | "select"
+  | "hand"
+  | "text"
+  | "shape"
+  | "draw"
+  | "eraser"
+  | "crop";
+
+export type ShapeKind =
+  | "rectangle"
+  | "circle"
+  | "triangle"
+  | "star"
+  | "line"
+  | "arrow"
+  | "polygon";
+
+export interface LayerInfo {
+  id: string;
+  name: string;
+  type: string;
+  visible: boolean;
+  locked: boolean;
+  groupId?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Canvas presets
-// ---------------------------------------------------------------------------
-export interface CanvasPreset {
-  label: string
-  category: string
-  width: number
-  height: number
-  icon: string
-}
+export type PanelTab =
+  | "templates"
+  | "elements"
+  | "text"
+  | "uploads"
+  | "images"
+  | "brand"
+  | "layers";
 
-export const CANVAS_PRESETS: CanvasPreset[] = [
-  { label: 'Instagram Post', category: 'Social Media', width: 1080, height: 1080, icon: '📷' },
-  { label: 'Instagram Story', category: 'Social Media', width: 1080, height: 1920, icon: '📱' },
-  { label: 'Facebook Post', category: 'Social Media', width: 1200, height: 630, icon: '👤' },
-  { label: 'Twitter/X Post', category: 'Social Media', width: 1600, height: 900, icon: '🐦' },
-  { label: 'YouTube Thumbnail', category: 'Video', width: 1280, height: 720, icon: '🎬' },
-  { label: 'LinkedIn Banner', category: 'Social Media', width: 1584, height: 396, icon: '💼' },
-  { label: 'Logo (Square)', category: 'Marketing', width: 500, height: 500, icon: '🎨' },
-  { label: 'Presentation 16:9', category: 'Documents', width: 1920, height: 1080, icon: '📊' },
-  { label: 'A4 Document', category: 'Print', width: 2480, height: 3508, icon: '📄' },
-  { label: 'Business Card', category: 'Print', width: 1050, height: 600, icon: '💳' },
-  { label: 'Poster 18×24', category: 'Print', width: 5400, height: 7200, icon: '🪧' },
-  { label: 'Custom', category: 'Custom', width: 1080, height: 1080, icon: '✏️' },
-]
-
-// ---------------------------------------------------------------------------
-// Fonts
-// ---------------------------------------------------------------------------
-export interface FontOption {
-  family: string
-  label: string
-  category: 'sans-serif' | 'serif' | 'display' | 'handwriting' | 'monospace'
-  weights: number[]
-}
-
-export const FONT_OPTIONS: FontOption[] = [
-  { family: 'Inter', label: 'Inter', category: 'sans-serif', weights: [400, 500, 600, 700] },
-  { family: 'Arial', label: 'Arial', category: 'sans-serif', weights: [400, 700] },
-  { family: 'Helvetica', label: 'Helvetica', category: 'sans-serif', weights: [400, 700] },
-  { family: 'Georgia', label: 'Georgia', category: 'serif', weights: [400, 700] },
-  { family: 'Times New Roman', label: 'Times New Roman', category: 'serif', weights: [400, 700] },
-  { family: 'Courier New', label: 'Courier New', category: 'monospace', weights: [400, 700] },
-  { family: 'Impact', label: 'Impact', category: 'display', weights: [400] },
-  { family: 'Verdana', label: 'Verdana', category: 'sans-serif', weights: [400, 700] },
-  { family: 'Trebuchet MS', label: 'Trebuchet', category: 'sans-serif', weights: [400, 700] },
-  { family: 'Palatino Linotype', label: 'Palatino', category: 'serif', weights: [400, 700] },
-  { family: 'Garamond', label: 'Garamond', category: 'serif', weights: [400, 700] },
-  { family: 'Comic Sans MS', label: 'Comic Sans', category: 'handwriting', weights: [400, 700] },
-]
-
-// ---------------------------------------------------------------------------
-// Shapes
-// ---------------------------------------------------------------------------
-export type ShapeType = 'rect' | 'circle' | 'triangle' | 'line' | 'polygon' | 'star'
-
-// ---------------------------------------------------------------------------
-// Export
-// ---------------------------------------------------------------------------
-export type ExportFormat = 'png' | 'jpg' | 'svg' | 'pdf'
+export type ExportFormat = "png" | "jpg" | "svg" | "pdf";
 
 export interface ExportOptions {
-  format: ExportFormat
-  quality: number       // 0.1-1.0 for jpg
-  dpi: number           // 72, 150, 300
-  transparent: boolean
-  pages: 'all' | 'current' | number[]
-  bleed: number         // mm
-  cropMarks: boolean
+  format: ExportFormat;
+  quality: number; // 0-1 for jpg
+  scale: number; // multiplier
+  pages: number[]; // page indices to export
 }
 
-// ---------------------------------------------------------------------------
-// Text styles
-// ---------------------------------------------------------------------------
-export interface TextStylePreset {
-  label: string
-  fontSize: number
-  fontWeight: string
-  fontFamily: string
-  letterSpacing: number
-  lineHeight: number
+// ── Fabric.js custom serialisation keys ─────────────────────────────────────
+export const FABRIC_CUSTOM_PROPS = [
+  "id",
+  "customName",
+  "selectable",
+  "visible",
+  "groupId",
+  "locked",
+] as const;
+
+// ── Template types ──────────────────────────────────────────────────────────
+export interface BuiltinTemplate {
+  id: string;
+  name: string;
+  category: string;
+  presetKey: string; // key into CANVAS_PRESETS
+  thumbnail?: string; // path or data-url
+  fabricJson: object; // fabric canvas JSON
 }
 
-export const TEXT_STYLE_PRESETS: TextStylePreset[] = [
-  { label: 'Title', fontSize: 64, fontWeight: 'bold', fontFamily: 'Inter', letterSpacing: -1, lineHeight: 1.1 },
-  { label: 'Heading', fontSize: 48, fontWeight: 'bold', fontFamily: 'Inter', letterSpacing: 0, lineHeight: 1.2 },
-  { label: 'Subheading', fontSize: 32, fontWeight: '600', fontFamily: 'Inter', letterSpacing: 0, lineHeight: 1.3 },
-  { label: 'Body', fontSize: 18, fontWeight: 'normal', fontFamily: 'Inter', letterSpacing: 0, lineHeight: 1.6 },
-  { label: 'Caption', fontSize: 14, fontWeight: 'normal', fontFamily: 'Inter', letterSpacing: 0.5, lineHeight: 1.4 },
-  { label: 'Quote', fontSize: 24, fontWeight: '500', fontFamily: 'Georgia', letterSpacing: 0, lineHeight: 1.5 },
-]
-
-// ---------------------------------------------------------------------------
-// Presence
-// ---------------------------------------------------------------------------
-export interface PresenceUser {
-  userId: string
-  email: string
-  color: string
-  cursor: { x: number; y: number } | null
-  selectedObjectIds: string[]
-  pageId: string | null
-}
-
-// ---------------------------------------------------------------------------
-// CSV bulk create
-// ---------------------------------------------------------------------------
-export interface CsvMapping {
-  column: string
-  objectName: string // matches a named object on the canvas
-}
+export type TemplateCategory =
+  | "Social Media"
+  | "Marketing"
+  | "Video"
+  | "Presentation"
+  | "Print"
+  | "Logo"
+  | "Event"
+  | "Business";

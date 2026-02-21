@@ -10,6 +10,82 @@ const XENO_VARIANTS = {
   xenoDs:  { folder: '/templates/xeno-ds/', emoji: '🖌️' },
   xenoMa:  { folder: '/templates/xeno-ma/', emoji: '📣' },
   xenoWa:  { folder: '/templates/xeno-wa/', emoji: '🌐' },
+  xenoMin: { folder: '/templates/xeno-min/', emoji: '⬛' },
+  xenoSu:  { folder: '/templates/xeno-su/',  emoji: '🚀' },
+  xenoPf:  { folder: '/templates/xeno-pf/',  emoji: '📂' },
+  xenoCo:  { folder: '/templates/xeno-co/',  emoji: '💼' },
+  xenoRe:  { folder: '/templates/xeno-re/',  emoji: '🍽️' },
+  xenoInf: { folder: '/templates/xeno-inf/', emoji: '⭐' },
+  xenoLaw: { folder: '/templates/xeno-law/', emoji: '⚖️' },
+  xenoFit: { folder: '/templates/xeno-fit/', emoji: '💪' },
+  xenoEdu: { folder: '/templates/xeno-edu/', emoji: '📚' },
+  xenoMed: { folder: '/templates/xeno-med/', emoji: '🏥' },
+  xenoEv:  { folder: '/templates/xeno-ev/',  emoji: '💒' },
+  xenoRl:  { folder: '/templates/xeno-rl/',  emoji: '🏠' },
+  xenoPh:  { folder: '/templates/xeno-ph/',  emoji: '📸' },
+  xenoTra: { folder: '/templates/xeno-tra/', emoji: '✈️' },
+  xenoEco: { folder: '/templates/xeno-eco/', emoji: '🌿' },
+  xenoMus: { folder: '/templates/xeno-mus/', emoji: '🎵' },
+  xenoBar: { folder: '/templates/xeno-bar/', emoji: '💈' },
+  xenoCafe: { folder: '/templates/xeno-cafe/', emoji: '☕' },
+  xenoPet: { folder: '/templates/xeno-pet/', emoji: '🐾' },
+  xenoArc: { folder: '/templates/xeno-arc/', emoji: '🏛️' },
+  xenoYog: { folder: '/templates/xeno-yog/', emoji: '🧘' },
+  xenoAut: { folder: '/templates/xeno-aut/', emoji: '🚗' },
+  xenoDen: { folder: '/templates/xeno-den/', emoji: '🦷' },
+  xenoFlo: { folder: '/templates/xeno-flo/', emoji: '🌸' },
+  xenoBak: { folder: '/templates/xeno-bak/', emoji: '🧁' },
+  xenoSpa: { folder: '/templates/xeno-spa/', emoji: '💆' },
+  xenoNgo: { folder: '/templates/xeno-ngo/', emoji: '❤️' },
+  xenoPod: { folder: '/templates/xeno-pod/', emoji: '🎙️' },
+  xenoCry: { folder: '/templates/xeno-cry/', emoji: '🪙' },
+  xenoFas: { folder: '/templates/xeno-fas/', emoji: '👗' },
+  xenoInt: { folder: '/templates/xeno-int/', emoji: '🛋️' },
+  xenoDj:  { folder: '/templates/xeno-dj/',  emoji: '🎧' },
+  xenoAcc: { folder: '/templates/xeno-acc/', emoji: '📊' },
+  xenoPlm: { folder: '/templates/xeno-plm/', emoji: '🔧' },
+  xenoDay: { folder: '/templates/xeno-day/', emoji: '👶' },
+  xenoChu: { folder: '/templates/xeno-chu/', emoji: '⛪' },
+  xenoIns: { folder: '/templates/xeno-ins/', emoji: '🛡️' },
+  xenoVet: { folder: '/templates/xeno-vet/', emoji: '🐕' },
+  xenoPhr: { folder: '/templates/xeno-phr/', emoji: '💊' },
+  xenoLog: { folder: '/templates/xeno-log/', emoji: '📦' },
+  xenoAgr: { folder: '/templates/xeno-agr/', emoji: '🌾' },
+  xenoWne: { folder: '/templates/xeno-wne/', emoji: '🍷' },
+  xenoBrw: { folder: '/templates/xeno-brw/', emoji: '🍺' },
+  xenoTat: { folder: '/templates/xeno-tat/', emoji: '✒️' },
+  xenoCln: { folder: '/templates/xeno-cln/', emoji: '🧹' },
+  xenoSec: { folder: '/templates/xeno-sec/', emoji: '🔒' },
+  xenoMov: { folder: '/templates/xeno-mov/', emoji: '🚚' },
+  xenoWed: { folder: '/templates/xeno-wed/', emoji: '💍' },
+  xenoHtl: { folder: '/templates/xeno-htl/', emoji: '🏨' },
+  xenoGol: { folder: '/templates/xeno-gol/', emoji: '⛳' },
+  xenoMar: { folder: '/templates/xeno-mar/', emoji: '🥋' },
+  xenoDnc: { folder: '/templates/xeno-dnc/', emoji: '💃' },
+  xenoThr: { folder: '/templates/xeno-thr/', emoji: '🎭' },
+  xenoMsm: { folder: '/templates/xeno-msm/', emoji: '🖼️' },
+  xenoRec: { folder: '/templates/xeno-rec/', emoji: '👔' },
+  xenoBld: { folder: '/templates/xeno-bld/', emoji: '🏗️' },
+  xenoSol: { folder: '/templates/xeno-sol/', emoji: '☀️' },
+  xenoJwl: { folder: '/templates/xeno-jwl/', emoji: '💎' },
+  xenoOpt: { folder: '/templates/xeno-opt/', emoji: '👓' },
+  xenoChi: { folder: '/templates/xeno-chi/', emoji: '🦴' },
+  xenoPsy: { folder: '/templates/xeno-psy/', emoji: '🧠' },
+  xenoNut: { folder: '/templates/xeno-nut/', emoji: '🥗' },
+  xenoCok: { folder: '/templates/xeno-cok/', emoji: '👨‍🍳' },
+  xenoLnd: { folder: '/templates/xeno-lnd/', emoji: '🌳' },
+  xenoPrn: { folder: '/templates/xeno-prn/', emoji: '🖨️' },
+  xenoCwh: { folder: '/templates/xeno-cwh/', emoji: '🚿' },
+  xenoLau: { folder: '/templates/xeno-lau/', emoji: '👕' },
+  xenoNrs: { folder: '/templates/xeno-nrs/', emoji: '👴' },
+  xenoGrc: { folder: '/templates/xeno-grc/', emoji: '🛒' },
+  xenoBks: { folder: '/templates/xeno-bks/', emoji: '📕' },
+  xenoGam: { folder: '/templates/xeno-gam/', emoji: '🎮' },
+  xenoSpt: { folder: '/templates/xeno-spt/', emoji: '⚽' },
+  xenoCam: { folder: '/templates/xeno-cam/', emoji: '🏕️' },
+  xenoDiv: { folder: '/templates/xeno-div/', emoji: '🤿' },
+  xenoBnk: { folder: '/templates/xeno-bnk/', emoji: '🏦' },
+  xenoApt: { folder: '/templates/xeno-apt/', emoji: '🏢' },
 } as const
 
 type XenoVariant = keyof typeof XENO_VARIANTS
@@ -21,6 +97,23 @@ const EDITING_SCRIPT = `
 <style>
   /* Hide preloader */
   .preloader { display: none !important; }
+
+  /* Force-show AOS animated elements immediately */
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Disable smooth-scroll wrappers that may collapse content */
+  #smooth-wrapper, #smooth-content {
+    transform: none !important;
+  }
+
+  /* Prevent template pseudo-element overlays from blocking editable elements */
+  *::before, *::after {
+    pointer-events: none !important;
+  }
 
   /* ---- Editable text hover/focus ---- */
   [data-phoxta-editable] {
@@ -113,6 +206,7 @@ const EDITING_SCRIPT = `
     position: relative;
     display: inline-block;
     cursor: pointer;
+    z-index: 5;
   }
   .phoxta-img-wrap .phoxta-img-overlay {
     position: absolute;
@@ -741,11 +835,14 @@ document.addEventListener('DOMContentLoaded', function() {
         removeSelectors.forEach(function(sel) {
           clone.querySelectorAll(sel).forEach(function(el) { el.remove(); });
         });
-        // Unwrap images from phoxta-img-wrap spans (restore original img)
+        // Unwrap images/videos from phoxta-img-wrap spans (restore original element)
         clone.querySelectorAll('.phoxta-img-wrap').forEach(function(wrap) {
-          var img = wrap.querySelector('img');
-          if (img && wrap.parentNode) {
-            wrap.parentNode.insertBefore(img, wrap);
+          // Could contain <img>, <video>, or <iframe> (video embed)
+          var child = wrap.querySelector('img, video, iframe');
+          if (child && wrap.parentNode) {
+            // Clean up video wrap styles that were added for aspect-ratio
+            child.removeAttribute('data-phoxta-video');
+            wrap.parentNode.insertBefore(child, wrap);
             wrap.remove();
           }
         });
@@ -769,6 +866,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         clone.querySelectorAll('[data-phoxta-img-instance]').forEach(function(el) {
           el.removeAttribute('data-phoxta-img-instance');
+          el.removeAttribute('data-phoxta-width');
+          el.removeAttribute('data-phoxta-height');
         });
         clone.querySelectorAll('[data-phoxta-section-id]').forEach(function(el) {
           el.removeAttribute('data-phoxta-section-id');
@@ -1971,13 +2070,74 @@ document.addEventListener('DOMContentLoaded', function() {
     var newSrc = e.data.src;
     if (!targetKey || !newSrc) return;
     var targetImg = document.querySelector('[data-phoxta-img-instance="' + targetKey + '"]');
-    if (targetImg) {
-      var w = targetImg.dataset.phoxtaWidth;
-      var h = targetImg.dataset.phoxtaHeight;
-      targetImg.style.width = w + 'px';
-      targetImg.style.height = h + 'px';
+    if (!targetImg) return;
+
+    // Check if this is a video replacement (prefixed with "video:")
+    if (newSrc.indexOf('video:') === 0) {
+      var videoUrl = newSrc.substring(6); // strip "video:" prefix
+      var wrap = targetImg.closest('.phoxta-img-wrap');
+      var container = wrap || targetImg.parentElement;
+      if (!container) return;
+
+      // Determine if it's a direct video file or an embed (YouTube/Vimeo)
+      var isDirect = /\\.(mp4|webm|ogg)(\\?.*)?$/i.test(videoUrl);
+      var videoEl;
+      if (isDirect) {
+        videoEl = document.createElement('video');
+        videoEl.src = videoUrl;
+        videoEl.setAttribute('controls', '');
+        videoEl.setAttribute('playsinline', '');
+        videoEl.style.width = '100%';
+        videoEl.style.height = '100%';
+        videoEl.style.objectFit = 'cover';
+        videoEl.style.display = 'block';
+      } else {
+        videoEl = document.createElement('iframe');
+        videoEl.src = videoUrl;
+        videoEl.setAttribute('frameborder', '0');
+        videoEl.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        videoEl.setAttribute('allowfullscreen', '');
+        videoEl.style.width = '100%';
+        videoEl.style.height = '100%';
+        videoEl.style.border = 'none';
+        videoEl.style.display = 'block';
+      }
+      videoEl.setAttribute('data-phoxta-video', targetKey);
+      videoEl.setAttribute('data-phoxta-img-instance', targetKey);
+
+      // Replace the image with the video element
+      if (wrap) {
+        // Remove overlay and toolbar (editing UI) from the wrap
+        var overlay = wrap.querySelector('.phoxta-img-overlay');
+        var toolbar = wrap.querySelector('.phoxta-img-toolbar');
+        if (overlay) overlay.remove();
+        if (toolbar) toolbar.remove();
+        // Remove the old img
+        targetImg.remove();
+        // Insert video
+        wrap.insertBefore(videoEl, wrap.firstChild);
+        // Ensure the wrap has aspect ratio for embeds
+        if (!isDirect) {
+          wrap.style.position = 'relative';
+          wrap.style.paddingBottom = '56.25%';
+          wrap.style.height = '0';
+          wrap.style.overflow = 'hidden';
+          videoEl.style.position = 'absolute';
+          videoEl.style.top = '0';
+          videoEl.style.left = '0';
+        }
+      } else {
+        targetImg.replaceWith(videoEl);
+      }
+      notifyChange();
+    } else {
+      // Normal image replacement
       targetImg.style.objectFit = 'cover';
+      targetImg.setAttribute('src', newSrc);
       targetImg.src = newSrc;
+      // Remove stale inline width/height so CSS responsive rules take effect
+      targetImg.style.removeProperty('width');
+      targetImg.style.removeProperty('height');
       notifyChange();
     }
   });
@@ -2138,33 +2298,25 @@ function XenoPreviewBase({ variant, ...props }: TemplateProps & { variant: XenoV
     placeholderHeight: number
   } | null>(null)
 
-  // Once the iframe is populated, freeze srcDoc so prop changes don't reload it
-  const iframePopulatedRef = useRef(false)
-
-  // Fetch the raw template HTML once
+  // Fetch the raw template HTML once (cache-bust to avoid stale browser cache)
   useEffect(() => {
-    fetch(`${folder}index.html`)
+    fetch(`${folder}index.html?v=${Date.now()}`)
       .then((r) => r.text())
       .then((html) => {
         setRawHtml(html)
         setLoading(false)
       })
       .catch(() => setLoading(false))
-  }, [folder])
+  }, [folder, variant])
 
-  // Compute the iframe srcDoc exactly ONCE — either from the saved edited HTML
-  // snapshot (restored on page load) or from the freshly-fetched raw template.
-  // After the first render, the ref guard prevents any prop change from
-  // recomputing srcDoc, which would cause the iframe to flash/flicker.
+  // Compute the iframe srcDoc — from saved HTML or freshly-fetched template.
   const [stableSrcDoc, setStableSrcDoc] = useState<string>('')
 
   useEffect(() => {
-    if (iframePopulatedRef.current) return // already loaded — never update again
     const html = savedEditedHtml || rawHtml
     if (!html) return
-    iframePopulatedRef.current = true
     setStableSrcDoc(injectEditingScript(html))
-  }, [savedEditedHtml, rawHtml])
+  }, [savedEditedHtml, rawHtml, variant])
 
   // Listen for postMessage from the iframe
   useEffect(() => {
@@ -2482,3 +2634,79 @@ export function XenoAiPreview(p: TemplateProps) { return <XenoPreviewBase varian
 export function XenoDsPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDs" {...p} /> }
 export function XenoMaPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMa" {...p} /> }
 export function XenoWaPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoWa" {...p} /> }
+export function XenoMinPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMin" {...p} /> }
+export function XenoSuPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoSu" {...p} /> }
+export function XenoPfPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPf" {...p} /> }
+export function XenoCoPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCo" {...p} /> }
+export function XenoRePreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoRe" {...p} /> }
+export function XenoInfPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoInf" {...p} /> }
+export function XenoLawPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoLaw" {...p} /> }
+export function XenoFitPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoFit" {...p} /> }
+export function XenoEduPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoEdu" {...p} /> }
+export function XenoMedPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMed" {...p} /> }
+export function XenoEvPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoEv" {...p} /> }
+export function XenoRlPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoRl" {...p} /> }
+export function XenoPhPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPh" {...p} /> }
+export function XenoTraPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoTra" {...p} /> }
+export function XenoEcoPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoEco" {...p} /> }
+export function XenoMusPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMus" {...p} /> }
+export function XenoBarPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBar" {...p} /> }
+export function XenoCafePreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCafe" {...p} /> }
+export function XenoPetPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPet" {...p} /> }
+export function XenoArcPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoArc" {...p} /> }
+export function XenoYogPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoYog" {...p} /> }
+export function XenoAutPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoAut" {...p} /> }
+export function XenoDenPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDen" {...p} /> }
+export function XenoFloPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoFlo" {...p} /> }
+export function XenoBakPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBak" {...p} /> }
+export function XenoSpaPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoSpa" {...p} /> }
+export function XenoNgoPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoNgo" {...p} /> }
+export function XenoPodPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPod" {...p} /> }
+export function XenoCryPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCry" {...p} /> }
+export function XenoFasPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoFas" {...p} /> }
+export function XenoIntPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoInt" {...p} /> }
+export function XenoDjPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDj" {...p} /> }
+export function XenoAccPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoAcc" {...p} /> }
+export function XenoPlmPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPlm" {...p} /> }
+export function XenoDayPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDay" {...p} /> }
+export function XenoChuPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoChu" {...p} /> }
+export function XenoInsPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoIns" {...p} /> }
+export function XenoVetPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoVet" {...p} /> }
+export function XenoPhrPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPhr" {...p} /> }
+export function XenoLogPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoLog" {...p} /> }
+export function XenoAgrPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoAgr" {...p} /> }
+export function XenoWnePreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoWne" {...p} /> }
+export function XenoBrwPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBrw" {...p} /> }
+export function XenoTatPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoTat" {...p} /> }
+export function XenoClnPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCln" {...p} /> }
+export function XenoSecPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoSec" {...p} /> }
+export function XenoMovPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMov" {...p} /> }
+export function XenoWedPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoWed" {...p} /> }
+export function XenoHtlPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoHtl" {...p} /> }
+export function XenoGolPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoGol" {...p} /> }
+export function XenoMarPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMar" {...p} /> }
+export function XenoDncPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDnc" {...p} /> }
+export function XenoThrPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoThr" {...p} /> }
+export function XenoMsmPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoMsm" {...p} /> }
+export function XenoRecPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoRec" {...p} /> }
+export function XenoBldPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBld" {...p} /> }
+export function XenoSolPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoSol" {...p} /> }
+export function XenoJwlPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoJwl" {...p} /> }
+export function XenoOptPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoOpt" {...p} /> }
+export function XenoChiPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoChi" {...p} /> }
+export function XenoPsyPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPsy" {...p} /> }
+export function XenoNutPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoNut" {...p} /> }
+export function XenoCokPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCok" {...p} /> }
+export function XenoLndPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoLnd" {...p} /> }
+export function XenoPrnPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoPrn" {...p} /> }
+export function XenoCwhPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCwh" {...p} /> }
+export function XenoLauPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoLau" {...p} /> }
+export function XenoNrsPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoNrs" {...p} /> }
+export function XenoGrcPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoGrc" {...p} /> }
+export function XenoBksPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBks" {...p} /> }
+export function XenoGamPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoGam" {...p} /> }
+export function XenoSptPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoSpt" {...p} /> }
+export function XenoCamPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoCam" {...p} /> }
+export function XenoDivPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoDiv" {...p} /> }
+export function XenoBnkPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoBnk" {...p} /> }
+export function XenoAptPreview(p: TemplateProps) { return <XenoPreviewBase variant="xenoApt" {...p} /> }

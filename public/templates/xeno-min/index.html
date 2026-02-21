@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimal Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #111111;
+      --secondary: #f5f5f0;
+      --accent: #e63946;
+      --text: #333333;
+      --text-light: #888888;
+      --white: #ffffff;
+      --border: #e0e0e0;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; letter-spacing: -1px; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white) !important; padding: 10px 24px; border-radius: 100px; font-size: 13px !important; }
+    .nav-cta:hover { background: var(--accent) !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 140px 48px 80px; }
+    .hero-content { max-width: 900px; }
+    .hero-label { font-family: 'Space Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 24px; }
+    .hero h1 { font-size: 72px; line-height: 1.05; font-weight: 700; letter-spacing: -3px; margin-bottom: 32px; color: var(--primary); }
+    .hero p { font-size: 20px; color: var(--text-light); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
+    .hero-actions { display: flex; gap: 16px; align-items: center; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: var(--white); padding: 16px 32px; border-radius: 100px; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--border); color: var(--text); padding: 15px 32px; border-radius: 100px; font-size: 15px; font-weight: 500; transition: all 0.3s; }
+    .btn-outline:hover { border-color: var(--primary); }
+
+    /* SECTION COMMON */
+    section { padding: 120px 48px; }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 16px; }
+    .section-title { font-size: 48px; font-weight: 700; letter-spacing: -2px; color: var(--primary); margin-bottom: 24px; }
+    .section-desc { font-size: 18px; color: var(--text-light); max-width: 520px; margin-bottom: 64px; }
+
+    /* SERVICES */
+    .services { background: var(--secondary); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .service-card { background: var(--secondary); padding: 48px; transition: background 0.3s; }
+    .service-card:hover { background: var(--white); }
+    .service-number { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); margin-bottom: 24px; }
+    .service-card h3 { font-size: 22px; font-weight: 600; margin-bottom: 16px; color: var(--primary); }
+    .service-card p { font-size: 15px; color: var(--text-light); line-height: 1.7; }
+
+    /* WORK */
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .work-item { position: relative; aspect-ratio: 4/3; background: var(--secondary); border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .work-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .work-item:hover img { transform: scale(1.05); }
+    .work-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: var(--white); }
+    .work-overlay h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .work-overlay span { font-size: 13px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ABOUT */
+    .about { background: var(--primary); color: var(--white); }
+    .about .section-label { color: var(--accent); }
+    .about .section-title { color: var(--white); }
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-text p { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .stat { padding: 32px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; }
+    .stat-number { font-family: 'Space Mono', monospace; font-size: 42px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* TESTIMONIALS */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .testimonial-card { padding: 40px; border: 1px solid var(--border); border-radius: 16px; transition: border-color 0.3s; }
+    .testimonial-card:hover { border-color: var(--primary); }
+    .testimonial-stars { color: var(--accent); font-size: 14px; margin-bottom: 20px; }
+    .testimonial-card blockquote { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { font-weight: 600; font-size: 14px; color: var(--primary); }
+    .testimonial-role { font-size: 13px; color: var(--text-light); }
+
+    /* CTA */
+    .cta { background: var(--secondary); text-align: center; padding: 120px 48px; }
+    .cta .section-title { max-width: 600px; margin: 0 auto 24px; }
+    .cta .section-desc { max-width: 480px; margin: 0 auto 48px; }
+
+    /* FOOTER */
+    .footer { padding: 64px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 14px; color: var(--text-light); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-light); transition: all 0.3s; }
+    .footer-social a:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      .hero { padding: 120px 24px 60px; }
+      .hero h1 { font-size: 40px; letter-spacing: -1px; }
+      .hero p { font-size: 17px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .about-content { grid-template-columns: 1fr; gap: 48px; }
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 36px; }
+      .footer { flex-direction: column; gap: 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav-logo" data-phoxta="brand">minimal<span>.</span></a>
+    <div class="nav-links">
+      <a href="#services" data-phoxta-link="nav1">Services</a>
+      <a href="#work" data-phoxta-link="nav2">Work</a>
+      <a href="#about" data-phoxta-link="nav3">About</a>
+      <a href="#testimonials" data-phoxta-link="nav4">Testimonials</a>
+      <a href="#contact" class="nav-cta" data-phoxta-link="cta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label" data-phoxta="heroLabel">Design Studio</div>
+      <h1 data-phoxta="heroTitle">We craft digital experiences that matter.</h1>
+      <p data-phoxta="heroSubtitle">A minimal design studio creating clean, purposeful digital products. We believe in the power of simplicity and thoughtful design.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary" data-phoxta-link="heroCta1"><span>View Our Work</span> <i class="fas fa-arrow-right"></i></a>
+        <a href="#about" class="btn-outline" data-phoxta-link="heroCta2"><span>Learn More</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-label" data-phoxta="servicesLabel">What We Do</div>
+    <h2 class="section-title" data-phoxta="servicesTitle">Services</h2>
+    <p class="section-desc" data-phoxta="servicesDesc">We focus on strategy, design, and technology to build products that truly resonate.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3 data-phoxta="service1Title">Brand Identity</h3>
+        <p data-phoxta="service1Desc">Crafting memorable visual identities that communicate your brand's core values with clarity and precision.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 data-phoxta="service2Title">UI/UX Design</h3>
+        <p data-phoxta="service2Desc">Designing intuitive user experiences backed by research, focused on usability and aesthetic harmony.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 data-phoxta="service3Title">Web Development</h3>
+        <p data-phoxta="service3Desc">Building fast, accessible, and responsive websites using modern technologies and clean code.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3 data-phoxta="service4Title">Motion Design</h3>
+        <p data-phoxta="service4Desc">Adding purposeful motion and micro-interactions that enhance user engagement and delight.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">05</div>
+        <h3 data-phoxta="service5Title">Content Strategy</h3>
+        <p data-phoxta="service5Desc">Developing content frameworks that align with your brand voice and drive meaningful engagement.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-number">06</div>
+        <h3 data-phoxta="service6Title">Digital Marketing</h3>
+        <p data-phoxta="service6Desc">Data-driven marketing strategies that connect your brand with the right audience at the right time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-label" data-phoxta="workLabel">Selected Work</div>
+    <h2 class="section-title" data-phoxta="workTitle">Recent Projects</h2>
+    <p class="section-desc" data-phoxta="workDesc">A selection of our recent work across branding, web, and digital product design.</p>
+    <div class="work-grid">
+      <div class="work-item">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop" alt="Project" data-phoxta-image="work1Img" />
+        <div class="work-overlay">
+          <h3 data-phoxta="work1Title">Aura Brand System</h3>
+          <span data-phoxta="work1Cat">Branding</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop" alt="Project" data-phoxta-image="work2Img" />
+        <div class="work-overlay">
+          <h3 data-phoxta="work2Title">Flow Dashboard</h3>
+          <span data-phoxta="work2Cat">UI/UX Design</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop" alt="Project" data-phoxta-image="work3Img" />
+        <div class="work-overlay">
+          <h3 data-phoxta="work3Title">Vertex Website</h3>
+          <span data-phoxta="work3Cat">Development</span>
+        </div>
+      </div>
+      <div class="work-item">
+        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3579?w=800&h=600&fit=crop" alt="Project" data-phoxta-image="work4Img" />
+        <div class="work-overlay">
+          <h3 data-phoxta="work4Title">Prism Mobile App</h3>
+          <span data-phoxta="work4Cat">Product Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-content">
+      <div>
+        <div class="section-label" data-phoxta="aboutLabel">About Us</div>
+        <h2 class="section-title" data-phoxta="aboutTitle">Design with intent, build with care.</h2>
+        <p data-phoxta="aboutDesc1">We are a team of designers, developers, and strategists who believe that great design is invisible. It simply works — guiding users, communicating ideas, and creating lasting impressions.</p>
+        <p data-phoxta="aboutDesc2">Founded in 2018, we've partnered with startups and established brands alike to deliver digital products that stand the test of time.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number" data-phoxta="stat1Num">120+</div>
+          <div class="stat-label" data-phoxta="stat1Label">Projects Completed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-phoxta="stat2Num">6</div>
+          <div class="stat-label" data-phoxta="stat2Label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-phoxta="stat3Num">40+</div>
+          <div class="stat-label" data-phoxta="stat3Label">Happy Clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-phoxta="stat4Num">15</div>
+          <div class="stat-label" data-phoxta="stat4Label">Design Awards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-label" data-phoxta="testimonialsLabel">Client Feedback</div>
+    <h2 class="section-title" data-phoxta="testimonialsTitle">What they say</h2>
+    <p class="section-desc" data-phoxta="testimonialsDesc">Hear from the people we've had the pleasure of working with.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote data-phoxta="testimonial1">"Their minimal approach transformed our brand. Every detail was purposeful and the result exceeded our expectations entirely."</blockquote>
+        <div class="testimonial-author" data-phoxta="testimonial1Author">Sarah Chen</div>
+        <div class="testimonial-role" data-phoxta="testimonial1Role">CEO, Aura Labs</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote data-phoxta="testimonial2">"They don't just design — they think deeply about the problem. Working with them felt like having true partners in our journey."</blockquote>
+        <div class="testimonial-author" data-phoxta="testimonial2Author">Marcus Reed</div>
+        <div class="testimonial-role" data-phoxta="testimonial2Role">Founder, FlowState</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote data-phoxta="testimonial3">"Clean, fast, and beautifully crafted. Our new website has seen a 3x increase in user engagement since launch."</blockquote>
+        <div class="testimonial-author" data-phoxta="testimonial3Author">Emma Larsson</div>
+        <div class="testimonial-role" data-phoxta="testimonial3Role">CMO, Vertex Inc</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="section-label" data-phoxta="ctaLabel">Start a Project</div>
+    <h2 class="section-title" data-phoxta="ctaTitle">Let's create something beautiful together.</h2>
+    <p class="section-desc" data-phoxta="ctaDesc">Ready to elevate your digital presence? We'd love to hear about your project.</p>
+    <a href="mailto:hello@minimal.studio" class="btn-primary" data-phoxta-link="ctaBtn"><span data-phoxta="ctaBtnText">Get Started</span> <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo" data-phoxta="footerBrand">minimal<span>.</span></div>
+    <div class="footer-links">
+      <a href="#services" data-phoxta-link="fLink1">Services</a>
+      <a href="#work" data-phoxta-link="fLink2">Work</a>
+      <a href="#about" data-phoxta-link="fLink3">About</a>
+      <a href="#contact" data-phoxta-link="fLink4">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="#" data-phoxta-link="social1"><i class="fab fa-twitter"></i></a>
+      <a href="#" data-phoxta-link="social2"><i class="fab fa-instagram"></i></a>
+      <a href="#" data-phoxta-link="social3"><i class="fab fa-dribbble"></i></a>
+      <a href="#" data-phoxta-link="social4"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav')?.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

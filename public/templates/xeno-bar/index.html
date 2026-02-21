@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLADE — Premium Barber Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root{--bg:#1a1a1a;--surface:#222;--card:#2a2a2a;--accent:#c9a55c;--accent-l:#dbb96e;--text:#e8e0d4;--dim:#8a8278;--white:#fff;--border:#333}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.7}a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(26,26,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--accent);letter-spacing:3px}
+    .nav-links{display:flex;gap:28px;align-items:center}.nav-links a{font-size:13px;font-weight:500;color:var(--dim);transition:color .3s;text-transform:uppercase;letter-spacing:1px}.nav-links a:hover{color:var(--accent)}
+    .nav-cta{background:var(--accent)!important;color:var(--bg)!important;padding:10px 28px;border-radius:4px;font-weight:600!important}
+    .hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#1a1a1a 0%,#2a2218 100%);padding:140px 60px 80px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:500px;height:500px;border:1px solid rgba(201,165,92,.08);border-radius:50%}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;position:relative;z-index:2}
+    .hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--accent);padding:6px 16px;border-radius:2px;font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:24px}
+    .hero h1{font-family:'Playfair Display',serif;font-size:58px;line-height:1.1;font-weight:800;color:var(--white);margin-bottom:20px}.hero h1 span{color:var(--accent)}
+    .hero p{font-size:16px;color:var(--dim);max-width:440px;margin-bottom:32px}
+    .btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg);padding:14px 36px;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:all .3s;border:none;cursor:pointer}.btn-gold:hover{background:var(--accent-l);transform:translateY(-2px)}
+    .btn-outline{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);color:var(--text);padding:13px 36px;font-size:14px;font-weight:600;transition:all .3s;text-transform:uppercase;letter-spacing:1px}.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+    .hero-img img{width:100%;height:560px;object-fit:cover;border:1px solid var(--border)}
+    section{padding:100px 60px}.container{max-width:1200px;margin:0 auto}
+    .section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:10px}
+    .section-title{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--white);margin-bottom:12px}
+    .section-desc{font-size:15px;color:var(--dim);max-width:480px}
+    .services{background:var(--surface)}.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+    .svc-card{background:var(--card);padding:40px 28px;border:1px solid var(--border);transition:all .3s}.svc-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .svc-icon{width:56px;height:56px;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:22px;margin-bottom:20px}
+    .svc-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;color:var(--white)}.svc-card p{font-size:13px;color:var(--dim);margin-bottom:16px}
+    .svc-price{font-size:22px;font-weight:700;color:var(--accent)}
+    .barbers{background:var(--bg)}.barbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+    .barber-card{text-align:center}.barber-card img{width:100%;height:360px;object-fit:cover;border:1px solid var(--border);margin-bottom:16px;filter:grayscale(30%);transition:all .3s}
+    .barber-card:hover img{filter:grayscale(0%);border-color:var(--accent)}.barber-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);margin-bottom:4px}.barber-card p{font-size:13px;color:var(--dim)}
+    .gallery{background:var(--surface)}.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:60px}
+    .gallery-item{overflow:hidden;aspect-ratio:1;border:1px solid var(--border)}.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.gallery-item:hover img{transform:scale(1.08)}
+    .cta-section{background:var(--bg);text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:44px;color:var(--white);margin-bottom:16px}.cta-section p{font-size:15px;color:var(--dim);margin-bottom:36px}
+    footer{background:var(--surface);padding:48px 60px;border-top:1px solid var(--border)}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--accent);letter-spacing:3px}
+    .footer-links{display:flex;gap:20px}.footer-links a{font-size:13px;color:var(--dim);transition:color .3s}.footer-links a:hover{color:var(--accent)}
+    .footer-copy{font-size:11px;color:var(--dim);margin-top:24px;text-align:center}
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-img{display:none}.services-grid{grid-template-columns:repeat(2,1fr)}.barbers-grid{grid-template-columns:repeat(2,1fr)}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.nav{padding:16px 24px}.nav-links{display:none}section{padding:60px 24px}.hero{padding:120px 24px 60px}.hero h1{font-size:38px}.services-grid,.barbers-grid,.gallery-grid{grid-template-columns:1fr}.section-title{font-size:30px}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav-logo" data-phoxta="navLogo">BLADE</div><div class="nav-links"><a href="#services" data-phoxta-link="navSvc">Services</a><a href="#barbers" data-phoxta-link="navTeam">Barbers</a><a href="#gallery" data-phoxta-link="navGal">Gallery</a><a href="#cta" class="nav-cta" data-phoxta-link="navCta">Book Now</a></div></nav>
+  <section class="hero"><div class="hero-inner"><div><div class="hero-tag" data-phoxta="heroTag"><i class="fa-solid fa-scissors"></i> Est. 2018</div><h1 data-phoxta="heroTitle">The Art of the <span>Perfect Cut</span></h1><p data-phoxta="heroDesc">Premium grooming experience in a classic barbershop atmosphere. Walk-ins welcome.</p><div style="display:flex;gap:12px"><a href="#cta" class="btn-gold" data-phoxta-link="heroCta1"><i class="fa-solid fa-calendar"></i> Book Appointment</a><a href="#services" class="btn-outline" data-phoxta-link="heroCta2">Our Services</a></div></div><div class="hero-img"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Barber" data-phoxta-image="heroImg" /></div></div></section>
+  <section class="services" id="services"><div class="container"><p class="section-label" data-phoxta="svcLabel">Services</p><h2 class="section-title" data-phoxta="svcTitle">What We Offer</h2><p class="section-desc" data-phoxta="svcDesc">Classic cuts and modern styles, executed with precision.</p><div class="services-grid">
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-scissors"></i></div><h3 data-phoxta="s1Title">Classic Haircut</h3><p data-phoxta="s1Desc">Precision cut with hot towel and styling finish.</p><div class="svc-price" data-phoxta="s1Price">$35</div></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-hat-cowboy"></i></div><h3 data-phoxta="s2Title">Beard Trim & Shape</h3><p data-phoxta="s2Desc">Expert beard sculpting with straight razor line-up.</p><div class="svc-price" data-phoxta="s2Price">$25</div></div>
+    <div class="svc-card"><div class="svc-icon"><i class="fa-solid fa-gem"></i></div><h3 data-phoxta="s3Title">Premium Package</h3><p data-phoxta="s3Desc">Full cut, beard, hot towel, scalp massage & styling.</p><div class="svc-price" data-phoxta="s3Price">$55</div></div>
+  </div></div></section>
+  <section class="barbers" id="barbers"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="teamLabel">Our Team</p><h2 class="section-title" data-phoxta="teamTitle">Master Barbers</h2><div class="barbers-grid">
+    <div class="barber-card"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Barber" data-phoxta-image="b1Img"/><h3 data-phoxta="b1Name">Marcus Cole</h3><p data-phoxta="b1Role">Master Barber</p></div>
+    <div class="barber-card"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Barber" data-phoxta-image="b2Img"/><h3 data-phoxta="b2Name">Jake Rivera</h3><p data-phoxta="b2Role">Senior Stylist</p></div>
+    <div class="barber-card"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Barber" data-phoxta-image="b3Img"/><h3 data-phoxta="b3Name">Omar Nash</h3><p data-phoxta="b3Role">Barber</p></div>
+    <div class="barber-card"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Barber" data-phoxta-image="b4Img"/><h3 data-phoxta="b4Name">Danny Kim</h3><p data-phoxta="b4Role">Junior Barber</p></div>
+  </div></div></section>
+  <section class="gallery" id="gallery"><div class="container" style="text-align:center"><p class="section-label" data-phoxta="galLabel">Gallery</p><h2 class="section-title" data-phoxta="galTitle">Our Work</h2><div class="gallery-grid">
+    <div class="gallery-item"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cut" data-phoxta-image="g1Img"/></div>
+    <div class="gallery-item"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cut" data-phoxta-image="g2Img"/></div>
+    <div class="gallery-item"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cut" data-phoxta-image="g3Img"/></div>
+    <div class="gallery-item"><img src="https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cut" data-phoxta-image="g4Img"/></div>
+  </div></div></section>
+  <section class="cta-section" id="cta"><h2 data-phoxta="ctaTitle">Ready for a Fresh Look?</h2><p data-phoxta="ctaDesc">Walk-ins welcome. Or book your appointment online for guaranteed seating.</p><a href="#" class="btn-gold" data-phoxta-link="ctaBtn"><i class="fa-solid fa-calendar"></i> Book Now</a></section>
+  <footer><div class="footer-inner"><div class="footer-logo" data-phoxta="footerLogo">BLADE</div><div class="footer-links"><a href="#services" data-phoxta-link="fl1">Services</a><a href="#barbers" data-phoxta-link="fl2">Team</a><a href="#gallery" data-phoxta-link="fl3">Gallery</a><a href="#cta" data-phoxta-link="fl4">Book</a></div></div><p class="footer-copy" data-phoxta="footerCopy">&copy; 2025 BLADE Barber Shop. All rights reserved.</p></footer>
+</body>
+</html>

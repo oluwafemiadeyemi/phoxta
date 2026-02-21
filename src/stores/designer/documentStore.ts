@@ -1,257 +1,207 @@
-// ===========================================================================
-// Designer – Zustand document store (canvas, pages, layers, history)
-// ===========================================================================
-import { create } from 'zustand'
-import { immer } from 'zustand/middleware/immer'
-import type { Canvas as FabricCanvas } from 'fabric'
-import type {
-  DesignProject,
-  DesignPage,
-  LayerInfo,
-  DesignVersion,
-} from '@/types/designer'
+/* ─────────────────────────────────────────────────────────────────────────────
+   Designer – Document Store (Zustand + immer)
+   Manages: canvas instance, pages, undo/redo, dirty state, project metadata
+   ───────────────────────────────────────────────────────────────────────────── */
+"use client";
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-interface HistoryEntry {
-  label: string
-  pagesJson: Record<string, string> // pageId -> JSON string
-  timestamp: number
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import type { DesignPage, DesignProject, PageBackground } from "@/types/designer";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FabricCanvas = any;
+
+// Fabric JSON snapshot for undo/redo
+interface CanvasSnapshot {
+  json: object;
+  timestamp: number;
 }
 
 export interface DocumentState {
-  /* Canvas ref */
-  canvas: FabricCanvas | null
-  setCanvas: (c: FabricCanvas | null) => void
+  // Project metadata
+  project: DesignProject | null;
+  pages: DesignPage[];
+  activePageIndex: number;
 
-  /* Project metadata */
-  project: DesignProject | null
-  setProject: (p: DesignProject | null) => void
+  // Canvas reference (populated by CanvasStage)
+  canvas: FabricCanvas;
 
-  /* Pages */
-  pages: DesignPage[]
-  currentPageId: string | null
-  setPages: (pages: DesignPage[]) => void
-  setCurrentPage: (id: string) => void
-  setCurrentPageId: (id: string) => void
-  addPage: (page: DesignPage) => void
-  removePage: (id: string) => void
-  reorderPage: (id: string, newIndex: number) => void
-  updatePage: (id: string, updates: Partial<DesignPage>) => void
+  // Dirty / save tracking
+  isDirty: boolean;
+  isSaving: boolean;
+  lastSavedAt: string | null;
 
-  /* Layers */
-  layers: LayerInfo[]
-  refreshLayers: () => void
-
-  /* Active selection */
-  activeObjectIds: string[]
-  setActiveObjectIds: (ids: string[]) => void
-
-  /* Undo / Redo */
-  undoStack: HistoryEntry[]
-  redoStack: HistoryEntry[]
-  pushUndo: (label?: string) => void
-  pushUndoSnapshot: (label: string, json: string) => void
-  undo: () => void
-  redo: () => void
-  canUndo: () => boolean
-  canRedo: () => boolean
-
-  /* Save state */
-  isDirty: boolean
-  isSaving: boolean
-  lastSavedAt: string | null
-  markDirty: () => void
-  markClean: (at: string) => void
-  setIsSaving: (v: boolean) => void
-
-  /* Zoom */
-  zoom: number
-  setZoom: (z: number) => void
-
-  /* Versions */
-  versions: DesignVersion[]
-  setVersions: (v: DesignVersion[]) => void
+  // Undo / Redo
+  undoStack: CanvasSnapshot[];
+  redoStack: CanvasSnapshot[];
+  maxHistory: number;
 }
 
-const MAX_UNDO = 80
+export interface DocumentActions {
+  // Project
+  setProject: (project: DesignProject) => void;
+  setPages: (pages: DesignPage[]) => void;
+  setActivePageIndex: (index: number) => void;
+  updatePageBackground: (pageIndex: number, bg: PageBackground) => void;
 
-// ---------------------------------------------------------------------------
-// Store
-// ---------------------------------------------------------------------------
-export const useDocumentStore = create<DocumentState>()(
+  // Canvas
+  setCanvas: (canvas: FabricCanvas) => void;
+
+  // Dirty
+  markDirty: () => void;
+  markClean: () => void;
+  setIsSaving: (v: boolean) => void;
+  setLastSavedAt: (ts: string) => void;
+
+  // Undo / Redo
+  pushSnapshot: (json: object) => void;
+  undo: () => object | null;
+  redo: () => object | null;
+  clearHistory: () => void;
+
+  // Reset
+  reset: () => void;
+}
+
+const initialState: DocumentState = {
+  project: null,
+  pages: [],
+  activePageIndex: 0,
+  canvas: null,
+  isDirty: false,
+  isSaving: false,
+  lastSavedAt: null,
+  undoStack: [],
+  redoStack: [],
+  maxHistory: 50,
+};
+
+export const useDocumentStore = create<DocumentState & DocumentActions>()(
   immer((set, get) => ({
-    canvas: null,
-    setCanvas: (c) => set({ canvas: c }),
+    ...initialState,
 
-    project: null,
-    setProject: (p) => set({ project: p }),
-
-    // ----- Pages -----
-    pages: [],
-    currentPageId: null,
-    setPages: (pages) => set({ pages }),
-    setCurrentPage: (id) => set({ currentPageId: id }),
-    setCurrentPageId: (id) => set({ currentPageId: id }),
-    addPage: (page) =>
+    // ── Project ───────────────────────────────────────────────────────────
+    setProject: (project) =>
       set((s) => {
-        s.pages.push(page)
-        s.currentPageId = page.id
+        s.project = project;
       }),
-    removePage: (id) =>
+
+    setPages: (pages) =>
       set((s) => {
-        s.pages = s.pages.filter((p) => p.id !== id)
-        if (s.currentPageId === id) {
-          s.currentPageId = s.pages[0]?.id ?? null
+        s.pages = pages;
+      }),
+
+    setActivePageIndex: (index) =>
+      set((s) => {
+        s.activePageIndex = index;
+      }),
+
+    updatePageBackground: (pageIndex, bg) =>
+      set((s) => {
+        if (s.pages[pageIndex]) {
+          s.pages[pageIndex].background = bg;
         }
-        // Re-index
-        s.pages.forEach((p, i) => {
-          p.page_index = i
-        })
       }),
-    reorderPage: (id, newIndex) =>
+
+    // ── Canvas ────────────────────────────────────────────────────────────
+    setCanvas: (canvas) =>
       set((s) => {
-        const idx = s.pages.findIndex((p) => p.id === id)
-        if (idx < 0) return
-        const [page] = s.pages.splice(idx, 1)
-        s.pages.splice(newIndex, 0, page)
-        s.pages.forEach((p, i) => {
-          p.page_index = i
-        })
+        // cast to any for immer compatibility with fabric.Canvas
+        (s as any).canvas = canvas;
       }),
-    updatePage: (id, updates) =>
+
+    // ── Dirty tracking ────────────────────────────────────────────────────
+    markDirty: () =>
       set((s) => {
-        const page = s.pages.find((p) => p.id === id)
-        if (page) Object.assign(page, updates)
+        s.isDirty = true;
       }),
 
-    // ----- Layers -----
-    layers: [],
-    refreshLayers: () => {
-      const { canvas } = get()
-      if (!canvas) return set({ layers: [] })
-      const objects = canvas.getObjects()
-      const layers: LayerInfo[] = objects.map((obj, i) => ({
-        id: (obj as any).id ?? `obj-${i}`,
-        name: (obj as any).customName ?? obj.type ?? 'object',
-        type: obj.type ?? 'object',
-        visible: obj.visible !== false,
-        locked: !obj.selectable,
-        index: i,
-        groupId: (obj as any).groupId ?? null,
-      }))
-      set({ layers: layers.reverse() })
-    },
+    markClean: () =>
+      set((s) => {
+        s.isDirty = false;
+      }),
 
-    // ----- Selection -----
-    activeObjectIds: [],
-    setActiveObjectIds: (ids) => set({ activeObjectIds: ids }),
+    setIsSaving: (v) =>
+      set((s) => {
+        s.isSaving = v;
+      }),
 
-    // ----- History -----
-    undoStack: [],
-    redoStack: [],
+    setLastSavedAt: (ts) =>
+      set((s) => {
+        s.lastSavedAt = ts;
+      }),
 
-    /** Extra properties to include when serializing canvas to JSON for undo */
-
-    pushUndo: (label = 'edit') => {
-      const { canvas, undoStack } = get()
-      if (!canvas) return
-      const json = JSON.stringify((canvas as any).toJSON(['id', 'customName', 'selectable', 'visible', 'groupId', '_storagePath']))
-      const entry: HistoryEntry = {
-        label,
-        pagesJson: { current: json },
-        timestamp: Date.now(),
-      }
-      const next = [...undoStack, entry].slice(-MAX_UNDO)
-      set({ undoStack: next, redoStack: [], isDirty: true })
-    },
-
-    /** Push a pre-captured JSON snapshot (used when the canvas state has
-     *  already changed by the time we want to record the undo entry, e.g.
-     *  after an interactive transform captured via before:transform). */
-    pushUndoSnapshot: (label, json) => {
-      const { undoStack } = get()
-      const entry: HistoryEntry = {
-        label,
-        pagesJson: { current: json },
-        timestamp: Date.now(),
-      }
-      const next = [...undoStack, entry].slice(-MAX_UNDO)
-      set({ undoStack: next, redoStack: [], isDirty: true })
-    },
+    // ── Undo / Redo ──────────────────────────────────────────────────────
+    pushSnapshot: (json) =>
+      set((s) => {
+        s.undoStack.push({ json, timestamp: Date.now() });
+        if (s.undoStack.length > s.maxHistory) {
+          s.undoStack.shift();
+        }
+        s.redoStack = [];
+        s.isDirty = true;
+      }),
 
     undo: () => {
-      const { canvas, undoStack, redoStack } = get()
-      if (!canvas || undoStack.length === 0) return
-      // Set loading flag so CanvasStage event handlers ignore
-      // the object:added / object:removed events from loadFromJSON
-      ;(canvas as any).__isUndoRedoLoading = true
-      const current = JSON.stringify((canvas as any).toJSON(['id', 'customName', 'selectable', 'visible', 'groupId', '_storagePath']))
-      const prev = undoStack[undoStack.length - 1]
-      const prevJson = prev.pagesJson.current
-      if (!prevJson) {
-        ;(canvas as any).__isUndoRedoLoading = false
-        return
-      }
-      canvas.loadFromJSON(prevJson).then(() => {
-        // Restore pasteboard background (loadFromJSON may have overwritten it)
-        canvas.backgroundColor = '#e5e7eb'
-        canvas.renderAll()
-        ;(canvas as any).__isUndoRedoLoading = false
-        set({
-          undoStack: undoStack.slice(0, -1),
-          redoStack: [...redoStack, { label: 'redo', pagesJson: { current }, timestamp: Date.now() }],
-          isDirty: true,
-        })
-        get().refreshLayers()
-      }).catch(() => {
-        ;(canvas as any).__isUndoRedoLoading = false
-      })
+      const state = get();
+      if (state.undoStack.length === 0) return null;
+
+      let result: object | null = null;
+      set((s) => {
+        const snapshot = s.undoStack.pop();
+        if (snapshot) {
+          result = snapshot.json;
+          // Save current state to redo stack
+          const canvas = (s as any).canvas;
+          if (canvas) {
+            const currentJson = (canvas as any).toJSON([
+              "id",
+              "customName",
+              "selectable",
+              "visible",
+              "groupId",
+              "locked",
+            ]);
+            s.redoStack.push({ json: currentJson, timestamp: Date.now() });
+          }
+        }
+      });
+      return result;
     },
 
     redo: () => {
-      const { canvas, undoStack, redoStack } = get()
-      if (!canvas || redoStack.length === 0) return
-      ;(canvas as any).__isUndoRedoLoading = true
-      const current = JSON.stringify((canvas as any).toJSON(['id', 'customName', 'selectable', 'visible', 'groupId', '_storagePath']))
-      const next = redoStack[redoStack.length - 1]
-      const nextJson = next.pagesJson.current
-      if (!nextJson) {
-        ;(canvas as any).__isUndoRedoLoading = false
-        return
-      }
-      canvas.loadFromJSON(nextJson).then(() => {
-        canvas.backgroundColor = '#e5e7eb'
-        canvas.renderAll()
-        ;(canvas as any).__isUndoRedoLoading = false
-        set({
-          undoStack: [...undoStack, { label: 'undo', pagesJson: { current }, timestamp: Date.now() }],
-          redoStack: redoStack.slice(0, -1),
-          isDirty: true,
-        })
-        get().refreshLayers()
-      }).catch(() => {
-        ;(canvas as any).__isUndoRedoLoading = false
-      })
+      const state = get();
+      if (state.redoStack.length === 0) return null;
+
+      let result: object | null = null;
+      set((s) => {
+        const snapshot = s.redoStack.pop();
+        if (snapshot) {
+          result = snapshot.json;
+          const canvas = (s as any).canvas;
+          if (canvas) {
+            const currentJson = (canvas as any).toJSON([
+              "id",
+              "customName",
+              "selectable",
+              "visible",
+              "groupId",
+              "locked",
+            ]);
+            s.undoStack.push({ json: currentJson, timestamp: Date.now() });
+          }
+        }
+      });
+      return result;
     },
-    canUndo: () => get().undoStack.length > 0,
-    canRedo: () => get().redoStack.length > 0,
 
-    // ----- Save -----
-    isDirty: false,
-    isSaving: false,
-    lastSavedAt: null,
-    markDirty: () => set({ isDirty: true }),
-    markClean: (at) => set({ isDirty: false, lastSavedAt: at }),
-    setIsSaving: (v) => set({ isSaving: v }),
+    clearHistory: () =>
+      set((s) => {
+        s.undoStack = [];
+        s.redoStack = [];
+      }),
 
-    // ----- Zoom -----
-    zoom: 1,
-    setZoom: (z) => set({ zoom: z }),
-
-    // ----- Versions -----
-    versions: [],
-    setVersions: (v) => set({ versions: v }),
-  }))
-)
+    // ── Reset ─────────────────────────────────────────────────────────────
+    reset: () => set(() => ({ ...initialState })),
+  })),
+);

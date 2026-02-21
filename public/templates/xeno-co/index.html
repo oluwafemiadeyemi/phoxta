@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --navy: #0C1B33;
+      --navy-light: #162A50;
+      --gold: #C9A84C;
+      --gold-light: #E8D5A0;
+      --bg: #FAFAFA;
+      --white: #ffffff;
+      --text: #333340;
+      --text-light: #6B6B7A;
+      --border: #E5E5E8;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    .nav.scrolled { border-bottom-color: var(--border); }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-light); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { background: var(--navy); color: var(--white) !important; padding: 10px 24px; border-radius: 8px; font-weight: 600 !important; transition: background 0.3s !important; }
+    .nav-cta:hover { background: var(--gold) !important; }
+
+    /* HERO */
+    .hero { background: var(--navy); color: var(--white); padding: 180px 0 120px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, transparent 30%, rgba(201,168,76,0.08)); }
+    .hero-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(201,168,76,0.3); padding: 8px 20px; border-radius: 100px; font-size: 13px; color: var(--gold); margin-bottom: 28px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 500px; margin-bottom: 40px; line-height: 1.8; }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 16px 32px; border-radius: 8px; font-weight: 700; font-size: 15px; transition: all 0.3s; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-white-outline { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 15px 32px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: all 0.3s; }
+    .btn-white-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .hero-stat-num { font-size: 36px; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+    .hero-trust { display: flex; flex-direction: column; gap: 24px; }
+    .hero-trust-badge { background: var(--navy-light); border-radius: 16px; padding: 28px; border: 1px solid rgba(255,255,255,0.06); }
+    .hero-trust-badge h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--gold-light); }
+    .hero-trust-badge p { font-size: 14px; color: rgba(255,255,255,0.5); }
+
+    /* SERVICES */
+    .services { padding: 120px 0; }
+    .services-header { text-align: center; margin-bottom: 72px; }
+    .section-tag { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 700; margin-bottom: 16px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+    .section-desc { font-size: 17px; color: var(--text-light); max-width: 520px; margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card { padding: 40px; border: 1px solid var(--border); border-radius: 16px; transition: all 0.3s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.06); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, var(--navy), var(--navy-light)); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 24px; }
+    .service-card h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .service-card p { font-size: 15px; color: var(--text-light); line-height: 1.7; }
+
+    /* PROCESS */
+    .process { background: var(--bg); padding: 120px 0; }
+    .process-header { text-align: center; margin-bottom: 72px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .process-step { text-align: center; }
+    .process-num { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: var(--gold); margin-bottom: 16px; }
+    .process-step h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .process-step p { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+
+    /* RESULTS */
+    .results { background: var(--navy); color: var(--white); padding: 120px 0; }
+    .results-header { text-align: center; margin-bottom: 72px; }
+    .results .section-title { color: var(--white); }
+    .results .section-desc { color: rgba(255,255,255,0.6); }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .result-item { text-align: center; padding: 40px; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; }
+    .result-num { font-size: 48px; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+    .result-label { font-size: 14px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 120px 0; }
+    .testimonials-header { text-align: center; margin-bottom: 72px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .test-card { padding: 40px; border: 1px solid var(--border); border-radius: 16px; }
+    .test-stars { color: var(--gold); font-size: 14px; margin-bottom: 20px; }
+    .test-card blockquote { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 24px; }
+    .test-author { font-weight: 700; font-size: 15px; color: var(--navy); }
+    .test-role { font-size: 13px; color: var(--text-light); }
+
+    /* CTA */
+    .cta { padding: 120px 0; }
+    .cta-box { background: var(--navy); border-radius: 24px; padding: 80px; text-align: center; position: relative; overflow: hidden; }
+    .cta-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border: 2px solid rgba(201,168,76,0.15); border-radius: 50%; }
+    .cta-box::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 300px; height: 300px; border: 2px solid rgba(201,168,76,0.08); border-radius: 50%; }
+    .cta h2 { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .cta p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 40px; }
+
+    /* FOOTER */
+    .footer { padding: 48px 0; border-top: 1px solid var(--border); }
+    .footer .container { display: flex; justify-content: space-between; align-items: center; }
+    .footer-brand { font-size: 18px; font-weight: 800; color: var(--navy); }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy { font-size: 13px; color: var(--text-light); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 14px; color: var(--text-light); transition: color 0.3s; }
+    .footer-links a:hover { color: var(--navy); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 140px 0 80px; }
+      .hero-layout { grid-template-columns: 1fr; gap: 48px; }
+      .hero h1 { font-size: 38px; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .hero-trust { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 36px; }
+      .cta-box { padding: 48px 24px; }
+      .cta h2 { font-size: 32px; }
+      .footer .container { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo" data-phoxta="brand">APEX<span>.</span></a>
+      <div class="nav-links">
+        <a href="#services" data-phoxta-link="nav1">Services</a>
+        <a href="#process" data-phoxta-link="nav2">Process</a>
+        <a href="#results" data-phoxta-link="nav3">Results</a>
+        <a href="#testimonials" data-phoxta-link="nav4">Clients</a>
+        <a href="#cta" class="nav-cta" data-phoxta-link="cta">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-layout">
+        <div>
+          <div class="hero-tag" data-phoxta="heroTag"><i class="fas fa-gem"></i> Premium Business Consulting</div>
+          <h1 data-phoxta="heroTitle">Strategic consulting for <em>ambitious</em> businesses</h1>
+          <p data-phoxta="heroSubtitle">We help forward-thinking companies navigate complexity, unlock growth, and build lasting competitive advantages through strategic insight and execution excellence.</p>
+          <div class="hero-btns">
+            <a href="#cta" class="btn-gold" data-phoxta-link="heroCta1">Schedule Consultation <i class="fas fa-arrow-right"></i></a>
+            <a href="#services" class="btn-white-outline" data-phoxta-link="heroCta2">Our Services</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="hero-stat-num" data-phoxta="stat1">$2.4B</div>
+              <div class="hero-stat-label" data-phoxta="stat1Label">Revenue Generated</div>
+            </div>
+            <div>
+              <div class="hero-stat-num" data-phoxta="stat2">300+</div>
+              <div class="hero-stat-label" data-phoxta="stat2Label">Clients Served</div>
+            </div>
+            <div>
+              <div class="hero-stat-num" data-phoxta="stat3">15</div>
+              <div class="hero-stat-label" data-phoxta="stat3Label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-badge">
+            <h4 data-phoxta="trust1Title"><i class="fas fa-award"></i> Top 1% Consultants</h4>
+            <p data-phoxta="trust1Desc">Recognized by Forbes as one of the leading consulting firms for mid-market businesses.</p>
+          </div>
+          <div class="hero-trust-badge">
+            <h4 data-phoxta="trust2Title"><i class="fas fa-shield-halved"></i> Trusted by Fortune 500</h4>
+            <p data-phoxta="trust2Desc">Partnered with 40+ Fortune 500 companies across technology, finance, and healthcare sectors.</p>
+          </div>
+          <div class="hero-trust-badge">
+            <h4 data-phoxta="trust3Title"><i class="fas fa-chart-line"></i> 340% Average ROI</h4>
+            <p data-phoxta="trust3Desc">Our strategies deliver measurable outcomes with a 340% average return on investment for clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-tag" data-phoxta="servicesLabel">Our Expertise</div>
+        <h2 class="section-title" data-phoxta="servicesTitle">How we help you grow</h2>
+        <p class="section-desc" data-phoxta="servicesDesc">Comprehensive consulting services tailored to drive sustainable growth and operational excellence.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-chart-pie"></i></div>
+          <h3 data-phoxta="svc1Title">Growth Strategy</h3>
+          <p data-phoxta="svc1Desc">Market analysis, competitive positioning, and revenue growth strategies backed by data and proven frameworks.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-cogs"></i></div>
+          <h3 data-phoxta="svc2Title">Operations</h3>
+          <p data-phoxta="svc2Desc">Streamline processes, reduce costs, and build scalable operational foundations for sustained performance.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3 data-phoxta="svc3Title">Digital Transformation</h3>
+          <p data-phoxta="svc3Desc">Navigate technological change with confidence. We guide your digital evolution from strategy to implementation.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-users-gear"></i></div>
+          <h3 data-phoxta="svc4Title">Organizational Design</h3>
+          <p data-phoxta="svc4Desc">Build high-performing teams with the right structure, culture, and leadership frameworks to execute strategy.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-handshake"></i></div>
+          <h3 data-phoxta="svc5Title">M&A Advisory</h3>
+          <p data-phoxta="svc5Desc">Due diligence, valuation, integration planning, and post-merger optimization for successful transactions.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-bullseye"></i></div>
+          <h3 data-phoxta="svc6Title">Market Entry</h3>
+          <p data-phoxta="svc6Desc">Expand into new markets with confidence through thorough research, risk assessment, and go-to-market strategies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="process-header">
+        <div class="section-tag" data-phoxta="processLabel">Our Approach</div>
+        <h2 class="section-title" data-phoxta="processTitle">A proven framework for results</h2>
+        <p class="section-desc" data-phoxta="processDesc">Our structured methodology ensures clarity, alignment, and measurable outcomes at every stage.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num" data-phoxta="step1Num">01</div>
+          <h3 data-phoxta="step1Title">Discovery</h3>
+          <p data-phoxta="step1Desc">Deep dive into your business, market, and challenges to understand the full picture.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num" data-phoxta="step2Num">02</div>
+          <h3 data-phoxta="step2Title">Strategy</h3>
+          <p data-phoxta="step2Desc">Develop tailored strategies informed by data, industry expertise, and proven frameworks.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num" data-phoxta="step3Num">03</div>
+          <h3 data-phoxta="step3Title">Execution</h3>
+          <p data-phoxta="step3Desc">Hands-on implementation support with your team to turn strategy into tangible results.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num" data-phoxta="step4Num">04</div>
+          <h3 data-phoxta="step4Title">Optimize</h3>
+          <p data-phoxta="step4Desc">Continuous measurement and refinement to maximize impact and sustain momentum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="results">
+    <div class="container">
+      <div class="results-header">
+        <div class="section-tag" style="color:var(--gold-light);" data-phoxta="resultsLabel">Impact</div>
+        <h2 class="section-title" data-phoxta="resultsTitle">Results that speak for themselves</h2>
+        <p class="section-desc" data-phoxta="resultsDesc">Measurable outcomes delivered consistently across industries and geographies.</p>
+      </div>
+      <div class="results-grid">
+        <div class="result-item">
+          <div class="result-num" data-phoxta="res1Num">340%</div>
+          <div class="result-label" data-phoxta="res1Label">Average ROI</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num" data-phoxta="res2Num">92%</div>
+          <div class="result-label" data-phoxta="res2Label">Client Retention</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num" data-phoxta="res3Num">$2.4B</div>
+          <div class="result-label" data-phoxta="res3Label">Revenue Generated</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num" data-phoxta="res4Num">18</div>
+          <div class="result-label" data-phoxta="res4Label">Industries Served</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <div class="section-tag" data-phoxta="testLabel">Client Stories</div>
+        <h2 class="section-title" data-phoxta="testTitle">Trusted by industry leaders</h2>
+        <p class="section-desc" data-phoxta="testDesc">Hear from executives who have partnered with us to drive transformation.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="test-card">
+          <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="test1">"Apex didn't just advise — they became an extension of our leadership team. Their insights directly contributed to a 45% revenue increase in 18 months."</blockquote>
+          <div class="test-author" data-phoxta="test1Author">Richard Thornton</div>
+          <div class="test-role" data-phoxta="test1Role">CEO, Meridian Technologies</div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="test2">"Their strategic framework transformed how we approach market expansion. We successfully entered three new markets within a year of engagement."</blockquote>
+          <div class="test-author" data-phoxta="test2Author">Catherine Shaw</div>
+          <div class="test-role" data-phoxta="test2Role">VP Strategy, GlobalEdge</div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <blockquote data-phoxta="test3">"The operational improvements Apex implemented reduced our costs by 28% while improving quality. A rare combination of vision and execution discipline."</blockquote>
+          <div class="test-author" data-phoxta="test3Author">James Nakamura</div>
+          <div class="test-role" data-phoxta="test3Role">COO, Pacific Health Systems</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 data-phoxta="ctaTitle">Ready to accelerate your growth?</h2>
+        <p data-phoxta="ctaDesc">Book a complimentary strategy session with our senior consultants. Let's discuss how we can help you reach your goals.</p>
+        <a href="#" class="btn-gold" data-phoxta-link="ctaBtn"><span data-phoxta="ctaBtnText">Book Free Consultation</span> <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand" data-phoxta="footerBrand">APEX<span>.</span></div>
+      <div class="footer-copy" data-phoxta="footerCopy">&copy; 2024 Apex Consulting. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#" data-phoxta-link="fLink1">Privacy</a>
+        <a href="#" data-phoxta-link="fLink2">Terms</a>
+        <a href="#" data-phoxta-link="fLink3">LinkedIn</a>
+        <a href="#" data-phoxta-link="fLink4">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.querySelector('.nav')?.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
